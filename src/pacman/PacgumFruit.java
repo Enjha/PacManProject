@@ -1,22 +1,22 @@
 package pacman;
 
+import Gameplay.Item;
 import Gameplay.SceneCase;
-import Gameplay.Character;
 
-public class Ghost implements Character{
+public class PacgumFruit implements Item {
 
     private SceneCase position;
 
-    public Ghost(SceneCase position){
+    public PacgumFruit(SceneCase position){
         this.position = position;
     }
 
     public boolean isCharacter(){
-        return true;
+        return false;
     }
 
     public boolean isItem(){
-        return false;
+        return true;
     }
 
     public boolean canInteractWithItem(){
@@ -24,7 +24,7 @@ public class Ghost implements Character{
     }
 
     public boolean isEnemy(){
-        return true;
+        return false;
     }
 
     public SceneCase getPosition(){
