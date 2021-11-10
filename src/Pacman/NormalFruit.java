@@ -1,22 +1,22 @@
-package pacman;
+package Pacman;
 
-import Gameplay.SceneCase;
-import Gameplay.Character;
+import Gameplay.Item;
+import Scene.SceneCase;
 
-public class Ghost implements Character{
+public class NormalFruit implements Item {
 
     private SceneCase position;
 
-    public Ghost(SceneCase position){
+    public NormalFruit(SceneCase position){
         this.position = position;
     }
 
     public boolean isCharacter(){
-        return true;
+        return false;
     }
 
     public boolean isItem(){
-        return false;
+        return true;
     }
 
     public boolean canInteractWithItem(){
@@ -24,7 +24,7 @@ public class Ghost implements Character{
     }
 
     public boolean isEnemy(){
-        return true;
+        return false;
     }
 
     public SceneCase getPosition(){

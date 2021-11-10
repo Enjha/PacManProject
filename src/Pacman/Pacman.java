@@ -1,26 +1,26 @@
-package pacman;
+package Pacman;
 
-import Gameplay.Item;
-import Gameplay.SceneCase;
+import Gameplay.Character;
+import Scene.SceneCase;
 
-public class PacgumFruit implements Item {
+public class Pacman implements Character {
 
     private SceneCase position;
 
-    public PacgumFruit(SceneCase position){
+    public Pacman(SceneCase position){
         this.position = position;
     }
 
     public boolean isCharacter(){
-        return false;
-    }
-
-    public boolean isItem(){
         return true;
     }
 
-    public boolean canInteractWithItem(){
+    public boolean isItem(){
         return false;
+    }
+
+    public boolean canInteractWithItem(){
+        return true;
     }
 
     public boolean isEnemy(){

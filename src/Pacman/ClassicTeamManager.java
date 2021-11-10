@@ -1,4 +1,4 @@
-package pacman;
+package Pacman;
 
 import Gameplay.Team;
 import Gameplay.TeamManager;

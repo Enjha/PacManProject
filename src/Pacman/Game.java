@@ -1,4 +1,4 @@
-package pacman;
+package Pacman;
 
 public class Game {
 }

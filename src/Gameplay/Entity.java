@@ -1,5 +1,7 @@
 package Gameplay;
 
+import Scene.SceneCase;
+
 public interface Entity {
 
     boolean isCharacter();

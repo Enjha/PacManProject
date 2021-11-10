@@ -1,13 +1,13 @@
-package pacman;
+package Pacman;
 
+import Scene.SceneCase;
 import Gameplay.Character;
-import Gameplay.SceneCase;
 
-public class Pacman implements Character {
+public class Ghost implements Character{
 
     private SceneCase position;
 
-    public Pacman(SceneCase position){
+    public Ghost(SceneCase position){
         this.position = position;
     }
 
@@ -20,11 +20,11 @@ public class Pacman implements Character {
     }
 
     public boolean canInteractWithItem(){
-        return true;
+        return false;
     }
 
     public boolean isEnemy(){
-        return false;
+        return true;
     }
 
     public SceneCase getPosition(){

@@ -1,13 +1,13 @@
-package pacman;
+package Pacman;
 
 import Gameplay.Item;
-import Gameplay.SceneCase;
+import Scene.SceneCase;
 
-public class NormalFruit implements Item {
+public class PacgumFruit implements Item {
 
     private SceneCase position;
 
-    public NormalFruit(SceneCase position){
+    public PacgumFruit(SceneCase position){
         this.position = position;
     }
 
