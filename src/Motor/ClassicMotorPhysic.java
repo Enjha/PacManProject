@@ -5,6 +5,8 @@ import Gameplay.Entity;
 import Gameplay.Movement;
 import Scene.*;
 
+import java.util.List;
+
 public class ClassicMotorPhysic implements MotorPhysic{
 
     public Collision moveEntity(Movement movement, Scene scene){
@@ -17,22 +19,28 @@ public class ClassicMotorPhysic implements MotorPhysic{
             return new CollisionEntitySceneElement(movement.getEntity(),sceneElement);
         }
         else {
-            for(Object object : scene.getCase(nextPositionEntity[0],nextPositionEntity[1]).getCaseContent(Entity.class.toString())){
-                Entity entity = (Entity) object;
-                if(entity.isCharacter() && movement.getEntity().isCharacter()){
-                    if(((Character)entity).getTeam() == ((Character)movement.getEntity()).getTeam()){
-                        if(((Character)entity).getTeam().getCollision()){
-                            return new CollisionEntities(movement.getEntity(),entity);
+            List<Object> list = scene.getCase(nextPositionEntity[0],nextPositionEntity[1]).getCaseContent(movement.getEntity().getClass().toString());
+            if(list != null) {
+                for (Object object : list) {
+                    Entity entity = (Entity) object;
+                    if (movement.getEntity().isCharacter()) {
+                        if (entity.isCharacter()) {
+                            if (((Character) entity).getTeam() == ((Character) movement.getEntity()).getTeam()) {
+                                if (((Character) entity).getTeam().getCollision()) {
+                                    return new CollisionEntities(movement.getEntity(), entity);
+                                }
+                            } else {
+                                return new CollisionEntities(movement.getEntity(), entity);
+                            }
+                        } else {
+                            if (entity.isItem()) {
+                                return new CollisionEntities(movement.getEntity(), entity);
+                            }
                         }
-                    }
-                    else {
-                        return new CollisionEntities(movement.getEntity(),entity);
                     }
                 }
             }
-
         }
-
         return null;
     }
 

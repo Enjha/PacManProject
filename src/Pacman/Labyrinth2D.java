@@ -20,7 +20,7 @@ public class Labyrinth2D implements Scene {
     }
 
     public boolean addSceneCase(SceneCase sceneCase, int x, int y){
-        if(labyrinth[x][y] != null && x >= 0 && x < width && y >= 0 && y < height) {
+        if(labyrinth[x][y] == null && x >= 0 && x < width && y >= 0 && y < height) {
             labyrinth[x][y] = sceneCase;
             return true;
         }
@@ -54,9 +54,12 @@ public class Labyrinth2D implements Scene {
     }
 
     private Wall wall(Direction direction, SceneCase sceneCase){
-        for(Object object : sceneCase.getCaseContent(Wall.class.toString())){
-            if(((Wall) object).getSceneElement() == direction){
-                return (Wall)object;
+        List<Object> list = sceneCase.getCaseContent(Wall.class.toString());
+        if(list != null) {
+            for (Object object : sceneCase.getCaseContent(Wall.class.toString())) {
+                if (((Wall) object).getSceneElement() == direction) {
+                    return (Wall) object;
+                }
             }
         }
       return null;
