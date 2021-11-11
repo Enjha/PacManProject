@@ -6,9 +6,7 @@ public interface SceneCase {
 
     int getX();
     int getY();
-    double getHeight();
-    double getWidth();
-    boolean removeCaseContent(Object object);
-    boolean addCaseContent(Object object);
-    List<Object> getCaseContent();
+    void removeCaseContent(Object object);
+    void addCaseContent(Object object);
+    List<Object> getCaseContent(String typeOfElement);
 }

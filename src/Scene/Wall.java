@@ -10,7 +10,7 @@ public class Wall implements SceneElement{
         this.wallDirection = wallDirection;
     }
 
-    public Direction getWallDirection(){
+    public Direction getSceneElement(){
         return wallDirection;
     }
 }

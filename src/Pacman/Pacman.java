@@ -1,14 +1,17 @@
 package Pacman;
 
 import Gameplay.Character;
+import Gameplay.Team;
 import Scene.SceneCase;
 
 public class Pacman implements Character {
 
     private SceneCase position;
+    private Team team;
 
-    public Pacman(SceneCase position){
+    public Pacman(SceneCase position, Team team){
         this.position = position;
+        this.team = team;
     }
 
     public boolean isCharacter(){
@@ -23,11 +26,9 @@ public class Pacman implements Character {
         return true;
     }
 
-    public boolean isEnemy(){
-        return false;
-    }
-
     public SceneCase getPosition(){
         return position;
     }
+
+    public Team getTeam(){ return team; }
 }

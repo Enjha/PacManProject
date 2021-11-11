@@ -5,6 +5,8 @@ import Gameplay.Movement;
 import Scene.*;
 import Scene.Scene;
 
+import java.util.List;
+
 public class Labyrinth2D implements Scene {
 
     private SceneCase[][] labyrinth;
@@ -40,27 +42,23 @@ public class Labyrinth2D implements Scene {
         return null;
     }
 
-    public boolean obstacle(int x, int y, Movement movement){
+    public SceneElement obstacle(int x, int y, Movement movement){
         if(x >= 0 && x < width && y >= 0 && y < height) {
             SceneCase sceneCase = labyrinth[x][y];
-            switch (movement.getDirection()){
-                case North: return wall(Direction.North,sceneCase);
-                case South: return wall(Direction.South,sceneCase);
-                case West: return wall(Direction.West,sceneCase);
-                case East: return wall(Direction.East,sceneCase);
+            SceneElement element = wall(movement.getDirection(),sceneCase);
+            if(element != null){
+                return element;
             }
         }
-        return true;
+        return null;
     }
 
-    private boolean wall(Direction direction, SceneCase sceneCase){
-        for(Object object : sceneCase.getCaseContent()){
-            if(object instanceof Wall){
-                if(((Wall) object).getWallDirection() == direction){
-                    return true;
-                }
+    private Wall wall(Direction direction, SceneCase sceneCase){
+        for(Object object : sceneCase.getCaseContent(Wall.class.toString())){
+            if(((Wall) object).getSceneElement() == direction){
+                return (Wall)object;
             }
         }
-        return false;
+      return null;
     }
 }

@@ -23,10 +23,6 @@ public class PacgumFruit implements Item {
         return false;
     }
 
-    public boolean isEnemy(){
-        return false;
-    }
-
     public SceneCase getPosition(){
         return position;
     }

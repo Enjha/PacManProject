@@ -1,14 +1,17 @@
 package Pacman;
 
+import Gameplay.Team;
 import Scene.SceneCase;
 import Gameplay.Character;
 
 public class Ghost implements Character{
 
     private SceneCase position;
+    private Team team;
 
-    public Ghost(SceneCase position){
+    public Ghost(SceneCase position, Team team){
         this.position = position;
+        this.team = team;
     }
 
     public boolean isCharacter(){
@@ -23,11 +26,9 @@ public class Ghost implements Character{
         return false;
     }
 
-    public boolean isEnemy(){
-        return true;
-    }
-
     public SceneCase getPosition(){
         return position;
     }
+
+    public Team getTeam(){ return team; }
 }

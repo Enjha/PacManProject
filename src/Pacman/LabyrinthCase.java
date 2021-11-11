@@ -1,5 +1,6 @@
 package Pacman;
 
+import Scene.CaseContentManager;
 import Scene.SceneCase;
 
 import java.util.ArrayList;
@@ -7,37 +8,26 @@ import java.util.List;
 
 public class LabyrinthCase implements SceneCase {
 
-    private List<Object> caseContent = new ArrayList<>();
+    private CaseContentManager caseContentManager;
     private int x;
     private int y;
-    private double height;
-    private double width;
 
-    public LabyrinthCase(int x, int y, double height, double width){
+    public LabyrinthCase(int x, int y, CaseContentManager caseContentManager){
         this.x = x;
         this.y = y;
-        this.height = height;
-        this.width = width;
+        this.caseContentManager = caseContentManager;
     }
 
-    public boolean addCaseContent(Object object){
-        if(!caseContent.contains(object)) {
-            caseContent.add(object);
-            return true;
-        }
-        return false;
+    public void addCaseContent(Object object){
+        caseContentManager.addContent(object.getClass().toString(),object);
     }
 
-    public boolean removeCaseContent(Object object){
-        if(caseContent.contains(object)){
-            caseContent.remove(object);
-            return true;
-        }
-        return false;
+    public void removeCaseContent(Object object){
+        caseContentManager.removeContent(object.getClass().toString(),object);
     }
 
-    public List<Object> getCaseContent(){
-        return caseContent;
+    public List<Object> getCaseContent(String typeOfElement){
+        return caseContentManager.getContent(typeOfElement);
     }
 
     public int getX(){
@@ -46,14 +36,6 @@ public class LabyrinthCase implements SceneCase {
 
     public int getY(){
         return y;
-    }
-
-    public double getHeight(){
-        return height;
-    }
-
-    public double getWidth(){
-        return width;
     }
 
 }
