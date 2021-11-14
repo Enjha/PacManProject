@@ -1,4 +1,4 @@
-package Motor;
+package Motor.Physic;
 
 import Gameplay.Character;
 import Gameplay.Entity;
