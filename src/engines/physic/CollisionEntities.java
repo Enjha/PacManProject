@@ -1,4 +1,4 @@
-package motor.physic;
+package engines.physic;
 
 import gameplay.Entity;
 
