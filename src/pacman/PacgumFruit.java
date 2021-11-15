@@ -5,7 +5,7 @@ import scene.SceneCase;
 
 public class PacgumFruit implements Item {
 
-    private SceneCase position;
+    private final SceneCase position;
 
     public PacgumFruit(SceneCase position){
         this.position = position;

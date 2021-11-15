@@ -9,9 +9,9 @@ import java.util.List;
 
 public class Labyrinth2D implements Scene {
 
-    private SceneCase[][] labyrinth;
-    private int height;
-    private int width;
+    private final SceneCase[][] labyrinth;
+    private final int height;
+    private final int width;
 
     public Labyrinth2D(int height, int width){
         labyrinth = new SceneCase[height][width];
@@ -20,7 +20,7 @@ public class Labyrinth2D implements Scene {
     }
 
     public boolean addSceneCase(SceneCase sceneCase, int x, int y){
-        if(labyrinth[x][y] == null && x >= 0 && x < width && y >= 0 && y < height) {
+        if(labyrinth[x][y] == null && x < width && y < height) {
             labyrinth[x][y] = sceneCase;
             return true;
         }
@@ -28,7 +28,7 @@ public class Labyrinth2D implements Scene {
     }
 
     public boolean removeSceneCase(int x, int y){
-        if(labyrinth[x][y] != null  && x >= 0 && x < width && y >= 0 && y < height) {
+        if(labyrinth[x][y] != null && x < width && y < height) {
             labyrinth[x][y] = null;
             return true;
         }
@@ -45,10 +45,7 @@ public class Labyrinth2D implements Scene {
     public SceneElement obstacle(int x, int y, Movement movement){
         if(x >= 0 && x < width && y >= 0 && y < height) {
             SceneCase sceneCase = labyrinth[x][y];
-            SceneElement element = wall(movement.getDirection(),sceneCase);
-            if(element != null){
-                return element;
-            }
+            return wall(movement.getDirection(),sceneCase);
         }
         return null;
     }

@@ -5,7 +5,7 @@ import scene.SceneCase;
 
 public class NormalFruit implements Item {
 
-    private SceneCase position;
+    private final SceneCase position;
 
     public NormalFruit(SceneCase position){
         this.position = position;

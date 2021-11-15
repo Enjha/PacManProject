@@ -2,8 +2,8 @@ package gameplay;
 
 public class MovementNorth implements Movement{
 
-    private Entity entity;
-    private Direction direction;
+    private final Entity entity;
+    private final Direction direction;
 
     public MovementNorth(Entity entity){
         this.entity = entity;
@@ -19,7 +19,6 @@ public class MovementNorth implements Movement{
     }
 
     public int[] nextPosition(){
-        int[] nextPosition = {entity.getPosition().getX(),entity.getPosition().getY() - 1};
-        return nextPosition;
+        return new int[]{entity.getPosition().getX(),entity.getPosition().getY() - 1};
     }
 }

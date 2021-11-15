@@ -6,8 +6,8 @@ import gameplay.Character;
 
 public class Ghost implements Character{
 
-    private SceneCase position;
-    private Team team;
+    private final SceneCase position;
+    private final Team team;
 
     public Ghost(SceneCase position, Team team){
         this.position = position;

@@ -6,8 +6,8 @@ import scene.SceneCase;
 
 public class Pacman implements Character {
 
-    private SceneCase position;
-    private Team team;
+    private final SceneCase position;
+    private final Team team;
 
     public Pacman(SceneCase position, Team team){
         this.position = position;

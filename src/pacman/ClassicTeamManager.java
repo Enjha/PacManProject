@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class ClassicTeamManager implements TeamManager {
 
-    private HashMap<String, Team> teams = new HashMap<String,Team>();
+    private final HashMap<String, Team> teams = new HashMap<String,Team>();
 
     public boolean addTeam(Team team){
         if(!teams.containsKey(team.getTeamName())) {

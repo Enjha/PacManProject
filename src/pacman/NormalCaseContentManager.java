@@ -7,8 +7,8 @@ import java.util.List;
 
 public class NormalCaseContentManager implements CaseContentManager {
 
-    private List<String> listOfTypeOfContent = new ArrayList<>();
-    private List<List<Object>> caseContent = new ArrayList<>();
+    private final List<String> listOfTypeOfContent = new ArrayList<>();
+    private final List<List<Object>> caseContent = new ArrayList<>();
 
     public void addContent(String typeOfContent, Object content){
         int index = verifyTypeOfContent(typeOfContent);

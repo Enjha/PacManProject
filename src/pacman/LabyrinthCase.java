@@ -7,9 +7,9 @@ import java.util.List;
 
 public class LabyrinthCase implements SceneCase {
 
-    private CaseContentManager caseContentManager;
-    private int x;
-    private int y;
+    private final CaseContentManager caseContentManager;
+    private final int x;
+    private final int y;
 
     public LabyrinthCase(int x, int y, CaseContentManager caseContentManager){
         this.x = x;

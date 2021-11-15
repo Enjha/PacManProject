@@ -2,8 +2,8 @@ package gameplay;
 
 public class MovementWest implements Movement{
 
-    private Entity entity;
-    private Direction direction;
+    private final Entity entity;
+    private final Direction direction;
 
     public MovementWest(Entity entity){
         this.entity = entity;
@@ -19,7 +19,6 @@ public class MovementWest implements Movement{
     }
 
     public int[] nextPosition(){
-        int[] nextPosition = {entity.getPosition().getX() - 1,entity.getPosition().getY()};
-        return nextPosition;
+        return new int[]{entity.getPosition().getX() - 1,entity.getPosition().getY()};
     }
 }

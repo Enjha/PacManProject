@@ -4,7 +4,7 @@ import gameplay.Direction;
 
 public class Wall implements SceneElement{
 
-    private Direction wallDirection;
+    private final Direction wallDirection;
 
     public Wall(Direction wallDirection){
         this.wallDirection = wallDirection;
