@@ -9,9 +9,7 @@ public class FxScheduler {
 
     private static FxScheduler instance;
 
-
     private final Map<String, Timer> timers = new HashMap<>();
-
 
     private FxScheduler() {
     }

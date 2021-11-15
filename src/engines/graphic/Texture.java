@@ -1,6 +1,9 @@
 package engines.graphic;
 
-public class Texture {
+import api.FxRender;
+
+public class Texture extends Cover{
+
     /**
      * Nom du fichier de textures
      */
@@ -15,17 +18,18 @@ public class Texture {
         this.link = textureCut.getLink() + row + "-" + col;
     }
 
+    @Override
     protected void cover(GraphicEntity graphicEntity) {
+        FxRender.getInstance().renderTexturedRect(graphicEntity.getHeight(), graphicEntity.getWidth(),
+                graphicEntity.getX(), graphicEntity.getY(), link);
     }
 
+    @Override
     protected void update() {}
 
-    public Texture clone() {
+    @Override
+    public Cover clone() {
         return this;
-    }
-
-    public TextureCut getSpriteSheet() {
-        return textureCut;
     }
 
     public String getLink() {

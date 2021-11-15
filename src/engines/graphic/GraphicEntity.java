@@ -14,7 +14,7 @@ public class GraphicEntity {
     private int height;
 
     //Couleur
-    private Colors color;
+    private Color color;
 
     //Texture
     private Texture texture;
@@ -23,7 +23,7 @@ public class GraphicEntity {
     private Scene scene;
 
 
-    public GraphicEntity(int x, int y, int width, int height, Colors color, Texture texture, Scene scene) {
+    public GraphicEntity(int x, int y, int width, int height, Color color, Texture texture, Scene scene) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -67,11 +67,11 @@ public class GraphicEntity {
         this.height = height;
     }
 
-    public Colors getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(Colors color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 

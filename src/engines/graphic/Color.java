@@ -1,14 +1,12 @@
 package engines.graphic;
 
-import javafx.scene.paint.Color;
-
-public class Colors {
+public class Color {
 
     private int red;
     private int green;
     private int blue;
 
-    public Colors(int red, int green, int blue) {
+    public Color(int red, int green, int blue) {
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -39,7 +37,7 @@ public class Colors {
     }
 
     public javafx.scene.paint.Color getJavafxColor(int red, int green, int blue){
-        return Color.rgb(red, green, blue);
+        return javafx.scene.paint.Color.rgb(red, green, blue);
     }
 }
 
