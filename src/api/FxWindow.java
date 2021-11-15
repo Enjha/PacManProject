@@ -4,6 +4,8 @@ import engines.graphic.Colors;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 public class FxWindow {
 
     private static FxWindow instance;
@@ -61,7 +63,7 @@ public class FxWindow {
      * Fixe la couleur du bakground de la fenêtre.
      * @param color => couleur
      */
-    public void setBackgroundColor(Colors color) {
+    public void setBackgroundColor(Color color) {
         window.getScene().getRoot().setStyle("-fx-background-color: rgb("+color.getRed()+","+color.getGreen()+","+color.getBlue()+");");
     }
 
