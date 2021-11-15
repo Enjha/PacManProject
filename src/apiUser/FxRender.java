@@ -1,11 +1,9 @@
-package api;
+package apiUser;
 
 import engines.graphic.Color;
-import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;

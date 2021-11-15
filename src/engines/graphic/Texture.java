@@ -1,7 +1,5 @@
 package engines.graphic;
 
-import api.FxRender;
-
 public class Texture extends Cover{
 
     /**

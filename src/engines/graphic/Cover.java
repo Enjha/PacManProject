@@ -1,11 +1,11 @@
 package engines.graphic;
 
-import api.FxAPI;
+import apiUser.FxAPIUser;
 
 /**
  * Élément graphique pour couvrir une entité graphique
  */
-public abstract class Cover extends FxAPI {
+public abstract class Cover extends FxAPIUser {
     /**
      * Recouvrir une entité graphique
      * @param graphicEntity carreau

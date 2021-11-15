@@ -1,4 +1,4 @@
-package api;
+package apiUser;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -24,6 +24,10 @@ public class FxWindow {
         stage.setTitle(sceneName);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void setScene(Scene scene){
+        this.scene = scene;
     }
 
 }

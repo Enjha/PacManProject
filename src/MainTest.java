@@ -1,16 +1,6 @@
-import api.FxWindow;
-import engines.UI.*;
-import engines.sound.*;
-import gameplay.Direction;
+import apiUser.FxWindow;
 import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
-import java.io.File;
 
 public class MainTest extends Application {
 
