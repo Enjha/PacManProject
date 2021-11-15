@@ -1,8 +1,7 @@
 package engines.graphic;
 
 import com.sun.prism.Texture;
-
-import java.awt.*;
+import javafx.scene.Scene;
 
 public class GraphicEntity {
 
@@ -33,6 +32,8 @@ public class GraphicEntity {
         this.texture = texture;
         this.scene = scene;
     }
+
+    public int[] getBounds() { return new int[]{x, y, x + width, y + height}; }
 
     public int getX() {
         return x;

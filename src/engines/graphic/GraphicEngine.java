@@ -1,5 +1,5 @@
 package engines.graphic;
 
-public class Scene {
+public class GraphicEngine {
 
 }
