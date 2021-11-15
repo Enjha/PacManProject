@@ -33,6 +33,8 @@ public class GraphicEntity {
         this.scene = scene;
     }
 
+    public int[] getBounds() { return new int[]{x, y, x + width, y + height}; }
+
     public int getX() {
         return x;
     }
