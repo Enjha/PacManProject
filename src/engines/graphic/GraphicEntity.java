@@ -1,8 +1,7 @@
 package engines.graphic;
 
 import com.sun.prism.Texture;
-
-import java.awt.*;
+import javafx.scene.Scene;
 
 public class GraphicEntity {
 
