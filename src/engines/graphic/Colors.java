@@ -1,5 +1,7 @@
 package engines.graphic;
 
+import javafx.scene.paint.Color;
+
 public class Colors {
 
     private int red;
@@ -36,16 +38,8 @@ public class Colors {
         this.blue = blue;
     }
 
-    public javafx.scene.paint.Color getJavafxColor(){
-//        return .getJavafxColor(red,green,blue);
-        return getJavafxColor();
+    public javafx.scene.paint.Color getJavafxColor(int red, int green, int blue){
+        return Color.rgb(red, green, blue);
     }
-
-/*
-    A mettre dans l'API lors du rendu du jeu
-    getJavafxColor(int red, int green, int blue){
-        return new Colors(red, green, blue);
-    }
-*/
 }
 
