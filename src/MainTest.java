@@ -1,3 +1,4 @@
+import api.FxWindow;
 import engines.UI.*;
 import engines.sound.*;
 import gameplay.Direction;
@@ -15,7 +16,10 @@ public class MainTest extends Application {
 
     public void start(Stage stage) {
 
-        VBox root = new VBox();
+        FxWindow window = new FxWindow(400,300,"Pac-Man");
+        window.openWindow(stage);
+
+        /*VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
         Scene scene = new Scene(root, 400, 300);
 
@@ -37,7 +41,7 @@ public class MainTest extends Application {
 
         stage.setTitle("My JavaFX Application");
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
     }
 
     public static void main(String[] args) {

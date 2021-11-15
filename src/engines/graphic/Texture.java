@@ -20,8 +20,8 @@ public class Texture extends Cover{
 
     @Override
     protected void cover(GraphicEntity graphicEntity) {
-        FxRender.getInstance().renderTexturedRect(graphicEntity.getHeight(), graphicEntity.getWidth(),
-                graphicEntity.getX(), graphicEntity.getY(), link);
+       // FxRender.getInstance().renderTexturedRect(graphicEntity.getHeight(), graphicEntity.getWidth(),
+             //   graphicEntity.getX(), graphicEntity.getY(), link);
     }
 
     @Override

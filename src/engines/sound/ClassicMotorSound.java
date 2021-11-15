@@ -1,7 +1,5 @@
 package engines.sound;
 
-import java.util.HashMap;
-
 public class ClassicMotorSound implements MotorSound{
 
     private SoundManager soundManager;

@@ -30,25 +30,25 @@ public class FxRender extends GridPane {
     private final Map<String, BufferedImage> loadedTextures = new HashMap<>();
 
     public void renderRect(int height, int width, int x, int y, java.awt.Color color) {
-        Graphics2D graphics2D = getCurrentGraphics();
+       /* Graphics2D graphics2D = getCurrentGraphics();
         if (graphics2D != null) {
             graphics2D.setColor(color);
-            x += getCurrentScene().getX();
-            y += getCurrentScene().getY();
+          //  x += getCurrentScene().getX();
+           // y += getCurrentScene().getY();
             graphics2D.fillRect(x, y, width, height);
-        }
+        }*/
     }
 
-    public void renderTexturedRect(int height, int width, int x, int y, String link) {
+    /*public void renderTexturedRect(int height, int width, int x, int y, String link) {
         Graphics2D graphics2D = this.;
         if (graphics2D != null) {
             x += getCurrentScene().getX();
             y += getCurrentScene().getY();
             graphics2D.drawImage(loadedTextures.get(link), x, y, width, height, null);
         }
-    }
+    }*/
 
-    public void renderText(String text, java.awt.Color color, int fontSize, boolean center, int x, int y, int height, int width) {
+    /*public void renderText(String text, java.awt.Color color, int fontSize, boolean center, int x, int y, int height, int width) {
         Graphics2D graphics2D = getCurrentGraphics();
         if (graphics2D != null) {
             graphics2D.setFont(new Font("Arial", Font.PLAIN, fontSize));
@@ -62,7 +62,7 @@ public class FxRender extends GridPane {
             graphics2D.setColor(color);
             graphics2D.drawString(text, x, y);
         }
-    }
+    }*/
 
     public void loadTexture(String link) {
         BufferedImage texture = getBufferedImage(link);
@@ -104,7 +104,7 @@ public class FxRender extends GridPane {
     }
 
     // GETTERS //
-    public Graphics2D getCurrentGraphics() {
+   /* public Graphics2D getCurrentGraphics() {
         if (FxWindow.getInstance().getCurrentScene() != null)
             return FxWindow.getInstance().getCurrentScene().get2DGraphics();
         return null;
@@ -112,5 +112,5 @@ public class FxRender extends GridPane {
 
     public Scene getCurrentScene() {
         return FxWindow.getInstance().getCurrentScene();
-    }
+    }*/
 }
