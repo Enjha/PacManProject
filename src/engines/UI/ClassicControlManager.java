@@ -4,10 +4,18 @@ import java.util.HashMap;
 
 public class ClassicControlManager implements ControlManager{
 
-    private HashMap<String,Control> controls;
+    private HashMap<String,Control> controls = new HashMap<>();
 
-    public ClassicControlManager(HashMap<String,Control> controls){
-        this.controls = controls;
+    public void addControl(Control control){
+        if(!controls.containsKey(control.getKey())){
+            controls.put(control.getKey(),control);
+        }
+    }
+
+    public void removeControl(Control control){
+        if(controls.containsKey(control.getKey())){
+            controls.remove(control.getKey());
+        }
     }
 
     public Control getControl(String key){
