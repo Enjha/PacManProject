@@ -6,4 +6,5 @@ public interface MotorSound {
     void stopSound(String name);
     void changeVolume(String name, double newVolume);
     void changeVolumeAll(double newVolume);
+    double getVolume();
 }

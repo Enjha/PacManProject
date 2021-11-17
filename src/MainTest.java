@@ -1,13 +1,19 @@
 import apiUser.FxWindow;
+import apiUser.SceneAPIUser;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pacman.SceneMainMenu;
+import pacman.SceneOptionMenu;
 
 public class MainTest extends Application {
 
     public void start(Stage stage) {
 
         FxWindow window = new FxWindow(400,300,"Pac-Man");
-        window.openWindow(stage);
+        SceneAPIUser scene = new SceneMainMenu(stage);
+        scene.setScene();
+
+        //window.openWindow(stage);
 
         /*VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
