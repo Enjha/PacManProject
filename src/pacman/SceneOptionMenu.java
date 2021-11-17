@@ -29,29 +29,29 @@ public class SceneOptionMenu implements ScenePacMan {
     public void setScene(){
         AnchorPane anchorPane = new AnchorPane();
 
-        Label title = new Label();
-        setupScene.setLabel(title,"Options", Pos.CENTER,500,50,80,200,new Font(30), Paint.valueOf("black"),true);
+        Label labelTitle = new Label();
+        setupScene.setLabel(labelTitle,"Options", Pos.CENTER,500,50,80,200,new Font(30), Paint.valueOf("black"),true);
 
-        Slider soundVolumeSlider = new Slider();
-        setupScene.setSlider(soundVolumeSlider,480,400,80,250,0.0,1.0,0.3,true); //recupérer valeur initial du son à partir du moteur noyau
+        Slider SliderSoundVolume = new Slider();
+        setupScene.setSlider(SliderSoundVolume,480,400,80,250,0.0,1.0,0.3,true); //recupérer valeur initial du son à partir du moteur noyau
 
-        Label volume = new Label();
-        setupScene.setLabel(volume,"Volume :",Pos.CENTER,450,350,80,300,new Font(20),Paint.valueOf("black"),true);
+        Label labelVolume = new Label();
+        setupScene.setLabel(labelVolume,"Volume :",Pos.CENTER,450,350,80,300,new Font(20),Paint.valueOf("black"),true);
 
-        Label volumeLevel = new Label();
-        setupScene.setLabel(volumeLevel,""+(int)(soundVolumeSlider.getValue()*100),Pos.CENTER,730,400,80,100,new Font(20),Paint.valueOf("black"),true);
+        Label labelVolumeLevel = new Label();
+        setupScene.setLabel(labelVolumeLevel,""+(int)(SliderSoundVolume.getValue()*100),Pos.CENTER,730,400,80,100,new Font(20),Paint.valueOf("black"),true);
 
-        Button sound = new Button();
-        setupScene.setButton(sound,"Son : Activé",Pos.CENTER,500,200,80,200,new Font(20),true);
+        Button buttonSound = new Button();
+        setupScene.setButton(buttonSound,"Son : Activé",Pos.CENTER,500,200,80,200,new Font(20),true);
 
-        soundVolumeSlider.valueProperty().addListener(observable -> {
-            volumeLevel.setText(""+(int)(soundVolumeSlider.getValue()*100));
+        SliderSoundVolume.valueProperty().addListener(observable -> {
+            labelVolumeLevel.setText(""+(int)(SliderSoundVolume.getValue()*100));
             // modifier son avec moteur noyau
         });
 
-        sound.setOnMouseClicked((event)-> setStateSound(sound));
+        buttonSound.setOnMouseClicked((event)-> setStateSound(buttonSound));
 
-        anchorPane.getChildren().addAll(title,soundVolumeSlider,volumeLevel,volume,sound);
+        anchorPane.getChildren().addAll(labelTitle,SliderSoundVolume,labelVolumeLevel,labelVolume,buttonSound);
         root.getChildren().add(anchorPane);
         stage.setScene(scene);
         stage.show();

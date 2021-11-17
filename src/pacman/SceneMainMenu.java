@@ -30,13 +30,13 @@ public class SceneMainMenu implements ScenePacMan {
         AnchorPane anchorPane = new AnchorPane();
 
         Button buttonPlay = new Button("Jouer");
-        setupScene.setButton(buttonPlay,"Jouer", Pos.CENTER,450,300,80,300,new Font(30),true);
+        setupScene.setButton(buttonPlay,"Jouer", Pos.CENTER,500,300,80,200,new Font(30),true);
 
         Button buttonQuit = new Button("Quitter");
-        setupScene.setButton(buttonQuit,"Quitter", Pos.CENTER,450,500,80,300,new Font(20),true);
+        setupScene.setButton(buttonQuit,"Quitter", Pos.CENTER,500,500,80,200,new Font(20),true);
 
         Button buttonOption = new Button("Options");
-        setupScene.setButton(buttonOption,"Options", Pos.CENTER,450,400,80,300,new Font(20),true);
+        setupScene.setButton(buttonOption,"Options", Pos.CENTER,500,400,80,200,new Font(20),true);
 
         ImageView picturePacMan = new ImageView();
         setupScene.setImageView(picturePacMan,450,100,80,300,new Image(new File("ressources/textures/menu_logo.png").toURI().toString()),true);
@@ -61,6 +61,6 @@ public class SceneMainMenu implements ScenePacMan {
     }
 
     private void setScenePlay(){
-
+        new ScenePlayMenu(stage).setScene();
     }
 }
