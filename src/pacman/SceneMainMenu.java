@@ -49,8 +49,8 @@ public class SceneMainMenu implements ScenePacMan {
         root.getChildren().add(anchorPane);
         stage.setScene(scene);
         stage.show();
-        //son
     }
+
 
     private void setSceneOption(){
         new SceneOptionMenu(stage).setScene();
