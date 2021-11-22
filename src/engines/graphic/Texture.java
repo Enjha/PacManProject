@@ -2,18 +2,14 @@ package engines.graphic;
 
 public class Texture extends Cover{
 
+
     /**
-     * Nom du fichier de textures
-     */
-    private final TextureCut textureCut;
-    /**
-     * Lien vers la partie de la texture
+     * Lien vers la texture
      */
     private final String link;
 
-    protected Texture(TextureCut textureCut, int row, int col) {
-        this.textureCut = textureCut;
-        this.link = textureCut.getLink() + row + "-" + col;
+    protected Texture(String link) {
+        this.link = link;
     }
 
     @Override
