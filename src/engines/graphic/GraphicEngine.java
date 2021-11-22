@@ -22,6 +22,7 @@ public class GraphicEngine {
 
     public void setCurrentScene(SceneAPIUser scene){
         window.setScene(scene.getScene());
+        currentScene = scene.getScene();
     }
 
 }

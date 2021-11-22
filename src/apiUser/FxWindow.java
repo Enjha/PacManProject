@@ -34,4 +34,8 @@ public class FxWindow {
         stage.show();
     }
 
+    public Scene getScene(){
+        return scene;
+    }
+
 }
