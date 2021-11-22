@@ -44,14 +44,18 @@ public class SceneOptionMenu implements ScenePacMan {
         Button buttonSound = new Button();
         setupScene.setButton(buttonSound,"Son : Activé",Pos.CENTER,500,200,80,200,new Font(20),true);
 
+        Button buttonReturn = new Button();
+        setupScene.setButton(buttonReturn,"retour",Pos.CENTER,500,700,80,200,new Font(20),true);
+
         SliderSoundVolume.valueProperty().addListener(observable -> {
             labelVolumeLevel.setText(""+(int)(SliderSoundVolume.getValue()*100));
             // modifier son avec moteur noyau
         });
 
         buttonSound.setOnMouseClicked((event)-> setStateSound(buttonSound));
+        buttonReturn.setOnMouseClicked((event)->setSceneReturn());
 
-        anchorPane.getChildren().addAll(labelTitle,SliderSoundVolume,labelVolumeLevel,labelVolume,buttonSound);
+        anchorPane.getChildren().addAll(labelTitle,SliderSoundVolume,labelVolumeLevel,labelVolume,buttonSound,buttonReturn);
         root.getChildren().add(anchorPane);
         stage.setScene(scene);
         stage.show();
@@ -68,5 +72,9 @@ public class SceneOptionMenu implements ScenePacMan {
             soundButton.setText("Son : Activé");
             // mettre son avec valeur du moteur son avec moteur noyau
         }
+    }
+
+    private void setSceneReturn(){
+        new SceneMainMenu(stage).setScene();
     }
 }
