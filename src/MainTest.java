@@ -1,17 +1,16 @@
-import apiUser.FxWindow;
-import apiUser.SceneAPIUser;
+import engines.graphic.GraphicEngine;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import pacman.SceneMainMenu;
-import pacman.SceneOptionMenu;
 
 public class MainTest extends Application {
 
     public void start(Stage stage) {
 
-        FxWindow window = new FxWindow(400,300,"Pac-Man");
-        SceneAPIUser scene = new SceneMainMenu(stage);
-        scene.setScene();
+        GraphicEngine graphicEngine = new GraphicEngine(stage);
+        graphicEngine.setFxWindow(1200,800,"Pac-Man");
+        graphicEngine.setCurrentScene(new SceneMainMenu(stage,graphicEngine));
+
 
         //window.openWindow(stage);
 

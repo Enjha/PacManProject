@@ -1,6 +1,7 @@
 package pacman;
 
 import apiUser.SetupScene;
+import engines.graphic.GraphicEngine;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,12 +22,14 @@ public class SceneOptionMenu implements ScenePacMan {
     private Stage stage;
     private SetupScene setupScene = new SetupScene();
     private boolean stateSound = true;
+    private GraphicEngine graphicEngine;
 
-    public SceneOptionMenu(Stage stage){
+    public SceneOptionMenu(Stage stage,GraphicEngine graphicEngine){
+        this.graphicEngine = graphicEngine;
         this.stage = stage;
     }
 
-    public void setScene(){
+    public Scene getScene(){
         AnchorPane anchorPane = new AnchorPane();
 
         Label labelTitle = new Label();
@@ -57,8 +60,7 @@ public class SceneOptionMenu implements ScenePacMan {
 
         anchorPane.getChildren().addAll(labelTitle,SliderSoundVolume,labelVolumeLevel,labelVolume,buttonSound,buttonReturn);
         root.getChildren().add(anchorPane);
-        stage.setScene(scene);
-        stage.show();
+        return scene;
     }
 
     private void setStateSound(Button soundButton){
@@ -75,6 +77,6 @@ public class SceneOptionMenu implements ScenePacMan {
     }
 
     private void setSceneReturn(){
-        new SceneMainMenu(stage).setScene();
+        graphicEngine.setCurrentScene(new SceneMainMenu(stage,graphicEngine));
     }
 }

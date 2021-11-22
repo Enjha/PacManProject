@@ -5,5 +5,5 @@ import javafx.scene.Scene;
 
 public interface ScenePacMan extends SceneAPIUser {
 
-    void setScene();
+    Scene getScene();
 }
