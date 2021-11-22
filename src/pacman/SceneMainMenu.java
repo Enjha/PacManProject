@@ -1,6 +1,7 @@
 package pacman;
 
 import apiUser.SetupScene;
+import engines.graphic.GraphicEngine;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,12 +22,14 @@ public class SceneMainMenu implements ScenePacMan {
     private Scene scene = new Scene(root, widht, height);
     private Stage stage;
     private SetupScene setupScene = new SetupScene();
+    private GraphicEngine graphicEngine;
 
-    public SceneMainMenu(Stage stage){
+    public SceneMainMenu(Stage stage,GraphicEngine graphicEngine){
         this.stage = stage;
+        this.graphicEngine = graphicEngine;
     }
 
-    public void setScene(){
+    public Scene getScene(){
         AnchorPane anchorPane = new AnchorPane();
 
         Button buttonPlay = new Button("Jouer");
@@ -47,13 +50,12 @@ public class SceneMainMenu implements ScenePacMan {
 
         anchorPane.getChildren().addAll(buttonOption,buttonQuit,buttonPlay,picturePacMan);
         root.getChildren().add(anchorPane);
-        stage.setScene(scene);
-        stage.show();
-        //son
+        return scene;
     }
 
+
     private void setSceneOption(){
-        new SceneOptionMenu(stage).setScene();
+        graphicEngine.setCurrentScene(new SceneOptionMenu(stage,graphicEngine));
     }
 
     private void exit(){
@@ -61,6 +63,6 @@ public class SceneMainMenu implements ScenePacMan {
     }
 
     private void setScenePlay(){
-        new ScenePlayMenu(stage).setScene();
+        graphicEngine.setCurrentScene(new ScenePlayMenu(stage,graphicEngine));
     }
 }

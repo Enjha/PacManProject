@@ -1,6 +1,7 @@
 package pacman;
 
 import apiUser.SetupScene;
+import engines.graphic.GraphicEngine;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,12 +22,14 @@ public class SceneOptionMenu implements ScenePacMan {
     private Stage stage;
     private SetupScene setupScene = new SetupScene();
     private boolean stateSound = true;
+    private GraphicEngine graphicEngine;
 
-    public SceneOptionMenu(Stage stage){
+    public SceneOptionMenu(Stage stage,GraphicEngine graphicEngine){
+        this.graphicEngine = graphicEngine;
         this.stage = stage;
     }
 
-    public void setScene(){
+    public Scene getScene(){
         AnchorPane anchorPane = new AnchorPane();
 
         Label labelTitle = new Label();
@@ -44,17 +47,20 @@ public class SceneOptionMenu implements ScenePacMan {
         Button buttonSound = new Button();
         setupScene.setButton(buttonSound,"Son : Activé",Pos.CENTER,500,200,80,200,new Font(20),true);
 
+        Button buttonReturn = new Button();
+        setupScene.setButton(buttonReturn,"retour",Pos.CENTER,500,700,80,200,new Font(20),true);
+
         SliderSoundVolume.valueProperty().addListener(observable -> {
             labelVolumeLevel.setText(""+(int)(SliderSoundVolume.getValue()*100));
             // modifier son avec moteur noyau
         });
 
         buttonSound.setOnMouseClicked((event)-> setStateSound(buttonSound));
+        buttonReturn.setOnMouseClicked((event)->setSceneReturn());
 
-        anchorPane.getChildren().addAll(labelTitle,SliderSoundVolume,labelVolumeLevel,labelVolume,buttonSound);
+        anchorPane.getChildren().addAll(labelTitle,SliderSoundVolume,labelVolumeLevel,labelVolume,buttonSound,buttonReturn);
         root.getChildren().add(anchorPane);
-        stage.setScene(scene);
-        stage.show();
+        return scene;
     }
 
     private void setStateSound(Button soundButton){
@@ -68,5 +74,9 @@ public class SceneOptionMenu implements ScenePacMan {
             soundButton.setText("Son : Activé");
             // mettre son avec valeur du moteur son avec moteur noyau
         }
+    }
+
+    private void setSceneReturn(){
+        graphicEngine.setCurrentScene(new SceneMainMenu(stage,graphicEngine));
     }
 }

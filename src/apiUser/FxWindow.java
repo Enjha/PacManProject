@@ -11,14 +11,16 @@ public class FxWindow {
     private Scene scene;
     private BorderPane root;
     private String sceneName;
+    private Stage stage;
 
-    public FxWindow(int width, int height,String sceneName){
+    public FxWindow(int width, int height,String sceneName,Stage stage){
         this.width = width;
         this.height = height;
         this.sceneName = sceneName;
+        this.stage = stage;
     }
 
-    public void openWindow(Stage stage){
+    public void openWindow(){
         root = new BorderPane();
         scene = new Scene(root, width, height);
         stage.setTitle(sceneName);
@@ -28,6 +30,8 @@ public class FxWindow {
 
     public void setScene(Scene scene){
         this.scene = scene;
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
