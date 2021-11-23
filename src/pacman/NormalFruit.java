@@ -5,11 +5,8 @@ import scene.SceneCase;
 
 public class NormalFruit implements Item {
 
-    private final SceneCase position;
-
-    public NormalFruit(SceneCase position){
-        this.position = position;
-    }
+    private SceneCase position;
+    private String entityName = "Fruit";
 
     public boolean isCharacter(){
         return false;
@@ -25,5 +22,13 @@ public class NormalFruit implements Item {
 
     public SceneCase getPosition(){
         return position;
+    }
+
+    public void setPosition(SceneCase position){
+        this.position = position;
+    }
+
+    public String getEntityName(){
+        return entityName;
     }
 }

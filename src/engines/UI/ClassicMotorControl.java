@@ -1,8 +1,12 @@
 package engines.UI;
 
+import gameplay.Direction;
+import gameplay.Entity;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+
+import java.util.List;
 
 
 public class ClassicMotorControl implements MotorControl{
@@ -28,13 +32,19 @@ public class ClassicMotorControl implements MotorControl{
         });
     }
 
-    public void setKey(String oldKey, String newKey){
+    public boolean setKey(String oldKey, String newKey){
         if(!controlManager.setControl(oldKey,newKey)){
-            System.out.println("La touche " + oldKey + " n'est pas enregistrer");
+            return false;
         }
-        else {
-            System.out.println("La touche " + newKey + " est enregistrer");
-        }
+        return true;
+    }
+
+    public Control getControl(String keyName){
+       return controlManager.getControl(keyName);
+    }
+
+    public List<Control> getControl(Entity entity){
+        return controlManager.getControl(entity);
     }
 
     public void printKeyPressed(String key){

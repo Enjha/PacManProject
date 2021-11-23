@@ -5,11 +5,8 @@ import scene.SceneCase;
 
 public class PacgumFruit implements Item {
 
-    private final SceneCase position;
-
-    public PacgumFruit(SceneCase position){
-        this.position = position;
-    }
+    private SceneCase position;
+    private String entityName = "Pacgum";
 
     public boolean isCharacter(){
         return false;
@@ -25,5 +22,13 @@ public class PacgumFruit implements Item {
 
     public SceneCase getPosition(){
         return position;
+    }
+
+    public void setPosition(SceneCase position){
+        this.position = position;
+    }
+
+    public String getEntityName(){
+        return entityName;
     }
 }

@@ -30,4 +30,12 @@ public class ClassicMotorSound implements MotorSound{
     public double getVolume(){
         return volume;
     }
+
+    public void mute(){
+        changeVolumeAll(0);
+    }
+
+    public void unmute(){
+        changeVolumeAll(volume);
+    }
 }

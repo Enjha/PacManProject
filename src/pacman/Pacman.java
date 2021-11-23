@@ -6,13 +6,9 @@ import scene.SceneCase;
 
 public class Pacman implements Character {
 
-    private final SceneCase position;
-    private final Team team;
-
-    public Pacman(SceneCase position, Team team){
-        this.position = position;
-        this.team = team;
-    }
+    private SceneCase position;
+    private Team team;
+    private String entityName = "Pac-Man";
 
     public boolean isCharacter(){
         return true;
@@ -31,4 +27,16 @@ public class Pacman implements Character {
     }
 
     public Team getTeam(){ return team; }
+
+    public void setPosition(SceneCase position){
+        this.position = position;
+    }
+
+    public void setTeam(Team team){
+        this.team = team;
+    }
+
+    public String getEntityName(){
+        return entityName;
+    }
 }

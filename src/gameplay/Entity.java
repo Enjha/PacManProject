@@ -8,4 +8,7 @@ public interface Entity {
     boolean isItem();
     boolean canInteractWithItem();
     SceneCase getPosition();
+    void setPosition(SceneCase position);
+    String getEntityName();
+
 }

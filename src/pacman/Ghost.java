@@ -6,12 +6,12 @@ import gameplay.Character;
 
 public class Ghost implements Character{
 
-    private final SceneCase position;
-    private final Team team;
+    private SceneCase position;
+    private Team team;
+    private String entityName;
 
-    public Ghost(SceneCase position, Team team){
-        this.position = position;
-        this.team = team;
+    public Ghost(String entityName){
+        this.entityName = entityName;
     }
 
     public boolean isCharacter(){
@@ -31,4 +31,16 @@ public class Ghost implements Character{
     }
 
     public Team getTeam(){ return team; }
+
+    public void setPosition(SceneCase position){
+        this.position = position;
+    }
+
+    public void setTeam(Team team){
+        this.team = team;
+    }
+
+    public String getEntityName(){
+        return entityName;
+    }
 }
