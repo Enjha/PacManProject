@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import scene.SceneCase;
 import scene.Wall;
 
+import java.util.List;
 import java.util.Objects;
 
 public class WallView {
@@ -56,8 +57,11 @@ public class WallView {
     }
 
     public Image getWallView(SceneCase sceneCase){
-        //Récupérer les direction du mur et renvoyer l'image qui correspond au cas !
-        sceneCase.getCaseContent(Wall.class.toString());
+        //Récupérer les direction du mur (en fonction de la case en paramètre) et renvoyer l'image qui correspond au cas !
+        List<Object> list = sceneCase.getCaseContent(Wall.class.toString());
+        Wall wall = (Wall) list.get(0);
+
+
         return null;
     }
 
