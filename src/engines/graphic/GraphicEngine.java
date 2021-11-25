@@ -13,18 +13,18 @@ import java.util.List;
 
 public class GraphicEngine {
 
-    private Stage stage;
+    private final Stage stage;
     private FxWindow window;
-    private KernelEngine kernelEngine;
+    private final KernelEngine kernelEngine;
 
     public GraphicEngine(Stage stage,KernelEngine kernelEngine){
         this.stage = stage;
         this.kernelEngine = kernelEngine;
     }
 
-    public void setFxWindow(int width, int height,String name){
-        window = new FxWindow(width,height,name,stage);
-        window.openWindow();
+    public void setFxWindow(int width, int height, String name){
+        window = new FxWindow(width,height,name);
+        window.openWindow(stage);
     }
 
     public void setCurrentScene(SceneAPIUser scene){
