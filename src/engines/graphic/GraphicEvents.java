@@ -2,7 +2,7 @@ package engines.graphic;
 
 import java.util.EventListener;
 
-public interface GraphicEvent {
+public interface GraphicEvents {
 
     void notifyEvent(String event);
 

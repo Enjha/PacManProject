@@ -1,7 +1,5 @@
 package engines.graphic;
 
-import com.sun.prism.Texture;
-
 public class GraphicEntity {
 
     //Position
@@ -15,17 +13,13 @@ public class GraphicEntity {
     //Couleur
     private Color color;
 
-    //Texture
-    private Texture texture;
 
-
-    public GraphicEntity(int x, int y, int width, int height, Color color, Texture texture) {
+    public GraphicEntity(int x, int y, int width, int height, Color color) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
-        this.texture = texture;
     }
 
     public int[] getBounds() { return new int[]{x, y, x + width, y + height}; }
@@ -68,14 +62,6 @@ public class GraphicEntity {
 
     public void setColor(Color color) {
         this.color = color;
-    }
-
-    public Texture getTexture() {
-        return texture;
-    }
-
-    public void setTexture(Texture texture) {
-        this.texture = texture;
     }
 
 }
