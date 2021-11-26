@@ -1,5 +1,5 @@
 package gameplay;
 
 public enum Direction {
-    North, South, East, West, Dead
+    North, South, East, West, Dead, Stop
 }

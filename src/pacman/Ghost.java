@@ -1,5 +1,6 @@
 package pacman;
 
+import gameplay.Direction;
 import gameplay.Team;
 import scene.SceneCase;
 import gameplay.Character;
@@ -9,6 +10,7 @@ public class Ghost implements Character{
     private SceneCase position;
     private Team team;
     private String entityName;
+    private Direction direction = Direction.Stop;
 
     public Ghost(String entityName){
         this.entityName = entityName;
@@ -42,5 +44,13 @@ public class Ghost implements Character{
 
     public String getEntityName(){
         return entityName;
+    }
+
+    public Direction getDirection(){
+        return direction;
+    }
+
+    public void setDirection(Direction direction){
+        this.direction = direction;
     }
 }

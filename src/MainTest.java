@@ -12,7 +12,12 @@ import gameplay.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import pacman.*;
+import scene.CaseContentManager;
+import scene.SceneCase;
+import scene.SceneElement;
 import scene.Wall;
+
+import java.util.List;
 
 public class MainTest extends Application {
 
@@ -52,6 +57,23 @@ public class MainTest extends Application {
         MotorControl motorControl = new ClassicMotorControl(kernelEngine.getCurrentScene(),controlManager);
 
         kernelEngine.setMotorControl(motorControl);
+
+        CaseContentManager caseContentManager = new NormalCaseContentManager();
+        SceneElement wall = new Wall(Direction.North);
+        SceneElement wall2 = new Wall(Direction.East);
+        caseContentManager.addContent(Wall.class.toString(),wall);
+        caseContentManager.addContent(wall2.getClass().toString(),wall2);
+        SceneCase cases = new LabyrinthCase(0,0,caseContentManager);
+
+        List<Object> walls = cases.getCaseContent(Wall.class.toString());
+        for(int i = 0; i < walls.size(); i++){
+            if(walls.get(i) instanceof Wall) {
+                System.out.println("wall : " + ((Wall) walls.get(i)).getSceneElement());
+            }
+            else {
+                System.out.println("Error index : " + i);
+            }
+        }
 
         //window.openWindow(stage);
 

@@ -1,6 +1,8 @@
 package engines.graphic.view;
 
+import gameplay.Character;
 import gameplay.Direction;
+import gameplay.Entity;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -65,8 +67,8 @@ public class PacManView {
         this.pacman_dead_views = new ArrayList<>();
     }
 
-    public ArrayList<Image> getPacmanView(Direction direction) {
-        switch (direction) {
+    public ArrayList<Image> getPacmanView(Character character) {
+        switch (character.getDirection()) {
             case North:
                 this.pacman_north_views.add(pacman_north);
                 this.pacman_north_views.add(pacman_north_open);
@@ -95,6 +97,8 @@ public class PacManView {
                 this.pacman_dead_views.add(pacman_dead9);
                 this.pacman_dead_views.add(pacman_dead10);
                 return this.pacman_dead_views;
+            case Stop:
+
         }
         return null;
     }
