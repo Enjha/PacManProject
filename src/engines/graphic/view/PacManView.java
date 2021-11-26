@@ -70,7 +70,7 @@ public class PacManView {
     public ArrayList<Image> getViewCharacter(Character character) {
         switch (character.getDirection()) {
             case North:
-                this.pacman_north_views.add(pacman_north);
+                this.pacman_north_views.add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/pacman/pacman_north.gif"))));
                 this.pacman_north_views.add(pacman_north_open);
                 return this.pacman_north_views;
             case East:
