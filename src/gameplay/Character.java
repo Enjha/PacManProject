@@ -6,4 +6,5 @@ public interface Character extends Entity {
     void setTeam(Team team);
     Direction getDirection();
     void setDirection(Direction direction);
+    boolean isAlive();
 }
