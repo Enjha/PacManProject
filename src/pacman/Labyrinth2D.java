@@ -61,4 +61,8 @@ public class Labyrinth2D implements Scene {
         }
       return null;
     }
+
+    public SceneCase[][] getCases(){
+        return labyrinth;
+    }
 }

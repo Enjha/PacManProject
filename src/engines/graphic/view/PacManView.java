@@ -67,7 +67,7 @@ public class PacManView {
         this.pacman_dead_views = new ArrayList<>();
     }
 
-    public ArrayList<Image> getPacmanView(Character character) {
+    public ArrayList<Image> getViewCharacter(Character character) {
         switch (character.getDirection()) {
             case North:
                 this.pacman_north_views.add(pacman_north);
