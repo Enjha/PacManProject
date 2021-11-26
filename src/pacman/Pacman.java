@@ -11,6 +11,7 @@ public class Pacman implements Character {
     private Team team;
     private String entityName = "Pac-Man";
     private Direction direction = Direction.Stop;
+    private boolean isAlive = true;
 
     public boolean isCharacter(){
         return true;
@@ -48,5 +49,9 @@ public class Pacman implements Character {
 
     public void setDirection(Direction direction){
         this.direction = direction;
+    }
+
+    public boolean isAlive(){
+        return isAlive;
     }
 }

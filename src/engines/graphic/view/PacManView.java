@@ -85,22 +85,27 @@ public class PacManView {
                 this.pacman_west_views.add(pacman_west);
                 this.pacman_west_views.add(pacman_west_open);
                 return this.pacman_west_views;
-            case Dead:
-                this.pacman_dead_views.add(pacman_dead1);
-                this.pacman_dead_views.add(pacman_dead2);
-                this.pacman_dead_views.add(pacman_dead3);
-                this.pacman_dead_views.add(pacman_dead4);
-                this.pacman_dead_views.add(pacman_dead5);
-                this.pacman_dead_views.add(pacman_dead6);
-                this.pacman_dead_views.add(pacman_dead7);
-                this.pacman_dead_views.add(pacman_dead8);
-                this.pacman_dead_views.add(pacman_dead9);
-                this.pacman_dead_views.add(pacman_dead10);
-                return this.pacman_dead_views;
             case Stop:
 
+            default:
+                if(!character.isAlive()) {
+                    this.pacman_dead_views.add(pacman_dead1);
+                    this.pacman_dead_views.add(pacman_dead2);
+                    this.pacman_dead_views.add(pacman_dead3);
+                    this.pacman_dead_views.add(pacman_dead4);
+                    this.pacman_dead_views.add(pacman_dead5);
+                    this.pacman_dead_views.add(pacman_dead6);
+                    this.pacman_dead_views.add(pacman_dead7);
+                    this.pacman_dead_views.add(pacman_dead8);
+                    this.pacman_dead_views.add(pacman_dead9);
+                    this.pacman_dead_views.add(pacman_dead10);
+                    return this.pacman_dead_views;
+                }
+                else {
+                    return null;
+                }
+
         }
-        return null;
     }
 
 }

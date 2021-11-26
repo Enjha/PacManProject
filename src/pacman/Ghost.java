@@ -11,6 +11,7 @@ public class Ghost implements Character{
     private Team team;
     private String entityName;
     private Direction direction = Direction.Stop;
+    private boolean isAlive = true;
 
     public Ghost(String entityName){
         this.entityName = entityName;
@@ -52,5 +53,9 @@ public class Ghost implements Character{
 
     public void setDirection(Direction direction){
         this.direction = direction;
+    }
+
+    public boolean isAlive(){
+        return isAlive;
     }
 }
