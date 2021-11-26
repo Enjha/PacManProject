@@ -10,19 +10,17 @@ public class GraphicEntity {
     private int width;
     private int height;
 
-    //Couleur
-    private Color color;
 
-
-    public GraphicEntity(int x, int y, int width, int height, Color color) {
+    public GraphicEntity(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.color = color;
     }
 
-    public int[] getBounds() { return new int[]{x, y, x + width, y + height}; }
+    public int[] getBounds() {
+        return new int[]{x, y, x + width, y + height};
+    }
 
     public int getX() {
         return x;
@@ -54,14 +52,6 @@ public class GraphicEntity {
 
     public void setHeight(int height) {
         this.height = height;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 
 }

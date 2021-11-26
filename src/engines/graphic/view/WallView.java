@@ -1,69 +1,120 @@
 package engines.graphic.view;
 
+import gameplay.Direction;
 import javafx.scene.image.Image;
 import scene.SceneCase;
 import scene.Wall;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class WallView {
 
-    //ANGLE
-    private final Image W_angle_top_left;
-    private final Image W_angle_right_left;
-    private final Image W_angle_bot_left;
-    private final Image W_angle_left_left;
-
-    //CORRIDOR
-    private final Image W_horizontal_corridor;
-    private final Image W_vertical_corridor;
-
-    //CROSSROAD
-    private final Image W_crossroad;
-    private final Image W_horizontal_up_crossroad;
-    private final Image W_horizontal_right_crossroad;
-    private final Image W_vertical_down_crossroad;
-    private final Image W_vertical_left_crossroad;
-
-    //DEAD_END
-    private final Image W_dead_end_up;
-    private final Image W_dead_end_right;
-    private final Image W_dead_end_down;
-    private final Image W_dead_end_left;
-
-    //PARTICULAR
-    private final Image W_ghost_exit;
-    private final Image W_square;
-
     public WallView() {
-        W_angle_top_left = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_angle_top_left.gif")));
-        W_angle_right_left = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_angle_right_left.gif")));
-        W_angle_bot_left = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_angle_bot_left.gif")));
-        W_angle_left_left = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_angle_left_left.gif")));
-        W_horizontal_corridor = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_horizontal_corridor.gif")));
-        W_vertical_corridor = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_vertical_corridor.gif")));
-        W_crossroad = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_crossroad.gif")));
-        W_horizontal_up_crossroad = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_horizontal_up_crossroad.gif")));
-        W_horizontal_right_crossroad = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_horizontal_right_crossroad.gif")));
-        W_vertical_down_crossroad = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_vertical_down_crossroad.gif")));
-        W_vertical_left_crossroad = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_vertical_left_crossroad.gif")));
-        W_dead_end_up = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_dead_end_up.gif")));
-        W_dead_end_right = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_dead_end_right.gif")));
-        W_dead_end_down = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_dead_end_down.gif")));
-        W_dead_end_left = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_dead_end_left.gif")));
-        W_ghost_exit = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_ghost_exit.gif")));
-        W_square = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_square.gif")));
     }
 
-    public Image getWallView(Object o){
+    public Image getWallView(Object o) {
         SceneCase sceneCase = (SceneCase) o;
-        //Récupérer les direction du mur (en fonction de la case en paramètre) et renvoyer l'image qui correspond au cas !
-        List<Object> list = sceneCase.getCaseContent(Wall.class.toString());
-        Wall wall = (Wall) list.get(0);
+        List<Object> walls = sceneCase.getCaseContent(Wall.class.toString());
+        /**
+         * La list walls sera probablement null si la case contient aucun mur ! à corriger !
+         */
+        ArrayList<Direction> directions = new ArrayList<>();
+        switch (walls.size()) {
+            case 1:
+                Wall w1 = (Wall) walls.get(0);
+                switch (w1.getSceneElement()) {
+                    case North:
+                        return new Image(new File("ressources/wall/crossroad/W_vertical_down_crossroad.gif").toURI().toString());
+                    case West:
+                        return new Image(new File("ressources/wall/crossroad/W_horizontal_right_crossroad.gif").toURI().toString());
+                    case South:
+                        return new Image(new File("ressources/wall/crossroad/W_horizontal_up_crossroad.gif").toURI().toString());
+                    case East:
+                        return new Image(new File("ressources/wall/crossroad/W_vertical_left_crossroad.gif").toURI().toString());
+                }
+            case 2:
+                directions.add(Direction.North);
+                directions.add(Direction.South);
+                if (containDirection(walls, directions)) {
+                    return new Image(new File("ressources/wall/corridor/W_vertical_corridor.gif").toURI().toString());
+                }
+                directions = new ArrayList<>();
+                directions.add(Direction.West);
+                directions.add(Direction.East);
+                if (containDirection(walls, directions)) {
+                    return new Image(new File("ressources/wall/corridor/W_horizontal_corridor.gif").toURI().toString());
+                }
+                directions = new ArrayList<>();
+                directions.add(Direction.North);
+                directions.add(Direction.East);
+                if (containDirection(walls, directions)) {
+                    return new Image(new File("ressources/wall/angle/W_angle_top_right.gif").toURI().toString());
+                }
+                directions = new ArrayList<>();
+                directions.add(Direction.North);
+                directions.add(Direction.West);
+                if (containDirection(walls, directions)) {
+                    return new Image(new File("ressources/wall/angle/W_angle_top_left.gif").toURI().toString());
+                }
+                directions = new ArrayList<>();
+                directions.add(Direction.South);
+                directions.add(Direction.East);
+                if (containDirection(walls, directions)) {
+                    return new Image(new File("ressources/wall/angle/W_angle_bot_right.gif").toURI().toString());
+                }
+                directions = new ArrayList<>();
+                directions.add(Direction.South);
+                directions.add(Direction.West);
+                if (containDirection(walls, directions)) {
+                    return new Image(new File("ressources/wall/angle/W_angle_bot_left").toURI().toString());
+                }
+            case 3:
+                directions.add(Direction.North);
+                directions.add(Direction.East);
+                directions.add(Direction.West);
+                if (containDirection(walls, directions)) {
+                    return new Image(new File("ressources/wall/dead_end/W_dead_end_up.gif").toURI().toString());
+                }
+                directions = new ArrayList<>();
+                directions.add(Direction.North);
+                directions.add(Direction.East);
+                directions.add(Direction.South);
+                if (containDirection(walls, directions)) {
+                    return new Image(new File("ressources/wall/dead_end/W_dead_end_right.gif").toURI().toString());
+                }
+                directions = new ArrayList<>();
+                directions.add(Direction.North);
+                directions.add(Direction.West);
+                directions.add(Direction.South);
+                if (containDirection(walls, directions)) {
+                    return new Image(new File("ressources/wall/dead_end/W_dead_end_left.gif").toURI().toString());
+                }
+                directions = new ArrayList<>();
+                directions.add(Direction.West);
+                directions.add(Direction.East);
+                directions.add(Direction.South);
+                if (containDirection(walls, directions)) {
+                    return new Image(new File("ressources/wall/dead_end/W_dead_end_down.gif").toURI().toString());
+                }
+            case 4:
+                return new Image(new File("ressources/wall/W_square.gif").toURI().toString());
+            default:
+                return new Image(new File("ressources/wall/crossroad/W_crossroad.gif").toURI().toString());
+        }
+    }
 
-
-        return null;
+    public boolean containDirection(List<Object> walls, List<Direction> directions) {
+        int i = directions.size();
+        for (Object o : walls) {
+            Wall w = (Wall) o;
+            if (directions.contains(w.getSceneElement())) {
+                directions.remove(w.getSceneElement());
+                i--;
+            }
+        }
+        return i == 0;
     }
 
 }

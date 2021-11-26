@@ -1,61 +1,70 @@
 package pacman;
 
+import gameplay.Character;
 import gameplay.Direction;
 import gameplay.Team;
 import scene.SceneCase;
-import gameplay.Character;
 
-public class Ghost implements Character{
+public class Ghost implements Character {
 
     private SceneCase position;
     private Team team;
     private String entityName;
     private Direction direction = Direction.Stop;
     private boolean isAlive = true;
+    private final
+    GhostColor color;
 
-    public Ghost(String entityName){
+    public Ghost(String entityName, GhostColor color) {
         this.entityName = entityName;
+        this.color = color;
     }
 
-    public boolean isCharacter(){
+    public boolean isCharacter() {
         return true;
     }
 
-    public boolean isItem(){
+    public boolean isItem() {
         return false;
     }
 
-    public boolean canInteractWithItem(){
+    public boolean canInteractWithItem() {
         return false;
     }
 
-    public SceneCase getPosition(){
+    public SceneCase getPosition() {
         return position;
     }
 
-    public Team getTeam(){ return team; }
+    public Team getTeam() {
+        return team;
+    }
 
-    public void setPosition(SceneCase position){
+    public void setPosition(SceneCase position) {
         this.position = position;
     }
 
-    public void setTeam(Team team){
+    public void setTeam(Team team) {
         this.team = team;
     }
 
-    public String getEntityName(){
+    public String getEntityName() {
         return entityName;
     }
 
-    public Direction getDirection(){
+    public Direction getDirection() {
         return direction;
     }
 
-    public void setDirection(Direction direction){
+    public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
-    public boolean isAlive(){
+    public boolean isAlive() {
         return isAlive;
+    }
+
+    public GhostColor getColor() {
+        return color;
     }
 }

@@ -6,7 +6,6 @@ import engines.sound.ClassicMotorSound;
 import engines.sound.ClassicSoundManager;
 import engines.sound.MotorSound;
 import engines.sound.SoundManager;
-import gameplay.Character;
 import gameplay.Direction;
 import gameplay.Game;
 import javafx.application.Application;
@@ -26,8 +25,7 @@ public class MainTest extends Application {
         Game game = new GamePacMan();
 
         Pacman pacman = new Pacman();
-        Ghost ghost = new Ghost("Pinky");
-
+        Ghost ghost = new Ghost("Pinky", GhostColor.BLUE);
         game.addEntity(pacman);
         game.addEntity(ghost);
         KernelEngine kernelEngine = new ClassicKernelEngine(game);
