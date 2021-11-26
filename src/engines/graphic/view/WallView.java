@@ -56,7 +56,8 @@ public class WallView {
         W_square = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/ressources/textures/wall/W_square.gif")));
     }
 
-    public Image getWallView(SceneCase sceneCase){
+    public Image getWallView(Object o){
+        SceneCase sceneCase = (SceneCase) o;
         //Récupérer les direction du mur (en fonction de la case en paramètre) et renvoyer l'image qui correspond au cas !
         List<Object> list = sceneCase.getCaseContent(Wall.class.toString());
         Wall wall = (Wall) list.get(0);
