@@ -4,5 +4,6 @@ import scene.Scene;
 
 public interface ConvertSceneToGraphic {
 
-    void setTextureScene(Scene scene);
+    void setLabyrinthTextureScene(Scene scene);
+    void setEntityTextureScene(Scene scene);
 }

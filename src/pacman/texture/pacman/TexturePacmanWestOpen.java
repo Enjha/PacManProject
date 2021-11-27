@@ -8,6 +8,6 @@ import java.io.File;
 public class TexturePacmanWestOpen implements Texture {
 
     public Image getTexture(){
-        return new Image(new File("ressources/pacman/pacman_west_open.gif").toURI().toString());
+        return new Image(new File("ressources/textures/pacman/pacman_west_open.gif").toURI().toString());
     }
 }

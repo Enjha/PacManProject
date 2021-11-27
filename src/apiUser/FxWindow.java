@@ -6,30 +6,30 @@ import javafx.stage.Stage;
 
 public class FxWindow {
 
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private Scene scene;
-    private BorderPane root;
-    private String sceneName;
+    private final String sceneName;
 
-    public FxWindow(int width, int height, String sceneName){
+    public FxWindow(int width, int height, String sceneName) {
         this.width = width;
         this.height = height;
         this.sceneName = sceneName;
     }
 
-    public void openWindow(Stage stage){
-        root = new BorderPane();
+    public void openWindow(Stage stage) {
+        BorderPane root = new BorderPane();
         scene = new Scene(root, width, height);
         stage.setTitle(sceneName);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void setScene(Scene scene){
+    public void setScene(Scene scene) {
         this.scene = scene;
     }
-    public Scene getScene(){
+
+    public Scene getScene() {
         return this.scene;
     }
 

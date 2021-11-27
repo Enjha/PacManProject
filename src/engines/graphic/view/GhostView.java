@@ -2,111 +2,109 @@ package engines.graphic.view;
 
 import javafx.scene.image.Image;
 import pacman.Ghost;
+import pacman.texture.ghosts.*;
 
-import java.io.File;
 import java.util.ArrayList;
 
-public class GhostView implements View {
+public class GhostView {
 
     public GhostView() {
     }
 
-    // Reste à faire le cas ou pacman a son pouvoir et le fantome est donc dasn un état AFRAID clignotement.
-    @Override
-    public ArrayList<Image> getView(Object o) {
-        Ghost ghost = (Ghost) o;
+    // Reste à faire le cas ou pacman a son pouvoir et le fantome est donc dans un état AFRAID clignotement.
+    public ArrayList<Image> getGhostView(Ghost ghost) {
         ArrayList<Image> pacman_views = new ArrayList<>();
         switch (ghost.getDirection()) {
             case North:
                 if (!ghost.isAlive()) {
-                    pacman_views.add(new Image(new File("ressources/ghost/afraid/respawn_ghost_north.gif").toURI().toString()));
+                    pacman_views.add(new TextureRespawnGhostNorth().getTexture());
                     return pacman_views;
                 }
                 switch (ghost.getColor()) {
                     case BLUE:
-                        pacman_views.add(new Image(new File("ressources/ghost/blue_ghost/blue_ghost_north.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/blue_ghost/blue_ghost_north_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureBlueGhostNorth().getTexture());
+                        pacman_views.add(new TextureBlueGhostNorth2().getTexture());
                         return pacman_views;
                     case ORANGE:
-                        pacman_views.add(new Image(new File("ressources/ghost/orange_ghost/orange_ghost_north.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/orange_ghost/orange_ghost_north_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureOrangeGhostNorth().getTexture());
+                        pacman_views.add(new TextureOrangeGhostNorth2().getTexture());
                         return pacman_views;
                     case PINK:
-                        pacman_views.add(new Image(new File("ressources/ghost/pink_ghost/pink_ghost_north.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/pink_ghost/pink_ghost_north_2.gif").toURI().toString()));
+                        pacman_views.add(new TexturePinkGhostNorth().getTexture());
+                        pacman_views.add(new TexturePinkGhostNorth2().getTexture());
                         return pacman_views;
                     case RED:
-                        pacman_views.add(new Image(new File("ressources/ghost/red_ghost/red_ghost_north.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/red_ghost/red_ghost_north_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureRedGhostNorth().getTexture());
+                        pacman_views.add(new TextureRedGhostNorth2().getTexture());
                         return pacman_views;
                 }
             case East:
                 if (!ghost.isAlive()) {
-                    pacman_views.add(new Image(new File("ressources/ghost/afraid/respawn_ghost_east.gif").toURI().toString()));
+                    pacman_views.add(new TextureRespawnGhostEast().getTexture());
                     return pacman_views;
                 }
                 switch (ghost.getColor()) {
                     case BLUE:
-                        pacman_views.add(new Image(new File("ressources/ghost/blue_ghost/blue_ghost_east.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/blue_ghost/blue_ghost_east_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureBlueGhostEast().getTexture());
+                        pacman_views.add(new TextureBlueGhostEast2().getTexture());
                         return pacman_views;
                     case ORANGE:
-                        pacman_views.add(new Image(new File("ressources/ghost/orange_ghost/orange_ghost_east.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/orange_ghost/orange_ghost_east_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureOrangeGhostEast().getTexture());
+                        pacman_views.add(new TextureOrangeGhostEast2().getTexture());
                         return pacman_views;
                     case PINK:
-                        pacman_views.add(new Image(new File("ressources/ghost/pink_ghost/pink_ghost_east.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/pink_ghost/pink_ghost_east_2.gif").toURI().toString()));
+                        pacman_views.add(new TexturePinkGhostEast().getTexture());
+                        pacman_views.add(new TexturePinkGhostEast2().getTexture());
                         return pacman_views;
                     case RED:
-                        pacman_views.add(new Image(new File("ressources/ghost/red_ghost/red_ghost_east.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/red_ghost/red_ghost_east_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureRedGhostEast().getTexture());
+                        pacman_views.add(new TextureRedGhostEast2().getTexture());
                         return pacman_views;
                 }
             case South:
                 if (!ghost.isAlive()) {
-                    pacman_views.add(new Image(new File("ressources/ghost/afraid/respawn_ghost_south.gif").toURI().toString()));
+                    pacman_views.add(new TextureRespawnGhostSouth().getTexture());
                     return pacman_views;
                 }
                 switch (ghost.getColor()) {
                     case BLUE:
-                        pacman_views.add(new Image(new File("ressources/ghost/blue_ghost/blue_ghost_south.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/blue_ghost/blue_ghost_south_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureBlueGhostSouth().getTexture());
+                        pacman_views.add(new TextureBlueGhostSouth2().getTexture());
                         return pacman_views;
                     case ORANGE:
-                        pacman_views.add(new Image(new File("ressources/ghost/orange_ghost/orange_ghost_south.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/orange_ghost/orange_ghost_south_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureOrangeGhostSouth().getTexture());
+                        pacman_views.add(new TextureOrangeGhostSouth2().getTexture());
                         return pacman_views;
                     case PINK:
-                        pacman_views.add(new Image(new File("ressources/ghost/pink_ghost/pink_ghost_south.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/pink_ghost/pink_ghost_south_2.gif").toURI().toString()));
+                        pacman_views.add(new TexturePinkGhostSouth().getTexture());
+                        pacman_views.add(new TexturePinkGhostSouth2().getTexture());
                         return pacman_views;
                     case RED:
-                        pacman_views.add(new Image(new File("ressources/ghost/red_ghost/red_ghost_south.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/red_ghost/red_ghost_south_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureRedGhostSouth().getTexture());
+                        pacman_views.add(new TextureRedGhostSouth2().getTexture());
                         return pacman_views;
                 }
             case West:
                 if (!ghost.isAlive()) {
-                    pacman_views.add(new Image(new File("ressources/ghost/afraid/respawn_ghost_west.gif").toURI().toString()));
+                    pacman_views.add(new TextureRespawnGhostWest().getTexture());
                     return pacman_views;
                 }
                 switch (ghost.getColor()) {
                     case BLUE:
-                        pacman_views.add(new Image(new File("ressources/ghost/blue_ghost/blue_ghost_west.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/blue_ghost/blue_ghost_west_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureBlueGhostWest().getTexture());
+                        pacman_views.add(new TextureBlueGhostWest2().getTexture());
                         return pacman_views;
                     case ORANGE:
-                        pacman_views.add(new Image(new File("ressources/ghost/orange_ghost/orange_ghost_west.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/orange_ghost/orange_ghost_nwest_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureOrangeGhostWest().getTexture());
+                        pacman_views.add(new TextureOrangeGhostWest2().getTexture());
                         return pacman_views;
                     case PINK:
-                        pacman_views.add(new Image(new File("ressources/ghost/pink_ghost/pink_ghost_west.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/pink_ghost/pink_ghost_west_2.gif").toURI().toString()));
+                        pacman_views.add(new TexturePinkGhostWest().getTexture());
+                        pacman_views.add(new TexturePinkGhostWest2().getTexture());
                         return pacman_views;
                     case RED:
-                        pacman_views.add(new Image(new File("ressources/ghost/red_ghost/red_ghost_west.gif").toURI().toString()));
-                        pacman_views.add(new Image(new File("ressources/ghost/red_ghost/red_ghost_west_2.gif").toURI().toString()));
+                        pacman_views.add(new TextureRedGhostWest().getTexture());
+                        pacman_views.add(new TextureRedGhostWest2().getTexture());
                         return pacman_views;
                 }
         }
