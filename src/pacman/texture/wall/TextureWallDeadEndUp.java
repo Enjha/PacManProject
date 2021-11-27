@@ -1,4 +1,4 @@
-package pacman.texture;
+package pacman.texture.wall;
 
 import engines.graphic.view.Texture;
 import javafx.scene.image.Image;

@@ -11,6 +11,7 @@ import gameplay.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import pacman.*;
+import pacman.scene.SceneMainMenu;
 import scene.CaseContentManager;
 import scene.SceneCase;
 import scene.SceneElement;

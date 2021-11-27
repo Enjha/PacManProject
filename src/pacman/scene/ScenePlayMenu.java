@@ -1,4 +1,4 @@
-package pacman;
+package pacman.scene;
 
 import apiUser.SetupScene;
 import engines.graphic.GraphicEngine;
@@ -11,8 +11,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import pacman.scene.SceneMainMenu;
+import pacman.scene.ScenePacMan;
 
-public class ScenePlayMenu implements ScenePacMan{
+public class ScenePlayMenu implements ScenePacMan {
 
     private BorderPane root = new BorderPane();
     private final int widht = 1200;

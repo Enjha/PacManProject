@@ -1,4 +1,4 @@
-package pacman;
+package pacman.scene;
 
 import apiUser.SetupScene;
 import javafx.scene.Scene;
@@ -6,7 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class SceneLabyrinthMenu implements ScenePacMan{
+public class SceneLabyrinthMenu implements ScenePacMan {
 
     private BorderPane root = new BorderPane();
     private final int widht = 1200;

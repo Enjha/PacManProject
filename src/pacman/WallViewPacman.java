@@ -3,11 +3,10 @@ package pacman;
 import engines.graphic.view.WallView;
 import gameplay.Direction;
 import javafx.scene.image.Image;
-import pacman.texture.*;
+import pacman.texture.wall.*;
 import scene.SceneCase;
 import scene.Wall;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
