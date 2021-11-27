@@ -4,5 +4,5 @@ import scene.Scene;
 
 public interface ConvertSceneToGraphic {
 
-    void test(Scene scene);
+    void setTextureScene(Scene scene);
 }
