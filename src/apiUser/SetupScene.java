@@ -19,12 +19,11 @@ import java.util.List;
 public class SetupScene {
 
     // A modifier
-    public void setEntityAliveAnimation(ArrayList<Image> images, double layoutX, double layoutY, double fitHeight, double fitWidth, Image image, boolean visible) {
+    public void setEntityAliveAnimation(ImageView imageView, double layoutX, double layoutY, double fitHeight, double fitWidth, ArrayList<Image> images, boolean visible) {
         final double INTERVAL = 1.0;
         Timeline timeline = new Timeline();
         Duration timePoint = Duration.ZERO;
         Duration pause = Duration.seconds(0.3);
-        ImageView imageView = new ImageView();
 
         Image image1 = images.get(0);
         Image image2 = images.get(1);
@@ -32,10 +31,10 @@ public class SetupScene {
 
         if (imageView.getImage().equals(image1)) {
             timeline.getKeyFrames().add(new KeyFrame(timePoint,
-                    e -> this.setImageView(new ImageView(), 10, 10, 32, 32, image2, true)));
+                    e -> this.setImageView(imageView, layoutX, layoutY, fitHeight, fitWidth, image2, visible)));
         } else {
             timeline.getKeyFrames().add(new KeyFrame(timePoint,
-                    e -> this.setImageView(new ImageView(), 10, 10, 32, 32, image1, true)));
+                    e -> this.setImageView(imageView, layoutX, layoutY, fitHeight, fitWidth, image1, visible)));
         }
         timeline.play();
     }
