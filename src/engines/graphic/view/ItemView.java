@@ -9,6 +9,10 @@ import pacman.texture.items.TexturePacGum;
 
 public class ItemView {
 
+    public ItemView() {
+
+    }
+
     public Image getItemView(Item item) {
         if (item instanceof NormalFruit) {
             return new TextureFruit().getTexture();

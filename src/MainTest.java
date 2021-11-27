@@ -22,28 +22,28 @@ import java.util.List;
 public class MainTest extends Application {
 
     public void start(Stage stage) {
-
         Game game = new GamePacMan();
 
         Pacman pacman = new Pacman();
         Ghost ghost = new Ghost("Pinky", GhostColor.BLUE);
         game.addEntity(pacman);
         game.addEntity(ghost);
-        KernelEngine kernelEngine = new ClassicKernelEngine(game);
+
+    /*    KernelEngine kernelEngine = new ClassicKernelEngine(game);
 
         GraphicEngine graphicEngine = new GraphicEngine(stage,kernelEngine);
         SoundManager soundManager = new ClassicSoundManager();
 
-        MotorSound motorSound = new ClassicMotorSound(soundManager);
+        SoundManager motorSound = (SoundManager) new ClassicMotorSound(soundManager);
 
-        kernelEngine.setMotorSound(motorSound);
+        kernelEngine.setMotorSound((MotorSound) motorSound);
         graphicEngine.setFxWindow(1200,800,"Pac-Man");
         graphicEngine.setCurrentScene(new SceneMainMenu(stage,graphicEngine));
 
         kernelEngine.setGraphicEngine(graphicEngine);
 
         ControlManager controlManager = new ClassicControlManager();
-        controlManager.addControl(new KeyBoardControl("z",Direction.North,pacman));
+        controlManager.addControl(new KeyBoardControl("z", Direction.North,pacman));
         controlManager.addControl(new KeyBoardControl("s",Direction.South,pacman));
         controlManager.addControl(new KeyBoardControl("q",Direction.West,pacman));
         controlManager.addControl(new KeyBoardControl("d",Direction.East,pacman));

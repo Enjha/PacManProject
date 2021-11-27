@@ -1,15 +1,13 @@
 package engines.graphic;
 
-import apiUser.FxAnimation;
 import apiUser.SetupScene;
 import engines.graphic.view.GhostView;
+import engines.graphic.view.ItemView;
 import engines.graphic.view.PacManView;
-import javafx.animation.Timeline;
-import pacman.Ghost;
-import pacman.Pacman;
-import pacman.WallViewPacman;
+import gameplay.Item;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import pacman.*;
 import scene.Scene;
 import scene.SceneCase;
 
@@ -41,23 +39,34 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
     @Override
     public void setEntityTextureScene(Scene scene) {
         SceneCase[][] sceneCases = scene.getCases();
-        Timeline timeline = new Timeline();
-        FxAnimation animation = new FxAnimation();
         for (SceneCase[] sceneCases1 : sceneCases) {
             for (SceneCase sceneCase : sceneCases1) {
                 if (sceneCase.getCaseContent(Pacman.class.toString()).size() > 0) {
                     ArrayList<Image> pacman_textures = new PacManView().getPacmanView((Pacman) sceneCase.getCaseContent(Pacman.class.toString()).get(0));
-                    animation.createAnimationWithImages(pacman_textures);
+                    // CREE UNE ANIMATION
                 }
+
                 if (sceneCase.getCaseContent(Ghost.class.toString()).size() > 0) {
                     for (Object o : sceneCase.getCaseContent(Ghost.class.toString())) {
                         Ghost ghost = (Ghost) o;
                         ArrayList<Image> ghost_textures = new GhostView().getGhostView(ghost);
-                        animation.createAnimationWithImages(ghost_textures);
+                        // CREE UNE ANIMATION
                     }
                 }
 
+                if (sceneCase.getCaseContent(NormalFruit.class.toString()).size() > 0) {
+                    Image fruit_texture = new ItemView().getItemView((Item) sceneCase.getCaseContent(NormalFruit.class.toString()).get(0));
+                    setupScene.setImageView(new ImageView(), x * CASE_SIZE, y * CASE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE, fruit_texture, true);
+                }
+
+                if (sceneCase.getCaseContent(PacgumFruit.class.toString()).size() > 0) {
+                    Image pac_gum_texture = new ItemView().getItemView((Item) sceneCase.getCaseContent(PacgumFruit.class.toString()).get(0));
+                    setupScene.setImageView(new ImageView(), x * CASE_SIZE, y * CASE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE, pac_gum_texture, true);
+                }
+
+                y++;
             }
+            x++;
         }
     }
 
