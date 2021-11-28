@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -23,6 +24,7 @@ public class SceneMainMenu implements ScenePacMan {
     private Stage stage;
     private SetupScene setupScene = new SetupScene();
     private GraphicEngine graphicEngine;
+    private Pane pane;
 
     public SceneMainMenu(Stage stage,GraphicEngine graphicEngine){
         this.stage = stage;
@@ -30,7 +32,7 @@ public class SceneMainMenu implements ScenePacMan {
     }
 
     public Scene getScene(){
-        AnchorPane anchorPane = new AnchorPane();
+        pane = new AnchorPane();
 
         Button buttonPlay = new Button("Jouer");
         setupScene.setButton(buttonPlay,"Jouer", Pos.CENTER,500,300,80,200,new Font(30),true);
@@ -42,14 +44,14 @@ public class SceneMainMenu implements ScenePacMan {
         setupScene.setButton(buttonOption,"Options", Pos.CENTER,500,400,80,200,new Font(20),true);
 
         ImageView picturePacMan = new ImageView();
-        setupScene.setImageView(picturePacMan,450,100,80,300,new Image(new File("ressources/textures/menu_logo.png").toURI().toString()),true);
+        setupScene.setImageView(picturePacMan,450,100,80,300,new Image(new File("ressources/wall/crossroad/W_crossroad.gif").toURI().toString()),true);
 
         buttonOption.setOnMouseClicked((event)-> setSceneOption());
         buttonQuit.setOnMouseClicked((event)-> exit());
         buttonPlay.setOnMouseClicked((event)-> setScenePlay());
 
-        anchorPane.getChildren().addAll(buttonOption,buttonQuit,buttonPlay,picturePacMan);
-        root.getChildren().add(anchorPane);
+        pane.getChildren().addAll(buttonOption,buttonQuit,buttonPlay,picturePacMan);
+        root.getChildren().add(pane);
         return scene;
     }
 
@@ -64,5 +66,13 @@ public class SceneMainMenu implements ScenePacMan {
 
     private void setScenePlay(){
         graphicEngine.setCurrentScene(new ScenePlayMenu(stage,graphicEngine));
+    }
+
+    public Pane getPane(){
+        return pane;
+    }
+
+    public boolean isSceneGame(){
+        return false;
     }
 }

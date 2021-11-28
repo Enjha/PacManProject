@@ -62,6 +62,7 @@ public class GhostView {
                         return pacman_views;
                 }
             case South:
+            case Stop:
                 if (!ghost.isAlive()) {
                     pacman_views.add(new TextureRespawnGhostSouth().getTexture());
                     return pacman_views;
@@ -76,6 +77,7 @@ public class GhostView {
                         pacman_views.add(new TextureOrangeGhostSouth2().getTexture());
                         return pacman_views;
                     case PINK:
+                        System.out.println("test");
                         pacman_views.add(new TexturePinkGhostSouth().getTexture());
                         pacman_views.add(new TexturePinkGhostSouth2().getTexture());
                         return pacman_views;

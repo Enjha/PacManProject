@@ -15,6 +15,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -36,6 +37,7 @@ public class SceneOptionMenu implements ScenePacMan {
     private List<Button> listButtonControl = new ArrayList<>();
     private List<Label> listLabelControl = new ArrayList<>();
     private boolean modifyKeyControl = false;
+    private Pane pane;
 
     public SceneOptionMenu(Stage stage, GraphicEngine graphicEngine){
         this.graphicEngine = graphicEngine;
@@ -43,7 +45,7 @@ public class SceneOptionMenu implements ScenePacMan {
     }
 
     public Scene getScene(){
-        AnchorPane anchorPane = new AnchorPane();
+        pane = new AnchorPane();
 
         Label labelTitle = new Label();
         setupScene.setLabel(labelTitle,"Options", Pos.CENTER,500,50,80,200,new Font(30), Paint.valueOf("black"),true);
@@ -81,7 +83,7 @@ public class SceneOptionMenu implements ScenePacMan {
             setupScene.setLabel(labelDirection,controls.get(i).getDirection().toString(),Pos.CENTER,x,y,30,100,new Font(20),Paint.valueOf("black"),true);
             Button finalButtonDirection = buttonDirection;
             buttonDirection.setOnMouseClicked((event)-> setControl(finalButtonDirection));
-            anchorPane.getChildren().addAll(buttonDirection,labelDirection);
+            pane.getChildren().addAll(buttonDirection,labelDirection);
             listButtonControl.add(buttonDirection);
             listLabelControl.add(labelDirection);
             x += 120;
@@ -103,8 +105,8 @@ public class SceneOptionMenu implements ScenePacMan {
         buttonSound.setOnMouseClicked((event)-> setStateSound(buttonSound,sliderSoundVolume,labelVolumeLevel));
         buttonReturn.setOnMouseClicked((event)->setSceneReturn());
 
-        anchorPane.getChildren().addAll(labelTitle,sliderSoundVolume,labelVolumeLevel,labelVolume,buttonSound,buttonReturn,buttonCharacter);
-        root.getChildren().add(anchorPane);
+        pane.getChildren().addAll(labelTitle,sliderSoundVolume,labelVolumeLevel,labelVolume,buttonSound,buttonReturn,buttonCharacter);
+        root.getChildren().add(pane);
         return scene;
     }
 
@@ -158,5 +160,13 @@ public class SceneOptionMenu implements ScenePacMan {
                 }
             });
         }
+    }
+
+    public Pane getPane(){
+        return pane;
+    }
+
+    public boolean isSceneGame(){
+        return false;
     }
 }

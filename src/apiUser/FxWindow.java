@@ -8,6 +8,7 @@ public class FxWindow {
 
     private int width;
     private int height;
+    private SceneAPIUser sceneAPIUser;
     private Scene scene;
     private BorderPane root;
     private String sceneName;
@@ -28,14 +29,14 @@ public class FxWindow {
         stage.show();
     }
 
-    public void setScene(Scene scene){
-        this.scene = scene;
-        stage.setScene(scene);
+    public void setScene(SceneAPIUser sceneAPIUser){
+        this.sceneAPIUser = sceneAPIUser;
+        stage.setScene(sceneAPIUser.getScene());
         stage.show();
     }
 
-    public Scene getScene(){
-        return scene;
+    public SceneAPIUser getScene(){
+        return sceneAPIUser;
     }
 
 }

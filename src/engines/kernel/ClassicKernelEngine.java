@@ -8,6 +8,7 @@ import engines.sound.MotorSound;
 import gameplay.Entity;
 import gameplay.Game;
 import javafx.scene.Scene;
+import scene.SceneGame;
 
 import java.util.List;
 
@@ -74,5 +75,9 @@ public class ClassicKernelEngine implements KernelEngine{
 
     public void unmute(){
         motorSound.unmute();
+    }
+
+    public SceneGame getSceneGame(){
+        return game.getSceneGame();
     }
 }

@@ -8,6 +8,7 @@ import engines.sound.MotorSound;
 import gameplay.Direction;
 import gameplay.Entity;
 import javafx.scene.Scene;
+import scene.SceneGame;
 
 import java.util.List;
 
@@ -25,5 +26,6 @@ public interface KernelEngine {
     boolean setControl(String oldKey,String newKey);
     void mute();
     void unmute();
+    SceneGame getSceneGame();
 
 }

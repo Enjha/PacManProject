@@ -1,4 +1,6 @@
 import engines.UI.*;
+import engines.graphic.ClassicConvertSceneToGraphic;
+import engines.graphic.ConvertSceneToGraphic;
 import engines.graphic.GraphicEngine;
 import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
@@ -12,24 +14,55 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import pacman.*;
 import pacman.scene.SceneMainMenu;
-import scene.CaseContentManager;
-import scene.SceneCase;
-import scene.SceneElement;
-import scene.Wall;
+import scene.*;
 
 import java.util.List;
 
 public class MainTest extends Application {
 
     public void start(Stage stage) {
-        Game game = new GamePacMan();
+
+        SceneGame sceneGame = new Labyrinth2D(2,2);
+
+        Game game = new GamePacMan(sceneGame);
 
         Pacman pacman = new Pacman();
-        Ghost ghost = new Ghost("Pinky", GhostColor.BLUE);
+        Ghost ghost = new Ghost("Blue", GhostColor.BLUE);
         game.addEntity(pacman);
         game.addEntity(ghost);
 
-    /*    KernelEngine kernelEngine = new ClassicKernelEngine(game);
+        CaseContentManager caseContentManager = new NormalCaseContentManager();
+        SceneCase cases = new LabyrinthCase(0,0,caseContentManager);
+        cases.addCaseContent(ghost);
+        sceneGame.addSceneCase(cases,0,0);
+
+
+        ghost.setPosition(cases);
+
+        caseContentManager = new NormalCaseContentManager();
+        cases = new LabyrinthCase(0,1,caseContentManager);
+        cases.addCaseContent(pacman);
+        sceneGame.addSceneCase(cases,0,1);
+
+        pacman.setPosition(cases);
+
+        caseContentManager = new NormalCaseContentManager();
+        cases = new LabyrinthCase(1,1,caseContentManager);
+        sceneGame.addSceneCase(cases,1,1);
+
+        caseContentManager = new NormalCaseContentManager();
+        cases = new LabyrinthCase(1,0,caseContentManager);
+        sceneGame.addSceneCase(cases,1,0);
+
+        KernelEngine kernelEngine = new ClassicKernelEngine(game);
+        ConvertSceneToGraphic convertSceneToGraphic = new ClassicConvertSceneToGraphic();
+        GraphicEngine graphicEngine = new GraphicEngine(stage,kernelEngine,convertSceneToGraphic);
+        kernelEngine.setGraphicEngine(graphicEngine);
+
+        graphicEngine.setFxWindow(1200,800,"Pac-Man");
+        graphicEngine.setCurrentScene(new SceneMainMenu(stage,graphicEngine));
+
+    /*    KernelEngine kernelEngine = new ClassicKernelEngine(game);1
 
         GraphicEngine graphicEngine = new GraphicEngine(stage,kernelEngine);
         SoundManager soundManager = new ClassicSoundManager();

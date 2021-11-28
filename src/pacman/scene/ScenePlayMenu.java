@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -23,6 +24,7 @@ public class ScenePlayMenu implements ScenePacMan {
     private Stage stage;
     private SetupScene setupScene = new SetupScene();
     private GraphicEngine graphicEngine;
+    private Pane pane;
 
     public ScenePlayMenu(Stage stage,GraphicEngine graphicEngine){
         this.stage = stage;
@@ -30,7 +32,7 @@ public class ScenePlayMenu implements ScenePacMan {
     }
 
     public Scene getScene(){
-        AnchorPane anchorPane = new AnchorPane();
+        pane = new AnchorPane();
 
         Label labelTitle = new Label();
         setupScene.setLabel(labelTitle,"Jouer", Pos.CENTER,500,100,150,200,new Font(40), Paint.valueOf("black"),true);
@@ -48,8 +50,8 @@ public class ScenePlayMenu implements ScenePacMan {
         buttonSolo.setOnMouseClicked((event)-> setSceneSoloMenu(stage));
         buttonMulti.setOnMouseClicked((event)-> setSceneMultiMenu(stage));
 
-        anchorPane.getChildren().addAll(labelTitle,buttonSolo,buttonMulti,buttonReturn);
-        root.getChildren().add(anchorPane);
+        pane.getChildren().addAll(labelTitle,buttonSolo,buttonMulti,buttonReturn);
+        root.getChildren().add(pane);
         return scene;
     }
 
@@ -58,10 +60,18 @@ public class ScenePlayMenu implements ScenePacMan {
     }
 
     private void setSceneSoloMenu(Stage stage){
-
+        graphicEngine.setCurrentScene(new SceneLabyrinthMenu(stage,graphicEngine));
     }
 
     private void setSceneMultiMenu(Stage stage){
 
+    }
+
+    public Pane getPane(){
+        return pane;
+    }
+
+    public boolean isSceneGame(){
+        return false;
     }
 }

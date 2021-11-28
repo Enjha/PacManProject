@@ -1,7 +1,6 @@
 package engines.IA;
 
-import engines.kernel.Entity;
-import javafx.scene.Node;
+import gameplay.Entity;
 import pacman.Ghost;
 import pacman.Pacman;
 
@@ -10,7 +9,7 @@ import javax.swing.text.Position;
 public class AiEntity {
 
     private int choice;
-    private Entity entity
+    private Entity entity;
 
     public AiEntity(Entity entity, Ghost ghost, Pacman pacman){
         this.entity = entity;
