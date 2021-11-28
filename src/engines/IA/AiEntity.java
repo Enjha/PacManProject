@@ -1,0 +1,49 @@
+package engines.IA;
+
+import engines.kernel.Entity;
+import javafx.scene.Node;
+import pacman.Ghost;
+import pacman.Pacman;
+
+import javax.swing.text.Position;
+
+public class AiEntity {
+
+    private int choice;
+    private Entity entity
+
+    public AiEntity(Entity entity, Ghost ghost, Pacman pacman){
+        this.entity = entity;
+        choice = calculateDijkstra(ghost,pacman);
+        pickDirection();
+    }
+
+    private int calculateDijkstra(Ghost ghost, Pacman pacman){
+
+
+        return 1;
+    }
+
+    private void pickDirection(){
+        switch(choice){
+            case 0 :
+
+                break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            default :
+
+                break;
+        }
+    }
+
+
+
+}
