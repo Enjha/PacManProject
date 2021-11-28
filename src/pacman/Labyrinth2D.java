@@ -7,18 +7,50 @@ import scene.Scene;
 
 import java.util.List;
 
+/**
+ * The scene of a 2D labyrinth
+ */
 public class Labyrinth2D implements Scene {
 
+    /**
+     * The cases of the labyrinth
+     */
     private final SceneCase[][] labyrinth;
+
+    /**
+     * the labyrinth's height
+     */
     private final int height;
+
+    /**
+     * the labyrinth's width
+     */
     private final int width;
 
+    /**
+     * <b>Constructor of Labyrinth2D</b>
+     * @param height
+     *      the height of the labyrinth
+     * @param width
+     *      the width of the labyrinth
+     */
     public Labyrinth2D(int height, int width){
         labyrinth = new SceneCase[height][width];
         this.height = height;
         this.width = width;
     }
 
+    /**
+     * If x and y are correct compared to the dimension of the labyrinth, the new scene case is add
+     * Return if the operation was a success
+     * @param sceneCase
+     *      a new scene case
+     * @param x
+     *      the position x of the new scene case
+     * @param y
+     *      the position y of the new scene case
+     * @return a boolean value
+     */
     public boolean addSceneCase(SceneCase sceneCase, int x, int y){
         if(labyrinth[x][y] == null && x < width && y < height) {
             labyrinth[x][y] = sceneCase;
@@ -27,6 +59,15 @@ public class Labyrinth2D implements Scene {
         return false;
     }
 
+    /**
+     * If x and y are correct compared to the dimension of the labyrinth, the scene case is remove
+     * Return if the operation was a success
+     * @param x
+     *      the position x of a scene case
+     * @param y
+     *      the position y of a scene case
+     * @return a boolean value
+     */
     public boolean removeSceneCase(int x, int y){
         if(labyrinth[x][y] != null && x < width && y < height) {
             labyrinth[x][y] = null;
@@ -35,6 +76,15 @@ public class Labyrinth2D implements Scene {
         return false;
     }
 
+    /**
+     * If x and y are correct compared to the dimension of the labyrinth, return the scene case at the position x and y
+     * If x and y are incorrect compared to the dimension of the labyrinth, return a null
+     * @param x
+     *      the position x of a scene case
+     * @param y
+     *      the position y of a scene case
+     * @return a object type of SceneCase
+     */
     public SceneCase getCase(int x, int y){
         if(x >= 0 && x < width && y >= 0 && y < height){
             return labyrinth[x][y];
@@ -42,6 +92,17 @@ public class Labyrinth2D implements Scene {
         return null;
     }
 
+    /**
+     * If x and y are correct compared to the dimension of the labyrinth, return the scene element who has a contact with a entity
+     * If x and y are incorrect compared to the dimension of the labyrinth, return a null
+     * @param x
+     *      the position x of a scene case
+     * @param y
+     *      the position y of a scene case
+     * @param movement
+     *      a movement of a entity
+     * @return a object type of SceneElement
+     */
     public SceneElement obstacle(int x, int y, Movement movement){
         if(x >= 0 && x < width && y >= 0 && y < height) {
             SceneCase sceneCase = labyrinth[x][y];
@@ -50,6 +111,14 @@ public class Labyrinth2D implements Scene {
         return null;
     }
 
+    /**
+     * Return the wall in the scene case at the direction if this wall exist or null if this wall don't exist
+     * @param direction
+     *      a direction in the scene case
+     * @param sceneCase
+     *      a scene case
+     * @return a object type of Wall
+     */
     private Wall wall(Direction direction, SceneCase sceneCase){
         List<Object> list = sceneCase.getCaseContent(Wall.class.toString());
         if(list != null) {
@@ -62,6 +131,10 @@ public class Labyrinth2D implements Scene {
       return null;
     }
 
+    /**
+     * Return all cases of the labyrinth
+     * @return a 2D table of object type of SceneCase
+     */
     public SceneCase[][] getCases(){
         return labyrinth;
     }
