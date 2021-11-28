@@ -3,14 +3,14 @@ package pacman;
 import gameplay.Direction;
 import gameplay.Movement;
 import scene.*;
-import scene.Scene;
+import scene.SceneGame;
 
 import java.util.List;
 
 /**
  * The scene of a 2D labyrinth
  */
-public class Labyrinth2D implements Scene {
+public class Labyrinth2D implements SceneGame {
 
     /**
      * The cases of the labyrinth

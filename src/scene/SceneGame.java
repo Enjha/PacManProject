@@ -5,7 +5,7 @@ import gameplay.Movement;
 /**
  * A scene who contain all information contain in a scene
  */
-public interface Scene {
+public interface SceneGame {
 
     /**
      * Add a scene case in a scene at the position x and y

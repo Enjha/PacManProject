@@ -23,8 +23,8 @@ public class GraphicEngine {
     }
 
     public void setFxWindow(int width, int height, String name){
-        window = new FxWindow(width,height,name);
-        window.openWindow(stage);
+        window = new FxWindow(width,height,name,stage);
+        window.openWindow();
     }
 
     public void setCurrentScene(SceneAPIUser scene){

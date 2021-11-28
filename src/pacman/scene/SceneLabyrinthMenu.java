@@ -22,7 +22,8 @@ public class SceneLabyrinthMenu implements ScenePacMan {
     public Scene getScene(){
         AnchorPane anchorPane = new AnchorPane();
 
-        anchorPane.getChildren().addAll();
+
+
         root.getChildren().add(anchorPane);
         return scene;
     }

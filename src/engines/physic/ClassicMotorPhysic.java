@@ -9,17 +9,17 @@ import java.util.List;
 
 public class ClassicMotorPhysic implements MotorPhysic{
 
-    public Collision moveEntity(Movement movement, Scene scene){
+    public Collision moveEntity(Movement movement, SceneGame sceneGame){
         int[] positionEntity = {movement.getEntity().getPosition().getX(),movement.getEntity().getPosition().getY()};
         int[] nextPositionEntity = movement.nextPosition();
         SceneCase sceneCaseEntity = movement.getEntity().getPosition();
-        SceneElement sceneElement = scene.obstacle(sceneCaseEntity.getX(),sceneCaseEntity.getY(),movement);
+        SceneElement sceneElement = sceneGame.obstacle(sceneCaseEntity.getX(),sceneCaseEntity.getY(),movement);
 
         if(sceneElement != null){
             return new CollisionEntitySceneElement(movement.getEntity(),sceneElement);
         }
         else {
-            List<Object> list = scene.getCase(nextPositionEntity[0],nextPositionEntity[1]).getCaseContent(movement.getEntity().getClass().toString());
+            List<Object> list = sceneGame.getCase(nextPositionEntity[0],nextPositionEntity[1]).getCaseContent(movement.getEntity().getClass().toString());
             if(list != null) {
                 for (Object object : list) {
                     Entity entity = (Entity) object;

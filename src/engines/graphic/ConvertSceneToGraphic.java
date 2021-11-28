@@ -1,9 +1,10 @@
 package engines.graphic;
 
-import scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import scene.SceneGame;
 
 public interface ConvertSceneToGraphic {
 
-    void setLabyrinthTextureScene(Scene scene);
-    void setEntityTextureScene(Scene scene);
+    void setLabyrinthTextureScene(SceneGame sceneGame, AnchorPane anchorPane);
+    void setEntityTextureScene(SceneGame sceneGame,AnchorPane anchorPane);
 }
