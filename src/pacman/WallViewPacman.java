@@ -14,9 +14,7 @@ public class WallViewPacman implements WallView {
 
     public Image getWallView(SceneCase sceneCase) {
         List<Object> walls = sceneCase.getCaseContent(Wall.class.toString());
-        /**
-         * La list walls sera probablement null si la case contient aucun mur ! à corriger !
-         */
+
         int sizeWall;
         if(walls == null) {
             sizeWall = 0;
@@ -24,7 +22,7 @@ public class WallViewPacman implements WallView {
         else {
             sizeWall = walls.size();
         }
-            ArrayList<Direction> directions = new ArrayList<>();
+        ArrayList<Direction> directions = new ArrayList<>();
             switch (sizeWall) {
                 case 1:
                     Wall w1 = (Wall) walls.get(0);

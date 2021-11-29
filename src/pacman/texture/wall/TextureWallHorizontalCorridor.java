@@ -8,6 +8,6 @@ import java.io.File;
 public class TextureWallHorizontalCorridor implements Texture {
 
     public Image getTexture(){
-        return new Image(new File("ressources/wall/corridor/W_horizontal_corridor.gif").toURI().toString());
+        return new Image(new File("ressources/textures/wall/corridor/W_horizontal_corridor.gif").toURI().toString());
     }
 }

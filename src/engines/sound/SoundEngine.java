@@ -1,6 +1,6 @@
 package engines.sound;
 
-public interface MotorSound {
+public interface SoundEngine {
 
     void playSound(String name,int cycle);
     void stopSound(String name);

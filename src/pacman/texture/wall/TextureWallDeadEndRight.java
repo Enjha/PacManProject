@@ -8,6 +8,6 @@ import java.io.File;
 public class TextureWallDeadEndRight implements Texture {
 
     public Image getTexture(){
-        return new Image(new File("ressources/wall/dead_end/W_dead_end_right.gif").toURI().toString());
+        return new Image(new File("ressources/textures/wall/dead_end/W_dead_end_right.gif").toURI().toString());
     }
 }

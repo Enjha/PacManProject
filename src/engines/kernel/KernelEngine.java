@@ -1,11 +1,11 @@
 package engines.kernel;
 
 import engines.UI.Control;
-import engines.UI.MotorControl;
+import engines.UI.ControlEngine;
+import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
-import engines.physic.MotorPhysic;
-import engines.sound.MotorSound;
-import gameplay.Direction;
+import engines.physic.PhysicEngine;
+import engines.sound.SoundEngine;
 import gameplay.Entity;
 import javafx.scene.Scene;
 import scene.SceneGame;
@@ -14,9 +14,9 @@ import java.util.List;
 
 public interface KernelEngine {
 
-    void setMotorSound(MotorSound motorSound);
-    void setMotorPhysic(MotorPhysic motorPhysic);
-    void setMotorControl(MotorControl motorControl);
+    void setSoundEngine(SoundEngine soundEngine);
+    void setPhysicEngine(PhysicEngine physicEngine);
+    void setControlEngine(ControlEngine controlEngine);
     void setGraphicEngine(GraphicEngine graphicEngine);
     List<Control> getControl(Entity entity);
     double getVolume();

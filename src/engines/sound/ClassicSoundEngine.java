@@ -1,11 +1,11 @@
 package engines.sound;
 
-public class ClassicMotorSound implements MotorSound{
+public class ClassicSoundEngine implements SoundEngine {
 
     private SoundManager soundManager;
     private double volume = 0.3;
 
-    public ClassicMotorSound(SoundManager soundManager){
+    public ClassicSoundEngine(SoundManager soundManager){
         this.soundManager = soundManager;
     }
 

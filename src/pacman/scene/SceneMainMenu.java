@@ -1,6 +1,7 @@
 package pacman.scene;
 
 import apiUser.SetupScene;
+import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,7 +27,7 @@ public class SceneMainMenu implements ScenePacMan {
     private GraphicEngine graphicEngine;
     private Pane pane;
 
-    public SceneMainMenu(Stage stage,GraphicEngine graphicEngine){
+    public SceneMainMenu(Stage stage, GraphicEngine graphicEngine){
         this.stage = stage;
         this.graphicEngine = graphicEngine;
     }
@@ -44,7 +45,7 @@ public class SceneMainMenu implements ScenePacMan {
         setupScene.setButton(buttonOption,"Options", Pos.CENTER,500,400,80,200,new Font(20),true);
 
         ImageView picturePacMan = new ImageView();
-        setupScene.setImageView(picturePacMan,450,100,80,300,new Image(new File("ressources/wall/crossroad/W_crossroad.gif").toURI().toString()),true);
+        setupScene.setImageView(picturePacMan,450,100,80,300,new Image(new File("ressources/textures/menu_logo.png").toURI().toString()),true);
 
         buttonOption.setOnMouseClicked((event)-> setSceneOption());
         buttonQuit.setOnMouseClicked((event)-> exit());
@@ -57,7 +58,7 @@ public class SceneMainMenu implements ScenePacMan {
 
 
     private void setSceneOption(){
-        graphicEngine.setCurrentScene(new SceneOptionMenu(stage,graphicEngine));
+        graphicEngine.setCurrentScene(new SceneOptionMenu(stage, graphicEngine));
     }
 
     private void exit(){
@@ -65,7 +66,7 @@ public class SceneMainMenu implements ScenePacMan {
     }
 
     private void setScenePlay(){
-        graphicEngine.setCurrentScene(new ScenePlayMenu(stage,graphicEngine));
+        graphicEngine.setCurrentScene(new ScenePlayMenu(stage, graphicEngine));
     }
 
     public Pane getPane(){

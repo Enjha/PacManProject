@@ -1,10 +1,11 @@
 package engines.kernel;
 
 import engines.UI.Control;
-import engines.UI.MotorControl;
+import engines.UI.ControlEngine;
+import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
-import engines.physic.MotorPhysic;
-import engines.sound.MotorSound;
+import engines.physic.PhysicEngine;
+import engines.sound.SoundEngine;
 import gameplay.Entity;
 import gameplay.Game;
 import javafx.scene.Scene;
@@ -15,10 +16,10 @@ import java.util.List;
 public class ClassicKernelEngine implements KernelEngine{
 
     //moteur graphique ici
-    private GraphicEngine graphicEngine;
-    private MotorSound motorSound;
-    private MotorPhysic motorPhysic;
-    private MotorControl motorControl;
+    private GraphicEngine classicGraphicEngine;
+    private SoundEngine soundEngine;
+    private PhysicEngine physicEngine;
+    private ControlEngine controlEngine;
     private Game game;
 
     public ClassicKernelEngine(Game game){
@@ -26,39 +27,39 @@ public class ClassicKernelEngine implements KernelEngine{
     }
 
     public Control getControl(String keyName){
-        return motorControl.getControl(keyName);
+        return controlEngine.getControl(keyName);
     }
 
     public double getVolume(){
-        return motorSound.getVolume();
+        return soundEngine.getVolume();
     }
 
     public void setVolume(double volume){
-        motorSound.changeVolumeAll(volume);
+        soundEngine.changeVolumeAll(volume);
     }
 
-    public void setMotorSound(MotorSound motorSound){
-        this.motorSound = motorSound;
+    public void setSoundEngine(SoundEngine soundEngine){
+        this.soundEngine = soundEngine;
     }
 
-    public void setMotorPhysic(MotorPhysic motorPhysic){
-        this.motorPhysic = motorPhysic;
+    public void setPhysicEngine(PhysicEngine physicEngine){
+        this.physicEngine = physicEngine;
     }
 
-    public void setMotorControl(MotorControl motorControl){
-        this.motorControl = motorControl;
+    public void setControlEngine(ControlEngine controlEngine){
+        this.controlEngine = controlEngine;
     }
 
     public void setGraphicEngine(GraphicEngine graphicEngine){
-        this.graphicEngine = graphicEngine;
+        this.classicGraphicEngine = graphicEngine;
     }
 
     public Scene getCurrentScene(){
-        return graphicEngine.getCurrentScene();
+        return classicGraphicEngine.getCurrentScene();
     }
 
     public List<Control> getControl(Entity entity){
-        return motorControl.getControl(entity);
+        return controlEngine.getControl(entity);
     }
 
     public List<Entity> getEntities(){
@@ -66,15 +67,15 @@ public class ClassicKernelEngine implements KernelEngine{
     }
 
     public boolean setControl(String oldKey,String newKey){
-        return motorControl.setKey(oldKey,newKey);
+        return controlEngine.setKey(oldKey,newKey);
     }
 
     public void mute(){
-        motorSound.mute();
+        soundEngine.mute();
     }
 
     public void unmute(){
-        motorSound.unmute();
+        soundEngine.unmute();
     }
 
     public SceneGame getSceneGame(){

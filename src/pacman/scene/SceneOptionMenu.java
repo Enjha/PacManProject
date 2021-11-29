@@ -4,6 +4,7 @@ package pacman.scene;
 
 import apiUser.SetupScene;
 import engines.UI.Control;
+import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
 import gameplay.Entity;
 import javafx.event.EventHandler;
@@ -51,7 +52,7 @@ public class SceneOptionMenu implements ScenePacMan {
         setupScene.setLabel(labelTitle,"Options", Pos.CENTER,500,50,80,200,new Font(30), Paint.valueOf("black"),true);
 
         Slider sliderSoundVolume = new Slider();
-        setupScene.setSlider(sliderSoundVolume,200,400,80,250,0.0,1.0,graphicEngine.getVolume(),true);
+        setupScene.setSlider(sliderSoundVolume,200,400,80,250,0.0,1.0, graphicEngine.getVolume(),true);
 
         Label labelVolume = new Label();
         setupScene.setLabel(labelVolume,"Volume :",Pos.CENTER,200,350,80,300,new Font(20),Paint.valueOf("black"),true);
@@ -126,11 +127,11 @@ public class SceneOptionMenu implements ScenePacMan {
     }
 
     private void setSceneReturn(){
-        graphicEngine.setCurrentScene(new SceneMainMenu(stage,graphicEngine));
+        graphicEngine.setCurrentScene(new SceneMainMenu(stage, graphicEngine));
     }
 
     private void changeEntityControl(Button button){
-        indexControlEntities = (indexControlEntities + 1)%graphicEngine.getEntities().size();
+        indexControlEntities = (indexControlEntities + 1)% graphicEngine.getEntities().size();
         Entity entity = graphicEngine.getEntities().get(indexControlEntities);
         List<Control> controls = graphicEngine.getControl(entity);
         button.setText(entity.getEntityName());

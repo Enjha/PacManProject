@@ -8,6 +8,6 @@ import java.io.File;
 public class TextureWallAngleBotLeft implements Texture {
 
     public Image getTexture(){
-        return new Image(new File("ressources/wall/angle/W_angle_bot_left").toURI().toString());
+        return new Image(new File("ressources/textures/wall/angle/W_angle_bot_left.gif").toURI().toString());
     }
 }

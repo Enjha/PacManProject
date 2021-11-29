@@ -7,7 +7,7 @@ import scene.*;
 
 import java.util.List;
 
-public class ClassicMotorPhysic implements MotorPhysic{
+public class ClassicPhysicEngine implements PhysicEngine {
 
     public Collision moveEntity(Movement movement, SceneGame sceneGame){
         int[] positionEntity = {movement.getEntity().getPosition().getX(),movement.getEntity().getPosition().getY()};

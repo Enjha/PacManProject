@@ -1,6 +1,7 @@
 package pacman.scene;
 
 import apiUser.SetupScene;
+import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,8 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import pacman.scene.SceneMainMenu;
-import pacman.scene.ScenePacMan;
 
 public class ScenePlayMenu implements ScenePacMan {
 
@@ -26,7 +25,7 @@ public class ScenePlayMenu implements ScenePacMan {
     private GraphicEngine graphicEngine;
     private Pane pane;
 
-    public ScenePlayMenu(Stage stage,GraphicEngine graphicEngine){
+    public ScenePlayMenu(Stage stage, GraphicEngine graphicEngine){
         this.stage = stage;
         this.graphicEngine = graphicEngine;
     }
@@ -56,11 +55,11 @@ public class ScenePlayMenu implements ScenePacMan {
     }
 
     private void setSceneReturnMenu(Stage stage){
-        graphicEngine.setCurrentScene( new SceneMainMenu(stage,graphicEngine));
+        graphicEngine.setCurrentScene( new SceneMainMenu(stage, graphicEngine));
     }
 
     private void setSceneSoloMenu(Stage stage){
-        graphicEngine.setCurrentScene(new SceneLabyrinthMenu(stage,graphicEngine));
+        graphicEngine.setCurrentScene(new SceneLabyrinthMenu(stage, graphicEngine));
     }
 
     private void setSceneMultiMenu(Stage stage){

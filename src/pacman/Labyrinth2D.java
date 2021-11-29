@@ -5,6 +5,7 @@ import gameplay.Movement;
 import scene.*;
 import scene.SceneGame;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class Labyrinth2D implements SceneGame {
      *      the width of the labyrinth
      */
     public Labyrinth2D(int height, int width){
-        labyrinth = new SceneCase[height][width];
+        labyrinth = new SceneCase[width][height];
         this.height = height;
         this.width = width;
     }
@@ -69,7 +70,7 @@ public class Labyrinth2D implements SceneGame {
      * @return a boolean value
      */
     public boolean removeSceneCase(int x, int y){
-        if(labyrinth[x][y] != null && x < width && y < height) {
+        if(labyrinth[x][y] != null && x >= 0 && x < width && y >= 0 && y < height) {
             labyrinth[x][y] = null;
             return true;
         }

@@ -7,29 +7,25 @@ import engines.graphic.view.PacManView;
 import gameplay.Item;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import pacman.*;
 import scene.SceneGame;
 import scene.SceneCase;
 
-
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
 
-    private final double TEXTURE_SIZE = 64;
-    private final double CASE_SIZE = 64.0;
-    private final double TEXTURE_ENTITY_SIZE = 42;
+    private final double TEXTURE_SIZE = 32;
+    private final double CASE_SIZE = 32;
+    private final double TEXTURE_ENTITY_SIZE = 30;
     private final SetupScene setupScene = new SetupScene();
     private int x = 0;
     private int y = 0;
-    private int originX = 100;
-    private int originY = 100;
-    private int originXEntity = 114;
-    private int originYEntity = 114;
+    private int originX = 0;
+    private int originY = 0;
+    private int originXEntity = 14;
+    private int originYEntity = 14;
 
     // Cette méthode va mettre en place les textures du labyrinth sur la scene.
     @Override

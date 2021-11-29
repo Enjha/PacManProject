@@ -1,0 +1,10 @@
+!! Pac-Man !!
+NORTH z
+SOUTH s
+WEST q
+EAST d
+!! Pinky !!
+NORTH i
+SOUTH K
+WEST j
+EAST l

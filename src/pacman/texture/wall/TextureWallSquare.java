@@ -8,6 +8,6 @@ import java.io.File;
 public class TextureWallSquare implements Texture {
 
     public Image getTexture(){
-        return new Image(new File("ressources/wall/W_square.gif").toURI().toString());
+        return new Image(new File("ressources/textures/wall/W_square.gif").toURI().toString());
     }
 }
