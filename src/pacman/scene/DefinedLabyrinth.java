@@ -85,8 +85,6 @@ public class DefinedLabyrinth implements LabyrinthGenerator{
 
             while((line = buffer.readLine()) != null){
                 String[] splitLine = line.split(" ");
-                System.out.println(line);
-
                 int x = Integer.parseInt(splitLine[0]);
                 int y = Integer.parseInt(splitLine[1]);
                 int numberWall = Integer.parseInt(splitLine[2]);
@@ -96,7 +94,6 @@ public class DefinedLabyrinth implements LabyrinthGenerator{
                         Direction wallDirection = getWallDirection(splitLine[2 + i]);
                         if(wallDirection != null){
                             sceneCase.addCaseContent(new Wall(wallDirection));
-                            System.out.println(wallDirection);
                         }
                     }
                 }
