@@ -11,12 +11,16 @@ public class AiEntity implements Runnable{
     private Ghost ghost;
     private Pacman pacman;
     private boolean isAbleToFollow;
+    private boolean isAbleToTurnAround;
+    private boolean calledByFollow = false;
+    private boolean calledByTurnAround = false;
 
     public AiEntity(Entity entity, Ghost ghost, Pacman pacman){
         this.entity = entity;
         this.ghost = ghost;
         this.pacman = pacman;
         isAbleToFollow = true;
+        isAbleToTurnAround = true;
         moove();
     }
 
@@ -26,11 +30,21 @@ public class AiEntity implements Runnable{
             if(algoDijkstra() <= 7 && isAbleToFollow){ //ghost va passer dans l'état de déplacement "poursuite"
                 followPM();
                 isAbleToFollow = false;
-                Thread thread = new Thread();
-                thread.start();
+                Thread threadFollow = new Thread();
+                calledByFollow = true;
+                threadFollow.start();
             }
             else{ //ghost va rester dans un état de déplacement "classique"
-
+                if (/*si on se trouve à une intersection*/){
+                    pickDirection();
+                }
+                if(isAbleToTurnAround){
+                    turnAround();
+                    isAbleToTurnAround = false;
+                    Thread threadTurnAround = new Thread();
+                    calledByTurnAround = true;
+                    threadTurnAround.start();
+                }
             }
         }
     }
@@ -67,12 +81,37 @@ public class AiEntity implements Runnable{
         }
     }
 
+    private void turnAround(){
+        int choice = 1 + (int)(Math.random() * 3);
+        switch(choice){
+            case 1:
+                if(ghost.getDirection() == Direction.North)
+                    ghost.setDirection(Direction.South);
+                if(ghost.getDirection() == Direction.East)
+                    ghost.setDirection(Direction.West);
+                if(ghost.getDirection() == Direction.South)
+                    ghost.setDirection(Direction.North);
+                if(ghost.getDirection() == Direction.West)
+                    ghost.setDirection(Direction.East);
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     public void run() {
         try {
-            Thread.sleep(5000);
-            isAbleToFollow = true;
+            if(calledByFollow){
+                calledByFollow = false;
+                Thread.sleep(10000);
+                isAbleToFollow = true;
+            }
+            if(calledByTurnAround){
+                calledByTurnAround = false;
+                Thread.sleep(7000);
+                isAbleToTurnAround = true;
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
