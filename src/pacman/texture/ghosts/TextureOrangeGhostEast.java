@@ -8,6 +8,6 @@ import java.io.File;
 public class TextureOrangeGhostEast implements Texture {
     @Override
     public Image getTexture() {
-        return new Image(new File("ressources/ghost/orange_ghost/orange_ghost_east.gif").toURI().toString());
+        return new Image(new File("ressources/textures/ghost/orange_ghost/orange_ghost_east.gif").toURI().toString());
     }
 }

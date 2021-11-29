@@ -6,11 +6,18 @@ import pacman.texture.ghosts.*;
 
 import java.util.ArrayList;
 
+/**
+ * Gère les textures de l'entité Ghost
+ */
 public class GhostView {
 
-    public GhostView() {
-    }
-
+    /**
+     * Cette classe va prendre en entrée l'entité et va en fonction de sa direction sa couleur etc .. retourné la texture qui correspond.
+     *
+     * @param ghost l'entité concernée
+     * @return la liste des images de l'entité avec la position concerné (liste car plusieurs images
+     * nécessaire pour l'animation de l'entité).
+     */
     // Reste à faire le cas ou pacman a son pouvoir et le fantome est donc dans un état AFRAID clignotement.
     public ArrayList<Image> getGhostView(Ghost ghost) {
         ArrayList<Image> pacman_views = new ArrayList<>();

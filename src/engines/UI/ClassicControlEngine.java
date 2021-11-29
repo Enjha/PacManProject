@@ -10,8 +10,8 @@ import java.util.List;
 
 public class ClassicControlEngine implements ControlEngine {
 
-    private Scene scene;
-    private ControlManager controlManager;
+    private final Scene scene;
+    private final ControlManager controlManager;
     private boolean engineState = false;
 
     public ClassicControlEngine(Scene scene, ControlManager controlManager){
@@ -22,13 +22,11 @@ public class ClassicControlEngine implements ControlEngine {
 
     private void getKeyPressed(){
         if(engineState) {
-            scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                public void handle(KeyEvent key) {
-                    Control control = controlManager.getControl(key.getText());
-                    if (control != null) {
-                        // appelle methode moteur noyau pour donner le control
-                        printKeyPressed(key.getText());
-                    }
+            scene.setOnKeyPressed(key -> {
+                Control control = controlManager.getControl(key.getText());
+                if (control != null) {
+                    // appelle methode moteur noyau pour donner le control
+                    printKeyPressed(key.getText());
                 }
             });
         }

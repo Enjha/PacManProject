@@ -14,28 +14,37 @@ import scene.SceneCase;
 
 import java.util.ArrayList;
 
+/**
+ * Cette classe va se charger de récupérer dans chaque case de la scène les entité/wall
+ * et afficher leur textures aux coordonnées voulues.
+ */
 public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
 
-    private final double TEXTURE_SIZE = 32;
+    // Taille d'une case de la scene
     private final double CASE_SIZE = 32;
-    private final double TEXTURE_ENTITY_SIZE = 30;
+    // Instanciation d'un setupScene de l'API
     private final SetupScene setupScene = new SetupScene();
-    private int x = 0;
-    private int y = 0;
-    private int originX = 0;
-    private int originY = 0;
-    private int originXEntity = 14;
-    private int originYEntity = 14;
+    // Initialization de la case x
+    private int x;
+    // Initialization de la case y
+    private int y;
 
-    // Cette méthode va mettre en place les textures du labyrinth sur la scene.
+    /**
+     * Cette fonction permet de placer les textures du labyrinth sur la scene.
+     *
+     * @param sceneGame La scene de jeu
+     * @param pane      La pane qui sera afficher sur la scene
+     */
     @Override
     public void setLabyrinthTextureScene(SceneGame sceneGame, Pane pane) {
         x = 0;
         y = 0;
+        final int originX = 0;
+        final int originY = 0;
+        final double TEXTURE_SIZE = 32;
         SceneCase[][] sceneCases = sceneGame.getCases();
         for (SceneCase[] sceneCases1 : sceneCases) {
             for (SceneCase sceneCase : sceneCases1) {
-
                 Image wall_texture = new WallViewPacman().getWallView(sceneCase);
                 ImageView imageView = new ImageView();
                 setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, TEXTURE_SIZE, TEXTURE_SIZE, wall_texture, true);
@@ -47,20 +56,29 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
         }
     }
 
-    // Cette méthode va mettre en place les textures des entitées sur la scene.
+    /**
+     * Cette fonction permet de placer les textures des entitées présente sur la scene.
+     *
+     * @param sceneGame La scene de jeu
+     * @param pane      La pane qui sera afficher sur la scene
+     */
     @Override
-    public void setEntityTextureScene(SceneGame sceneGame,Pane pane) {
+    public void setEntityTextureScene(SceneGame sceneGame, Pane pane) {
         x = 0;
         y = 0;
+        int originY = 14;
+        int originX = 14;
+        double ENTITY_TEXTURE_SIZE = 30;
         SceneCase[][] sceneCases = sceneGame.getCases();
-        ImageView imageView = new ImageView();
+        ImageView imageView;
         for (SceneCase[] sceneCases1 : sceneCases) {
             for (SceneCase sceneCase : sceneCases1) {
+
                 if (sceneCase.getCaseContent(Pacman.class.toString()) != null && sceneCase.getCaseContent(Pacman.class.toString()).size() > 0) {
                     ArrayList<Image> pacman_textures = new PacManView().getPacmanView((Pacman) sceneCase.getCaseContent(Pacman.class.toString()).get(0));
                     // CREE UNE ANIMATION
                     imageView = new ImageView();
-                    setupScene.setImageView(imageView,x * CASE_SIZE + originXEntity,y * CASE_SIZE + originYEntity,TEXTURE_ENTITY_SIZE,TEXTURE_ENTITY_SIZE,pacman_textures.get(0),true);
+                    setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, pacman_textures.get(0), true);
                     pane.getChildren().add(imageView);
                 }
 
@@ -70,7 +88,7 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
                         ArrayList<Image> ghost_textures = new GhostView().getGhostView(ghost);
                         // CREE UNE ANIMATION
                         imageView = new ImageView();
-                        setupScene.setImageView(imageView,x * CASE_SIZE + originXEntity,y * CASE_SIZE + originYEntity,TEXTURE_ENTITY_SIZE,TEXTURE_ENTITY_SIZE,ghost_textures.get(0),true);
+                        setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, ghost_textures.get(0), true);
                         pane.getChildren().add(imageView);
                     }
                 }
@@ -78,14 +96,13 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
 
                 if (sceneCase.getCaseContent(NormalFruit.class.toString()) != null && sceneCase.getCaseContent(NormalFruit.class.toString()).size() > 0) {
                     Image fruit_texture = new ItemView().getItemView((Item) sceneCase.getCaseContent(NormalFruit.class.toString()).get(0));
-                    setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, TEXTURE_SIZE, TEXTURE_SIZE, fruit_texture, true);
+                    setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, fruit_texture, true);
                 }
 
                 if (sceneCase.getCaseContent(PacgumFruit.class.toString()) != null && sceneCase.getCaseContent(PacgumFruit.class.toString()).size() > 0) {
                     Image pac_gum_texture = new ItemView().getItemView((Item) sceneCase.getCaseContent(PacgumFruit.class.toString()).get(0));
-                    setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, TEXTURE_SIZE, TEXTURE_SIZE, pac_gum_texture, true);
+                    setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, pac_gum_texture, true);
                 }
-
                 pane.getChildren().add(imageView);
                 y++;
             }
