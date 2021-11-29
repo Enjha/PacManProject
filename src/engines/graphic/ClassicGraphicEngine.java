@@ -4,7 +4,6 @@ import apiUser.FxWindow;
 import apiUser.SceneAPIUser;
 import engines.UI.Control;
 import engines.kernel.KernelEngine;
-import gameplay.Direction;
 import gameplay.Entity;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -31,11 +30,11 @@ public class ClassicGraphicEngine implements GraphicEngine{
     }
 
     public void setSceneGameTexture(SceneGame sceneGame){
-        convertSceneToGraphic.setLabyrinthTextureScene(sceneGame,window.getScene().getPane());
+        convertSceneToGraphic.setLabyrinthTextureScene(sceneGame,window.getScene().getPanel());
     }
 
     public void setSceneGameEntity(SceneGame sceneGame){
-        convertSceneToGraphic.setEntityTextureScene(sceneGame,window.getScene().getPane());
+        convertSceneToGraphic.setEntityTextureScene(sceneGame,window.getScene().getPanel());
     }
 
     public void setCurrentScene(SceneAPIUser scene){

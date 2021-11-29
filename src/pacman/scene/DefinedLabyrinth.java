@@ -15,8 +15,8 @@ import java.io.IOException;
 
 public class DefinedLabyrinth implements LabyrinthGenerator{
 
-    private final int height = 28;//28;
-    private final int width = 25;
+    private final int height = 29;
+    private final int width = 26;
     private final String seedPath = "ressources/seed/PacMan/labyrinth/seed1.txt";
 
     public SceneGame generateLabyrinth(){

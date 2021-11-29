@@ -39,7 +39,7 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
     public void setLabyrinthTextureScene(SceneGame sceneGame, Pane pane) {
         x = 0;
         y = 0;
-        final int originX = 0;
+        final int originX = 100;
         final int originY = 0;
         final double TEXTURE_SIZE = 32;
         SceneCase[][] sceneCases = sceneGame.getCases();

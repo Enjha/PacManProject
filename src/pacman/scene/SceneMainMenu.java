@@ -69,7 +69,7 @@ public class SceneMainMenu implements ScenePacMan {
         graphicEngine.setCurrentScene(new ScenePlayMenu(stage, graphicEngine));
     }
 
-    public Pane getPane(){
+    public Pane getPanel(){
         return pane;
     }
 

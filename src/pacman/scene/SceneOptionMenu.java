@@ -163,7 +163,7 @@ public class SceneOptionMenu implements ScenePacMan {
         }
     }
 
-    public Pane getPane(){
+    public Pane getPanel(){
         return pane;
     }
 
