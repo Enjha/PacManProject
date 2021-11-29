@@ -30,7 +30,7 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
     private int y;
 
     /**
-     * Cette fonction permet de placé les textures du labyrinth sur la scene.
+     * Cette fonction permet de placer les textures du labyrinth sur la scene.
      *
      * @param sceneGame La scene de jeu
      * @param pane      La pane qui sera afficher sur la scene
@@ -57,7 +57,7 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
     }
 
     /**
-     * Cette fonction permet de placé les textures des entitées présente sur la scene.
+     * Cette fonction permet de placer les textures des entitées présente sur la scene.
      *
      * @param sceneGame La scene de jeu
      * @param pane      La pane qui sera afficher sur la scene

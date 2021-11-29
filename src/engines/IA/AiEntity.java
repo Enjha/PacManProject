@@ -35,9 +35,9 @@ public class AiEntity implements Runnable{
                 threadFollow.start();
             }
             else{ //ghost va rester dans un état de déplacement "classique"
-                if (/*si on se trouve à une intersection*/){
+              /*  if (*si on se trouve à une intersection){
                     pickDirection();
-                }
+               } */
                 if(isAbleToTurnAround){
                     turnAround();
                     isAbleToTurnAround = false;

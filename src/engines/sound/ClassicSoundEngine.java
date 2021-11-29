@@ -17,11 +17,20 @@ public class ClassicSoundEngine implements SoundEngine {
         soundManager.stopSound(name);
     }
 
+    /**
+     * Permet de changer le volume d'un fichier audio précis
+     * @param name
+     * @param newVolume
+     */
     public void changeVolume(String name, double newVolume){
         volume = newVolume;
         soundManager.changeVolumeSound(name,newVolume);
     }
 
+    /**
+     * Permet de modifier le volume de tous les fichiers audios.
+     * @param newVolume
+     */
     public void changeVolumeAll(double newVolume){
         volume = newVolume;
         soundManager.changeVolumeAll(newVolume);
@@ -31,10 +40,16 @@ public class ClassicSoundEngine implements SoundEngine {
         return volume;
     }
 
+    /**
+     * Permet de mettre le son global à 0 (tous les fichiers audio au volume 0)
+     */
     public void mute(){
         changeVolumeAll(0);
     }
 
+    /**
+     * Remettre le son
+     */
     public void unmute(){
         changeVolumeAll(volume);
     }
