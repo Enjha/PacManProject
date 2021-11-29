@@ -8,16 +8,23 @@ import scene.SceneCase;
 import scene.SceneGame;
 import scene.Wall;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class DefinedLabyrinth implements LabyrinthGenerator{
 
-    public final int height = 28;//28;
-    public final int width = 26;//26;
+    private final int height = 28;//28;
+    private final int width = 25;
+    private final String seedPath = "ressources/seed/PacMan/labyrinth/seed1.txt";
 
     public SceneGame generateLabyrinth(){
         SceneGame sceneGame = new Labyrinth2D(height,width);
 
         generateSceneCaseEmpty(sceneGame);
-        generateExteriorWall(sceneGame);
+        //generateExteriorWall(sceneGame);
+        generateWall(sceneGame);
 
         return sceneGame;
     }
@@ -70,7 +77,48 @@ public class DefinedLabyrinth implements LabyrinthGenerator{
         }
     }
 
-    private void generateInteriorWall(){
+    private void generateWall(SceneGame sceneGame){
+        try {
+            File seedFile = new File(seedPath);
+            BufferedReader buffer = new BufferedReader(new FileReader(seedFile));
+            String line;
 
+            while((line = buffer.readLine()) != null){
+                String[] splitLine = line.split(" ");
+                System.out.println(line);
+
+                int x = Integer.parseInt(splitLine[0]);
+                int y = Integer.parseInt(splitLine[1]);
+                int numberWall = Integer.parseInt(splitLine[2]);
+                SceneCase sceneCase = sceneGame.getCase(x,y);
+                if(sceneCase != null){
+                    for(int i = 1; i <= numberWall; i++){
+                        Direction wallDirection = getWallDirection(splitLine[2 + i]);
+                        if(wallDirection != null){
+                            sceneCase.addCaseContent(new Wall(wallDirection));
+                            System.out.println(wallDirection);
+                        }
+                    }
+                }
+            }
+        }
+        catch (IOException ioException){
+            ioException.printStackTrace();
+        }
+    }
+
+    private Direction getWallDirection(String directionFile){
+        switch (directionFile){
+            case "NORTH":
+                return Direction.North;
+            case "SOUTH":
+                return Direction.South;
+            case "WEST":
+                return Direction.West;
+            case "EAST":
+                return Direction.East;
+            default:
+                return null;
+        }
     }
 }

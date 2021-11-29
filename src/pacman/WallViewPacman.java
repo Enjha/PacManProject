@@ -40,13 +40,13 @@ public class WallViewPacman implements WallView {
                     directions.add(Direction.North);
                     directions.add(Direction.South);
                     if (containDirection(walls, directions)) {
-                        return new TextureWallVerticalCorridor().getTexture();
+                        return new TextureWallHorizontalCorridor().getTexture();
                     }
                     directions = new ArrayList<>();
                     directions.add(Direction.West);
                     directions.add(Direction.East);
                     if (containDirection(walls, directions)) {
-                        return new TextureWallHorizontalCorridor().getTexture();
+                        return new TextureWallVerticalCorridor().getTexture();
                     }
                     directions = new ArrayList<>();
                     directions.add(Direction.North);
