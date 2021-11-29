@@ -14,14 +14,27 @@ import scene.SceneCase;
 
 import java.util.ArrayList;
 
+/**
+ * Cette classe va se charger de récupérer dans chaque case de la scène les entité/wall
+ * et afficher leur textures aux coordonnées voulues.
+ */
 public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
 
+    // Taille d'une case de la scene
     private final double CASE_SIZE = 32;
+    // Instanciation d'un setupScene de l'API
     private final SetupScene setupScene = new SetupScene();
+    // Initialization de la case x
     private int x;
+    // Initialization de la case y
     private int y;
 
-    // Cette méthode va mettre en place les textures du labyrinth sur la scene.
+    /**
+     * Cette fonction permet de placé les textures du labyrinth sur la scene.
+     *
+     * @param sceneGame La scene de jeu
+     * @param pane      La pane qui sera afficher sur la scene
+     */
     @Override
     public void setLabyrinthTextureScene(SceneGame sceneGame, Pane pane) {
         x = 0;
@@ -43,7 +56,12 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
         }
     }
 
-    // Cette méthode va mettre en place les textures des entitées sur la scene.
+    /**
+     * Cette fonction permet de placé les textures des entitées présente sur la scene.
+     *
+     * @param sceneGame La scene de jeu
+     * @param pane      La pane qui sera afficher sur la scene
+     */
     @Override
     public void setEntityTextureScene(SceneGame sceneGame, Pane pane) {
         x = 0;

@@ -3,7 +3,6 @@ package pacman;
 import engines.UI.*;
 import engines.graphic.ClassicConvertSceneToGraphic;
 import engines.graphic.ClassicGraphicEngine;
-import engines.graphic.ConvertSceneToGraphic;
 import engines.graphic.GraphicEngine;
 import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
@@ -20,7 +19,10 @@ import pacman.scene.LabyrinthGenerator;
 import pacman.scene.SceneMainMenu;
 import scene.SceneGame;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,24 +37,21 @@ public class GamePacMan implements Game {
     private ControlEngine controlEngine;
     private GraphicEngine graphicEngine;
 
-    private String pathRessourcesSound = "ressources/sounds/PacMan";
-    private String pathRessoucesControls = "ressources/controls/PacMan/commands.txt";
-
-    public GamePacMan(LabyrinthGenerator labyrinthGenerator){
+    public GamePacMan(LabyrinthGenerator labyrinthGenerator) {
         this.labyrinthGenerator = labyrinthGenerator;
     }
 
-    public void createEntity(){
+    public void createEntity() {
         entities.add(new Pacman());
-        entities.add(new Ghost("Pinky",GhostColor.PINK));
-        entities.add(new Ghost("Blue",GhostColor.BLUE));
+        entities.add(new Ghost("Pinky", GhostColor.PINK));
+        entities.add(new Ghost("Blue", GhostColor.BLUE));
     }
 
-    public void generateSceneGame(){
+    public void generateSceneGame() {
         sceneGame = labyrinthGenerator.generateLabyrinth();
     }
 
-    public void startEngine(Stage stage){
+    public void startEngine(Stage stage) {
         kernelEngine = new ClassicKernelEngine(this);
         physicEngine = new ClassicPhysicEngine();
         startSoundEngine();
@@ -63,57 +62,57 @@ public class GamePacMan implements Game {
     private void startSoundEngine() {
         SoundManager soundManager = new ClassicSoundManager();
 
+        String pathRessourcesSound = "ressources/sounds/PacMan";
         File soundFolder = new File(pathRessourcesSound);
         File[] listOfFiles = soundFolder.listFiles();
 
-        if (listOfFiles != null){
-            for (int i = 0; i < listOfFiles.length; i++) {
-                if (listOfFiles[i].isFile()) {
-                    soundManager.addSound(new ClassicSound(new MediaPlayer(new Media(new File(pathRessourcesSound+"/"+listOfFiles[i].getName()).toURI().toString())),listOfFiles[i].getName()));
+        if (listOfFiles != null) {
+            for (File listOfFile : listOfFiles) {
+                if (listOfFile.isFile()) {
+                    soundManager.addSound(new ClassicSound(new MediaPlayer(new Media(new File(pathRessourcesSound + "/" + listOfFile.getName()).toURI().toString())), listOfFile.getName()));
                 }
             }
             soundEngine = new ClassicSoundEngine(soundManager);
             kernelEngine.setSoundEngine(soundEngine);
-        }
-        else{
+        } else {
             System.out.println("error folder null");
         }
     }
 
-    private void startGraphicEngine(Stage stage){
-        graphicEngine = new ClassicGraphicEngine(stage,kernelEngine,new ClassicConvertSceneToGraphic());
-        graphicEngine.setFxWindow(1200,800,"Pac-Man");
+    private void startGraphicEngine(Stage stage) {
+        graphicEngine = new ClassicGraphicEngine(stage, kernelEngine, new ClassicConvertSceneToGraphic());
+        graphicEngine.setFxWindow(1200, 800, "Pac-Man");
         graphicEngine.setCurrentScene(new SceneMainMenu(stage, graphicEngine));
         kernelEngine.setGraphicEngine(graphicEngine);
     }
 
-    private void startControlEngine(){
+    private void startControlEngine() {
         ControlManager controlManager = new ClassicControlManager();
 
         try {
+            String pathRessoucesControls = "ressources/controls/PacMan/commands.txt";
             File commandFile = new File(pathRessoucesControls);
 
             BufferedReader buffer = new BufferedReader(new FileReader(commandFile));
             String line;
             Entity entity = null;
-            while ((line = buffer.readLine()) != null){
+            while ((line = buffer.readLine()) != null) {
                 String[] lineSplit = line.split(" ");
-                if(lineSplit[0].equals("!!") && lineSplit[2].equals("!!")){
+                if (lineSplit[0].equals("!!") && lineSplit[2].equals("!!")) {
                     entity = getEntity(lineSplit[1]);
-                    if(entity == null){
+                    if (entity == null) {
                         System.out.println("Error : entity null 0");
                         System.exit(-1);
                     }
 
-                }
-                else {
-                    if(entity == null){
+                } else {
+                    if (entity == null) {
                         System.out.println("Error : entity null");
                         System.exit(-1);
                     }
 
                     Direction direction;
-                    switch(lineSplit[0]){
+                    switch (lineSplit[0]) {
                         case "NORTH":
                             direction = Direction.North;
                             break;
@@ -129,32 +128,31 @@ public class GamePacMan implements Game {
                         default:
                             direction = Direction.Stop;
                     }
-                    controlManager.addControl(new KeyBoardControl(lineSplit[1],direction,entity));
+                    controlManager.addControl(new KeyBoardControl(lineSplit[1], direction, entity));
                 }
             }
 
             controlEngine = new ClassicControlEngine(kernelEngine.getCurrentScene(), controlManager);
             kernelEngine.setControlEngine(controlEngine);
-        }
-        catch (IOException ioException){
+        } catch (IOException ioException) {
             ioException.printStackTrace();
         }
     }
 
-    private Entity getEntity(String entityName){
-        for(Entity entity : entities){
-            if(entity.getEntityName().equals(entityName)){
+    private Entity getEntity(String entityName) {
+        for (Entity entity : entities) {
+            if (entity.getEntityName().equals(entityName)) {
                 return entity;
             }
         }
         return null;
     }
 
-    public List<Entity> getEntities(){
+    public List<Entity> getEntities() {
         return entities;
     }
 
-    public SceneGame getSceneGame(){
+    public SceneGame getSceneGame() {
         return sceneGame;
     }
 }

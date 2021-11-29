@@ -6,8 +6,19 @@ import pacman.texture.pacman.*;
 
 import java.util.ArrayList;
 
+/**
+ * Gère les textures de l'entité Pacman
+ */
 public class PacManView {
 
+    /**
+     * Cette classe va prendre en entrée l'entité et va en fonction de si il est en vie ou pas et de sa direction
+     * retourné la texture qui correspond.
+     *
+     * @param pacman l'entité concernée
+     * @return la liste des images de l'entité avec la position concerné (liste car plusieurs images
+     * nécessaire pour l'animation de l'entité).
+     */
     public ArrayList<Image> getPacmanView(Pacman pacman) {
         ArrayList<Image> pacman_views = new ArrayList<>();
         switch (pacman.getDirection()) {
