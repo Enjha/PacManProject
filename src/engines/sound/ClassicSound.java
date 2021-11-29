@@ -20,11 +20,13 @@ public class ClassicSound implements Sound{
         return sound;
     }
 
+    /** Permet de jouer un fichier audio "cycle"-fois */
     public void play(int cycle){
         sound.setCycleCount(cycle);
         sound.play();
     }
 
+    /** Permet d'arrêter l'écoute d'un fichier audio*/
     public void stop(){
         sound.stop();
     }
