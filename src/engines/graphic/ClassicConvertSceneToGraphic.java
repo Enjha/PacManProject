@@ -1,14 +1,15 @@
 package engines.graphic;
 
 import apiUser.SetupScene;
-import engines.graphic.view.GhostView;
-import engines.graphic.view.ItemView;
-import engines.graphic.view.PacManView;
+import pacman.view.GhostView;
+import pacman.view.ItemView;
+import pacman.view.PacManView;
 import gameplay.Item;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import pacman.*;
+import pacman.view.WallViewPacman;
 import scene.SceneGame;
 import scene.SceneCase;
 
@@ -39,8 +40,8 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
     public void setLabyrinthTextureScene(SceneGame sceneGame, Pane pane) {
         x = 0;
         y = 0;
-        final int originX = 100;
-        final int originY = 0;
+        final int originX = 130;
+        final int originY = 40;
         final double TEXTURE_SIZE = 32;
         SceneCase[][] sceneCases = sceneGame.getCases();
         for (SceneCase[] sceneCases1 : sceneCases) {

@@ -62,7 +62,7 @@ public class GamePacMan implements Game {
     private void startSoundEngine() {
         SoundManager soundManager = new ClassicSoundManager();
 
-        String pathRessourcesSound = "ressources/sounds/PacMan";
+        String pathRessourcesSound = "ressources/sounds.PacMan";
         File soundFolder = new File(pathRessourcesSound);
         File[] listOfFiles = soundFolder.listFiles();
 
