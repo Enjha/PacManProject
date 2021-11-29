@@ -1,6 +1,5 @@
 package engines.UI;
 
-import gameplay.Direction;
 import gameplay.Entity;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class ClassicControlManager implements ControlManager{
 
-    private HashMap<String,Control> controls = new HashMap<>();
+    private final HashMap<String,Control> controls = new HashMap<>();
 
     public void addControl(Control control){
         if(!controls.containsKey(control.getKey())){

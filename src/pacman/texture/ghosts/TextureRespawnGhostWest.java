@@ -8,6 +8,6 @@ import java.io.File;
 public class TextureRespawnGhostWest implements Texture {
     @Override
     public Image getTexture() {
-        return new Image(new File("ressources/ghost/afraid/respawn_ghost_west.gif").toURI().toString());
+        return new Image(new File("ressources/textures/ghost/afraid/respawn_ghost_west.gif").toURI().toString());
     }
 }

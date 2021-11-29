@@ -17,17 +17,19 @@ public class MainTest extends Application {
 
     public void start(Stage stage) {
 
+        /*
         stage.setResizable(false);
         Game game = new GamePacMan(new DefinedLabyrinth());
         game.createEntity();
         game.generateSceneGame();
         game.startEngine(stage);
+        */
 
-        /*SceneGame sceneGame = new Labyrinth2D(2,2);
+        SceneGame sceneGame = new Labyrinth2D(2,2);
 
         Game game = new GamePacMan(new DefinedLabyrinth());
         game.generateSceneGame();
-        game.startEngine();
+        game.startEngine(stage);
 
         Pacman pacman = new Pacman();
         Ghost ghost = new Ghost("Blue", GhostColor.BLUE);
