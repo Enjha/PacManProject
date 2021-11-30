@@ -1,11 +1,13 @@
 package pacman;
 
 import gameplay.Direction;
+import gameplay.Entity;
 import gameplay.Movement;
 import scene.*;
 import scene.SceneGame;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -104,12 +106,20 @@ public class Labyrinth2D implements SceneGame {
      *      a movement of a entity
      * @return a object type of SceneElement
      */
-    public SceneElement obstacle(int x, int y, Movement movement){
+    public SceneElement obstacleElement(int x, int y, Movement movement){
         if(x >= 0 && x < width && y >= 0 && y < height) {
             SceneCase sceneCase = labyrinth[x][y];
             return wall(movement.getDirection(),sceneCase);
         }
         return null;
+    }
+
+    public List<Entity> obstacleEntity(int x, int y, Movement movement){
+        List<Entity> entities = null;
+        if(x >= 0 && x < width && y >= 0 && y < height) {
+            return entity(labyrinth[x][y]);
+        }
+        return entities;
     }
 
     /**
@@ -130,6 +140,21 @@ public class Labyrinth2D implements SceneGame {
             }
         }
       return null;
+    }
+
+    private List<Entity> entity(SceneCase sceneCase){
+        List<List<Object>> list = sceneCase.getCaseAllContent();
+        List<Entity> entities = new ArrayList<>();
+        if(list != null){
+            for(List<Object> listObject : list){
+                if(listObject.size() > 0 && listObject.get(0) instanceof Entity){
+                    for(Object object : listObject) {
+                        entities.add((Entity) object);
+                    }
+                }
+            }
+        }
+        return entities;
     }
 
     /**

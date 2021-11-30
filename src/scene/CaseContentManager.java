@@ -23,5 +23,8 @@ public interface CaseContentManager {
      * @return a list of object
      */
     List<Object> getContent(String typeOfContent);
+
+    List<List<Object>> getAllContent();
+
     void removeContent(String typeOfContent, Object element);
 }

@@ -43,7 +43,7 @@ public class LabyrinthBuild implements LabyrinthGenerator{
                 }
                 else {
                     System.err.println("error : wrong format for the labyrinth's seed --> entity null");
-                    //System.exit(-1);
+                    System.exit(-1);
                 }
             }
         }
