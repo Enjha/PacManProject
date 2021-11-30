@@ -179,22 +179,18 @@ public class GamePacMan implements Game {
 
     public void treatmentCollision(Movement movement, Collision collision){
         if(collision != null){
-            System.out.println(collision.getFirstObjectCollision() + "/" + collision.getSecondObjectCollision());
 
             if(collision.getFirstObjectCollision() instanceof Pacman){
-                System.out.print("entity 1 = Pacman /");
             }
             else {
                 if(collision.getFirstObjectCollision() instanceof Ghost){
-                    System.out.print("entité 1 = Ghost (" + ((Ghost)collision.getFirstObjectCollision()).getEntityName() + ")");
                 }
             }
             if(collision.getSecondObjectCollision() instanceof SceneElement){
-                System.out.println("scene element = " + ((SceneElement)collision.getSecondObjectCollision()).getSceneElement());
+                getThreadEntity(movement.getEntity()).setCollision(true);
             }
             else{
                 if(collision.getSecondObjectCollision() instanceof Ghost){
-                    System.out.println("entité 2 = Ghost (" + ((Ghost)collision.getFirstObjectCollision()).getEntityName() + ")");
                 }
             }
             if(movement.getEntity().isCharacter()){
@@ -202,7 +198,7 @@ public class GamePacMan implements Game {
             }
         }
         else {
-            System.out.println("collision null");
+            getThreadEntity(movement.getEntity()).setCollision(false);
             SceneCase newSceneCase = getNewSceneCase(movement.getDirection(),movement.getEntity());
             if(newSceneCase != null){
                 sceneGame.getCase(movement.getEntity().getPosition().getX(),movement.getEntity().getPosition().getY()).removeCaseContent(movement.getEntity());
