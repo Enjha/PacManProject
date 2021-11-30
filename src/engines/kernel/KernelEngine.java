@@ -4,6 +4,7 @@ import engines.UI.Control;
 import engines.UI.ControlEngine;
 import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
+import engines.graphic.ImageViewEntities;
 import engines.physic.PhysicEngine;
 import engines.sound.SoundEngine;
 import gameplay.Entity;
@@ -33,5 +34,6 @@ public interface KernelEngine {
     void treatmentCollisionGame(Movement movement);
     void updateSceneGame(Entity entity);
     void setMovementEntity(Movement movement);
+    ImageViewEntities getImageViewEntities(Entity entity);
 
 }

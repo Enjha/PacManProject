@@ -3,7 +3,11 @@ package pacman;
 import gameplay.Character;
 import gameplay.Direction;
 import gameplay.Team;
+import javafx.scene.image.Image;
+import pacman.view.PacManView;
 import scene.SceneCase;
+
+import java.util.ArrayList;
 
 /**
  * The entity pacman
@@ -126,6 +130,15 @@ public class Pacman implements Character {
     }
 
     /**
+     * Return the textures list of Pacman
+     *
+     * @return list of Images
+     */
+    public ArrayList<Image> getTextures() {
+        return new PacManView().getPacmanView(this);
+    }
+
+    /**
      * Modify the direction of this entity's movement
      *
      * @param direction a new direction
@@ -165,4 +178,5 @@ public class Pacman implements Character {
     public void setIsAfraid(boolean isAfraid) {
         this.isAfraid = isAfraid;
     }
+
 }

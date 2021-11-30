@@ -33,7 +33,7 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
     private int x;
     // Initialization de la case y
     private int y;
-    private List<ImageViewEntities> imageViewEntities = new ArrayList<>();
+    private final List<ImageViewEntities> imageViewEntities = new ArrayList<>();
 
     /**
      * Cette fonction permet de placer les textures du labyrinth sur la scene.
@@ -123,7 +123,7 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
     }
 
     public void setEntityPosition(Entity entity,ImageView imageView){
-        imageView.setLayoutX(entity.getPosition().getX() * CASE_SIZE + originEntitiesX);
-        imageView.setLayoutY(entity.getPosition().getY() * CASE_SIZE + originEntitiesY);
+       // imageView.setLayoutX(entity.getPosition().getX() * CASE_SIZE + originEntitiesX);
+       // imageView.setLayoutY(entity.getPosition().getY() * CASE_SIZE + originEntitiesY);
     }
 }

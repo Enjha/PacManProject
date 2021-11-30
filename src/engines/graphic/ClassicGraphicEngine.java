@@ -100,7 +100,7 @@ public class ClassicGraphicEngine implements GraphicEngine{
         }
     }
 
-    private ImageViewEntities getImageViewEntities(Entity entity){
+    public ImageViewEntities getImageViewEntities(Entity entity){
         for(ImageViewEntities image : convertSceneToGraphic.getImageViewEntities()){
             if(image.getEntity() == entity){
                 return image;

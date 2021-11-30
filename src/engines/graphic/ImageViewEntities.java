@@ -6,8 +6,8 @@ import javafx.scene.image.ImageView;
 
 public class ImageViewEntities {
 
-    private Entity entity;
-    private ImageView imageView;
+    private final Entity entity;
+    private final ImageView imageView;
 
     public ImageViewEntities(Entity entity,ImageView imageView){
         this.entity = entity;

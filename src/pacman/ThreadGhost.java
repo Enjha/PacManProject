@@ -1,5 +1,6 @@
 package pacman;
 
+import engines.graphic.ImageViewEntities;
 import gameplay.Direction;
 import gameplay.Entity;
 import gameplay.Movement;
@@ -12,24 +13,30 @@ public class ThreadGhost extends Thread implements ThreadEntity {
     private double time = 1000;
     private Movement futureMovement;
     private boolean collision = false;
+    private ImageViewEntities imageViewEntities;
 
-    public ThreadGhost(Ghost ghost){
+    public ThreadGhost(Ghost ghost) {
         this.ghost = ghost;
     }
 
-    public void run(){
+    public void run() {
 
     }
 
-    public Entity getEntity(){
+    public Entity getEntity() {
         return ghost;
     }
 
-    public void setMovement(Movement movement){
+    public void setMovement(Movement movement) {
         this.movement = movement;
     }
 
-    public void setCollision(boolean collision){
+    public void setCollision(boolean collision) {
         this.collision = collision;
+    }
+
+    @Override
+    public void setImageViewEntities(ImageViewEntities imageViewEntities) {
+        this.imageViewEntities = imageViewEntities;
     }
 }

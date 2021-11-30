@@ -26,4 +26,5 @@ public interface GraphicEngine {
     void setControlEngineState(boolean state);
     void setControlEngineScene(Scene scene);
     void updateSceneGame(Entity entity);
+    ImageViewEntities getImageViewEntities(Entity entity);
 }
