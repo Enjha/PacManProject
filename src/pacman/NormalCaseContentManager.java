@@ -76,6 +76,10 @@ public class NormalCaseContentManager implements CaseContentManager {
         }
     }
 
+    public List<List<Object>> getAllContent(){
+        return caseContent;
+    }
+
     /**
      * If this type is new, return -1
      * If this type is not new, return the list's index of this type

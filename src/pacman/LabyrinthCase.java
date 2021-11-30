@@ -68,6 +68,10 @@ public class LabyrinthCase implements SceneCase {
         return caseContentManager.getContent(typeOfElement);
     }
 
+    public List<List<Object>> getCaseAllContent(){
+        return caseContentManager.getAllContent();
+    }
+
     /**
      * Return the position x of the case
      * @return a integer value
