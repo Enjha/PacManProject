@@ -10,10 +10,7 @@ import engines.physic.ClassicPhysicEngine;
 import engines.physic.Collision;
 import engines.physic.PhysicEngine;
 import engines.sound.*;
-import gameplay.Direction;
-import gameplay.Entity;
-import gameplay.Game;
-import gameplay.Movement;
+import gameplay.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -22,6 +19,7 @@ import pacman.scene.SceneMainMenu;
 import scene.SceneCase;
 import scene.SceneElement;
 import scene.SceneGame;
+import gameplay.Character;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,6 +38,8 @@ public class GamePacMan implements Game {
     private SoundEngine soundEngine;
     private ControlEngine controlEngine;
     private GraphicEngine graphicEngine;
+    private List<Thread> threadEntities = new ArrayList<>();
+    private boolean stateThread = false;
 
     public GamePacMan(LabyrinthGenerator labyrinthGenerator) {
         this.labyrinthGenerator = labyrinthGenerator;
@@ -47,6 +47,24 @@ public class GamePacMan implements Game {
 
     public void createEntity() {
         entities = labyrinthGenerator.generateEntity(sceneGame);
+
+        for(Entity entity :entities){
+            if(entity instanceof Pacman){
+                threadEntities.add(new ThreadPacman((Pacman) entity,this));
+            }
+            if(entity instanceof Ghost){
+                threadEntities.add(new ThreadGhost((Ghost) entity));
+            }
+        }
+    }
+
+    public void startThreadEntity(){
+        if(!stateThread) {
+            for (Thread thread : threadEntities) {
+                thread.start();
+            }
+            stateThread = true;
+        }
     }
 
     public void generateSceneGame() {
@@ -179,6 +197,9 @@ public class GamePacMan implements Game {
                     System.out.println("entité 2 = Ghost (" + ((Ghost)collision.getFirstObjectCollision()).getEntityName() + ")");
                 }
             }
+            if(movement.getEntity().isCharacter()){
+                ((Character)movement.getEntity()).setDirection(Direction.Stop);
+            }
         }
         else {
             System.out.println("collision null");
@@ -209,5 +230,26 @@ public class GamePacMan implements Game {
             default:
                 return null;
         }
+    }
+
+    public void updateSceneGame(Movement movement){
+        kernelEngine.updateSceneGame(movement.getEntity());
+    }
+
+    public List<Thread> getThreadEntities(){
+        return threadEntities;
+    }
+
+    public ThreadEntity getThreadEntity(Entity entity){
+        for(Thread thread : threadEntities){
+            if(((ThreadEntity)thread).getEntity() == entity){
+                return (ThreadEntity) thread;
+            }
+        }
+        return null;
+    }
+
+    public void treatmentCollisionGame(Movement movement){
+        kernelEngine.treatmentCollisionGame(movement);
     }
 }

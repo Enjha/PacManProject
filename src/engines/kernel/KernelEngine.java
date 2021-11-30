@@ -32,5 +32,6 @@ public interface KernelEngine {
     void setControlEngineScene(Scene scene);
     void treatmentCollisionGame(Movement movement);
     void updateSceneGame(Entity entity);
+    void setMovementEntity(Movement movement);
 
 }

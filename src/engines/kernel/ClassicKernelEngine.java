@@ -9,6 +9,7 @@ import engines.sound.SoundEngine;
 import gameplay.Entity;
 import gameplay.Game;
 import gameplay.Movement;
+import gameplay.Character;
 import javafx.scene.Scene;
 import scene.SceneGame;
 
@@ -97,6 +98,13 @@ public class ClassicKernelEngine implements KernelEngine{
         }
         else {
             System.out.println("error : physic engine null");
+        }
+    }
+
+    public void setMovementEntity(Movement movement){
+        if(movement.getEntity().isCharacter()) {
+            game.getThreadEntity(movement.getEntity()).setMovement(movement);
+            game.startThreadEntity();
         }
     }
 

@@ -14,4 +14,9 @@ public interface Game {
     void generateSceneGame();
     void startEngine(Stage stage);
     void treatmentCollision(Movement movement,Collision collision);
+    List<Thread> getThreadEntities();
+    void startThreadEntity();
+    ThreadEntity getThreadEntity(Entity entity);
+    void updateSceneGame(Movement movement);
+    void treatmentCollisionGame(Movement movement);
 }

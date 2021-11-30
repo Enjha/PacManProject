@@ -57,16 +57,16 @@ public class ClassicControlEngine implements ControlEngine {
         if(control != null){
             switch (control.getDirection()){
                 case North:
-                    kernelEngine.treatmentCollisionGame(new MovementNorth(control.getEntity()));
+                    kernelEngine.setMovementEntity(new MovementNorth(control.getEntity()));
                     break;
                 case South:
-                    kernelEngine.treatmentCollisionGame(new MovementSouth(control.getEntity()));
+                    kernelEngine.setMovementEntity(new MovementSouth(control.getEntity()));
                     break;
                 case West:
-                    kernelEngine.treatmentCollisionGame(new MovementWest(control.getEntity()));
+                    kernelEngine.setMovementEntity(new MovementWest(control.getEntity()));
                     break;
                 case East:
-                    kernelEngine.treatmentCollisionGame(new MovementEast(control.getEntity()));
+                    kernelEngine.setMovementEntity(new MovementEast(control.getEntity()));
                     break;
             }
         }
