@@ -4,7 +4,6 @@ import gameplay.Direction;
 import gameplay.Entity;
 import pacman.Ghost;
 import pacman.Pacman;
-import scene.SceneCase;
 
 public class AiEntity implements Runnable{
 
@@ -28,7 +27,7 @@ public class AiEntity implements Runnable{
     private void moove(){
         ghost.setDirection(Direction.North);
         while(ghost.isAlive()){
-            if(distBeetween() <= 7 && isAbleToFollow){ //ghost va passer dans l'état de déplacement "poursuite"
+            if(algoDijkstra() <= 7 && isAbleToFollow){ //ghost va passer dans l'état de déplacement "poursuite"
                 followPM();
                 isAbleToFollow = false;
                 Thread threadFollow = new Thread();
@@ -36,9 +35,9 @@ public class AiEntity implements Runnable{
                 threadFollow.start();
             }
             else{ //ghost va rester dans un état de déplacement "classique"
-                if (true/*si on se trouve à une intersection*/){
-                    pickDirection();
-                }
+               // if (/*si on se trouve à une intersection*/){
+               //     pickDirection();
+               // }
                 if(isAbleToTurnAround){
                     turnAround();
                     isAbleToTurnAround = false;
@@ -50,18 +49,15 @@ public class AiEntity implements Runnable{
         }
     }
 
-    private double distBeetween(){
-        double distance = 0;
-        SceneCase ghostPos = ghost.getPosition();
-        SceneCase pacmanPos = pacman.getPosition();
-        distance = Math.sqrt(Math.pow(ghostPos.getX() - pacmanPos.getX(), 2) + (Math.pow(ghostPos.getY() - pacmanPos.getY(), 2)));
+    private int algoDijkstra(){
+        int distance = 0;
+
+
         return distance;
     }
 
     private void followPM(){
-        while(true){
-            
-        }
+
     }
 
     private void pickDirection(){

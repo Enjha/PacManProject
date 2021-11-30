@@ -44,10 +44,9 @@ public class Ghost implements Character {
 
     /**
      * <b>Constructor of Ghost</b>
-     * @param entityName
-     *      a entity's name
-     * @param color
-     *      a entity's color
+     *
+     * @param entityName a entity's name
+     * @param color      a entity's color
      */
     public Ghost(String entityName, GhostColor color) {
         this.entityName = entityName;
@@ -56,6 +55,7 @@ public class Ghost implements Character {
 
     /**
      * Return if this entity is a character
+     *
      * @return a boolean value equal to true
      */
     public boolean isCharacter() {
@@ -64,6 +64,7 @@ public class Ghost implements Character {
 
     /**
      * Return if this entity is a item
+     *
      * @return a boolean value equal to false
      */
     public boolean isItem() {
@@ -72,6 +73,7 @@ public class Ghost implements Character {
 
     /**
      * Return if this entity can interact with item
+     *
      * @return a boolean value equal to false
      */
     public boolean canInteractWithItem() {
@@ -80,6 +82,7 @@ public class Ghost implements Character {
 
     /**
      * Return the scene case who contain this entity
+     *
      * @return a object type of SceneCase
      */
     public SceneCase getPosition() {
@@ -88,6 +91,7 @@ public class Ghost implements Character {
 
     /**
      * Return the team of this entity
+     *
      * @return a object type of Team
      */
     public Team getTeam() {
@@ -96,8 +100,8 @@ public class Ghost implements Character {
 
     /**
      * Modify the scene case who contain this entity
-     * @param position
-     *      a new scene case
+     *
+     * @param position a new scene case
      */
     public void setPosition(SceneCase position) {
         this.position = position;
@@ -105,8 +109,8 @@ public class Ghost implements Character {
 
     /**
      * Modify the team of this entity
-     * @param team
-     *      a new team
+     *
+     * @param team a new team
      */
     public void setTeam(Team team) {
         this.team = team;
@@ -114,6 +118,7 @@ public class Ghost implements Character {
 
     /**
      * Return this entity's name
+     *
      * @return a string value
      */
     public String getEntityName() {
@@ -122,6 +127,7 @@ public class Ghost implements Character {
 
     /**
      * Return the direction of this entity's movement
+     *
      * @return a object type of Direction
      */
     public Direction getDirection() {
@@ -130,8 +136,8 @@ public class Ghost implements Character {
 
     /**
      * Modify the direction of this entity's movement
-     * @param direction
-     *      a new direction
+     *
+     * @param direction a new direction
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
@@ -139,6 +145,7 @@ public class Ghost implements Character {
 
     /**
      * Return this entity's state of live
+     *
      * @return a boolean value
      */
     public boolean isAlive() {
@@ -146,7 +153,15 @@ public class Ghost implements Character {
     }
 
     /**
+     * Set the entity's state of live.
+     */
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+
+    /**
      * Return this entity's color
+     *
      * @return a object type of GhostColor
      */
     public GhostColor getColor() {

@@ -1,4 +1,4 @@
-package engines.graphic.view;
+package pacman.view;
 
 import gameplay.Item;
 import javafx.scene.image.Image;

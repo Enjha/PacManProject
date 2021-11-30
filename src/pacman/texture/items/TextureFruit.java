@@ -1,6 +1,6 @@
 package pacman.texture.items;
 
-import engines.graphic.view.Texture;
+import pacman.view.Texture;
 import javafx.scene.image.Image;
 
 import java.io.File;
