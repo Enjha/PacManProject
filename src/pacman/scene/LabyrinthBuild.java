@@ -37,20 +37,13 @@ public class LabyrinthBuild implements LabyrinthGenerator{
 
             while((line = buffer.readLine()) != null){
                 splitLine = line.split(" ");
-                if(splitLine.length == 5){
-                    Entity entity = createNewEntity(splitLine);
-                    setupEntityPosition(splitLine[3],splitLine[4],entity,sceneGame);
-                    if(entity != null){
-                        entities.add(entity);
-                    }
-                    else {
-                        System.err.println("error : wrong format for the labyrinth's seed --> entity null");
-                        System.exit(-1);
-                    }
+                Entity entity = createNewEntity(splitLine,sceneGame);
+                if(entity != null){
+                    entities.add(entity);
                 }
                 else {
-                    System.err.println("error : wrong format for the entities --> wrong number of information (5)");
-                    System.exit(-1);
+                    System.err.println("error : wrong format for the labyrinth's seed --> entity null");
+                    //System.exit(-1);
                 }
             }
         }
@@ -125,19 +118,54 @@ public class LabyrinthBuild implements LabyrinthGenerator{
         }
     }
 
-    private Entity createNewEntity(String[] entityInformation){
+    private Entity createNewEntity(String[] entityInformation,SceneGame sceneGame){
         String entityType = entityInformation[0];
-        switch (entityType){
+        switch (entityType) {
             case "PACMAN":
-                return new Pacman();
+                if (entityInformation.length == 3) {
+                    Entity pacman = new Pacman();
+                    setupEntityPosition(entityInformation[1],entityInformation[2],pacman,sceneGame);
+                    return pacman;
+                } else {
+                    System.err.println("error : wrong format for the entities --> wrong number of information (3)");
+                    System.exit(-1);
+                }
 
             case "GHOST":
-                GhostColor ghostColor = getGhostColor(entityInformation[2]);
-                if(ghostColor != null) {
-                    return new Ghost(entityInformation[1],ghostColor);
+                if (entityInformation.length == 5) {
+                    GhostColor ghostColor = getGhostColor(entityInformation[2]);
+                    if (ghostColor != null) {
+                        Entity ghost = new Ghost(entityInformation[1], ghostColor);
+                        setupEntityPosition(entityInformation[3],entityInformation[4],ghost,sceneGame);
+                        return ghost;
+                    }
+                    else {
+                        System.err.println("error : wrong format for the labyrinth's seed : ghost color wrong");
+                        System.exit(-1);
+                    }
                 }
                 else {
-                    System.err.println("error : wrong format for the labyrinth's seed : ghost color wrong");
+                    System.err.println("error : wrong format for the entities --> wrong number of information (5)");
+                    System.exit(-1);
+                }
+            case "PACGUM":
+                if(entityInformation.length == 3){
+                    Entity pacgum = new PacgumFruit();
+                    setupEntityPosition(entityInformation[1],entityInformation[2],pacgum,sceneGame);
+                    return pacgum;
+                }
+                else {
+                    System.err.println("error : wrong format for the entities --> wrong number of information (3)");
+                    System.exit(-1);
+                }
+            case "FRUIT":
+                if(entityInformation.length == 3){
+                    Entity fruit = new NormalFruit();
+                    setupEntityPosition(entityInformation[1],entityInformation[2],fruit,sceneGame);
+                    return fruit;
+                }
+                else {
+                    System.err.println("error : wrong format for the entities --> wrong number of information (3)");
                     System.exit(-1);
                 }
         }

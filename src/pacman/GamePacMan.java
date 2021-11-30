@@ -180,19 +180,14 @@ public class GamePacMan implements Game {
     public void treatmentCollision(Movement movement, Collision collision){
         if(collision != null){
 
-            if(collision.getFirstObjectCollision() instanceof Pacman){
-            }
-            else {
-                if(collision.getFirstObjectCollision() instanceof Ghost){
-                }
-            }
+
             if(collision.getSecondObjectCollision() instanceof SceneElement){
                 getThreadEntity(movement.getEntity()).setCollision(true);
             }
-            else{
-                if(collision.getSecondObjectCollision() instanceof Ghost){
-                }
+            if(collision.getSecondObjectCollision() instanceof NormalFruit){
+                System.out.println("collision fruit");
             }
+
             if(movement.getEntity().isCharacter()){
                 ((Character)movement.getEntity()).setDirection(Direction.Stop);
             }

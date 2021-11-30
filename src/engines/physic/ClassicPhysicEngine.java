@@ -24,16 +24,19 @@ public class ClassicPhysicEngine implements PhysicEngine {
                 for (Object object : list) {
                     Entity entity = (Entity) object;
                     if (movement.getEntity().isCharacter()) {
+                        System.out.println("entité character : " + entity.getClass().getName());
                         if (entity.isCharacter()) {
                             if (((Character) entity).getTeam() == ((Character) movement.getEntity()).getTeam()) {
                                 if (((Character) entity).getTeam().getCollision()) {
                                     return new CollisionEntities(movement.getEntity(), entity);
                                 }
-                            } else {
+                            }
+                            else {
                                 return new CollisionEntities(movement.getEntity(), entity);
                             }
                         } else {
                             if (entity.isItem()) {
+                                System.out.println("entité item : "+ entity.getClass().getName());
                                 return new CollisionEntities(movement.getEntity(), entity);
                             }
                         }
