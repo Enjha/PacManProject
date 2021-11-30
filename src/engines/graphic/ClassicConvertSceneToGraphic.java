@@ -1,6 +1,7 @@
 package engines.graphic;
 
 import apiUser.SetupScene;
+import gameplay.Entity;
 import pacman.view.GhostView;
 import pacman.view.ItemView;
 import pacman.view.PacManView;
@@ -14,6 +15,7 @@ import scene.SceneGame;
 import scene.SceneCase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Cette classe va se charger de récupérer dans chaque case de la scène les entité/wall
@@ -23,12 +25,15 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
 
     // Taille d'une case de la scene
     private final double CASE_SIZE = 32;
+    private final int originEntitiesY = 49;
+    private final int originEntitiesX = 139;
     // Instanciation d'un setupScene de l'API
     private final SetupScene setupScene = new SetupScene();
     // Initialization de la case x
     private int x;
     // Initialization de la case y
     private int y;
+    private List<ImageViewEntities> imageViewEntities = new ArrayList<>();
 
     /**
      * Cette fonction permet de placer les textures du labyrinth sur la scene.
@@ -67,8 +72,6 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
     public void setEntityTextureScene(SceneGame sceneGame, Pane pane) {
         x = 0;
         y = 0;
-        int originY = 49;
-        int originX = 139;
         double ENTITY_TEXTURE_SIZE = 16;
         SceneCase[][] sceneCases = sceneGame.getCases();
         ImageView imageView;
@@ -79,8 +82,9 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
                     ArrayList<Image> pacman_textures = new PacManView().getPacmanView((Pacman) sceneCase.getCaseContent(Pacman.class.toString()).get(0));
                     // CREE UNE ANIMATION
                     imageView = new ImageView();
-                    setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, pacman_textures.get(0), true);
+                    setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, pacman_textures.get(0), true);
                     pane.getChildren().add(imageView);
+                    imageViewEntities.add(new ImageViewEntities(((Pacman)sceneCase.getCaseContent(Pacman.class.toString()).get(0)),imageView));
                 }
 
                 if (sceneCase.getCaseContent(Ghost.class.toString()) != null && sceneCase.getCaseContent(Ghost.class.toString()).size() > 0) {
@@ -89,20 +93,22 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
                         ArrayList<Image> ghost_textures = new GhostView().getGhostView(ghost);
                         // CREE UNE ANIMATION
                         imageView = new ImageView();
-                        setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, ghost_textures.get(0), true);
+                        setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, ghost_textures.get(0), true);
                         pane.getChildren().add(imageView);
+                        imageViewEntities.add(new ImageViewEntities(((Ghost)sceneCase.getCaseContent(Ghost.class.toString()).get(0)),imageView));
+
                     }
                 }
                 imageView = new ImageView();
 
                 if (sceneCase.getCaseContent(NormalFruit.class.toString()) != null && sceneCase.getCaseContent(NormalFruit.class.toString()).size() > 0) {
                     Image fruit_texture = new ItemView().getItemView((Item) sceneCase.getCaseContent(NormalFruit.class.toString()).get(0));
-                    setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, fruit_texture, true);
+                    setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, fruit_texture, true);
                 }
 
                 if (sceneCase.getCaseContent(PacgumFruit.class.toString()) != null && sceneCase.getCaseContent(PacgumFruit.class.toString()).size() > 0) {
                     Image pac_gum_texture = new ItemView().getItemView((Item) sceneCase.getCaseContent(PacgumFruit.class.toString()).get(0));
-                    setupScene.setImageView(imageView, x * CASE_SIZE + originX, y * CASE_SIZE + originY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, pac_gum_texture, true);
+                    setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, pac_gum_texture, true);
                 }
                 pane.getChildren().add(imageView);
                 y++;
@@ -112,4 +118,12 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
         }
     }
 
+    public List<ImageViewEntities> getImageViewEntities(){
+        return imageViewEntities;
+    }
+
+    public void setEntityPosition(Entity entity,ImageView imageView){
+        imageView.setLayoutX(entity.getPosition().getX() * CASE_SIZE + originEntitiesX);
+        imageView.setLayoutY(entity.getPosition().getY() * CASE_SIZE + originEntitiesY);
+    }
 }

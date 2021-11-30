@@ -7,16 +7,20 @@ import engines.graphic.GraphicEngine;
 import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
 import engines.physic.ClassicPhysicEngine;
+import engines.physic.Collision;
 import engines.physic.PhysicEngine;
 import engines.sound.*;
 import gameplay.Direction;
 import gameplay.Entity;
 import gameplay.Game;
+import gameplay.Movement;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import pacman.scene.LabyrinthGenerator;
 import pacman.scene.SceneMainMenu;
+import scene.SceneCase;
+import scene.SceneElement;
 import scene.SceneGame;
 
 import java.io.BufferedReader;
@@ -52,6 +56,7 @@ public class GamePacMan implements Game {
     public void startEngine(Stage stage) {
         kernelEngine = new ClassicKernelEngine(this);
         physicEngine = new ClassicPhysicEngine();
+        kernelEngine.setPhysicEngine(physicEngine);
         startSoundEngine();
         startGraphicEngine(stage);
         startControlEngine();
@@ -130,7 +135,7 @@ public class GamePacMan implements Game {
                 }
             }
 
-            controlEngine = new ClassicControlEngine(kernelEngine.getCurrentScene(), controlManager);
+            controlEngine = new ClassicControlEngine(controlManager,kernelEngine);
             kernelEngine.setControlEngine(controlEngine);
         } catch (IOException ioException) {
             ioException.printStackTrace();
@@ -152,5 +157,57 @@ public class GamePacMan implements Game {
 
     public SceneGame getSceneGame() {
         return sceneGame;
+    }
+
+    public void treatmentCollision(Movement movement, Collision collision){
+        if(collision != null){
+            System.out.println(collision.getFirstObjectCollision() + "/" + collision.getSecondObjectCollision());
+
+            if(collision.getFirstObjectCollision() instanceof Pacman){
+                System.out.print("entity 1 = Pacman /");
+            }
+            else {
+                if(collision.getFirstObjectCollision() instanceof Ghost){
+                    System.out.print("entité 1 = Ghost (" + ((Ghost)collision.getFirstObjectCollision()).getEntityName() + ")");
+                }
+            }
+            if(collision.getSecondObjectCollision() instanceof SceneElement){
+                System.out.println("scene element = " + ((SceneElement)collision.getSecondObjectCollision()).getSceneElement());
+            }
+            else{
+                if(collision.getSecondObjectCollision() instanceof Ghost){
+                    System.out.println("entité 2 = Ghost (" + ((Ghost)collision.getFirstObjectCollision()).getEntityName() + ")");
+                }
+            }
+        }
+        else {
+            System.out.println("collision null");
+            SceneCase newSceneCase = getNewSceneCase(movement.getDirection(),movement.getEntity());
+            if(newSceneCase != null){
+                sceneGame.getCase(movement.getEntity().getPosition().getX(),movement.getEntity().getPosition().getY()).removeCaseContent(movement.getEntity());
+                newSceneCase.addCaseContent(movement.getEntity());
+                movement.getEntity().setPosition(newSceneCase);
+                kernelEngine.updateSceneGame(movement.getEntity());
+            }
+            else {
+                System.err.println("error : new scene case null");
+                System.exit(-1);
+            }
+        }
+    }
+
+    private SceneCase getNewSceneCase(Direction direction, Entity entity){
+        switch (direction){
+            case North:
+                return sceneGame.getCase(entity.getPosition().getX(),entity.getPosition().getY() - 1);
+            case South:
+                return sceneGame.getCase(entity.getPosition().getX(),entity.getPosition().getY() + 1);
+            case East:
+                return sceneGame.getCase(entity.getPosition().getX() + 1,entity.getPosition().getY());
+            case West:
+                return sceneGame.getCase(entity.getPosition().getX() - 1,entity.getPosition().getY());
+            default:
+                return null;
+        }
     }
 }

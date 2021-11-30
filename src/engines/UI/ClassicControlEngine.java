@@ -1,6 +1,7 @@
 package engines.UI;
 
-import gameplay.Entity;
+import engines.kernel.KernelEngine;
+import gameplay.*;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -10,14 +11,14 @@ import java.util.List;
 
 public class ClassicControlEngine implements ControlEngine {
 
-    private final Scene scene;
+    private Scene scene;
     private final ControlManager controlManager;
     private boolean engineState = false;
+    private KernelEngine kernelEngine;
 
-    public ClassicControlEngine(Scene scene, ControlManager controlManager){
-        this.scene = scene;
+    public ClassicControlEngine(ControlManager controlManager,KernelEngine kernelEngine){
         this.controlManager = controlManager;
-        getKeyPressed();
+        this.kernelEngine = kernelEngine;
     }
 
     private void getKeyPressed(){
@@ -25,8 +26,8 @@ public class ClassicControlEngine implements ControlEngine {
             scene.setOnKeyPressed(key -> {
                 Control control = controlManager.getControl(key.getText());
                 if (control != null) {
-                    // appelle methode moteur noyau pour donner le control
                     printKeyPressed(key.getText());
+                    getMovement(key.getText());
                 }
             });
         }
@@ -51,7 +52,36 @@ public class ClassicControlEngine implements ControlEngine {
         System.out.println("Key Pressed: " + key);
     }
 
+    private void getMovement(String key){
+        Control control = getControl(key);
+        if(control != null){
+            switch (control.getDirection()){
+                case North:
+                    kernelEngine.treatmentCollisionGame(new MovementNorth(control.getEntity()));
+                    break;
+                case South:
+                    kernelEngine.treatmentCollisionGame(new MovementSouth(control.getEntity()));
+                    break;
+                case West:
+                    kernelEngine.treatmentCollisionGame(new MovementWest(control.getEntity()));
+                    break;
+                case East:
+                    kernelEngine.treatmentCollisionGame(new MovementEast(control.getEntity()));
+                    break;
+            }
+        }
+        else{
+            System.err.println("error : control null");
+            System.exit(-1);
+        }
+    }
+
     public void setEngineState(boolean engineState){
         this.engineState = engineState;
+    }
+
+    public void setScene(Scene scene){
+        this.scene = scene;
+        getKeyPressed();
     }
 }

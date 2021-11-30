@@ -7,6 +7,7 @@ import engines.kernel.KernelEngine;
 import gameplay.Entity;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import scene.SceneCase;
 import scene.SceneGame;
 
 import java.util.List;
@@ -85,4 +86,26 @@ public class ClassicGraphicEngine implements GraphicEngine{
         kernelEngine.setControlEngineState(state);
     }
 
+    public void setControlEngineScene(Scene scene){
+        kernelEngine.setControlEngineScene(scene);
+    }
+
+    public void updateSceneGame(Entity entity){
+        ImageViewEntities imageViewEntities = getImageViewEntities(entity);
+        if(imageViewEntities != null){
+            convertSceneToGraphic.setEntityPosition(entity,imageViewEntities.getImageView());
+        }
+        else {
+            System.err.println("error : entity not found");
+        }
+    }
+
+    private ImageViewEntities getImageViewEntities(Entity entity){
+        for(ImageViewEntities image : convertSceneToGraphic.getImageViewEntities()){
+            if(image.getEntity() == entity){
+                return image;
+            }
+        }
+        return null;
+    }
 }

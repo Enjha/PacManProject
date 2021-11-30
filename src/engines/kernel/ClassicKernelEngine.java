@@ -2,12 +2,13 @@ package engines.kernel;
 
 import engines.UI.Control;
 import engines.UI.ControlEngine;
-import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
+import engines.physic.Collision;
 import engines.physic.PhysicEngine;
 import engines.sound.SoundEngine;
 import gameplay.Entity;
 import gameplay.Game;
+import gameplay.Movement;
 import javafx.scene.Scene;
 import scene.SceneGame;
 
@@ -15,8 +16,7 @@ import java.util.List;
 
 public class ClassicKernelEngine implements KernelEngine{
 
-    //moteur graphique ici
-    private GraphicEngine classicGraphicEngine;
+    private GraphicEngine graphicEngine;
     private SoundEngine soundEngine;
     private PhysicEngine physicEngine;
     private ControlEngine controlEngine;
@@ -51,11 +51,11 @@ public class ClassicKernelEngine implements KernelEngine{
     }
 
     public void setGraphicEngine(GraphicEngine graphicEngine){
-        this.classicGraphicEngine = graphicEngine;
+        this.graphicEngine = graphicEngine;
     }
 
     public Scene getCurrentScene(){
-        return classicGraphicEngine.getCurrentScene();
+        return graphicEngine.getCurrentScene();
     }
 
     public List<Control> getControl(Entity entity){
@@ -84,5 +84,23 @@ public class ClassicKernelEngine implements KernelEngine{
 
     public void setControlEngineState(boolean state){
         controlEngine.setEngineState(state);
+    }
+
+    public void setControlEngineScene(Scene scene){
+        controlEngine.setScene(scene);
+    }
+
+    public void treatmentCollisionGame(Movement movement){
+        if(physicEngine != null) {
+            Collision collision = physicEngine.moveEntity(movement, game.getSceneGame());
+            game.treatmentCollision(movement,collision);
+        }
+        else {
+            System.out.println("error : physic engine null");
+        }
+    }
+
+    public void updateSceneGame(Entity entity){
+        graphicEngine.updateSceneGame(entity);
     }
 }

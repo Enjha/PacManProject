@@ -24,4 +24,6 @@ public interface GraphicEngine {
     void unmute();
     SceneGame getSceneGame();
     void setControlEngineState(boolean state);
+    void setControlEngineScene(Scene scene);
+    void updateSceneGame(Entity entity);
 }

@@ -30,6 +30,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         root.getChildren().add(panel);
         root.setStyle("-fx-background-color: black;");
         graphicEngine.setControlEngineState(true);
+        graphicEngine.setControlEngineScene(scene);
         return scene;
     }
 

@@ -1,5 +1,6 @@
 package gameplay;
 
+import engines.physic.Collision;
 import javafx.stage.Stage;
 import scene.SceneGame;
 
@@ -12,4 +13,5 @@ public interface Game {
     SceneGame getSceneGame();
     void generateSceneGame();
     void startEngine(Stage stage);
+    void treatmentCollision(Movement movement,Collision collision);
 }
