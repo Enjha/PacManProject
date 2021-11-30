@@ -66,9 +66,9 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
     public void setEntityTextureScene(SceneGame sceneGame, Pane pane) {
         x = 0;
         y = 0;
-        int originY = 14;
-        int originX = 14;
-        double ENTITY_TEXTURE_SIZE = 30;
+        int originY = 9;
+        int originX = 109;
+        double ENTITY_TEXTURE_SIZE = 16;
         SceneCase[][] sceneCases = sceneGame.getCases();
         ImageView imageView;
         for (SceneCase[] sceneCases1 : sceneCases) {

@@ -28,7 +28,7 @@ import java.util.List;
 
 public class GamePacMan implements Game {
 
-    private List<Entity> entities = new ArrayList<>();
+    private List<Entity> entities;
     private SceneGame sceneGame;
     private LabyrinthGenerator labyrinthGenerator;
     private KernelEngine kernelEngine;
@@ -42,9 +42,10 @@ public class GamePacMan implements Game {
     }
 
     public void createEntity() {
-        entities.add(new Pacman());
+        entities = labyrinthGenerator.generateEntity(sceneGame);
+        /*entities.add(new Pacman());
         entities.add(new Ghost("Pinky", GhostColor.PINK));
-        entities.add(new Ghost("Blue", GhostColor.BLUE));
+        entities.add(new Ghost("Blue", GhostColor.BLUE));*/
     }
 
     public void generateSceneGame() {

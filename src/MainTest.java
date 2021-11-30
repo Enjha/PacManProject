@@ -19,8 +19,8 @@ public class MainTest extends Application {
 
         stage.setResizable(false);
         Game game = new GamePacMan(new DefinedLabyrinth());
-        game.createEntity();
         game.generateSceneGame();
+        game.createEntity();
         game.startEngine(stage);
 
 /*
