@@ -81,4 +81,8 @@ public class ClassicKernelEngine implements KernelEngine{
     public SceneGame getSceneGame(){
         return game.getSceneGame();
     }
+
+    public void setControlEngineState(boolean state){
+        controlEngine.setEngineState(state);
+    }
 }

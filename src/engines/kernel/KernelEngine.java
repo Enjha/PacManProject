@@ -27,5 +27,6 @@ public interface KernelEngine {
     void mute();
     void unmute();
     SceneGame getSceneGame();
+    void setControlEngineState(boolean state);
 
 }

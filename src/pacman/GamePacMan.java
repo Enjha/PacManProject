@@ -43,9 +43,6 @@ public class GamePacMan implements Game {
 
     public void createEntity() {
         entities = labyrinthGenerator.generateEntity(sceneGame);
-        /*entities.add(new Pacman());
-        entities.add(new Ghost("Pinky", GhostColor.PINK));
-        entities.add(new Ghost("Blue", GhostColor.BLUE));*/
     }
 
     public void generateSceneGame() {
@@ -63,7 +60,7 @@ public class GamePacMan implements Game {
     private void startSoundEngine() {
         SoundManager soundManager = new ClassicSoundManager();
 
-        String pathRessourcesSound = "ressources/sounds.PacMan";
+        String pathRessourcesSound = "ressources/sounds/PacMan";
         File soundFolder = new File(pathRessourcesSound);
         File[] listOfFiles = soundFolder.listFiles();
 

@@ -81,4 +81,8 @@ public class ClassicGraphicEngine implements GraphicEngine{
         return kernelEngine.getSceneGame();
     }
 
+    public void setControlEngineState(boolean state){
+        kernelEngine.setControlEngineState(state);
+    }
+
 }
