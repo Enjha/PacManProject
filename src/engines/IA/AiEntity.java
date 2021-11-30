@@ -5,6 +5,7 @@ import gameplay.Entity;
 import pacman.Ghost;
 import pacman.Pacman;
 import scene.SceneCase;
+import scene.SceneGame;
 
 public class AiEntity implements Runnable{
 
@@ -36,7 +37,7 @@ public class AiEntity implements Runnable{
                 threadFollow.start();
             }
             else{ //ghost va rester dans un état de déplacement "classique"
-                if (true/*si on se trouve à une intersection*/){
+                if(true){//si on se trouve à une intersection
                     pickDirection();
                 }
                 if(isAbleToTurnAround){
