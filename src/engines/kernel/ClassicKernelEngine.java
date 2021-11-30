@@ -9,7 +9,6 @@ import engines.sound.SoundEngine;
 import gameplay.Entity;
 import gameplay.Game;
 import gameplay.Movement;
-import gameplay.Character;
 import javafx.scene.Scene;
 import scene.SceneGame;
 

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefinedLabyrinth implements LabyrinthGenerator{
+public class LabyrinthBuild implements LabyrinthGenerator{
 
     private int height;
     private int width;
