@@ -4,10 +4,10 @@ import apiUser.FxWindow;
 import apiUser.SceneAPIUser;
 import engines.UI.Control;
 import engines.kernel.KernelEngine;
-import gameplay.Direction;
 import gameplay.Entity;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import scene.SceneCase;
 import scene.SceneGame;
 
 import java.util.List;
@@ -31,11 +31,11 @@ public class ClassicGraphicEngine implements GraphicEngine{
     }
 
     public void setSceneGameTexture(SceneGame sceneGame){
-        convertSceneToGraphic.setLabyrinthTextureScene(sceneGame,window.getScene().getPane());
+        convertSceneToGraphic.setLabyrinthTextureScene(sceneGame,window.getScene().getPanel());
     }
 
     public void setSceneGameEntity(SceneGame sceneGame){
-        convertSceneToGraphic.setEntityTextureScene(sceneGame,window.getScene().getPane());
+        convertSceneToGraphic.setEntityTextureScene(sceneGame,window.getScene().getPanel());
     }
 
     public void setCurrentScene(SceneAPIUser scene){
@@ -82,4 +82,30 @@ public class ClassicGraphicEngine implements GraphicEngine{
         return kernelEngine.getSceneGame();
     }
 
+    public void setControlEngineState(boolean state){
+        kernelEngine.setControlEngineState(state);
+    }
+
+    public void setControlEngineScene(Scene scene){
+        kernelEngine.setControlEngineScene(scene);
+    }
+
+    public void updateSceneGame(Entity entity){
+        ImageViewEntities imageViewEntities = getImageViewEntities(entity);
+        if(imageViewEntities != null){
+            convertSceneToGraphic.setEntityPosition(entity,imageViewEntities.getImageView());
+        }
+        else {
+            System.err.println("error : entity not found");
+        }
+    }
+
+    public ImageViewEntities getImageViewEntities(Entity entity){
+        for(ImageViewEntities image : convertSceneToGraphic.getImageViewEntities()){
+            if(image.getEntity() == entity){
+                return image;
+            }
+        }
+        return null;
+    }
 }

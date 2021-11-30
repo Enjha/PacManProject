@@ -4,20 +4,23 @@ import engines.UI.*;
 import engines.graphic.ClassicConvertSceneToGraphic;
 import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
+import engines.graphic.ImageViewEntities;
 import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
 import engines.physic.ClassicPhysicEngine;
+import engines.physic.Collision;
 import engines.physic.PhysicEngine;
 import engines.sound.*;
-import gameplay.Direction;
-import gameplay.Entity;
-import gameplay.Game;
+import gameplay.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import pacman.scene.LabyrinthGenerator;
 import pacman.scene.SceneMainMenu;
+import scene.SceneCase;
+import scene.SceneElement;
 import scene.SceneGame;
+import gameplay.Character;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,7 +31,7 @@ import java.util.List;
 
 public class GamePacMan implements Game {
 
-    private List<Entity> entities = new ArrayList<>();
+    private List<Entity> entities;
     private SceneGame sceneGame;
     private LabyrinthGenerator labyrinthGenerator;
     private KernelEngine kernelEngine;
@@ -36,15 +39,36 @@ public class GamePacMan implements Game {
     private SoundEngine soundEngine;
     private ControlEngine controlEngine;
     private GraphicEngine graphicEngine;
+    private List<Thread> threadEntities = new ArrayList<>();
+    private boolean stateThread = false;
 
     public GamePacMan(LabyrinthGenerator labyrinthGenerator) {
         this.labyrinthGenerator = labyrinthGenerator;
     }
 
     public void createEntity() {
-        entities.add(new Pacman());
-        entities.add(new Ghost("Pinky", GhostColor.PINK));
-        entities.add(new Ghost("Blue", GhostColor.BLUE));
+        entities = labyrinthGenerator.generateEntity(sceneGame);
+
+        for (Entity entity : entities) {
+            if (entity instanceof Pacman) {
+
+                threadEntities.add(new ThreadPacman((Pacman) entity, this));
+            }
+            if (entity instanceof Ghost) {
+                threadEntities.add(new ThreadGhost((Ghost) entity));
+            }
+        }
+    }
+
+    public void startThreadEntity() {
+        if (!stateThread) {
+            for (Thread thread : threadEntities) {
+                ThreadEntity threadEntity = (ThreadEntity) thread;
+                threadEntity.setImageViewEntities(kernelEngine.getImageViewEntities(threadEntity.getEntity()));
+                thread.start();
+            }
+            stateThread = true;
+        }
     }
 
     public void generateSceneGame() {
@@ -54,6 +78,7 @@ public class GamePacMan implements Game {
     public void startEngine(Stage stage) {
         kernelEngine = new ClassicKernelEngine(this);
         physicEngine = new ClassicPhysicEngine();
+        kernelEngine.setPhysicEngine(physicEngine);
         startSoundEngine();
         startGraphicEngine(stage);
         startControlEngine();
@@ -132,7 +157,7 @@ public class GamePacMan implements Game {
                 }
             }
 
-            controlEngine = new ClassicControlEngine(kernelEngine.getCurrentScene(), controlManager);
+            controlEngine = new ClassicControlEngine(controlManager, kernelEngine);
             kernelEngine.setControlEngine(controlEngine);
         } catch (IOException ioException) {
             ioException.printStackTrace();
@@ -154,5 +179,70 @@ public class GamePacMan implements Game {
 
     public SceneGame getSceneGame() {
         return sceneGame;
+    }
+
+    public void treatmentCollision(Movement movement, Collision collision) {
+        if (collision != null) {
+
+
+            if (collision.getSecondObjectCollision() instanceof SceneElement) {
+                getThreadEntity(movement.getEntity()).setCollision(true);
+            }
+            if (collision.getSecondObjectCollision() instanceof NormalFruit) {
+                System.out.println("collision fruit");
+            }
+
+            if (movement.getEntity().isCharacter()) {
+                ((Character) movement.getEntity()).setDirection(Direction.Stop);
+            }
+        } else {
+            getThreadEntity(movement.getEntity()).setCollision(false);
+            SceneCase newSceneCase = getNewSceneCase(movement.getDirection(), movement.getEntity());
+            if (newSceneCase != null) {
+                sceneGame.getCase(movement.getEntity().getPosition().getX(), movement.getEntity().getPosition().getY()).removeCaseContent(movement.getEntity());
+                newSceneCase.addCaseContent(movement.getEntity());
+                movement.getEntity().setPosition(newSceneCase);
+                kernelEngine.updateSceneGame(movement.getEntity());
+            } else {
+                System.err.println("error : new scene case null");
+                System.exit(-1);
+            }
+        }
+    }
+
+    private SceneCase getNewSceneCase(Direction direction, Entity entity) {
+        switch (direction) {
+            case North:
+                return sceneGame.getCase(entity.getPosition().getX(), entity.getPosition().getY() - 1);
+            case South:
+                return sceneGame.getCase(entity.getPosition().getX(), entity.getPosition().getY() + 1);
+            case East:
+                return sceneGame.getCase(entity.getPosition().getX() + 1, entity.getPosition().getY());
+            case West:
+                return sceneGame.getCase(entity.getPosition().getX() - 1, entity.getPosition().getY());
+            default:
+                return null;
+        }
+    }
+
+    public void updateSceneGame(Movement movement) {
+        kernelEngine.updateSceneGame(movement.getEntity());
+    }
+
+    public List<Thread> getThreadEntities() {
+        return threadEntities;
+    }
+
+    public ThreadEntity getThreadEntity(Entity entity) {
+        for (Thread thread : threadEntities) {
+            if (((ThreadEntity) thread).getEntity() == entity) {
+                return (ThreadEntity) thread;
+            }
+        }
+        return null;
+    }
+
+    public void treatmentCollisionGame(Movement movement) {
+        kernelEngine.treatmentCollisionGame(movement);
     }
 }

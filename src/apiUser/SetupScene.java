@@ -19,7 +19,7 @@ import java.util.List;
 public class SetupScene {
 
     // A modifier
-    public void setEntityAliveAnimation(ImageView imageView, double layoutX, double layoutY, double fitHeight, double fitWidth, ArrayList<Image> images, boolean visible) {
+    public void setAnimationEntityAlive(ImageView imageView, double layoutX, double layoutY, double fitHeight, double fitWidth, ArrayList<Image> images, boolean visible) {
         final double INTERVAL = 1.0;
         Timeline timeline = new Timeline();
         Duration timePoint = Duration.ZERO;
@@ -40,7 +40,7 @@ public class SetupScene {
     }
 
     // A modifier aussi, ca sera l'animation des entité lorsqu'elle meurt
-    public void setEntityDeadAnimation(ArrayList<Image> images, double layoutX, double layoutY, double fitHeight, double fitWidth, Image image, boolean visible) {
+    public void setAnimationEntityDead(ArrayList<Image> images, double layoutX, double layoutY, double fitHeight, double fitWidth, Image image, boolean visible) {
 
     }
 

@@ -3,11 +3,9 @@ package gameplay;
 public class MovementWest implements Movement{
 
     private final Entity entity;
-    private final Direction direction;
 
     public MovementWest(Entity entity){
         this.entity = entity;
-        this.direction = Direction.West;
     }
 
     public Entity getEntity(){
@@ -15,7 +13,7 @@ public class MovementWest implements Movement{
     }
 
     public Direction getDirection(){
-        return direction;
+        return Direction.West;
     }
 
     public int[] nextPosition(){

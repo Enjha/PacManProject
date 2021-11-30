@@ -40,4 +40,6 @@ public interface SceneCase {
      * @return a list of object
      */
     List<Object> getCaseContent(String typeOfElement);
+
+    List<List<Object>> getCaseAllContent();
 }

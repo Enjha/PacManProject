@@ -3,11 +3,9 @@ package gameplay;
 public class MovementNorth implements Movement{
 
     private final Entity entity;
-    private final Direction direction;
 
     public MovementNorth(Entity entity){
         this.entity = entity;
-        this.direction = Direction.North;
     }
 
     public Entity getEntity(){
@@ -15,7 +13,7 @@ public class MovementNorth implements Movement{
     }
 
     public Direction getDirection(){
-        return direction;
+        return Direction.North;
     }
 
     public int[] nextPosition(){

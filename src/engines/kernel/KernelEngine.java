@@ -4,9 +4,11 @@ import engines.UI.Control;
 import engines.UI.ControlEngine;
 import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
+import engines.graphic.ImageViewEntities;
 import engines.physic.PhysicEngine;
 import engines.sound.SoundEngine;
 import gameplay.Entity;
+import gameplay.Movement;
 import javafx.scene.Scene;
 import scene.SceneGame;
 
@@ -27,5 +29,11 @@ public interface KernelEngine {
     void mute();
     void unmute();
     SceneGame getSceneGame();
+    void setControlEngineState(boolean state);
+    void setControlEngineScene(Scene scene);
+    void treatmentCollisionGame(Movement movement);
+    void updateSceneGame(Entity entity);
+    void setMovementEntity(Movement movement);
+    ImageViewEntities getImageViewEntities(Entity entity);
 
 }

@@ -1,4 +1,4 @@
-package engines.graphic.view;
+package pacman.view;
 
 import javafx.scene.image.Image;
 import pacman.Pacman;
@@ -39,9 +39,6 @@ public class PacManView {
                 pacman_views.add(new TexturePacmanWestOpen().getTexture());
                 return pacman_views;
             case Stop:
-                pacman_views.add(new TexturePacmanFull().getTexture());
-                return pacman_views;
-            default:
                 if (!pacman.isAlive()) {
                     pacman_views.add(new TexturePacmanDead1().getTexture());
                     pacman_views.add(new TexturePacmanDead2().getTexture());
@@ -55,9 +52,12 @@ public class PacManView {
                     pacman_views.add(new TexturePacmanDead10().getTexture());
                     pacman_views.add(new TexturePacmanDead11().getTexture());
                     return pacman_views;
+                } else {
+                    pacman_views.add(new TexturePacmanFull().getTexture());
+                    return pacman_views;
                 }
         }
         return null;
-    }
 
+    }
 }

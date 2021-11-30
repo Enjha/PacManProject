@@ -1,6 +1,9 @@
 package scene;
 
+import gameplay.Entity;
 import gameplay.Movement;
+
+import java.util.List;
 
 /**
  * A scene who contain all information contain in a scene
@@ -56,5 +59,7 @@ public interface SceneGame {
      *      a movement of a entity
      * @return o object type of SceneElement
      */
-    SceneElement obstacle(int x, int y, Movement movement);
+    SceneElement obstacleElement(int x, int y, Movement movement);
+
+    List<Entity> obstacleEntity(int x, int y, Movement movement);
 }

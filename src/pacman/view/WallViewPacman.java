@@ -1,6 +1,5 @@
-package pacman;
+package pacman.view;
 
-import engines.graphic.view.WallView;
 import gameplay.Direction;
 import javafx.scene.image.Image;
 import pacman.texture.wall.*;

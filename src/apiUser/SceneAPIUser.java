@@ -6,6 +6,6 @@ import javafx.scene.layout.Pane;
 public interface SceneAPIUser {
 
     Scene getScene();
-    Pane getPane();
+    Pane getPanel();
     boolean isSceneGame();
 }

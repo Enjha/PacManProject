@@ -13,34 +13,44 @@ public class ClassicPhysicEngine implements PhysicEngine {
         int[] positionEntity = {movement.getEntity().getPosition().getX(),movement.getEntity().getPosition().getY()};
         int[] nextPositionEntity = movement.nextPosition();
         SceneCase sceneCaseEntity = movement.getEntity().getPosition();
-        SceneElement sceneElement = sceneGame.obstacle(sceneCaseEntity.getX(),sceneCaseEntity.getY(),movement);
+        SceneElement sceneElement = sceneGame.obstacleElement(sceneCaseEntity.getX(),sceneCaseEntity.getY(),movement);
 
         if(sceneElement != null){
+            System.out.println("un mur");
             return new CollisionEntitySceneElement(movement.getEntity(),sceneElement);
         }
         else {
-            List<Object> list = sceneGame.getCase(nextPositionEntity[0],nextPositionEntity[1]).getCaseContent(movement.getEntity().getClass().toString());
+            System.out.println("aucun mur");
+            System.out.println();
+            List<Entity> list = sceneGame.obstacleEntity(nextPositionEntity[0],nextPositionEntity[1],movement);
             if(list != null) {
-                for (Object object : list) {
-                    Entity entity = (Entity) object;
+                for (Entity entity : list) {
                     if (movement.getEntity().isCharacter()) {
+                        System.out.println("entité character : " + entity.getClass().getName());
                         if (entity.isCharacter()) {
+                            System.out.println(entity.getClass().getName());
                             if (((Character) entity).getTeam() == ((Character) movement.getEntity()).getTeam()) {
                                 if (((Character) entity).getTeam().getCollision()) {
                                     return new CollisionEntities(movement.getEntity(), entity);
                                 }
-                            } else {
+                            }
+                            else {
                                 return new CollisionEntities(movement.getEntity(), entity);
                             }
                         } else {
                             if (entity.isItem()) {
+                                System.out.println("entité item : "+ entity.getClass().getName());
                                 return new CollisionEntities(movement.getEntity(), entity);
                             }
                         }
                     }
                 }
             }
+            else {
+                System.out.println("list vide");
+            }
         }
+        System.out.println("null");
         return null;
     }
 

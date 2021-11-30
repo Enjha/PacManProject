@@ -1,26 +1,17 @@
-import engines.graphic.ClassicConvertSceneToGraphic;
-import engines.graphic.ConvertSceneToGraphic;
-import engines.graphic.ClassicGraphicEngine;
-import engines.kernel.ClassicKernelEngine;
-import engines.kernel.KernelEngine;
 import gameplay.Game;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import pacman.*;
-import pacman.scene.DefinedLabyrinth;
-import pacman.scene.SceneMainMenu;
-import scene.*;
+import pacman.scene.LabyrinthBuild;
 
 public class MainTest extends Application {
 
     public void start(Stage stage) {
 
         stage.setResizable(false);
-        Game game = new GamePacMan(new DefinedLabyrinth());
-        game.createEntity();
+        Game game = new GamePacMan(new LabyrinthBuild());
         game.generateSceneGame();
+        game.createEntity();
         game.startEngine(stage);
 
 /*

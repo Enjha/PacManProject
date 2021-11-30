@@ -23,4 +23,8 @@ public interface GraphicEngine {
     void mute();
     void unmute();
     SceneGame getSceneGame();
+    void setControlEngineState(boolean state);
+    void setControlEngineScene(Scene scene);
+    void updateSceneGame(Entity entity);
+    ImageViewEntities getImageViewEntities(Entity entity);
 }
