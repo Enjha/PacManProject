@@ -77,11 +77,10 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
         ImageView imageView;
         for (SceneCase[] sceneCases1 : sceneCases) {
             for (SceneCase sceneCase : sceneCases1) {
-
+                imageView = new ImageView();
                 if (sceneCase.getCaseContent(Pacman.class.toString()) != null && sceneCase.getCaseContent(Pacman.class.toString()).size() > 0) {
                     ArrayList<Image> pacman_textures = new PacManView().getPacmanView((Pacman) sceneCase.getCaseContent(Pacman.class.toString()).get(0));
                     // CREE UNE ANIMATION
-                    imageView = new ImageView();
                     setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, pacman_textures.get(0), true);
                     pane.getChildren().add(imageView);
                     imageViewEntities.add(new ImageViewEntities(((Pacman)sceneCase.getCaseContent(Pacman.class.toString()).get(0)),imageView));
@@ -92,25 +91,26 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
                         Ghost ghost = (Ghost) o;
                         ArrayList<Image> ghost_textures = new GhostView().getGhostView(ghost);
                         // CREE UNE ANIMATION
-                        imageView = new ImageView();
                         setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, ghost_textures.get(0), true);
                         pane.getChildren().add(imageView);
                         imageViewEntities.add(new ImageViewEntities(((Ghost)sceneCase.getCaseContent(Ghost.class.toString()).get(0)),imageView));
 
                     }
                 }
-                imageView = new ImageView();
 
                 if (sceneCase.getCaseContent(NormalFruit.class.toString()) != null && sceneCase.getCaseContent(NormalFruit.class.toString()).size() > 0) {
                     Image fruit_texture = new ItemView().getItemView((Item) sceneCase.getCaseContent(NormalFruit.class.toString()).get(0));
                     setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, fruit_texture, true);
+                    imageViewEntities.add(new ImageViewEntities(((NormalFruit)sceneCase.getCaseContent(NormalFruit.class.toString()).get(0)),imageView));
+                    pane.getChildren().add(imageView);
                 }
 
                 if (sceneCase.getCaseContent(PacgumFruit.class.toString()) != null && sceneCase.getCaseContent(PacgumFruit.class.toString()).size() > 0) {
                     Image pac_gum_texture = new ItemView().getItemView((Item) sceneCase.getCaseContent(PacgumFruit.class.toString()).get(0));
                     setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, pac_gum_texture, true);
+                    imageViewEntities.add(new ImageViewEntities(((PacgumFruit)sceneCase.getCaseContent(PacgumFruit.class.toString()).get(0)),imageView));
+                    pane.getChildren().add(imageView);
                 }
-                pane.getChildren().add(imageView);
                 y++;
             }
             y = 0;
@@ -123,7 +123,7 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
     }
 
     public void setEntityPosition(Entity entity,ImageView imageView){
-       // imageView.setLayoutX(entity.getPosition().getX() * CASE_SIZE + originEntitiesX);
-       // imageView.setLayoutY(entity.getPosition().getY() * CASE_SIZE + originEntitiesY);
+       //imageView.setLayoutX(entity.getPosition().getX() * CASE_SIZE + originEntitiesX);
+       //imageView.setLayoutY(entity.getPosition().getY() * CASE_SIZE + originEntitiesY);
     }
 }

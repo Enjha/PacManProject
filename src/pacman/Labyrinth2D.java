@@ -6,7 +6,6 @@ import gameplay.Movement;
 import scene.*;
 import scene.SceneGame;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 

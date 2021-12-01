@@ -4,7 +4,6 @@ package pacman.scene;
 
 import apiUser.SetupScene;
 import engines.UI.Control;
-import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
 import gameplay.Entity;
 import javafx.event.EventHandler;

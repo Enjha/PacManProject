@@ -41,11 +41,6 @@ public class Pacman implements Character {
      */
     private boolean isAlive = true;
 
-    /**
-     * The entity's state of fear
-     * By default the state is false
-     */
-    private boolean isAfraid = false;
 
     /**
      * Return if this entity is a character
@@ -134,6 +129,7 @@ public class Pacman implements Character {
      *
      * @return list of Images
      */
+    @Override
     public ArrayList<Image> getTextures() {
         return new PacManView().getPacmanView(this);
     }
@@ -161,22 +157,6 @@ public class Pacman implements Character {
      */
     public void setIsAlive(boolean isAlive) {
         this.isAlive = isAlive;
-    }
-
-    /**
-     * Return this entity's state of fear
-     *
-     * @return a boolean value
-     */
-    public boolean isAfraid() {
-        return isAfraid;
-    }
-
-    /**
-     * Set the entity's state of fear.
-     */
-    public void setIsAfraid(boolean isAfraid) {
-        this.isAfraid = isAfraid;
     }
 
 }

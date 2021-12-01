@@ -4,7 +4,6 @@ import engines.UI.*;
 import engines.graphic.ClassicConvertSceneToGraphic;
 import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
-import engines.graphic.ImageViewEntities;
 import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
 import engines.physic.ClassicPhysicEngine;
@@ -182,31 +181,67 @@ public class GamePacMan implements Game {
     }
 
     public void treatmentCollision(Movement movement, Collision collision) {
+        System.out.println("test : x = " + movement.getEntity().getPosition().getX() + "/y = " + movement.getEntity().getPosition().getY());
         if (collision != null) {
-
+            System.out.println("collision");
 
             if (collision.getSecondObjectCollision() instanceof SceneElement) {
-                getThreadEntity(movement.getEntity()).setCollision(true);
+                System.out.println("collision wall");
+                getThreadEntity(movement.getEntity()).setCollision(collision);
+                if (movement.getEntity().isCharacter()) {
+                    ((Character) movement.getEntity()).setDirection(Direction.Stop);
+                }
             }
-            if (collision.getSecondObjectCollision() instanceof NormalFruit) {
-                System.out.println("collision fruit");
+            else {
+                if(collision.getSecondObjectCollision() instanceof Entity){
+                    System.out.println("collision entity ");
+                    treatmentCollisionEntity(movement,collision);
+                }
             }
+        }
+        else {
+            System.out.println("no collision");
+           treatmentCollisionMoveEntity(movement,null);
+        }
+    }
 
-            if (movement.getEntity().isCharacter()) {
-                ((Character) movement.getEntity()).setDirection(Direction.Stop);
+    private void treatmentCollisionEntity(Movement movement,Collision collision){
+        if (collision.getSecondObjectCollision() instanceof NormalFruit) {
+            System.out.println("collision fruit");
+            treatmentCollisionMoveEntity(movement,collision);
+        }
+        else if(collision.getSecondObjectCollision() instanceof PacgumFruit){
+            System.out.println("collision pacgum");
+            treatmentCollisionMoveEntity(movement,collision);
+        }
+        else if(collision.getSecondObjectCollision() instanceof Ghost){
+            System.out.println("collision ghost");
+            getThreadEntity(movement.getEntity()).setCollision(collision);
+        }
+    }
+
+    private void treatmentCollisionMoveEntity(Movement movement,Collision collision){
+        getThreadEntity(movement.getEntity()).setCollision(collision);
+        SceneCase newSceneCase = getNewSceneCase(movement.getDirection(), movement.getEntity());
+
+        if (newSceneCase != null) {
+            sceneGame.getCase(movement.getEntity().getPosition().getX(), movement.getEntity().getPosition().getY()).removeCaseContent(movement.getEntity());
+            newSceneCase.addCaseContent(movement.getEntity());
+            if(collision != null){
+                if(collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit){
+                    newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
+                }
             }
+            else {
+                if(movement.getEntity().isCharacter()){
+                    ((Character)movement.getEntity()).setDirection(movement.getDirection());
+                }
+            }
+            movement.getEntity().setPosition(newSceneCase);
+            kernelEngine.updateSceneGame(movement.getEntity());
         } else {
-            getThreadEntity(movement.getEntity()).setCollision(false);
-            SceneCase newSceneCase = getNewSceneCase(movement.getDirection(), movement.getEntity());
-            if (newSceneCase != null) {
-                sceneGame.getCase(movement.getEntity().getPosition().getX(), movement.getEntity().getPosition().getY()).removeCaseContent(movement.getEntity());
-                newSceneCase.addCaseContent(movement.getEntity());
-                movement.getEntity().setPosition(newSceneCase);
-                kernelEngine.updateSceneGame(movement.getEntity());
-            } else {
-                System.err.println("error : new scene case null");
-                System.exit(-1);
-            }
+            System.err.println("error : new scene case null");
+            System.exit(-1);
         }
     }
 
@@ -244,5 +279,9 @@ public class GamePacMan implements Game {
 
     public void treatmentCollisionGame(Movement movement) {
         kernelEngine.treatmentCollisionGame(movement);
+    }
+
+    public ImageViewEntities getImageViewEntity(Entity entity){
+        return kernelEngine.getImageViewEntities(entity);
     }
 }

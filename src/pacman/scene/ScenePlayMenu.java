@@ -1,7 +1,6 @@
 package pacman.scene;
 
 import apiUser.SetupScene;
-import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

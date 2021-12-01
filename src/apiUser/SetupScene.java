@@ -1,7 +1,5 @@
 package apiUser;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -11,38 +9,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
-import javafx.util.Duration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SetupScene {
 
-    // A modifier
-    public void setAnimationEntityAlive(ImageView imageView, double layoutX, double layoutY, double fitHeight, double fitWidth, ArrayList<Image> images, boolean visible) {
-        final double INTERVAL = 1.0;
-        Timeline timeline = new Timeline();
-        Duration timePoint = Duration.ZERO;
-        Duration pause = Duration.seconds(0.3);
-
-        Image image1 = images.get(0);
-        Image image2 = images.get(1);
-
-
-        if (imageView.getImage().equals(image1)) {
-            timeline.getKeyFrames().add(new KeyFrame(timePoint,
-                    e -> this.setImageView(imageView, layoutX, layoutY, fitHeight, fitWidth, image2, visible)));
-        } else {
-            timeline.getKeyFrames().add(new KeyFrame(timePoint,
-                    e -> this.setImageView(imageView, layoutX, layoutY, fitHeight, fitWidth, image1, visible)));
-        }
-        timeline.play();
-    }
-
-    // A modifier aussi, ca sera l'animation des entité lorsqu'elle meurt
-    public void setAnimationEntityDead(ArrayList<Image> images, double layoutX, double layoutY, double fitHeight, double fitWidth, Image image, boolean visible) {
-
-    }
 
     public void setLabel(Label label, String text, Pos position, double layoutX, double layoutY, double prefHeight, double prefWidth, Font font, Paint textColor, boolean visible) {
         label.setLayoutX(layoutX);

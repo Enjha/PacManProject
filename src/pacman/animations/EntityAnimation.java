@@ -7,4 +7,6 @@ public interface EntityAnimation {
     void movementAnimation(ImageViewEntities entity);
 
     void deadAnimation(ImageViewEntities entity);
+
+
 }
