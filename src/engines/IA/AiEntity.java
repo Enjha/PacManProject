@@ -8,7 +8,7 @@ import scene.SceneCase;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+/*
 public class AiEntity implements Runnable{
 
     private Entity entity;
@@ -39,8 +39,8 @@ public class AiEntity implements Runnable{
                 threadFollow.start();
             }
             else{ //ghost va rester dans un état de déplacement "classique"
-                if (true/*il y a un mur devant ou plusieurs possibilité de chemin alors*/){
-                    ArrayList<Direction> directions = initializeDirections();
+                if (true/*il y a un mur devant ou plusieurs possibilité de chemin alors*///){
+ /*                   ArrayList<Direction> directions = initializeDirections();
                     directions = pickGoodCase(directions);
                     pickDirection(directions);
                 }
@@ -120,3 +120,4 @@ public class AiEntity implements Runnable{
         }
     }
 }
+*/

@@ -1,9 +1,8 @@
-import gameplay.Direction;
 import gameplay.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import ghost.*;
-import ghost.scene.LabyrinthBuild;
+import pacman.*;
+import pacman.scene.LabyrinthBuild;
 
 public class MainTest extends Application {
 
