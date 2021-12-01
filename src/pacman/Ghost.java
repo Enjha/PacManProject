@@ -3,7 +3,11 @@ package pacman;
 import gameplay.Character;
 import gameplay.Direction;
 import gameplay.Team;
+import pacman.view.GhostView;
+import javafx.scene.image.Image;
 import scene.SceneCase;
+
+import java.util.ArrayList;
 
 /**
  * The entity ghost
@@ -36,6 +40,12 @@ public class Ghost implements Character {
      * By default the state is true
      */
     private boolean isAlive = true;
+
+    /**
+     * The entity's state of fear
+     * By default the state is false
+     */
+    private boolean isAfraid = false;
 
     /**
      * The color of this entity
@@ -155,10 +165,36 @@ public class Ghost implements Character {
     }
 
     /**
+     * Return the textures list of the Ghosts
+     *
+     * @return list of Images
+     */
+    @Override
+    public ArrayList<Image> getTextures() {
+        return new GhostView().getGhostView(this);
+    }
+
+    /**
      * Set the entity's state of live.
      */
     public void setIsAlive(boolean isAlive) {
         this.isAlive = isAlive;
+    }
+
+    /**
+     * Return this entity's state of fear
+     *
+     * @return a boolean value
+     */
+    public boolean isAfraid() {
+        return isAfraid;
+    }
+
+    /**
+     * Set the entity's state of fear.
+     */
+    public void setIsAfraid(boolean isAfraid) {
+        this.isAfraid = isAfraid;
     }
 
     /**

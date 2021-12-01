@@ -1,5 +1,9 @@
 package gameplay;
 
+import javafx.scene.image.Image;
+
+import java.util.ArrayList;
+
 public interface Character extends Entity {
 
     Team getTeam();
@@ -7,6 +11,5 @@ public interface Character extends Entity {
     Direction getDirection();
     void setDirection(Direction direction);
     boolean isAlive();
-    boolean isAnimate();
-    void setAnimate(boolean isAnimate);
+    ArrayList<Image> getTextures();
 }

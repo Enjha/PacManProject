@@ -1,18 +1,11 @@
 package pacman.animations;
 
-import apiUser.SetupScene;
 import engines.graphic.ImageViewEntities;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import pacman.Pacman;
-import pacman.view.PacManView;
-
-import java.io.File;
-import java.util.ArrayList;
 
 public class PacManAnimation implements EntityAnimation {
 

@@ -6,6 +6,9 @@ import pacman.Ghost;
 import pacman.Pacman;
 import scene.SceneCase;
 
+import java.util.ArrayList;
+import java.util.Random;
+/*
 public class AiEntity implements Runnable{
 
     private Entity entity;
@@ -25,19 +28,21 @@ public class AiEntity implements Runnable{
         moove();
     }
 
-    private void moove(){
+    private void moove(){ //permet au fantôme de se deplacer
         ghost.setDirection(Direction.North);
         while(ghost.isAlive()){
             if(distBeetween() <= 7 && isAbleToFollow){ //ghost va passer dans l'état de déplacement "poursuite"
-                followPM();
                 isAbleToFollow = false;
+                followPM();
                 Thread threadFollow = new Thread();
                 calledByFollow = true;
                 threadFollow.start();
             }
             else{ //ghost va rester dans un état de déplacement "classique"
-                if (true/*si on se trouve à une intersection*/){
-                    pickDirection();
+                if (true/*il y a un mur devant ou plusieurs possibilité de chemin alors*///){
+ /*                   ArrayList<Direction> directions = initializeDirections();
+                    directions = pickGoodCase(directions);
+                    pickDirection(directions);
                 }
                 if(isAbleToTurnAround){
                     turnAround();
@@ -50,7 +55,7 @@ public class AiEntity implements Runnable{
         }
     }
 
-    private double distBeetween(){
+    private double distBeetween(){ //calculer la distance mathématique entre le fantôme et pacman
         double distance = 0;
         SceneCase ghostPos = ghost.getPosition();
         SceneCase pacmanPos = pacman.getPosition();
@@ -58,48 +63,42 @@ public class AiEntity implements Runnable{
         return distance;
     }
 
-    private void followPM(){
+    private void followPM(){ //suivre PM en empruntant le chemin le plus court (par Dijkstra ou par indice de position)
         while(true){
             
         }
     }
 
-    private void pickDirection(){
-        int choice = 1 + (int)(Math.random() * 5);
-        switch(choice){
-            case 1:
-                ghost.setDirection(Direction.North);
-                break;
-            case 2:
-                ghost.setDirection(Direction.East);
-                break;
-            case 3:
-                ghost.setDirection(Direction.South);
-                break;
-            case 4:
-                ghost.setDirection(Direction.West);
-                break;
-            default :
-                System.err.println("Error with direction in AI motor");
-                break;
-        }
+    private ArrayList<Direction> initializeDirections(ArrayList<Direction> directions){
+
+
+        return directions;
     }
 
-    private void turnAround(){
-        int choice = 1 + (int)(Math.random() * 3);
-        switch(choice){
-            case 1:
-                if(ghost.getDirection() == Direction.North)
-                    ghost.setDirection(Direction.South);
-                if(ghost.getDirection() == Direction.East)
-                    ghost.setDirection(Direction.West);
-                if(ghost.getDirection() == Direction.South)
-                    ghost.setDirection(Direction.North);
-                if(ghost.getDirection() == Direction.West)
-                    ghost.setDirection(Direction.East);
-                break;
-            default:
-                break;
+    private ArrayList<Direction> pickGoodCase(ArrayList<Direction> directions){
+        directions.remove(ghost.getDirection());
+
+        return directions;
+    }
+
+    private void pickDirection(ArrayList<Direction> directions){ //choisir un directions entre celles qui sont possibles
+        Random random = new Random();
+        int choice = random.nextInt(directions.size());
+        ghost.setDirection(directions.get(choice));
+    }
+
+    private void turnAround(){ //le fantôme a une chance faire demi-tour
+        Random random = new Random();
+        int choice = random.nextInt(3);
+        if (choice == 1) { //une chance sur trois de changer de direction
+            if (ghost.getDirection() == Direction.North)
+                ghost.setDirection(Direction.South);
+            if (ghost.getDirection() == Direction.East)
+                ghost.setDirection(Direction.West);
+            if (ghost.getDirection() == Direction.South)
+                ghost.setDirection(Direction.North);
+            if (ghost.getDirection() == Direction.West)
+                ghost.setDirection(Direction.East);
         }
     }
 
@@ -108,12 +107,12 @@ public class AiEntity implements Runnable{
         try {
             if(calledByFollow){
                 calledByFollow = false;
-                Thread.sleep(10000);
+                Thread.sleep(10000); //il ne peux plus suivre PM pednant 10 secondes
                 isAbleToFollow = true;
             }
             if(calledByTurnAround){
                 calledByTurnAround = false;
-                Thread.sleep(7000);
+                Thread.sleep(7000); //il ne peux plus faire demi-tour pendant 7 secondes
                 isAbleToTurnAround = true;
             }
         } catch (InterruptedException e) {
@@ -121,3 +120,4 @@ public class AiEntity implements Runnable{
         }
     }
 }
+*/
