@@ -55,6 +55,7 @@ public class ClassicControlEngine implements ControlEngine {
     private void getMovement(String key){
         Control control = getControl(key);
         if(control != null){
+            System.out.println(control.getEntity().getClass());
             switch (control.getDirection()){
                 case North:
                     kernelEngine.setMovementEntity(new MovementNorth(control.getEntity()));

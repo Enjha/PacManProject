@@ -5,6 +5,6 @@ WEST q
 EAST d
 !! Pinky !!
 NORTH i
-SOUTH K
+SOUTH k
 WEST j
 EAST l

@@ -4,6 +4,7 @@ import engines.UI.*;
 import engines.graphic.ClassicConvertSceneToGraphic;
 import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
+import engines.graphic.ImageViewEntities;
 import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
 import engines.physic.ClassicPhysicEngine;
@@ -54,7 +55,7 @@ public class GamePacMan implements Game {
                 threadEntities.add(new ThreadPacman((Pacman) entity, this));
             }
             if (entity instanceof Ghost) {
-                threadEntities.add(new ThreadGhost((Ghost) entity));
+                threadEntities.add(new ThreadGhost((Ghost) entity,this));
             }
         }
     }
@@ -181,12 +182,9 @@ public class GamePacMan implements Game {
     }
 
     public void treatmentCollision(Movement movement, Collision collision) {
-        System.out.println("test : x = " + movement.getEntity().getPosition().getX() + "/y = " + movement.getEntity().getPosition().getY());
         if (collision != null) {
-            System.out.println("collision");
 
             if (collision.getSecondObjectCollision() instanceof SceneElement) {
-                System.out.println("collision wall");
                 getThreadEntity(movement.getEntity()).setCollision(collision);
                 if (movement.getEntity().isCharacter()) {
                     ((Character) movement.getEntity()).setDirection(Direction.Stop);
@@ -194,28 +192,23 @@ public class GamePacMan implements Game {
             }
             else {
                 if(collision.getSecondObjectCollision() instanceof Entity){
-                    System.out.println("collision entity ");
                     treatmentCollisionEntity(movement,collision);
                 }
             }
         }
         else {
-            System.out.println("no collision");
            treatmentCollisionMoveEntity(movement,null);
         }
     }
 
     private void treatmentCollisionEntity(Movement movement,Collision collision){
         if (collision.getSecondObjectCollision() instanceof NormalFruit) {
-            System.out.println("collision fruit");
             treatmentCollisionMoveEntity(movement,collision);
         }
         else if(collision.getSecondObjectCollision() instanceof PacgumFruit){
-            System.out.println("collision pacgum");
             treatmentCollisionMoveEntity(movement,collision);
         }
         else if(collision.getSecondObjectCollision() instanceof Ghost){
-            System.out.println("collision ghost");
             getThreadEntity(movement.getEntity()).setCollision(collision);
         }
     }

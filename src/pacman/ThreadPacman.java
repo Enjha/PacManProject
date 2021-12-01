@@ -25,14 +25,13 @@ public class ThreadPacman extends Thread implements ThreadEntity {
 
     public synchronized void run() {
         while (!end) {
-            System.out.println();
             if (pacman.getDirection() != Direction.Stop) {
                 if (futureMovement != null) {
                     game.treatmentCollisionGame(futureMovement);
                     if (collision == null) {
                         movement = futureMovement;
                         futureMovement = null;
-                        pacman.setDirection(futureMovement.getDirection());
+                        pacman.setDirection(movement.getDirection());
                         pacManAnimation.movementAnimation(imageViewEntities);
                     }
                     else{
