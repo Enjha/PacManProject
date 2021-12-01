@@ -2,6 +2,17 @@
     -fx-background-color: linear-gradient(#130f40, black);
 }
 
+#buttonSetting{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 30px;
+}
+
+#buttonSetting:hover {
+    -fx-cursor: hand;
+}
+
 .label{
     -fx-text-fill: white;
 }
@@ -14,10 +25,7 @@
 }
 
 .button:hover {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
     -fx-text-fill: #fff200;
     -fx-border-color: #fff200;
-    -fx-border-radius: 30px;
     -fx-cursor: hand;
 }
