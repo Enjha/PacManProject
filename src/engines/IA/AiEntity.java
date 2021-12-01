@@ -6,6 +6,7 @@ import pacman.Ghost;
 import pacman.Pacman;
 import scene.SceneCase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,9 +16,11 @@ public class AiEntity implements Runnable{
     private Ghost ghost;
     private Pacman pacman;
     private boolean isAbleToFollow;
-    private boolean isAbleToTurnAround;
     private boolean calledByFollow = false;
+    private boolean isAbleToTurnAround;
     private boolean calledByTurnAround = false;
+    private boolean imFollowingPM;
+    private boolean calledWhenFollowing = false;
 
     public AiEntity(Entity entity, Ghost ghost, Pacman pacman){
         this.entity = entity;
@@ -25,6 +28,7 @@ public class AiEntity implements Runnable{
         this.pacman = pacman;
         isAbleToFollow = true;
         isAbleToTurnAround = true;
+        imFollowingPM = false;
         moove();
     }
 
@@ -39,8 +43,8 @@ public class AiEntity implements Runnable{
                 threadFollow.start();
             }
             else{ //ghost va rester dans un état de déplacement "classique"
-                if (true/*il y a un mur devant ou plusieurs possibilité de chemin alors*/){
-                    ArrayList<Direction> directions = initializeDirections();
+                if (isWallOrCrossRoad()){ //il y a un mur devant ou plusieurs possibilité de chemin alors
+                    ArrayList<Direction> directions = initializeDirections(new ArrayList<>());
                     directions = pickGoodCase(directions);
                     pickDirection(directions);
                 }
@@ -55,29 +59,38 @@ public class AiEntity implements Runnable{
         }
     }
 
+    private boolean isWallOrCrossRoad(){
+
+        return true;
+    }
+
     private double distBeetween(){ //calculer la distance mathématique entre le fantôme et pacman
-        double distance = 0;
         SceneCase ghostPos = ghost.getPosition();
         SceneCase pacmanPos = pacman.getPosition();
-        distance = Math.sqrt(Math.pow(ghostPos.getX() - pacmanPos.getX(), 2) + (Math.pow(ghostPos.getY() - pacmanPos.getY(), 2)));
-        return distance;
+        return Math.sqrt(Math.pow(ghostPos.getX() - pacmanPos.getX(), 2) + (Math.pow(ghostPos.getY() - pacmanPos.getY(), 2)));
     }
 
     private void followPM(){ //suivre PM en empruntant le chemin le plus court (par Dijkstra ou par indice de position)
-        while(true){
+        while(imFollowingPM){
             
         }
     }
 
     private ArrayList<Direction> initializeDirections(ArrayList<Direction> directions){
-
-
+        directions = new ArrayList<>();
+        directions.add(Direction.North);
+        directions.add(Direction.East);
+        directions.add(Direction.South);
+        directions.add(Direction.West);
         return directions;
     }
 
-    private ArrayList<Direction> pickGoodCase(ArrayList<Direction> directions){
+    private ArrayList<Direction> pickGoodCase(ArrayList<Direction> directions){//remove les position ou le fantôme ne peux pas aller
         directions.remove(ghost.getDirection());
-
+        for(int i = 0; i < directions.size(); i++){
+            if(/*ghost.setDirection(directions.get(i)) != possible*/);
+                directions.remove(i);
+        }
         return directions;
     }
 
@@ -115,6 +128,7 @@ public class AiEntity implements Runnable{
                 Thread.sleep(7000); //il ne peux plus faire demi-tour pendant 7 secondes
                 isAbleToTurnAround = true;
             }
+            if(c)
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
