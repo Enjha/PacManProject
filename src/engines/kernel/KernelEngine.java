@@ -12,6 +12,7 @@ import gameplay.Movement;
 import javafx.scene.Scene;
 import scene.SceneGame;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface KernelEngine {
@@ -35,5 +36,6 @@ public interface KernelEngine {
     void updateSceneGame(Entity entity);
     void setMovementEntity(Movement movement);
     ImageViewEntities getImageViewEntities(Entity entity);
-
+    void playSound(String soundName);
+    List<Thread> getCurrentsThreads();
 }

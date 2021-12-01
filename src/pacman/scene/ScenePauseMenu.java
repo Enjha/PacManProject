@@ -62,7 +62,7 @@ public class ScenePauseMenu implements ScenePacMan {
         ImageView picturePacMan = new ImageView();
         setupScene.setImageView(picturePacMan, 400, -80, 400, 400, new Image(new File("ressources/textures/menu_pause.png").toURI().toString()), true);
 
-        buttonBack.setOnMouseClicked((event) -> setSceneReturn());
+        buttonBack.setOnMouseClicked((event) -> setSceneBackLabyrinth());
         buttonOption.setOnMouseClicked((event) -> setSceneOption());
         buttonQuit.setOnMouseClicked((event) -> setSceneMainMenu());
 
@@ -72,12 +72,12 @@ public class ScenePauseMenu implements ScenePacMan {
         return scene;
     }
 
-    private void setSceneReturn() {
+    private synchronized void setSceneBackLabyrinth() {
+        notifyAll();
         graphicEngine.setCurrentScene(graphicEngine.getPreviewScene());
     }
 
     private void setSceneOption() {
-        graphicEngine.setPreviewScene(this);
         graphicEngine.setCurrentScene(new SceneOptionMenu(stage, graphicEngine));
     }
 

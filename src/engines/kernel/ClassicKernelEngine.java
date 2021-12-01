@@ -11,8 +11,10 @@ import gameplay.Entity;
 import gameplay.Game;
 import gameplay.Movement;
 import javafx.scene.Scene;
+import javafx.scene.media.MediaPlayer;
 import scene.SceneGame;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClassicKernelEngine implements KernelEngine {
@@ -114,4 +116,14 @@ public class ClassicKernelEngine implements KernelEngine {
     public void updateSceneGame(Entity entity) {
         graphicEngine.updateSceneGame(entity);
     }
+
+    public void playSound(String soundName){
+        soundEngine.playSound(soundName, MediaPlayer.INDEFINITE);
+    }
+
+    public List<Thread> getCurrentsThreads() {
+        return game.getThreadEntities();
+    }
+
+
 }
