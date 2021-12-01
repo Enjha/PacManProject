@@ -169,7 +169,6 @@ public class Ghost implements Character {
      *
      * @return list of Images
      */
-    @Override
     public ArrayList<Image> getTextures() {
         return new GhostView().getGhostView(this);
     }

@@ -25,6 +25,8 @@ public class LabyrinthCase implements SceneCase {
      */
     private final int y;
 
+    private SceneCase sceneCaseLink = null;
+
     /**
      * <b>Constructor of LabyrinthCase</b>
      * @param x
@@ -86,6 +88,14 @@ public class LabyrinthCase implements SceneCase {
      */
     public int getY(){
         return y;
+    }
+
+    public SceneCase getSceneCaseLink(){
+        return sceneCaseLink;
+    }
+
+    public void setSceneCaseLink(SceneCase sceneCase){
+        sceneCaseLink = sceneCase;
     }
 
 }

@@ -43,9 +43,9 @@ public class AiEntity implements Runnable{
             }
             else{ //ghost va rester dans un état de déplacement "classique"
                 if (isWallOrCrossRoad()){ //il y a un mur devant ou plusieurs possibilité de chemin alors
-                    ArrayList<Direction> directions = initializeDirections();
-                    directions = pickGoodCase(directions);
-                    pickDirection(directions);
+                   //ArrayList<Direction> directions = initializeDirections();
+                    //directions = pickGoodCase(directions);
+                    //pickDirection(directions);
                 }
                 if(isAbleToTurnAround){
                     turnAround();

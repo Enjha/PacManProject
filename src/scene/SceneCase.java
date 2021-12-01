@@ -42,4 +42,8 @@ public interface SceneCase {
     List<Object> getCaseContent(String typeOfElement);
 
     List<List<Object>> getCaseAllContent();
+
+    SceneCase getSceneCaseLink();
+
+    void setSceneCaseLink(SceneCase sceneCase);
 }
