@@ -2,11 +2,11 @@ package engines.IA;
 
 import gameplay.Direction;
 import gameplay.Entity;
-import pacman.Ghost;
-import pacman.Pacman;
+import ghost.Ghost;
+import ghost.Pacman;
 import scene.SceneCase;
 
-public class AiEntity implements Runnable{
+public class AiEntity implements Runnable {
 
     private Entity entity;
     private Ghost ghost;
@@ -16,7 +16,7 @@ public class AiEntity implements Runnable{
     private boolean calledByFollow = false;
     private boolean calledByTurnAround = false;
 
-    public AiEntity(Entity entity, Ghost ghost, Pacman pacman){
+    public AiEntity(Entity entity, Ghost ghost, Pacman pacman) {
         this.entity = entity;
         this.ghost = ghost;
         this.pacman = pacman;
@@ -25,21 +25,20 @@ public class AiEntity implements Runnable{
         moove();
     }
 
-    private void moove(){
+    private void moove() {
         ghost.setDirection(Direction.North);
-        while(ghost.isAlive()){
-            if(distBeetween() <= 7 && isAbleToFollow){ //ghost va passer dans l'état de déplacement "poursuite"
+        while (ghost.isAlive()) {
+            if (distBeetween() <= 7 && isAbleToFollow) { //ghost va passer dans l'état de déplacement "poursuite"
                 followPM();
                 isAbleToFollow = false;
                 Thread threadFollow = new Thread();
                 calledByFollow = true;
                 threadFollow.start();
-            }
-            else{ //ghost va rester dans un état de déplacement "classique"
-                if (true/*si on se trouve à une intersection*/){
+            } else { //ghost va rester dans un état de déplacement "classique"
+                if (true/*si on se trouve à une intersection*/) {
                     pickDirection();
                 }
-                if(isAbleToTurnAround){
+                if (isAbleToTurnAround) {
                     turnAround();
                     isAbleToTurnAround = false;
                     Thread threadTurnAround = new Thread();
@@ -50,7 +49,7 @@ public class AiEntity implements Runnable{
         }
     }
 
-    private double distBeetween(){
+    private double distBeetween() {
         double distance = 0;
         SceneCase ghostPos = ghost.getPosition();
         SceneCase pacmanPos = pacman.getPosition();
@@ -58,44 +57,27 @@ public class AiEntity implements Runnable{
         return distance;
     }
 
-    private void followPM(){
-        while(true){
-            
+    private void followPM() {
+        while (true) {
+
         }
     }
 
-    private void pickDirection(){
-        int choice = 1 + (int)(Math.random() * 5);
-        switch(choice){
-            case 1:
-                ghost.setDirection(Direction.North);
-                break;
-            case 2:
-                ghost.setDirection(Direction.East);
-                break;
-            case 3:
-                ghost.setDirection(Direction.South);
-                break;
-            case 4:
-                ghost.setDirection(Direction.West);
-                break;
-            default :
-                System.err.println("Error with direction in AI motor");
-                break;
-        }
+    private void pickDirection() {
+        ghost.setDirection(Direction.values()[(int) (Math.random() * 4)]);
     }
 
-    private void turnAround(){
-        int choice = 1 + (int)(Math.random() * 3);
-        switch(choice){
+    private void turnAround() {
+        int choice = 1 + (int) (Math.random() * 3);
+        switch (choice) {
             case 1:
-                if(ghost.getDirection() == Direction.North)
+                if (ghost.getDirection() == Direction.North)
                     ghost.setDirection(Direction.South);
-                if(ghost.getDirection() == Direction.East)
+                if (ghost.getDirection() == Direction.East)
                     ghost.setDirection(Direction.West);
-                if(ghost.getDirection() == Direction.South)
+                if (ghost.getDirection() == Direction.South)
                     ghost.setDirection(Direction.North);
-                if(ghost.getDirection() == Direction.West)
+                if (ghost.getDirection() == Direction.West)
                     ghost.setDirection(Direction.East);
                 break;
             default:
@@ -106,12 +88,12 @@ public class AiEntity implements Runnable{
     @Override
     public void run() {
         try {
-            if(calledByFollow){
+            if (calledByFollow) {
                 calledByFollow = false;
                 Thread.sleep(10000);
                 isAbleToFollow = true;
             }
-            if(calledByTurnAround){
+            if (calledByTurnAround) {
                 calledByTurnAround = false;
                 Thread.sleep(7000);
                 isAbleToTurnAround = true;

@@ -2,15 +2,15 @@ package engines.graphic;
 
 import apiUser.SetupScene;
 import gameplay.Entity;
-import pacman.view.GhostView;
-import pacman.view.ItemView;
-import pacman.view.PacManView;
+import ghost.view.GhostView;
+import ghost.view.ItemView;
+import ghost.view.PacManView;
 import gameplay.Item;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import pacman.*;
-import pacman.view.WallViewPacman;
+import ghost.*;
+import ghost.view.WallViewPacman;
 import scene.SceneGame;
 import scene.SceneCase;
 

@@ -6,10 +6,10 @@ import static org.junit.Assert.assertNull;
 import org.junit.jupiter.api.Test;
 
 import gameplay.Entity;
-import pacman.Ghost;
-import pacman.GhostColor;
-import pacman.NormalCaseContentManager;
-import pacman.Pacman;
+import ghost.Ghost;
+import ghost.GhostColor;
+import ghost.NormalCaseContentManager;
+import ghost.Pacman;
 
 import java.util.List;
 
