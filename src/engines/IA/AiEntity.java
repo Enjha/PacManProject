@@ -34,19 +34,19 @@ public class AiEntity implements Runnable{
 
     private void moove(){ //permet au fantôme de se deplacer
         ghost.setDirection(Direction.North);
+        List<Object> walls = sceneCase[ghost.getPosition().getX()][ghost.getPosition().getY()].getCaseContent(Wall.class.toString());
         while(ghost.isAlive()){
-            if(distBeetween() <= 7 && isAbleToFollow){ //ghost va passer dans l'état de déplacement "poursuite"
+            if(distBeetween() <= 5 && isAbleToFollow){ //ghost va passer dans l'état de déplacement "poursuite"
                 isAbleToFollow = false;
-                followPM();
+                followPM(walls);
                 Thread threadFollow = new Thread();
                 calledByFollow = true;
                 threadFollow.start();
             }
             else{ //ghost va rester dans un état de déplacement "classique"
-                List<Object> walls = sceneCase[ghost.getPosition().getX()][ghost.getPosition().getY()].getCaseContent(Wall.class.toString());
                 if (isWallOrCrossRoad(walls)){ //il y a un mur devant ou plusieurs possibilité de chemin alors
                     ArrayList<Direction> directions = initializeDirections();
-                    directions = pickGoodCases(directions);
+                    directions = pickGoodCases(directions, walls);
                     pickDirection(directions);
                 }
                 if(isAbleToTurnAround){
@@ -78,14 +78,48 @@ public class AiEntity implements Runnable{
         return Math.sqrt(Math.pow(ghostPos.getX() - pacmanPos.getX(), 2) + (Math.pow(ghostPos.getY() - pacmanPos.getY(), 2)));
     }
 
-    private void followPM(){ //suivre PM en empruntant le chemin le plus court (par Dijkstra ou par indice de position)
+    private void followPM(List<Object> walls){ //suivre PM en empruntant le chemin le plus court (par Dijkstra ou par indice de position)
         isFollowingPM = true;
         Thread threadWhenImFollowingPM = new Thread();
         calledWhenFollowing = true;
         threadWhenImFollowingPM.start();
         while(isFollowingPM){
-
+            if(isWallOrCrossRoad(walls)){
+                ghost.setDirection(findPM(walls));
+            }
         }
+    }
+
+    private Direction findPM(List<Object> walls){
+        ArrayList<Direction> directions = initializeDirections();
+        for (Object o : walls){
+            Wall wall = (Wall) o;
+            if (wall.getSceneElement() == Direction.North){
+                directions.remove(Direction.North);
+            }
+            if (wall.getSceneElement() == Direction.East){
+                directions.remove(Direction.East);
+            }
+            if (wall.getSceneElement() == Direction.South){
+                directions.remove(Direction.South);
+            }
+            if (wall.getSceneElement() == Direction.West){
+                directions.remove(Direction.West);
+            }
+        }
+        if (pacmanBelow()) directions.remove(Direction.North);
+        else directions.remove(Direction.South);
+        if (pacmanOnRight()) directions.remove(Direction.West);
+        else directions.remove(Direction.East);
+        return directions.get(0);
+    }
+
+    private boolean pacmanOnRight(){
+        return ghost.getPosition().getX() < pacman.getPosition().getX();
+    }
+
+    private boolean pacmanBelow(){
+        return ghost.getPosition().getY() < pacman.getPosition().getY();
     }
 
     private ArrayList<Direction> initializeDirections(){
@@ -97,16 +131,16 @@ public class AiEntity implements Runnable{
         return directions;
     }
 
-    private ArrayList<Direction> pickGoodCases(ArrayList<Direction> directions){ //remove les position ou le fantôme ne peux pas aller
+    private ArrayList<Direction> pickGoodCases(ArrayList<Direction> directions, List<Object> walls){ //remove les positions ou le fantôme ne peux pas aller
         directions.remove(ghost.getDirection());
-        for(int i = 0; i < directions.size(); i++){
-            if(true/*ghost.setDirection(directions.get(i)) != possible*/);
-            directions.remove(i);
+        for(Object o : walls){
+            Wall wall = (Wall) o;
+            directions.remove(wall.getSceneElement());
         }
         return directions;
     }
 
-    private void pickDirection(ArrayList<Direction> directions){ //choisir un directions entre celles qui sont possibles
+    private void pickDirection(ArrayList<Direction> directions){ //choisir une direction entre celles qui sont possibles
         Random random = new Random();
         int choice = random.nextInt(directions.size());
         ghost.setDirection(directions.get(choice));
@@ -137,12 +171,12 @@ public class AiEntity implements Runnable{
         try {
             if(calledByFollow){
                 calledByFollow = false;
-                Thread.sleep(10000); //il ne peux plus suivre PM pendant 10 secondes
+                Thread.sleep(10000); //il ne peut plus suivre PM pendant 10 secondes
                 isAbleToFollow = true;
             }
             if(calledByTurnAround){
                 calledByTurnAround = false;
-                Thread.sleep(7000); //il ne peux plus faire demi-tour pendant 7 secondes
+                Thread.sleep(7000); //il ne peut plus faire demi-tour pendant 7 secondes
                 isAbleToTurnAround = true;
             }
             if(calledWhenFollowing){
