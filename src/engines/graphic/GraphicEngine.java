@@ -30,4 +30,5 @@ public interface GraphicEngine {
     void setControlEngineScene(Scene scene);
     void updateSceneGame(Entity entity);
     ImageViewEntities getImageViewEntities(Entity entity);
+    void playSound(String soundName);
 }

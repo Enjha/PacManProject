@@ -35,5 +35,6 @@ public interface KernelEngine {
     void updateSceneGame(Entity entity);
     void setMovementEntity(Movement movement);
     ImageViewEntities getImageViewEntities(Entity entity);
+    void playSound(String soundName);
 
 }

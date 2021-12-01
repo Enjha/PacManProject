@@ -47,12 +47,10 @@ public class ClassicGraphicEngine implements GraphicEngine {
         }
     }
 
-    @Override
     public void setPreviewScene(SceneAPIUser scene) {
         this.previewScene = scene;
     }
 
-    @Override
     public SceneAPIUser getPreviewScene() {
         return previewScene;
     }
@@ -117,5 +115,9 @@ public class ClassicGraphicEngine implements GraphicEngine {
             }
         }
         return null;
+    }
+
+    public void playSound(String soundName){
+        kernelEngine.playSound(soundName);
     }
 }

@@ -3,7 +3,7 @@ package engines.sound;
 public class ClassicSoundEngine implements SoundEngine {
 
     private SoundManager soundManager;
-    private double volume = 0.3;
+    private double volume = 0.1;
 
     public ClassicSoundEngine(SoundManager soundManager){
         this.soundManager = soundManager;
@@ -11,6 +11,7 @@ public class ClassicSoundEngine implements SoundEngine {
 
     public void playSound(String name,int cycle){
         soundManager.playSound(name,cycle);
+        soundManager.changeVolumeSound(name,volume);
     }
 
     public void stopSound(String name){
