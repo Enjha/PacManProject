@@ -131,7 +131,7 @@ public class SceneOptionMenu implements ScenePacMan {
     }
 
     private void setSceneReturn(){
-        graphicEngine.setCurrentScene(new SceneMainMenu(stage, graphicEngine));
+        graphicEngine.setCurrentScene(graphicEngine.getPreviewScene());
     }
 
     private void changeEntityControl(Button button){

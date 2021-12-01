@@ -14,6 +14,8 @@ public interface GraphicEngine {
     void setSceneGameTexture(SceneGame sceneGame);
     void setSceneGameEntity(SceneGame sceneGame);
     void setCurrentScene(SceneAPIUser scene);
+    void setPreviewScene(SceneAPIUser scene);
+    SceneAPIUser getPreviewScene();
     List<Control> getControl(Entity entity);
     double getVolume();
     void setVolume(double volume);

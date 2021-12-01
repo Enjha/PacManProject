@@ -49,6 +49,8 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         setupScene.setButton(buttonSetting, "", Pos.CENTER, 20, 20, 80, 80, new Font(30), true);
         buttonSetting.setOnMouseClicked((event) -> setSceneOption());
 
+
+
         panel.getChildren().addAll(buttonSetting);
         root.getChildren().add(panel);
         root.setStyle("-fx-background-color: black;");
@@ -66,6 +68,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
     }
 
     private void setSceneOption() {
+        graphicEngine.setPreviewScene(this);
         graphicEngine.setCurrentScene(new SceneOptionMenu(stage, graphicEngine));
     }
 

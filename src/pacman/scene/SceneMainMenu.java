@@ -68,6 +68,7 @@ public class SceneMainMenu implements ScenePacMan {
 
 
     private void setSceneOption(){
+        graphicEngine.setPreviewScene(this);
         graphicEngine.setCurrentScene(new SceneOptionMenu(stage, graphicEngine));
     }
 

@@ -12,97 +12,107 @@ import scene.SceneGame;
 
 import java.util.List;
 
-public class ClassicGraphicEngine implements GraphicEngine{
+public class ClassicGraphicEngine implements GraphicEngine {
 
     private final Stage stage;
     private FxWindow window;
     private final KernelEngine kernelEngine;
     private ConvertSceneToGraphic convertSceneToGraphic;
+    private SceneAPIUser previewScene;
 
-    public ClassicGraphicEngine(Stage stage, KernelEngine kernelEngine, ConvertSceneToGraphic convertSceneToGraphic){
+    public ClassicGraphicEngine(Stage stage, KernelEngine kernelEngine, ConvertSceneToGraphic convertSceneToGraphic) {
         this.stage = stage;
         this.kernelEngine = kernelEngine;
         this.convertSceneToGraphic = convertSceneToGraphic;
     }
 
-    public void setFxWindow(int width, int height, String name){
-        window = new FxWindow(width,height,name,stage);
+    public void setFxWindow(int width, int height, String name) {
+        window = new FxWindow(width, height, name, stage);
         window.openWindow();
     }
 
-    public void setSceneGameTexture(SceneGame sceneGame){
-        convertSceneToGraphic.setLabyrinthTextureScene(sceneGame,window.getScene().getPanel());
+    public void setSceneGameTexture(SceneGame sceneGame) {
+        convertSceneToGraphic.setLabyrinthTextureScene(sceneGame, window.getScene().getPanel());
     }
 
-    public void setSceneGameEntity(SceneGame sceneGame){
-        convertSceneToGraphic.setEntityTextureScene(sceneGame,window.getScene().getPanel());
+    public void setSceneGameEntity(SceneGame sceneGame) {
+        convertSceneToGraphic.setEntityTextureScene(sceneGame, window.getScene().getPanel());
     }
 
-    public void setCurrentScene(SceneAPIUser scene){
+    public void setCurrentScene(SceneAPIUser scene) {
         window.setScene(scene);
-        if(window.getScene().isSceneGame()){
+        if (window.getScene().isSceneGame()) {
             setSceneGameTexture(kernelEngine.getSceneGame());
             setSceneGameEntity(kernelEngine.getSceneGame());
         }
     }
 
-    public List<Control> getControl(Entity entity){
+    @Override
+    public void setPreviewScene(SceneAPIUser scene) {
+        this.previewScene = scene;
+    }
+
+    @Override
+    public SceneAPIUser getPreviewScene() {
+        return previewScene;
+    }
+
+    public List<Control> getControl(Entity entity) {
         return kernelEngine.getControl(entity);
     }
 
-    public double getVolume(){
+    public double getVolume() {
         return kernelEngine.getVolume();
     }
 
-    public void setVolume(double volume){
+    public void setVolume(double volume) {
         kernelEngine.setVolume(volume);
     }
 
-    public Scene getCurrentScene(){
+    public Scene getCurrentScene() {
         return window.getScene().getScene();
     }
 
-    public List<Entity> getEntities(){
+    public List<Entity> getEntities() {
         return kernelEngine.getEntities();
     }
 
-    public boolean setControl(String oldKey,String newKey){
-        return kernelEngine.setControl(oldKey,newKey);
+    public boolean setControl(String oldKey, String newKey) {
+        return kernelEngine.setControl(oldKey, newKey);
     }
 
-    public void mute(){
+    public void mute() {
         kernelEngine.mute();
     }
 
-    public void unmute(){
+    public void unmute() {
         kernelEngine.unmute();
     }
 
-    public SceneGame getSceneGame(){
+    public SceneGame getSceneGame() {
         return kernelEngine.getSceneGame();
     }
 
-    public void setControlEngineState(boolean state){
+    public void setControlEngineState(boolean state) {
         kernelEngine.setControlEngineState(state);
     }
 
-    public void setControlEngineScene(Scene scene){
+    public void setControlEngineScene(Scene scene) {
         kernelEngine.setControlEngineScene(scene);
     }
 
-    public void updateSceneGame(Entity entity){
+    public void updateSceneGame(Entity entity) {
         ImageViewEntities imageViewEntities = getImageViewEntities(entity);
-        if(imageViewEntities != null){
-            convertSceneToGraphic.setEntityPosition(entity,imageViewEntities.getImageView());
-        }
-        else {
+        if (imageViewEntities != null) {
+            convertSceneToGraphic.setEntityPosition(entity, imageViewEntities.getImageView());
+        } else {
             System.err.println("error : entity not found");
         }
     }
 
-    public ImageViewEntities getImageViewEntities(Entity entity){
-        for(ImageViewEntities image : convertSceneToGraphic.getImageViewEntities()){
-            if(image.getEntity() == entity){
+    public ImageViewEntities getImageViewEntities(Entity entity) {
+        for (ImageViewEntities image : convertSceneToGraphic.getImageViewEntities()) {
+            if (image.getEntity() == entity) {
                 return image;
             }
         }
