@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import scene.SceneCase;
 import scene.SceneGame;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClassicGraphicEngine implements GraphicEngine {
@@ -117,7 +118,12 @@ public class ClassicGraphicEngine implements GraphicEngine {
         return null;
     }
 
-    public void playSound(String soundName){
+    public void playSound(String soundName) {
         kernelEngine.playSound(soundName);
     }
+
+    public List<Thread> getCurrentsThreads() {
+        return kernelEngine.getCurrentsThreads();
+    }
+
 }

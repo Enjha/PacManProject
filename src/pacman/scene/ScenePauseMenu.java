@@ -72,7 +72,8 @@ public class ScenePauseMenu implements ScenePacMan {
         return scene;
     }
 
-    private void setSceneBackLabyrinth() {
+    private synchronized void setSceneBackLabyrinth() {
+        notifyAll();
         graphicEngine.setCurrentScene(graphicEngine.getPreviewScene());
     }
 

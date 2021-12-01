@@ -3,10 +3,12 @@ package engines.graphic;
 import apiUser.SceneAPIUser;
 import engines.UI.Control;
 import gameplay.Entity;
+import gameplay.ThreadEntity;
 import javafx.scene.Scene;
 import pacman.scene.SceneLabyrinthMenu;
 import scene.SceneGame;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface GraphicEngine {
@@ -31,4 +33,6 @@ public interface GraphicEngine {
     void updateSceneGame(Entity entity);
     ImageViewEntities getImageViewEntities(Entity entity);
     void playSound(String soundName);
+    List<Thread> getCurrentsThreads();
+
 }
