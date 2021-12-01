@@ -16,19 +16,24 @@ public class PacManAnimation implements EntityAnimation {
 
         switch (pacman.getDirection()) {
             case North:
-                new Timeline(
-                        new KeyFrame(Duration.seconds(0), event -> image_pacman.setImage(pacman.getTextures().get(0))),
-                        new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                        new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                        new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                        new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                        new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setImage(pacman.getTextures().get(1))),
-                        new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                        new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                        new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                        new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                        new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setImage(pacman.getTextures().get(0)))
-                ).play();
+                if(entity.getEntity().getPosition().getSceneCaseLink() == null) {
+                    new Timeline(
+                            new KeyFrame(Duration.seconds(0), event -> image_pacman.setImage(pacman.getTextures().get(0))),
+                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setY(image_pacman.getY() - 4)),
+                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setY(image_pacman.getY() - 4)),
+                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setY(image_pacman.getY() - 4)),
+                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setY(image_pacman.getY() - 4)),
+                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setImage(pacman.getTextures().get(1))),
+                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setY(image_pacman.getY() - 4)),
+                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setY(image_pacman.getY() - 4)),
+                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setY(image_pacman.getY() - 4)),
+                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setY(image_pacman.getY() - 4)),
+                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setImage(pacman.getTextures().get(0)))
+                    ).play();
+                }
+                else {
+
+                }
                 break;
             case East:
                 new Timeline(
