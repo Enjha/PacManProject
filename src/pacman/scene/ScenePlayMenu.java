@@ -13,6 +13,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class ScenePlayMenu implements ScenePacMan {
 
     private BorderPane root = new BorderPane();
@@ -24,52 +26,56 @@ public class ScenePlayMenu implements ScenePacMan {
     private GraphicEngine graphicEngine;
     private Pane pane;
 
-    public ScenePlayMenu(Stage stage, GraphicEngine graphicEngine){
+    public ScenePlayMenu(Stage stage, GraphicEngine graphicEngine) {
         this.stage = stage;
         this.graphicEngine = graphicEngine;
     }
 
-    public Scene getScene(){
+    public Scene getScene() {
         pane = new AnchorPane();
+        root.setId("background");
+        File f = new File("ressources/styles/menu_style.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
         Label labelTitle = new Label();
-        setupScene.setLabel(labelTitle,"Jouer", Pos.CENTER,500,100,150,200,new Font(40), Paint.valueOf("black"),true);
+        setupScene.setLabel(labelTitle, "Jouer", Pos.CENTER, 500, 100, 150, 200, new Font(40), Paint.valueOf("black"), true);
 
         Button buttonSolo = new Button();
-        setupScene.setButton(buttonSolo,"Solo",Pos.CENTER,500,300,80,200,new Font(20),true);
+        setupScene.setButton(buttonSolo, "Solo", Pos.CENTER, 500, 300, 80, 200, new Font(20), true);
 
         Button buttonMulti = new Button();
-        setupScene.setButton(buttonMulti,"Multi",Pos.CENTER,500,400,80,200,new Font(20),true);
+        setupScene.setButton(buttonMulti, "Multi", Pos.CENTER, 500, 400, 80, 200, new Font(20), true);
 
         Button buttonReturn = new Button();
-        setupScene.setButton(buttonReturn,"Retour",Pos.CENTER,500,500,80,200,new Font(20),true);
+        setupScene.setButton(buttonReturn, "Retour", Pos.CENTER, 500, 500, 80, 200, new Font(20), true);
 
-        buttonReturn.setOnMouseClicked((event)-> setSceneReturnMenu(stage));
-        buttonSolo.setOnMouseClicked((event)-> setSceneSoloMenu(stage));
-        buttonMulti.setOnMouseClicked((event)-> setSceneMultiMenu(stage));
+        buttonReturn.setOnMouseClicked((event) -> setSceneReturnMenu(stage));
+        buttonSolo.setOnMouseClicked((event) -> setSceneSoloMenu(stage));
+        buttonMulti.setOnMouseClicked((event) -> setSceneMultiMenu(stage));
 
-        pane.getChildren().addAll(labelTitle,buttonSolo,buttonMulti,buttonReturn);
+        pane.getChildren().addAll(labelTitle, buttonSolo, buttonMulti, buttonReturn);
         root.getChildren().add(pane);
         return scene;
     }
 
-    private void setSceneReturnMenu(Stage stage){
-        graphicEngine.setCurrentScene( new SceneMainMenu(stage, graphicEngine));
+    private void setSceneReturnMenu(Stage stage) {
+        graphicEngine.setCurrentScene(new SceneMainMenu(stage, graphicEngine));
     }
 
-    private void setSceneSoloMenu(Stage stage){
+    private void setSceneSoloMenu(Stage stage) {
         graphicEngine.setCurrentScene(new SceneLabyrinthMenu(stage, graphicEngine));
     }
 
-    private void setSceneMultiMenu(Stage stage){
+    private void setSceneMultiMenu(Stage stage) {
 
     }
 
-    public Pane getPanel(){
+    public Pane getPanel() {
         return pane;
     }
 
-    public boolean isSceneGame(){
+    public boolean isSceneGame() {
         return false;
     }
 }

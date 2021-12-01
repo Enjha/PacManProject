@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.Objects;
 
 public class SceneMainMenu implements ScenePacMan {
 
@@ -33,6 +34,10 @@ public class SceneMainMenu implements ScenePacMan {
 
     public Scene getScene(){
         pane = new AnchorPane();
+        root.setId("background");
+        File f = new File("ressources/styles/menu_style.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
         Button buttonPlay = new Button("Jouer");
         setupScene.setButton(buttonPlay,"Jouer", Pos.CENTER,500,300,80,200,new Font(30),true);
@@ -52,6 +57,7 @@ public class SceneMainMenu implements ScenePacMan {
 
         pane.getChildren().addAll(buttonOption,buttonQuit,buttonPlay,picturePacMan);
         root.getChildren().add(pane);
+
         return scene;
     }
 

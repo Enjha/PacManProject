@@ -1,0 +1,23 @@
+#background{
+    -fx-background-color: linear-gradient(#130f40, black);
+}
+
+.label{
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 30px;
+}
+
+.button:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-text-fill: #546de5;
+    -fx-border-color: #546de5;
+    -fx-border-radius: 30px;
+    -fx-cursor: hand;
+}

@@ -20,6 +20,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,10 @@ public class SceneOptionMenu implements ScenePacMan {
 
     public Scene getScene(){
         pane = new AnchorPane();
+        root.setId("background");
+        File f = new File("ressources/styles/menu_style.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
         Label labelTitle = new Label();
         setupScene.setLabel(labelTitle,"Options", Pos.CENTER,500,50,80,200,new Font(30), Paint.valueOf("black"),true);
