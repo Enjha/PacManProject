@@ -47,8 +47,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         icon.setFitHeight(60);
         pauseButton.setGraphic(icon);
         setupScene.setButton(pauseButton, "", Pos.CENTER, 20, 20, 70, 70, new Font(30), true);
-        pauseButton.setOnMouseClicked((event) -> setSceneOption());
-
+        pauseButton.setOnMouseClicked((event) -> setScenePause());
 
 
         panel.getChildren().addAll(pauseButton);
@@ -67,9 +66,9 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         return true;
     }
 
-    private void setSceneOption() {
+    private void setScenePause() {
         graphicEngine.setPreviewScene(this);
-        graphicEngine.setCurrentScene(new SceneOptionMenu(stage, graphicEngine));
+        graphicEngine.setCurrentScene(new ScenePauseMenu(stage, graphicEngine));
     }
 
 }
