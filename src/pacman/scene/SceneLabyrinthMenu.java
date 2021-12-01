@@ -39,19 +39,19 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         scene.getStylesheets().clear();
         scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
-        Button buttonSetting = new Button();
-        buttonSetting.setId("buttonSetting");
-        Image image = new Image(new File("ressources/textures/setting.png").toURI().toString());
+        Button pauseButton = new Button();
+        pauseButton.setId("pauseButton");
+        Image image = new Image(new File("ressources/textures/pause.png").toURI().toString());
         ImageView icon = new ImageView(image);
-        icon.setFitWidth(50);
-        icon.setFitHeight(50);
-        buttonSetting.setGraphic(icon);
-        setupScene.setButton(buttonSetting, "", Pos.CENTER, 20, 20, 80, 80, new Font(30), true);
-        buttonSetting.setOnMouseClicked((event) -> setSceneOption());
+        icon.setFitWidth(60);
+        icon.setFitHeight(60);
+        pauseButton.setGraphic(icon);
+        setupScene.setButton(pauseButton, "", Pos.CENTER, 20, 20, 70, 70, new Font(30), true);
+        pauseButton.setOnMouseClicked((event) -> setSceneOption());
 
 
 
-        panel.getChildren().addAll(buttonSetting);
+        panel.getChildren().addAll(pauseButton);
         root.getChildren().add(panel);
         root.setStyle("-fx-background-color: black;");
         graphicEngine.setControlEngineState(true);

@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GamePacMan implements Game {
@@ -55,7 +56,7 @@ public class GamePacMan implements Game {
                 threadEntities.add(new ThreadPacman((Pacman) entity, this));
             }
             if (entity instanceof Ghost) {
-                threadEntities.add(new ThreadGhost((Ghost) entity,this));
+                threadEntities.add(new ThreadGhost((Ghost) entity, this));
             }
         }
     }
@@ -87,14 +88,16 @@ public class GamePacMan implements Game {
     private void startSoundEngine() {
         SoundManager soundManager = new ClassicSoundManager();
 
-        String pathRessourcesSound = "ressources/sounds/PacMan";
-        File soundFolder = new File(pathRessourcesSound);
-        File[] listOfFiles = soundFolder.listFiles();
+        File soundFolder = new File("ressources/sounds/PacMan");
+        File[] files = soundFolder.listFiles();
 
-        if (listOfFiles != null) {
-            for (File listOfFile : listOfFiles) {
-                if (listOfFile.isFile()) {
-                    soundManager.addSound(new ClassicSound(new MediaPlayer(new Media(new File(pathRessourcesSound + "/" + listOfFile.getName()).toURI().toString())), listOfFile.getName()));
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File(soundFolder.getPath() + "/" + file.getName()).toURI().toString()));
+                    mediaPlayer.setOnError(()->System.out.println("media error"
+                            + mediaPlayer.getError().toString()));
+                    soundManager.addSound(new ClassicSound(mediaPlayer, file.getName()));
                 }
             }
             soundEngine = new ClassicSoundEngine(soundManager);
@@ -189,45 +192,40 @@ public class GamePacMan implements Game {
                 if (movement.getEntity().isCharacter()) {
                     ((Character) movement.getEntity()).setDirection(Direction.Stop);
                 }
-            }
-            else {
-                if(collision.getSecondObjectCollision() instanceof Entity){
-                    treatmentCollisionEntity(movement,collision);
+            } else {
+                if (collision.getSecondObjectCollision() instanceof Entity) {
+                    treatmentCollisionEntity(movement, collision);
                 }
             }
-        }
-        else {
-           treatmentCollisionMoveEntity(movement,null);
+        } else {
+            treatmentCollisionMoveEntity(movement, null);
         }
     }
 
-    private void treatmentCollisionEntity(Movement movement,Collision collision){
+    private void treatmentCollisionEntity(Movement movement, Collision collision) {
         if (collision.getSecondObjectCollision() instanceof NormalFruit) {
-            treatmentCollisionMoveEntity(movement,collision);
-        }
-        else if(collision.getSecondObjectCollision() instanceof PacgumFruit){
-            treatmentCollisionMoveEntity(movement,collision);
-        }
-        else if(collision.getSecondObjectCollision() instanceof Ghost){
+            treatmentCollisionMoveEntity(movement, collision);
+        } else if (collision.getSecondObjectCollision() instanceof PacgumFruit) {
+            treatmentCollisionMoveEntity(movement, collision);
+        } else if (collision.getSecondObjectCollision() instanceof Ghost) {
             getThreadEntity(movement.getEntity()).setCollision(collision);
         }
     }
 
-    private void treatmentCollisionMoveEntity(Movement movement,Collision collision){
+    private void treatmentCollisionMoveEntity(Movement movement, Collision collision) {
         getThreadEntity(movement.getEntity()).setCollision(collision);
         SceneCase newSceneCase = getNewSceneCase(movement.getDirection(), movement.getEntity());
 
         if (newSceneCase != null) {
             sceneGame.getCase(movement.getEntity().getPosition().getX(), movement.getEntity().getPosition().getY()).removeCaseContent(movement.getEntity());
             newSceneCase.addCaseContent(movement.getEntity());
-            if(collision != null){
-                if(collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit){
+            if (collision != null) {
+                if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
                     newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
                 }
-            }
-            else {
-                if(movement.getEntity().isCharacter()){
-                    ((Character)movement.getEntity()).setDirection(movement.getDirection());
+            } else {
+                if (movement.getEntity().isCharacter()) {
+                    ((Character) movement.getEntity()).setDirection(movement.getDirection());
                 }
             }
             movement.getEntity().setPosition(newSceneCase);
@@ -274,7 +272,7 @@ public class GamePacMan implements Game {
         kernelEngine.treatmentCollisionGame(movement);
     }
 
-    public ImageViewEntities getImageViewEntity(Entity entity){
+    public ImageViewEntities getImageViewEntity(Entity entity) {
         return kernelEngine.getImageViewEntities(entity);
     }
 }
