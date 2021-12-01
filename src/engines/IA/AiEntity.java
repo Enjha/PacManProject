@@ -1,33 +1,34 @@
 package engines.IA;
 
 import gameplay.Direction;
-import gameplay.Entity;
 import pacman.Ghost;
 import pacman.Pacman;
 import scene.SceneCase;
+import scene.Wall;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class AiEntity implements Runnable{
 
-    private Entity entity;
-    private Ghost ghost;
-    private Pacman pacman;
+    private final Ghost ghost;
+    private final Pacman pacman;
+    private final SceneCase[][] sceneCase;
     private boolean isAbleToFollow;
     private boolean calledByFollow = false;
     private boolean isAbleToTurnAround;
     private boolean calledByTurnAround = false;
-    private boolean imFollowingPM;
+    private boolean isFollowingPM;
     private boolean calledWhenFollowing = false;
 
-    public AiEntity(Entity entity, Ghost ghost, Pacman pacman){
-        this.entity = entity;
+    public AiEntity(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase){
         this.ghost = ghost;
         this.pacman = pacman;
+        this.sceneCase = sceneCase;
         isAbleToFollow = true;
         isAbleToTurnAround = true;
-        imFollowingPM = false;
+        isFollowingPM = false;
         moove();
     }
 
@@ -42,10 +43,11 @@ public class AiEntity implements Runnable{
                 threadFollow.start();
             }
             else{ //ghost va rester dans un état de déplacement "classique"
-                if (isWallOrCrossRoad()){ //il y a un mur devant ou plusieurs possibilité de chemin alors
-                   //ArrayList<Direction> directions = initializeDirections();
-                    //directions = pickGoodCase(directions);
-                    //pickDirection(directions);
+                List<Object> walls = sceneCase[ghost.getPosition().getX()][ghost.getPosition().getY()].getCaseContent(Wall.class.toString());
+                if (isWallOrCrossRoad(walls)){ //il y a un mur devant ou plusieurs possibilité de chemin alors
+                    ArrayList<Direction> directions = initializeDirections();
+                    directions = pickGoodCases(directions);
+                    pickDirection(directions);
                 }
                 if(isAbleToTurnAround){
                     turnAround();
@@ -57,9 +59,17 @@ public class AiEntity implements Runnable{
             }
         }
     }
-    private boolean isWallOrCrossRoad(){
 
-        return true;
+    private boolean isWallOrCrossRoad(List<Object> walls){
+        if(walls.isEmpty()) return true;
+        int wallAround = 4;
+        for(Object o : walls){
+            Wall wall = (Wall) o;
+            if (wall.getSceneElement() == ghost.getDirection())
+                return true;
+            wallAround--;
+        }
+        return wallAround < 2;
     }
 
     private double distBeetween(){ //calculer la distance mathématique entre le fantôme et pacman
@@ -69,8 +79,12 @@ public class AiEntity implements Runnable{
     }
 
     private void followPM(){ //suivre PM en empruntant le chemin le plus court (par Dijkstra ou par indice de position)
-        while(imFollowingPM){
-            
+        isFollowingPM = true;
+        Thread threadWhenImFollowingPM = new Thread();
+        calledWhenFollowing = true;
+        threadWhenImFollowingPM.start();
+        while(isFollowingPM){
+
         }
     }
 
@@ -83,7 +97,7 @@ public class AiEntity implements Runnable{
         return directions;
     }
 
-    private ArrayList<Direction> pickGoodCase(ArrayList<Direction> directions){ //remove les position ou le fantôme ne peux pas aller
+    private ArrayList<Direction> pickGoodCases(ArrayList<Direction> directions){ //remove les position ou le fantôme ne peux pas aller
         directions.remove(ghost.getDirection());
         for(int i = 0; i < directions.size(); i++){
             if(true/*ghost.setDirection(directions.get(i)) != possible*/);
@@ -102,15 +116,20 @@ public class AiEntity implements Runnable{
         Random random = new Random();
         int choice = random.nextInt(3);
         if (choice == 1) { //une chance sur trois de changer de direction
-            if (ghost.getDirection() == Direction.North)
-                ghost.setDirection(Direction.South);
-            if (ghost.getDirection() == Direction.East)
-                ghost.setDirection(Direction.West);
-            if (ghost.getDirection() == Direction.South)
-                ghost.setDirection(Direction.North);
-            if (ghost.getDirection() == Direction.West)
-                ghost.setDirection(Direction.East);
+            ghost.setDirection(getOppositeDrirection(ghost.getDirection()));
         }
+    }
+
+    private Direction getOppositeDrirection(Direction direction){
+        if(direction == Direction.North)
+            direction = Direction.South;
+        else if(direction == Direction.East)
+            direction = Direction.West;
+        else if(direction == Direction.South)
+            direction = Direction.North;
+        else if(direction == Direction.West)
+            direction = Direction.East;
+        return direction;
     }
 
     @Override
@@ -118,7 +137,7 @@ public class AiEntity implements Runnable{
         try {
             if(calledByFollow){
                 calledByFollow = false;
-                Thread.sleep(10000); //il ne peux plus suivre PM pednant 10 secondes
+                Thread.sleep(10000); //il ne peux plus suivre PM pendant 10 secondes
                 isAbleToFollow = true;
             }
             if(calledByTurnAround){
@@ -126,8 +145,10 @@ public class AiEntity implements Runnable{
                 Thread.sleep(7000); //il ne peux plus faire demi-tour pendant 7 secondes
                 isAbleToTurnAround = true;
             }
-            if(imFollowingPM){
-
+            if(calledWhenFollowing){
+                calledWhenFollowing = false;
+                Thread.sleep(10000); //il poursuit PM pendant 10 secondes
+                isFollowingPM = false;
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
