@@ -1,6 +1,7 @@
 package pacman;
 
 import engines.graphic.ImageViewEntities;
+import engines.physic.Collision;
 import gameplay.Direction;
 import gameplay.Entity;
 import gameplay.Movement;
@@ -12,7 +13,7 @@ public class ThreadGhost extends Thread implements ThreadEntity {
     private Movement movement;
     private double time = 1000;
     private Movement futureMovement;
-    private boolean collision = false;
+    private Collision collision = null;
     private ImageViewEntities imageViewEntities;
 
     public ThreadGhost(Ghost ghost) {
@@ -31,11 +32,10 @@ public class ThreadGhost extends Thread implements ThreadEntity {
         this.movement = movement;
     }
 
-    public void setCollision(boolean collision) {
+    public void setCollision(Collision collision) {
         this.collision = collision;
     }
 
-    @Override
     public void setImageViewEntities(ImageViewEntities imageViewEntities) {
         this.imageViewEntities = imageViewEntities;
     }

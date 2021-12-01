@@ -107,7 +107,6 @@ public class ClassicKernelEngine implements KernelEngine {
         }
     }
 
-    @Override
     public ImageViewEntities getImageViewEntities(Entity entity) {
         return graphicEngine.getImageViewEntities(entity);
     }

@@ -47,6 +47,8 @@ public class Pacman implements Character {
      */
     private boolean isAfraid = false;
 
+    private boolean isAnimate = false;
+
     /**
      * Return if this entity is a character
      *
@@ -177,6 +179,14 @@ public class Pacman implements Character {
      */
     public void setIsAfraid(boolean isAfraid) {
         this.isAfraid = isAfraid;
+    }
+
+    public boolean isAnimate(){
+        return isAnimate;
+    }
+
+    public void setAnimate(boolean isAnimate){
+        this.isAnimate = isAnimate;
     }
 
 }

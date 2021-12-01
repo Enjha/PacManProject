@@ -16,17 +16,14 @@ public class ClassicPhysicEngine implements PhysicEngine {
         SceneElement sceneElement = sceneGame.obstacleElement(sceneCaseEntity.getX(),sceneCaseEntity.getY(),movement);
 
         if(sceneElement != null){
-            System.out.println("un mur");
             return new CollisionEntitySceneElement(movement.getEntity(),sceneElement);
         }
         else {
-            System.out.println("aucun mur");
             System.out.println();
             List<Entity> list = sceneGame.obstacleEntity(nextPositionEntity[0],nextPositionEntity[1],movement);
             if(list != null) {
                 for (Entity entity : list) {
                     if (movement.getEntity().isCharacter()) {
-                        System.out.println("entité character : " + entity.getClass().getName());
                         if (entity.isCharacter()) {
                             System.out.println(entity.getClass().getName());
                             if (((Character) entity).getTeam() == ((Character) movement.getEntity()).getTeam()) {
@@ -39,18 +36,13 @@ public class ClassicPhysicEngine implements PhysicEngine {
                             }
                         } else {
                             if (entity.isItem()) {
-                                System.out.println("entité item : "+ entity.getClass().getName());
                                 return new CollisionEntities(movement.getEntity(), entity);
                             }
                         }
                     }
                 }
             }
-            else {
-                System.out.println("list vide");
-            }
         }
-        System.out.println("null");
         return null;
     }
 

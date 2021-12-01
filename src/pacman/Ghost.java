@@ -42,6 +42,8 @@ public class Ghost implements Character {
      */
     private final GhostColor color;
 
+    private boolean isAnimate = false;
+
     /**
      * <b>Constructor of Ghost</b>
      *
@@ -166,5 +168,13 @@ public class Ghost implements Character {
      */
     public GhostColor getColor() {
         return color;
+    }
+
+    public boolean isAnimate(){
+        return isAnimate;
+    }
+
+    public void setAnimate(boolean isAnimate){
+        this.isAnimate = isAnimate;
     }
 }
