@@ -76,6 +76,7 @@ public class PacManAnimation implements EntityAnimation {
                 ).play();
                 break;
         }
+
     }
 
     @Override

@@ -241,13 +241,13 @@ public class GamePacMan implements Game {
     private SceneCase getNewSceneCase(Direction direction, Entity entity) {
         switch (direction) {
             case North:
-                return sceneGame.getCase(entity.getPosition().getX(), entity.getPosition().getY() - 1);
+                return sceneGame.getCase(entity.getPosition().getX(), new MovementNorth(entity).nextPosition()[1]);
             case South:
-                return sceneGame.getCase(entity.getPosition().getX(), entity.getPosition().getY() + 1);
+                return sceneGame.getCase(entity.getPosition().getX(), new MovementSouth(entity).nextPosition()[1]);
             case East:
-                return sceneGame.getCase(entity.getPosition().getX() + 1, entity.getPosition().getY());
+                return sceneGame.getCase(new MovementEast(entity).nextPosition()[0], entity.getPosition().getY());
             case West:
-                return sceneGame.getCase(entity.getPosition().getX() - 1, entity.getPosition().getY());
+                return sceneGame.getCase(new MovementWest(entity).nextPosition()[0], entity.getPosition().getY());
             default:
                 return null;
         }
