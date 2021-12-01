@@ -4,6 +4,7 @@ import apiUser.SceneAPIUser;
 import engines.UI.Control;
 import gameplay.Entity;
 import javafx.scene.Scene;
+import pacman.scene.SceneLabyrinthMenu;
 import scene.SceneGame;
 
 import java.util.List;
