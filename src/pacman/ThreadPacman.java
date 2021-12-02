@@ -33,6 +33,7 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                         movement = futureMovement;
                         futureMovement = null;
                         pacman.setDirection(movement.getDirection());
+                        pacman.setAnimated(true);
                         pacManAnimation.movementAnimation(imageViewEntities);
                     }
                     else{
@@ -40,8 +41,8 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                             movement = futureMovement;
                             futureMovement = null;
                             pacman.setDirection(movement.getDirection());
+                            pacman.setAnimated(true);
                             pacManAnimation.movementAnimation(imageViewEntities);
-                            waitMovement();
                             game.getImageViewEntity((Entity) collision.getSecondObjectCollision()).getImageView().setVisible(false);
                         }
                         else{
@@ -49,13 +50,14 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                             if(collision != null) {
                                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
                                     pacman.setDirection(movement.getDirection());
+                                    pacman.setAnimated(true);
                                     pacManAnimation.movementAnimation(imageViewEntities);
-                                    waitMovement();
                                     game.getImageViewEntity((Entity) collision.getSecondObjectCollision()).getImageView().setVisible(false);
                                 }
                             }
                             else {
                                 pacman.setDirection(movement.getDirection());
+                                pacman.setAnimated(true);
                                 pacManAnimation.movementAnimation(imageViewEntities);
                             }
                         }
@@ -67,14 +69,14 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                         game.treatmentCollisionGame(movement);
                         if (collision == null) {
                             pacman.setDirection(movement.getDirection());
+                            pacman.setAnimated(true);
                             pacManAnimation.movementAnimation(imageViewEntities);
-                            waitMovement();
                         }
                         else{
                             if(collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit){
                                 pacman.setDirection(movement.getDirection());
+                                pacman.setAnimated(true);
                                 pacManAnimation.movementAnimation(imageViewEntities);
-                                waitMovement();
                                 game.getImageViewEntity((Entity) collision.getSecondObjectCollision()).getImageView().setVisible(false);
                             }
                         }
@@ -110,21 +112,6 @@ public class ThreadPacman extends Thread implements ThreadEntity {
             } catch (InterruptedException exception) {
                 exception.printStackTrace();
             }
-        }
-    }
-
-    private synchronized void waitMovement(){
-        try{
-            if(!pause) {
-                wait(time);
-            }
-            else {
-                while(pause) {
-                    wait();
-                }
-            }
-        } catch (InterruptedException exception) {
-            exception.printStackTrace();
         }
     }
 

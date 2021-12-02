@@ -43,6 +43,7 @@ public class Pacman implements Character {
      */
     private boolean isAlive = true;
 
+    private volatile boolean isAnimated = false;
 
     /**
      * Return if this entity is a character
@@ -167,6 +168,14 @@ public class Pacman implements Character {
      */
     public void setIsAlive(boolean isAlive) {
         this.isAlive = isAlive;
+    }
+
+    public boolean isAnimated(){
+        return isAnimated;
+    }
+
+    public void setAnimated(boolean isAnimated){
+        this.isAnimated = isAnimated;
     }
 
 }

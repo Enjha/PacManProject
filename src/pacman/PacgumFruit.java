@@ -18,6 +18,8 @@ public class PacgumFruit implements Item {
      */
     private String entityName = "Pacgum";
 
+    private boolean isAnimated = false;
+
     /**
      * Return if this entity is a character
      * @return a boolean value equal to false
@@ -65,5 +67,13 @@ public class PacgumFruit implements Item {
      */
     public String getEntityName(){
         return entityName;
+    }
+
+    public boolean isAnimated(){
+        return isAnimated;
+    }
+
+    public void setAnimated(boolean isAnimated){
+        this.isAnimated = isAnimated;
     }
 }
