@@ -126,4 +126,8 @@ public class ClassicGraphicEngine implements GraphicEngine {
         return kernelEngine.getCurrentsThreads();
     }
 
+    public int getScore() {
+        return kernelEngine.getScore();
+    }
+
 }

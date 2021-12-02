@@ -43,6 +43,7 @@ public class GamePacMan implements Game {
     private GraphicEngine graphicEngine;
     private List<Thread> threadEntities = new ArrayList<>();
     private boolean stateThread = false;
+    private int score = 0;
 
     public GamePacMan(LabyrinthGenerator labyrinthGenerator) {
         this.labyrinthGenerator = labyrinthGenerator;
@@ -223,7 +224,8 @@ public class GamePacMan implements Game {
             if (collision != null) {
                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
                     newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
-                }else if(collision.getSecondObjectCollision() instanceof Ghost){
+                    setScore(score+10);
+                } else if (collision.getSecondObjectCollision() instanceof Ghost) {
                     System.out.println("COLLISION WITH GHOOOSOST");
                 }
 
@@ -278,5 +280,13 @@ public class GamePacMan implements Game {
 
     public ImageViewEntities getImageViewEntity(Entity entity) {
         return kernelEngine.getImageViewEntities(entity);
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

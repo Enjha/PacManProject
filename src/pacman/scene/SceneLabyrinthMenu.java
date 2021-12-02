@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import pacman.Pacman;
 
 import java.io.File;
+import java.util.ArrayList;
 
 
 public class SceneLabyrinthMenu implements ScenePacMan {
@@ -53,10 +54,17 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         pauseButton.setGraphic(icon);
 
         Label labelScore = new Label();
-        setupScene.setLabel(labelScore, "Score :", Pos.CENTER_LEFT, 0, 200, 80, 100, new Font(15), Paint.valueOf("black"), true);
+        setupScene.setLabel(labelScore, "Score : " + graphicEngine.getScore(), Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
         Label labelVie = new Label();
-        setupScene.setLabel(labelVie, "Vie restante : " + Integer.toString(pacman.getVies()), Pos.CENTER_LEFT, 0, 250, 80, 300, new Font(15), Paint.valueOf("black"), true);
-        Label labelVieRestante = new Label();
+        setupScene.setLabel(labelVie, "Vie(s) restante(s) : ", Pos.CENTER_LEFT, 500, -20, 80, 300, new Font(15), Paint.valueOf("black"), true);
+
+
+        for (int i = 0; i < pacman.getNumberOflife(); i++) {
+            ImageView coeur = new ImageView();
+            setupScene.setImageView(coeur, 625 + (25 * i), 7, 30, 30, new Image(new File("ressources/textures/coeur.png").toURI().toString()), true);
+            panel.getChildren().add(coeur);
+        }
+
         pauseButton.setOnMouseClicked((event) -> {
             try {
                 setScenePause();
@@ -64,7 +72,6 @@ public class SceneLabyrinthMenu implements ScenePacMan {
                 e.printStackTrace();
             }
         });
-
 
         panel.getChildren().addAll(pauseButton, labelScore, labelVie);
         root.getChildren().add(panel);
@@ -83,9 +90,9 @@ public class SceneLabyrinthMenu implements ScenePacMan {
     }
 
     private synchronized void setScenePause() throws InterruptedException {
-        for (Thread t : graphicEngine.getCurrentsThreads()){
+        for (Thread t : graphicEngine.getCurrentsThreads()) {
             System.out.println(t.getName() + " : " + t.getState());
-            ((ThreadEntity)t).setPause(true);
+            ((ThreadEntity) t).setPause(true);
         }
         graphicEngine.setPreviewScene(this);
         graphicEngine.setCurrentScene(new ScenePauseMenu(stage, graphicEngine));

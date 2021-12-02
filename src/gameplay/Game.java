@@ -21,4 +21,5 @@ public interface Game {
     void updateSceneGame(Movement movement);
     void treatmentCollisionGame(Movement movement);
     ImageViewEntities getImageViewEntity(Entity entity);
+    int getScore();
 }

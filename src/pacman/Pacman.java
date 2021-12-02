@@ -24,7 +24,10 @@ public class Pacman implements Character {
      */
     private Team team;
 
-    private int vies = 3;
+    /**
+     * Number of PacMan life
+     */
+    private int NumberOflife = 3;
 
     /**
      * The name of Pacman
@@ -101,12 +104,20 @@ public class Pacman implements Character {
         return team;
     }
 
-    public int getVies() {
-        return vies;
+    /**
+     * Return the Number of PacMan Life
+     *
+     * @return integer numberOfLife
+     */
+    public int getNumberOflife() {
+        return NumberOflife;
     }
 
-    public void setVies(int vies) {
-        this.vies = vies;
+    /**
+     * Set the Number of PacMan Life
+     */
+    public void setNumberOflife(int NumberOflife) {
+        this.NumberOflife = NumberOflife;
     }
 
     /**
@@ -180,11 +191,11 @@ public class Pacman implements Character {
         this.isAlive = isAlive;
     }
 
-    public boolean isAnimated(){
+    public boolean isAnimated() {
         return isAnimated;
     }
 
-    public void setAnimated(boolean isAnimated){
+    public void setAnimated(boolean isAnimated) {
         this.isAnimated = isAnimated;
     }
 

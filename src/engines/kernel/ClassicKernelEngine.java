@@ -117,7 +117,7 @@ public class ClassicKernelEngine implements KernelEngine {
         graphicEngine.updateSceneGame(entity);
     }
 
-    public void playSound(String soundName){
+    public void playSound(String soundName) {
         soundEngine.playSound(soundName, MediaPlayer.INDEFINITE);
     }
 
@@ -125,5 +125,8 @@ public class ClassicKernelEngine implements KernelEngine {
         return game.getThreadEntities();
     }
 
+    public int getScore() {
+        return game.getScore();
+    }
 
 }
