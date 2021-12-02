@@ -24,7 +24,6 @@ public class ClassicPhysicEngine implements PhysicEngine {
                 for (Entity entity : list) {
                     if (movement.getEntity().isCharacter()) {
                         if (entity.isCharacter()) {
-                            System.out.println(entity.getClass().getName());
                             if (((Character) entity).getTeam() == ((Character) movement.getEntity()).getTeam()) {
                                 if (((Character) entity).getTeam().getCollision()) {
                                     return new CollisionEntities(movement.getEntity(), entity);
@@ -44,6 +43,4 @@ public class ClassicPhysicEngine implements PhysicEngine {
         }
         return null;
     }
-
-
 }

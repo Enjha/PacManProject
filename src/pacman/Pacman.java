@@ -72,6 +72,16 @@ public class Pacman implements Character {
         return true;
     }
 
+    /**
+     * The entity's X starting position
+     */
+    private int xStartPosition;
+
+    /**
+     * The entity's Y starting position
+     */
+    private int yStartPosition;
+
 
     /**
      * Return the scene case who contain this entity
@@ -178,4 +188,39 @@ public class Pacman implements Character {
         this.isAnimated = isAnimated;
     }
 
+    /**
+     * Get the X starting position of PacMan in labyrtinh.
+     *
+     * @return X integer
+     */
+    public int getxStartPosition() {
+        return xStartPosition;
+    }
+
+    /**
+     * Set the X starting position of pacman in labyrtinh.
+     *
+     * @param xStartPosition integer
+     */
+    public void setxStartPosition(int xStartPosition) {
+        this.xStartPosition = xStartPosition;
+    }
+
+    /**
+     * Get the Y starting position of PacMan in labyrtinh.
+     *
+     * @return Y integer
+     */
+    public int getyStartPosition() {
+        return yStartPosition;
+    }
+
+    /**
+     * Set the Y starting position of pacman in labyrtinh.
+     *
+     * @param yStartPosition integer
+     */
+    public void setyStartPosition(int yStartPosition) {
+        this.yStartPosition = yStartPosition;
+    }
 }
