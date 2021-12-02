@@ -16,6 +16,7 @@ public class ThreadGhost extends Thread implements ThreadEntity {
     private boolean end = false;
     private Game game;
     private GhostAnimation ghostAnimation;
+    private volatile boolean pause = false;
 
     public ThreadGhost(Ghost ghost,Game game) {
         this.ghost = ghost;
@@ -109,9 +110,16 @@ public class ThreadGhost extends Thread implements ThreadEntity {
         }
     }
 
-    private void waitMovement(){
+    private synchronized void waitMovement(){
         try{
-            wait(time);
+            if(!pause) {
+                wait(time);
+            }
+            else {
+                while(pause) {
+                    wait();
+                }
+            }
         } catch (InterruptedException exception) {
             exception.printStackTrace();
         }
@@ -138,5 +146,14 @@ public class ThreadGhost extends Thread implements ThreadEntity {
 
     public void setImageViewEntities(ImageViewEntities imageViewEntities) {
         this.imageViewEntities = imageViewEntities;
+    }
+
+    public synchronized void setPause(boolean pause) {
+       this.pause = pause;
+       if(!pause){
+           System.out.println(this.getName() + "/" +this.getState());
+           notifyAll();
+           System.out.println(this.getName() + "/" +this.getState());
+       }
     }
 }

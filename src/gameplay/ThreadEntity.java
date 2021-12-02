@@ -9,4 +9,5 @@ public interface ThreadEntity {
     void setMovement(Movement movement);
     void setCollision(Collision collision);
     void setImageViewEntities(ImageViewEntities imageViewEntities);
+    void setPause(boolean pause);
 }

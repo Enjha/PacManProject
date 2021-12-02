@@ -5,6 +5,7 @@ import apiUser.SetupScene;
 import engines.UI.Control;
 import engines.graphic.GraphicEngine;
 import gameplay.Entity;
+import gameplay.ThreadEntity;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -129,9 +130,6 @@ public class SceneOptionMenu implements ScenePacMan {
     }
 
     private void setSceneReturn() {
-        if(graphicEngine.getCurrentsThreads().get(0).getState() == Thread.State.WAITING){
-            notifyAll();
-        }
         graphicEngine.setCurrentScene(graphicEngine.getPreviewScene());
     }
 

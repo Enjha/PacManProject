@@ -19,7 +19,6 @@ public class ClassicPhysicEngine implements PhysicEngine {
             return new CollisionEntitySceneElement(movement.getEntity(),sceneElement);
         }
         else {
-            System.out.println();
             List<Entity> list = sceneGame.obstacleEntity(nextPositionEntity[0],nextPositionEntity[1],movement);
             if(list != null) {
                 for (Entity entity : list) {

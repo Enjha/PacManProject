@@ -2,6 +2,7 @@ package pacman.scene;
 
 import apiUser.SetupScene;
 import engines.graphic.GraphicEngine;
+import gameplay.ThreadEntity;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -74,7 +75,8 @@ public class SceneLabyrinthMenu implements ScenePacMan {
 
     private synchronized void setScenePause() throws InterruptedException {
         for (Thread t : graphicEngine.getCurrentsThreads()){
-            t.wait();
+            System.out.println(t.getName() + " : " + t.getState());
+            ((ThreadEntity)t).setPause(true);
         }
         graphicEngine.setPreviewScene(this);
         graphicEngine.setCurrentScene(new ScenePauseMenu(stage, graphicEngine));

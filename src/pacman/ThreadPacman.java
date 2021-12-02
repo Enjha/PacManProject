@@ -16,6 +16,7 @@ public class ThreadPacman extends Thread implements ThreadEntity {
     private Collision collision = null;
     private ImageViewEntities imageViewEntities;
     private final PacManAnimation pacManAnimation;
+    private volatile boolean pause = false;
 
     public ThreadPacman(Pacman pacman, Game game) {
         this.pacman = pacman;
@@ -112,9 +113,16 @@ public class ThreadPacman extends Thread implements ThreadEntity {
         }
     }
 
-    private void waitMovement(){
+    private synchronized void waitMovement(){
         try{
-            wait(time);
+            if(!pause) {
+                wait(time);
+            }
+            else {
+                while(pause) {
+                    wait();
+                }
+            }
         } catch (InterruptedException exception) {
             exception.printStackTrace();
         }
@@ -142,5 +150,14 @@ public class ThreadPacman extends Thread implements ThreadEntity {
 
     public void setCollision(Collision collision) {
         this.collision = collision;
+    }
+
+    public synchronized void setPause(boolean pause){
+       this.pause = pause;
+       if(!pause){
+           System.out.println(this.getName() + "/" +this.getState());
+           notifyAll();
+           System.out.println(this.getName() + "/" +this.getState());
+       }
     }
 }
