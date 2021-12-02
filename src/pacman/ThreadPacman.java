@@ -8,10 +8,10 @@ import pacman.animations.PacManAnimation;
 public class ThreadPacman extends Thread implements ThreadEntity {
 
     private Pacman pacman;
-    private long time = 200;
+    private final long time = 200;
     private Movement movement;
     private boolean end = false;
-    private Game game;
+    private final Game game;
     private Movement futureMovement = null;
     private Collision collision = null;
     private ImageViewEntities imageViewEntities;

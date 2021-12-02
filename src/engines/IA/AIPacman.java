@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AiEntity implements Runnable{
+public class AIPacman implements IAEngine{
 
     private final Ghost ghost;
     private final Pacman pacman;
@@ -22,24 +22,24 @@ public class AiEntity implements Runnable{
     private boolean isFollowingPM;
     private boolean calledWhenFollowing = false;
 
-    public AiEntity(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase){
+    public AIPacman(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase){
         this.ghost = ghost;
         this.pacman = pacman;
         this.sceneCase = sceneCase;
         isAbleToFollow = true;
         isAbleToTurnAround = true;
         isFollowingPM = false;
-        moove();
+        move();
     }
 
-    private void moove(){ //permet au fantôme de se deplacer
+    private void move(){ //permet au fantôme de se deplacer
         ghost.setDirection(Direction.North);
         List<Object> walls = sceneCase[ghost.getPosition().getX()][ghost.getPosition().getY()].getCaseContent(Wall.class.toString());
         while(ghost.isAlive()){
             if(distBeetween() <= 5 && isAbleToFollow){ //ghost va passer dans l'état de déplacement "poursuite"
                 isAbleToFollow = false;
                 followPM(walls);
-                Thread threadFollow = new Thread();
+                Thread threadFollow = new Thread(this);
                 calledByFollow = true;
                 threadFollow.start();
             }
@@ -52,7 +52,7 @@ public class AiEntity implements Runnable{
                 if(isAbleToTurnAround){
                     turnAround();
                     isAbleToTurnAround = false;
-                    Thread threadTurnAround = new Thread();
+                    Thread threadTurnAround = new Thread(this);
                     calledByTurnAround = true;
                     threadTurnAround.start();
                 }
@@ -80,7 +80,7 @@ public class AiEntity implements Runnable{
 
     private void followPM(List<Object> walls){ //suivre PM en empruntant le chemin le plus court (par Dijkstra ou par indice de position)
         isFollowingPM = true;
-        Thread threadWhenImFollowingPM = new Thread();
+        Thread threadWhenImFollowingPM = new Thread(this);
         calledWhenFollowing = true;
         threadWhenImFollowingPM.start();
         while(isFollowingPM){
@@ -142,19 +142,18 @@ public class AiEntity implements Runnable{
 
     private void pickDirection(ArrayList<Direction> directions){ //choisir une direction entre celles qui sont possibles
         Random random = new Random();
-        int choice = random.nextInt(directions.size());
-        ghost.setDirection(directions.get(choice));
+        ghost.setDirection(directions.get(random.nextInt(directions.size()) - 1));
     }
 
     private void turnAround(){ //le fantôme a une chance faire demi-tour
         Random random = new Random();
         int choice = random.nextInt(3);
         if (choice == 1) { //une chance sur trois de changer de direction
-            ghost.setDirection(getOppositeDrirection(ghost.getDirection()));
+            ghost.setDirection(getOppositeDirection(ghost.getDirection()));
         }
     }
 
-    private Direction getOppositeDrirection(Direction direction){
+    private Direction getOppositeDirection(Direction direction){
         if(direction == Direction.North)
             direction = Direction.South;
         else if(direction == Direction.East)

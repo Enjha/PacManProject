@@ -27,7 +27,7 @@ public class Ghost implements Character {
     /**
      * The name of Pacman
      */
-    private String entityName;
+    private final String entityName;
 
     /**
      * The direction of the entity's movement
@@ -205,11 +205,11 @@ public class Ghost implements Character {
         return color;
     }
 
-    public boolean isAnimated(){
+    public boolean isAnimated() {
         return isAnimated;
     }
 
-    public void setAnimated(boolean isAnimated){
+    public void setAnimated(boolean isAnimated) {
         this.isAnimated = isAnimated;
     }
 }

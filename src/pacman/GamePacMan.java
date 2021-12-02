@@ -15,6 +15,7 @@ import gameplay.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import pacman.animations.PacManAnimation;
 import pacman.scene.LabyrinthGenerator;
 import pacman.scene.SceneMainMenu;
 import scene.SceneCase;
@@ -95,7 +96,7 @@ public class GamePacMan implements Game {
             for (File file : files) {
                 if (file.isFile()) {
                     MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File(soundFolder.getPath() + "/" + file.getName()).toURI().toString()));
-                    mediaPlayer.setOnError(()->System.out.println("media error"
+                    mediaPlayer.setOnError(() -> System.out.println("media error"
                             + mediaPlayer.getError().toString()));
                     soundManager.addSound(new ClassicSound(mediaPlayer, file.getName()));
                 }
@@ -222,7 +223,10 @@ public class GamePacMan implements Game {
             if (collision != null) {
                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
                     newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
+                }else if(collision.getSecondObjectCollision() instanceof Ghost){
+                    System.out.println("COLLISION WITH GHOOOSOST");
                 }
+
             } else {
                 if (movement.getEntity().isCharacter()) {
                     ((Character) movement.getEntity()).setDirection(movement.getDirection());
