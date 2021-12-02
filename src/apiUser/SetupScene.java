@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
@@ -39,7 +40,7 @@ public class SetupScene {
         anchorPane.getChildren().add(textField);
     }
 
-    public void setTextField(TextField textField, String promptText, Pos position, double layoutX, double layoutY, double prefHeight, double prefWidth, Font font, List<Double> listOfLayoutX, List<Double> listOfLayoutY, List<Double> listOfPrefHeight, List<Double> listOfPrefWidth, List<Double> listOfFontSize, boolean visible, AnchorPane anchorPane) {
+    public void setTextField(TextField textField, String promptText, Pos position, double layoutX, double layoutY, double prefHeight, double prefWidth, Font font, List<Double> listOfLayoutX, List<Double> listOfLayoutY, List<Double> listOfPrefHeight, List<Double> listOfPrefWidth, List<Double> listOfFontSize, boolean visible, Pane anchorPane) {
         textField.setPromptText(promptText);
         textField.setAlignment(position);
         textField.setLayoutX(layoutX);

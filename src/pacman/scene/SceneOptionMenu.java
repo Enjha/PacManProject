@@ -121,7 +121,6 @@ public class SceneOptionMenu implements ScenePacMan {
             soundButton.setText("Son : Désactivé");
             graphicEngine.setVolume(0);
             graphicEngine.mute();
-
         } else {
             stateSound = true;
             soundButton.setText("Son : Activé");

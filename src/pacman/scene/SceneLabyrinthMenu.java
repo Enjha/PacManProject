@@ -6,11 +6,13 @@ import gameplay.ThreadEntity;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -47,6 +49,12 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         icon.setFitWidth(60);
         icon.setFitHeight(60);
         pauseButton.setGraphic(icon);
+
+        Label labelScore = new Label();
+        setupScene.setLabel(labelScore, "Score :", Pos.CENTER_LEFT, 0, 200, 80, 100, new Font(15), Paint.valueOf("black"), true);
+        Label labelVie = new Label();
+        setupScene.setLabel(labelVie, "Vie restante :", Pos.CENTER_LEFT, 0, 250, 80, 300, new Font(15), Paint.valueOf("black"), true);
+
         setupScene.setButton(pauseButton, "", Pos.CENTER, 20, 20, 70, 70, new Font(30), true);
         pauseButton.setOnMouseClicked((event) -> {
             try {
@@ -57,7 +65,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         });
 
 
-        panel.getChildren().addAll(pauseButton);
+        panel.getChildren().addAll(pauseButton, labelScore, labelVie);
         root.getChildren().add(panel);
         root.setStyle("-fx-background-color: black;");
         graphicEngine.setControlEngineState(true);
