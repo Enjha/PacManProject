@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AiEntity implements Runnable{
+public class AiPacman implements IAEngine{
 
     private final Ghost ghost;
     private final Pacman pacman;
@@ -22,17 +22,17 @@ public class AiEntity implements Runnable{
     private boolean isFollowingPM;
     private boolean calledWhenFollowing = false;
 
-    public AiEntity(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase){
+    public AiPacman(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase){
         this.ghost = ghost;
         this.pacman = pacman;
         this.sceneCase = sceneCase;
         isAbleToFollow = true;
         isAbleToTurnAround = true;
         isFollowingPM = false;
-        moove();
+        move();
     }
 
-    private void moove(){ //permet au fantôme de se deplacer
+    private void move(){ //permet au fantôme de se deplacer
         ghost.setDirection(Direction.North);
         List<Object> walls = sceneCase[ghost.getPosition().getX()][ghost.getPosition().getY()].getCaseContent(Wall.class.toString());
         while(ghost.isAlive()){
@@ -150,11 +150,11 @@ public class AiEntity implements Runnable{
         Random random = new Random();
         int choice = random.nextInt(3);
         if (choice == 1) { //une chance sur trois de changer de direction
-            ghost.setDirection(getOppositeDrirection(ghost.getDirection()));
+            ghost.setDirection(getOppositeDirection(ghost.getDirection()));
         }
     }
 
-    private Direction getOppositeDrirection(Direction direction){
+    private Direction getOppositeDirection(Direction direction){
         if(direction == Direction.North)
             direction = Direction.South;
         else if(direction == Direction.East)

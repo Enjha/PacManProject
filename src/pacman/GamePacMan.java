@@ -223,6 +223,7 @@ public class GamePacMan implements Game {
                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
                     newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
                 }
+
             } else {
                 if (movement.getEntity().isCharacter()) {
                     ((Character) movement.getEntity()).setDirection(movement.getDirection());
