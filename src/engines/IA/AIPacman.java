@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AiPacman implements IAEngine{
+public class AIPacman implements IAEngine{
 
     private final Ghost ghost;
     private final Pacman pacman;
@@ -22,7 +22,7 @@ public class AiPacman implements IAEngine{
     private boolean isFollowingPM;
     private boolean calledWhenFollowing = false;
 
-    public AiPacman(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase){
+    public AIPacman(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase){
         this.ghost = ghost;
         this.pacman = pacman;
         this.sceneCase = sceneCase;
