@@ -57,11 +57,12 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         setupScene.setLabel(labelScore, "Score : " + graphicEngine.getScore(), Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
         Label labelVie = new Label();
         setupScene.setLabel(labelVie, "Vie(s) restante(s) : ", Pos.CENTER_LEFT, 500, -20, 80, 300, new Font(15), Paint.valueOf("black"), true);
-
+        labelScore.setId("labelScore");
+        labelVie.setId("labelVie");
 
         for (int i = 0; i < pacman.getNumberOflife(); i++) {
             ImageView coeur = new ImageView();
-            setupScene.setImageView(coeur, 625 + (25 * i), 7, 30, 30, new Image(new File("ressources/textures/coeur.png").toURI().toString()), true);
+            setupScene.setImageView(coeur, 630 + (25 * i), 7, 30, 30, new Image(new File("ressources/textures/coeur.png").toURI().toString()), true);
             panel.getChildren().add(coeur);
         }
 

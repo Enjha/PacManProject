@@ -29,3 +29,7 @@
     -fx-border-color: #fff200;
     -fx-cursor: hand;
 }
+
+#labelScore,#labelVie{
+    -fx-font-weight: bold;
+}
