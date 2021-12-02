@@ -85,6 +85,8 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
                     setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, pacman_textures.get(0), true);
                     pane.getChildren().add(imageView);
                     imageViewEntities.add(new ImageViewEntities(((Pacman)sceneCase.getCaseContent(Pacman.class.toString()).get(0)),imageView));
+                    ((Pacman) sceneCase.getCaseContent(Pacman.class.toString()).get(0)).setxStartPosition(sceneCase.getX());
+                    ((Pacman) sceneCase.getCaseContent(Pacman.class.toString()).get(0)).setyStartPosition(sceneCase.getY());
                 }
 
                 if (sceneCase.getCaseContent(Ghost.class.toString()) != null && sceneCase.getCaseContent(Ghost.class.toString()).size() > 0) {

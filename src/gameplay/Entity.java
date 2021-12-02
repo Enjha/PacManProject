@@ -10,5 +10,7 @@ public interface Entity {
     SceneCase getPosition();
     void setPosition(SceneCase position);
     String getEntityName();
+    boolean isAnimated();
+    void setAnimated(boolean isAnimated);
 
 }

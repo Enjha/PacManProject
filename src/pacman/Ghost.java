@@ -52,7 +52,7 @@ public class Ghost implements Character {
      */
     private final GhostColor color;
 
-    private boolean isAnimate = false;
+    private boolean isAnimated = false;
 
     /**
      * <b>Constructor of Ghost</b>
@@ -205,11 +205,11 @@ public class Ghost implements Character {
         return color;
     }
 
-    public boolean isAnimate(){
-        return isAnimate;
+    public boolean isAnimated(){
+        return isAnimated;
     }
 
-    public void setAnimate(boolean isAnimate){
-        this.isAnimate = isAnimate;
+    public void setAnimated(boolean isAnimated){
+        this.isAnimated = isAnimated;
     }
 }
