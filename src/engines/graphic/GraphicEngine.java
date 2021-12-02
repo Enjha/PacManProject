@@ -22,6 +22,7 @@ public interface GraphicEngine {
     List<Control> getControl(Entity entity);
     double getVolume();
     void setVolume(double volume);
+    Entity getEntity(String name);
     Scene getCurrentScene();
     List<Entity> getEntities();
     boolean setControl(String oldKey,String newKey);

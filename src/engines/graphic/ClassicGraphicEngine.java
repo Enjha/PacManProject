@@ -68,6 +68,11 @@ public class ClassicGraphicEngine implements GraphicEngine {
         kernelEngine.setVolume(volume);
     }
 
+    public Entity getEntity(String name){
+        return kernelEngine.getEntity(name);
+    }
+
+
     public Scene getCurrentScene() {
         return window.getScene().getScene();
     }

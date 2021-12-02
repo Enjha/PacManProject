@@ -14,6 +14,7 @@ import pacman.view.WallViewPacman;
 import scene.SceneGame;
 import scene.SceneCase;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -12,7 +12,6 @@ import gameplay.Movement;
 import javafx.scene.Scene;
 import scene.SceneGame;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface KernelEngine {
@@ -26,6 +25,7 @@ public interface KernelEngine {
     void setVolume(double volume);
     Scene getCurrentScene();
     List<Entity> getEntities();
+    Entity getEntity(String entityName);
     boolean setControl(String oldKey,String newKey);
     void mute();
     void unmute();

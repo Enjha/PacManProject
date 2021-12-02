@@ -113,6 +113,18 @@ public class ClassicKernelEngine implements KernelEngine {
         return graphicEngine.getImageViewEntities(entity);
     }
 
+
+    public Entity getEntity(String entityName) {
+        if(game.getEntities().size() != 0){
+            for (Entity entity : game.getEntities()) {
+                if (entity.getEntityName().equals(entityName)) {
+                    return entity;
+                }
+            }
+        }
+        return null;
+    }
+
     public void updateSceneGame(Entity entity) {
         graphicEngine.updateSceneGame(entity);
     }

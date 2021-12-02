@@ -1,7 +1,7 @@
 package pacman.scene;
 
 import apiUser.SetupScene;
-import engines.graphic.GraphicEngine;
+import engines.graphic.GraphicEngine
 import gameplay.ThreadEntity;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -30,7 +30,6 @@ public class SceneLabyrinthMenu implements ScenePacMan {
     private SetupScene setupScene = new SetupScene();
     private Pane panel;
     private GraphicEngine graphicEngine;
-    private Pacman pacman = new Pacman();
 
     public SceneLabyrinthMenu(Stage stage, GraphicEngine graphicEngine) {
         this.stage = stage;
@@ -52,8 +51,9 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         icon.setFitHeight(60);
         pauseButton.setGraphic(icon);
 
+        Pacman pacman = (Pacman) graphicEngine.getEntity("Pac-Man");
         Label labelScore = new Label();
-        setupScene.setLabel(labelScore, "Score :", Pos.CENTER_LEFT, 0, 200, 80, 100, new Font(15), Paint.valueOf("black"), true);
+        setupScene.setLabel(labelScore, "Score : "+ Integer.toString(pacman.getScore()), Pos.CENTER_LEFT, 0, 200, 80, 100, new Font(15), Paint.valueOf("black"), true);
         Label labelVie = new Label();
         setupScene.setLabel(labelVie, "Vie restante : " + Integer.toString(pacman.getVies()), Pos.CENTER_LEFT, 0, 250, 80, 300, new Font(15), Paint.valueOf("black"), true);
         Label labelVieRestante = new Label();

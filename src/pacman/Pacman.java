@@ -26,6 +26,16 @@ public class Pacman implements Character {
 
     private int vies = 3;
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    private int score = 0;
+
     /**
      * The name of Pacman
      */
