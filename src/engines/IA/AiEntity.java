@@ -39,7 +39,7 @@ public class AiEntity implements Runnable{
             if(distBeetween() <= 5 && isAbleToFollow){ //ghost va passer dans l'état de déplacement "poursuite"
                 isAbleToFollow = false;
                 followPM(walls);
-                Thread threadFollow = new Thread();
+                Thread threadFollow = new Thread(this);
                 calledByFollow = true;
                 threadFollow.start();
             }
@@ -52,7 +52,7 @@ public class AiEntity implements Runnable{
                 if(isAbleToTurnAround){
                     turnAround();
                     isAbleToTurnAround = false;
-                    Thread threadTurnAround = new Thread();
+                    Thread threadTurnAround = new Thread(this);
                     calledByTurnAround = true;
                     threadTurnAround.start();
                 }
@@ -80,7 +80,7 @@ public class AiEntity implements Runnable{
 
     private void followPM(List<Object> walls){ //suivre PM en empruntant le chemin le plus court (par Dijkstra ou par indice de position)
         isFollowingPM = true;
-        Thread threadWhenImFollowingPM = new Thread();
+        Thread threadWhenImFollowingPM = new Thread(this);
         calledWhenFollowing = true;
         threadWhenImFollowingPM.start();
         while(isFollowingPM){
@@ -142,8 +142,7 @@ public class AiEntity implements Runnable{
 
     private void pickDirection(ArrayList<Direction> directions){ //choisir une direction entre celles qui sont possibles
         Random random = new Random();
-        int choice = random.nextInt(directions.size());
-        ghost.setDirection(directions.get(choice));
+        ghost.setDirection(directions.get(random.nextInt(directions.size()) - 1));
     }
 
     private void turnAround(){ //le fantôme a une chance faire demi-tour
