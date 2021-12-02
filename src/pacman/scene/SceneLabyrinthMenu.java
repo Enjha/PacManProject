@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import pacman.Pacman;
 
 import java.io.File;
 
@@ -29,6 +30,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
     private SetupScene setupScene = new SetupScene();
     private Pane panel;
     private GraphicEngine graphicEngine;
+    private Pacman pacman = new Pacman();
 
     public SceneLabyrinthMenu(Stage stage, GraphicEngine graphicEngine) {
         this.stage = stage;
@@ -53,9 +55,8 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         Label labelScore = new Label();
         setupScene.setLabel(labelScore, "Score :", Pos.CENTER_LEFT, 0, 200, 80, 100, new Font(15), Paint.valueOf("black"), true);
         Label labelVie = new Label();
-        setupScene.setLabel(labelVie, "Vie restante :", Pos.CENTER_LEFT, 0, 250, 80, 300, new Font(15), Paint.valueOf("black"), true);
-
-        setupScene.setButton(pauseButton, "", Pos.CENTER, 20, 20, 70, 70, new Font(30), true);
+        setupScene.setLabel(labelVie, "Vie restante : " + Integer.toString(pacman.getVies()), Pos.CENTER_LEFT, 0, 250, 80, 300, new Font(15), Paint.valueOf("black"), true);
+        Label labelVieRestante = new Label();
         pauseButton.setOnMouseClicked((event) -> {
             try {
                 setScenePause();

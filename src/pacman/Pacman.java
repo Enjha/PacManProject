@@ -24,6 +24,8 @@ public class Pacman implements Character {
      */
     private Team team;
 
+    private int vies = 3;
+
     /**
      * The name of Pacman
      */
@@ -86,6 +88,14 @@ public class Pacman implements Character {
      */
     public Team getTeam() {
         return team;
+    }
+
+    public int getVies() {
+        return vies;
+    }
+
+    public void setVies(int vies) {
+        this.vies = vies;
     }
 
     /**
