@@ -226,6 +226,7 @@ public class GamePacMan implements Game {
                 }else if(collision.getSecondObjectCollision() instanceof Ghost){
                     System.out.println("COLLISION WITH GHOOOSOST");
                 }
+
             } else {
                 if (movement.getEntity().isCharacter()) {
                     ((Character) movement.getEntity()).setDirection(movement.getDirection());
