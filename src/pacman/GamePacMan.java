@@ -1,5 +1,6 @@
 package pacman;
 
+import apiUser.SetupScene;
 import engines.UI.ClassicControlEngine;
 import engines.UI.ClassicControlManager;
 import engines.UI.ControlManager;
@@ -18,11 +19,19 @@ import engines.sound.ClassicSoundManager;
 import engines.sound.SoundManager;
 import gameplay.Character;
 import gameplay.*;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import pacman.scene.LabyrinthGenerator;
-import pacman.scene.SceneMainMenu;
+import pacman.scene.*;
 import scene.SceneCase;
 import scene.SceneElement;
 import scene.SceneGame;
@@ -44,12 +53,14 @@ public class GamePacMan implements Game {
     private boolean stateThread = false;
     private Score score;
     private Life life;
+    private int nbFruits;
     private TeamManager teamManager;
 
-    public GamePacMan(LabyrinthGenerator labyrinthGenerator, Score score, Life life, TeamManager teamManager) {
+    public GamePacMan(LabyrinthGenerator labyrinthGenerator, Score score, Life life, int nbFruit, TeamManager teamManager) {
         this.labyrinthGenerator = labyrinthGenerator;
         this.score = score;
         this.life = life;
+        this.nbFruits = nbFruit;
         this.teamManager = teamManager;
         teamManager.addTeam(new ClassicTeam("GHOST", false));
         teamManager.addTeam(new ClassicTeam("PACMAN", false));
@@ -74,7 +85,7 @@ public class GamePacMan implements Game {
                 threadEntity.setImageViewEntities(kernelEngine.getImageViewEntities(threadEntity.getEntity()));
                 thread.start();
             }
-            kernelEngine.playOneSound("game_start.wav");
+            kernelEngine.playFirstSound("game_start.wav");
             stateThread = true;
         }
     }
@@ -210,10 +221,19 @@ public class GamePacMan implements Game {
             score.addScore(10);
             treatmentCollisionMoveEntity(movement, collision);
             kernelEngine.playOneSound("eat_fruit.wav");
+            System.out.println(nbFruits);
+            if(nbFruits>1) nbFruits-=1;
+            else{
+                System.out.println("gagné !");
+            }
         } else if (collision.getSecondObjectCollision() instanceof PacgumFruit) {
             score.addScore(50);
             treatmentCollisionMoveEntity(movement, collision);
             kernelEngine.playOneSound("eat_fruit.wav");
+            if(nbFruits>1) nbFruits-=1;
+            else{
+                System.out.println("gagné !");
+            }
         } else if (collision.getSecondObjectCollision() instanceof Ghost) {
             getThreadEntity(movement.getEntity()).setCollision(collision);
             treatmentCollisionMoveEntity(movement, collision);

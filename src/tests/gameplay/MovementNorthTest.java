@@ -4,6 +4,7 @@ import gameplay.Entity;
 import gameplay.Movement;
 import gameplay.MovementNorth;
 import org.junit.jupiter.api.Test;
+import pacman.ClassicLife;
 import pacman.LabyrinthCase;
 import pacman.NormalCaseContentManager;
 import pacman.Pacman;
@@ -12,7 +13,7 @@ import scene.SceneCase;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MovementNorthTest {
-    private Entity entity = new Pacman();
+    private Entity entity = new Pacman(new ClassicLife());
     private Movement movement = new MovementNorth(entity);
     private SceneCase sceneCase2 = new LabyrinthCase(0,1,new NormalCaseContentManager());
     private SceneCase sceneCase3 = new LabyrinthCase(2,2,new NormalCaseContentManager());

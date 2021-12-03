@@ -11,12 +11,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.File;
 
-public class SceneWinMenu implements ScenePacMan {
+public class SceneGameOverMenu implements ScenePacMan {
 
     private BorderPane root = new BorderPane();
     private final int widht = 1200;
@@ -27,7 +28,7 @@ public class SceneWinMenu implements ScenePacMan {
     private GraphicEngine graphicEngine;
     private Pane pane;
 
-    public SceneWinMenu(Stage stage, GraphicEngine graphicEngine) {
+    public SceneGameOverMenu(Stage stage, GraphicEngine graphicEngine) {
         this.graphicEngine = graphicEngine;
         this.stage = stage;
     }
@@ -50,10 +51,13 @@ public class SceneWinMenu implements ScenePacMan {
         scene.getStylesheets().clear();
         scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 
+        javafx.scene.control.Label labelFinalScore = new javafx.scene.control.Label();
+        setupScene.setLabel(labelFinalScore, "Score : " , Pos.CENTER_LEFT, 500, 300, 200, 240, new Font(15), Color.valueOf("black"), true);
+
         Button buttonOption = new Button("Options");
         setupScene.setButton(buttonOption, "Options", Pos.CENTER, 500, 400, 80, 200, new Font(20), true);
 
-        Button buttonQuit = new Button("Quitter");
+        Button buttonQuit = new Button("Retour au menu Principal");
         setupScene.setButton(buttonQuit, "Quitter", Pos.CENTER, 500, 500, 80, 200, new Font(20), true);
 
 
@@ -68,7 +72,7 @@ public class SceneWinMenu implements ScenePacMan {
 
         return scene;
     }
-    
+
     private void setSceneOption() {
         graphicEngine.setCurrentScene(new SceneOptionMenu(stage, graphicEngine));
     }

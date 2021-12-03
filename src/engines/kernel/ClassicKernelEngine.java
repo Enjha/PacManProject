@@ -140,6 +140,9 @@ public class ClassicKernelEngine implements KernelEngine {
         soundEngine.playSound(soundName, 1);
         soundEngine.stopSound(soundName);
     }
+    public void playFirstSound(String soundName) {
+        soundEngine.playSound(soundName, 1);
+    }
     public void stopSound(String soundName){
         soundEngine.stopSound(soundName);
     }

@@ -5,16 +5,14 @@ import gameplay.Movement;
 import gameplay.MovementEast;
 import gameplay.MovementNorth;
 import org.junit.jupiter.api.Test;
-import pacman.LabyrinthCase;
-import pacman.NormalCaseContentManager;
-import pacman.Pacman;
+import pacman.*;
 import scene.SceneCase;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MovementEastTest {
 
-    private Entity entity = new Pacman();
+    private Entity entity = new Pacman(new ClassicLife());
     private Movement movement = new MovementEast(entity);
     private SceneCase sceneCase2 = new LabyrinthCase(0,0,new NormalCaseContentManager());
     private SceneCase sceneCase3 = new LabyrinthCase(2,2,new NormalCaseContentManager());
