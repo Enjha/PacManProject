@@ -2,6 +2,8 @@ package pacman.scene;
 
 import gameplay.Direction;
 import gameplay.Entity;
+import gameplay.Game;
+import gameplay.Character;
 import pacman.*;
 import scene.SceneCase;
 import scene.SceneGame;
@@ -27,7 +29,7 @@ public class LabyrinthBuild implements LabyrinthGenerator{
         return sceneGame;
     }
 
-    public List<Entity> generateEntity(SceneGame sceneGame){
+    public List<Entity> generateEntity(SceneGame sceneGame, Game game){
         List<Entity> entities = new ArrayList<>();
         try{
             File entitiesFile = new File(entitiesPath);
@@ -37,7 +39,7 @@ public class LabyrinthBuild implements LabyrinthGenerator{
 
             while((line = buffer.readLine()) != null){
                 splitLine = line.split(" ");
-                Entity entity = createNewEntity(splitLine,sceneGame);
+                Entity entity = createNewEntity(splitLine,sceneGame,game);
                 if(entity != null){
                     entities.add(entity);
                 }
@@ -126,13 +128,14 @@ public class LabyrinthBuild implements LabyrinthGenerator{
         }
     }
 
-    private Entity createNewEntity(String[] entityInformation,SceneGame sceneGame){
+    private Entity createNewEntity(String[] entityInformation,SceneGame sceneGame,Game game){
         String entityType = entityInformation[0];
         switch (entityType) {
             case "PACMAN":
                 if (entityInformation.length == 3) {
                     Entity pacman = new Pacman();
                     setupEntityPosition(entityInformation[1],entityInformation[2],pacman,sceneGame);
+                    ((Character)pacman).setTeam(game.getTeamManager().getTeam("PACMAN"));
                     return pacman;
                 } else {
                     System.err.println("error : wrong format for the entities --> wrong number of information (3)");
@@ -145,6 +148,7 @@ public class LabyrinthBuild implements LabyrinthGenerator{
                     if (ghostColor != null) {
                         Entity ghost = new Ghost(entityInformation[1], ghostColor);
                         setupEntityPosition(entityInformation[3],entityInformation[4],ghost,sceneGame);
+                        ((Character)ghost).setTeam(game.getTeamManager().getTeam("PACMAN"));
                         return ghost;
                     }
                     else {
