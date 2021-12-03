@@ -18,7 +18,7 @@ public class ClassicScore implements Score {
     private Pane pane;
 
     public ClassicScore() {
-        new SetupScene().setLabel(labelScore, "Score : ", Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
+        new SetupScene().setLabel(labelScore, "Score : 0", Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
     }
 
     public Label getLabel() {

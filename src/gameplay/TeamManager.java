@@ -1,5 +1,8 @@
 package gameplay;
 
+/**
+ * The interface
+ */
 public interface TeamManager {
 
     boolean addTeam(Team team);

@@ -1,5 +1,7 @@
 package engines.sound;
 
+import javafx.scene.media.MediaPlayer;
+
 import java.util.HashMap;
 
 public class ClassicSoundManager implements SoundManager{
@@ -14,6 +16,7 @@ public class ClassicSoundManager implements SoundManager{
     public void addSound(Sound sound){
         if(!sounds.containsKey(sound.getName())){
             sounds.put(sound.getName(),sound);
+            assert(sounds.containsKey(sound.getName()));
         }
     }
 
@@ -25,6 +28,7 @@ public class ClassicSoundManager implements SoundManager{
     public void removeSound(Sound sound){
         if(sounds.containsKey(sound.getName())){
             sounds.remove(sound);
+            assert(!sounds.containsKey(sound.getName()));
         }
     }
 
@@ -38,6 +42,7 @@ public class ClassicSoundManager implements SoundManager{
     public void playSound(String name,int cycle){
         if(sounds.containsKey(name)){
             sounds.get(name).play(cycle);
+            assert(sounds.get(name).getSound().getStatus() == MediaPlayer.Status.PLAYING && sounds.get(name).getSound().getCycleCount() == cycle);
         }
     }
 
@@ -49,6 +54,7 @@ public class ClassicSoundManager implements SoundManager{
     public void stopSound(String name){
         if(sounds.containsKey(name)){
             sounds.get(name).stop();
+            assert(sounds.get(name).getSound().getStatus() == MediaPlayer.Status.STOPPED);
         }
     }
 
@@ -62,6 +68,7 @@ public class ClassicSoundManager implements SoundManager{
     public void changeVolumeSound(String name, double newVolume){
         if(sounds.containsKey(name)){
             sounds.get(name).setVolume(newVolume);
+            assert(sounds.get(name).getSound().getVolume() == newVolume);
         }
     }
 
@@ -73,6 +80,7 @@ public class ClassicSoundManager implements SoundManager{
     public void changeVolumeAll(double newVolume){
         for(Sound sound : sounds.values()){
             sound.setVolume(newVolume);
+            assert(sound.getSound().getVolume() == newVolume);
         }
     }
 

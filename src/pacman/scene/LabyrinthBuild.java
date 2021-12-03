@@ -95,6 +95,7 @@ public class LabyrinthBuild implements LabyrinthGenerator{
                         sceneCase.addCaseContent(new Wall(wallDirection));
                     }
                 }
+
                 if(splitLine.length  > (4 + numberWall)){
                     x = Integer.parseInt(splitLine[3 + numberWall]);
                     y = Integer.parseInt(splitLine[4 + numberWall]);
@@ -144,7 +145,7 @@ public class LabyrinthBuild implements LabyrinthGenerator{
                     if (ghostColor != null) {
                         Entity ghost = new Ghost(entityInformation[1], ghostColor);
                         setupEntityPosition(entityInformation[3],entityInformation[4],ghost,sceneGame);
-                        ((Character)ghost).setTeam(game.getTeamManager().getTeam("PACMAN"));
+                        ((Character)ghost).setTeam(game.getTeamManager().getTeam("GHOST"));
                         return ghost;
                     }
                     else {

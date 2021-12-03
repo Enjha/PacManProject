@@ -21,6 +21,7 @@ class ClassicPhysicEngineTest {
     private final SceneCase sceneCase1 = new LabyrinthCase(1,1,new NormalCaseContentManager());
     private final SceneCase sceneCase2 = new LabyrinthCase(1,0,new NormalCaseContentManager());
     private final SceneCase sceneCase3 = new LabyrinthCase(1,2,new NormalCaseContentManager());
+    private final SceneCase sceneCase4 = new LabyrinthCase(2,1,new NormalCaseContentManager());
     private final TeamManager teamManager = new ClassicTeamManager();
     private final Team team1 = new ClassicTeam("team1",true);
     private final Team team2 = new ClassicTeam("team2",false);
@@ -50,14 +51,19 @@ class ClassicPhysicEngineTest {
         sceneCase3.addCaseContent(entity3);
         entity3.setPosition(sceneCase3);
 
+        sceneGame.addSceneCase(sceneCase4,2,1);
+
+        //collision between two entity of the same team whit the collision on
         Collision collision = physicEngine.moveEntity(new MovementNorth(entity1),sceneGame);
         assertEquals(entity1,collision.getFirstObjectCollision());
         assertEquals(entity2,collision.getSecondObjectCollision());
 
+        //collision between two entity of the same team whit the collision off
         team1.setCollision(false);
         collision = physicEngine.moveEntity(new MovementNorth(entity1),sceneGame);
         assertNull(collision);
 
+        //collision between two entity in different team
         collision = physicEngine.moveEntity(new MovementSouth(entity1),sceneGame);
         assertEquals(entity1,collision.getFirstObjectCollision());
         assertEquals(entity3,collision.getSecondObjectCollision());
@@ -67,6 +73,8 @@ class ClassicPhysicEngineTest {
         assertEquals(entity1,collision.getFirstObjectCollision());
         assertEquals(wall1,collision.getSecondObjectCollision());
 
-
+        //no collision
+        collision = physicEngine.moveEntity(new MovementEast(entity1),sceneGame);
+        assertNull(collision);
     }
 }
