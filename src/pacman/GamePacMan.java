@@ -101,8 +101,7 @@ public class GamePacMan implements Game {
             for (File file : files) {
                 if (file.isFile()) {
                     MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File(soundFolder.getPath() + "/" + file.getName()).toURI().toString()));
-                    mediaPlayer.setOnError(() -> System.out.println("media error"
-                            + mediaPlayer.getError().toString()));
+                    mediaPlayer.setOnError(() -> System.out.println("media error" + mediaPlayer.getError().toString()));
                     soundManager.addSound(new ClassicSound(mediaPlayer, file.getName()));
                 }
             }
