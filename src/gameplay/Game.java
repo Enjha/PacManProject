@@ -23,4 +23,5 @@ public interface Game {
     void treatmentCollisionGame(Movement movement);
     ImageViewEntities getImageViewEntity(Entity entity);
     Score getScore();
+    TeamManager getTeamManager();
 }

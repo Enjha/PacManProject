@@ -43,14 +43,18 @@ public class GamePacMan implements Game {
     private List<Thread> threadEntities = new ArrayList<>();
     private boolean stateThread = false;
     private Score score;
+    private TeamManager teamManager;
 
-    public GamePacMan(LabyrinthGenerator labyrinthGenerator,Score score) {
+    public GamePacMan(LabyrinthGenerator labyrinthGenerator,Score score,TeamManager teamManager) {
         this.labyrinthGenerator = labyrinthGenerator;
         this.score = score;
+        this.teamManager = teamManager;
+        teamManager.addTeam(new ClassicTeam("GHOST",false));
+        teamManager.addTeam(new ClassicTeam("PACMAN",false));
     }
 
     public void createEntity() {
-        entities = labyrinthGenerator.generateEntity(sceneGame);
+        entities = labyrinthGenerator.generateEntity(sceneGame,this);
 
         for (Entity entity : entities) {
             if (entity instanceof Pacman) {
@@ -206,7 +210,7 @@ public class GamePacMan implements Game {
             score.addScore(10);
             treatmentCollisionMoveEntity(movement, collision);
         } else if (collision.getSecondObjectCollision() instanceof PacgumFruit) {
-            //score.addScore(score.getScore() + 10);
+            score.addScore(50);
             treatmentCollisionMoveEntity(movement, collision);
         } else if (collision.getSecondObjectCollision() instanceof Ghost) {
             getThreadEntity(movement.getEntity()).setCollision(collision);
@@ -284,4 +288,7 @@ public class GamePacMan implements Game {
         return this.score;
     }
 
+    public TeamManager getTeamManager(){
+        return teamManager;
+    }
 }
