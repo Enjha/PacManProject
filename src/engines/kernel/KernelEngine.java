@@ -38,7 +38,7 @@ public interface KernelEngine {
     void setMovementEntity(Movement movement);
     ImageViewEntities getImageViewEntities(Entity entity);
     void playSound(String soundName);
-    void play1Sound(String soundName);
+    void playOneSound(String soundName);
     List<Thread> getCurrentsThreads();
     Score getScore();
 }

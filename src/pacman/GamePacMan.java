@@ -206,11 +206,11 @@ public class GamePacMan implements Game {
         if (collision.getSecondObjectCollision() instanceof NormalFruit) {
             score.addScore(10);
             treatmentCollisionMoveEntity(movement, collision);
-            kernelEngine.play1Sound("eat_fruit.wav");
-
+            kernelEngine.playOneSound("eat_fruit.wav");
         } else if (collision.getSecondObjectCollision() instanceof PacgumFruit) {
             score.addScore(50);
             treatmentCollisionMoveEntity(movement, collision);
+            kernelEngine.playOneSound("eat_fruit.wav");
         } else if (collision.getSecondObjectCollision() instanceof Ghost) {
             getThreadEntity(movement.getEntity()).setCollision(collision);
             treatmentCollisionMoveEntity(movement,collision);
