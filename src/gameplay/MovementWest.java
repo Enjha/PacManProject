@@ -5,6 +5,7 @@ public class MovementWest implements Movement {
     private final Entity entity;
 
     public MovementWest(Entity entity) {
+        assert entity != null;
         this.entity = entity;
     }
 
