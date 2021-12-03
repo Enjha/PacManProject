@@ -160,6 +160,4 @@ class Labyrinth2DTest {
         assertEquals(entity1,labyrinth.obstacleEntity(0,0).get(0));
         assertNull(labyrinth.obstacleEntity(0,1));
     }
-
-
 }

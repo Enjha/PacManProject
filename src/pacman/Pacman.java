@@ -27,12 +27,7 @@ public class Pacman implements Character {
     /**
      * Number of PacMan life
      */
-    private int NumberOflife = 3;
-
-    /**
-     * The name of Pacman
-     */
-    private String entityName = "Pac-Man";
+    private int NumberOfLife = 3;
 
     /**
      * The direction of the entity's movement
@@ -46,6 +41,9 @@ public class Pacman implements Character {
      */
     private boolean isAlive = true;
 
+    /**
+     * The animation's state of Pac-Man
+     */
     private volatile boolean isAnimated = false;
 
     /**
@@ -109,15 +107,15 @@ public class Pacman implements Character {
      *
      * @return integer numberOfLife
      */
-    public int getNumberOflife() {
-        return NumberOflife;
+    public int getNumberOfLife() {
+        return NumberOfLife;
     }
 
     /**
      * Set the Number of PacMan Life
      */
-    public void setNumberOflife(int NumberOflife) {
-        this.NumberOflife = NumberOflife;
+    public void setNumberOfLife(int NumberOflife) {
+        this.NumberOfLife = NumberOflife;
     }
 
     /**
@@ -144,7 +142,7 @@ public class Pacman implements Character {
      * @return a string value
      */
     public String getEntityName() {
-        return entityName;
+        return "Pac-Man";
     }
 
     /**

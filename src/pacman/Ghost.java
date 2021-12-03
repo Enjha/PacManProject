@@ -52,6 +52,9 @@ public class Ghost implements Character {
      */
     private final GhostColor color;
 
+    /**
+     * The animation's state of this ghost
+     */
     private boolean isAnimated = false;
 
     /**
@@ -125,7 +128,9 @@ public class Ghost implements Character {
      * @param team a new team
      */
     public void setTeam(Team team) {
-        this.team = team;
+        if(team != null) {
+            this.team = team;
+        }
     }
 
     /**
@@ -152,7 +157,9 @@ public class Ghost implements Character {
      * @param direction a new direction
      */
     public void setDirection(Direction direction) {
-        this.direction = direction;
+        if(direction != null) {
+            this.direction = direction;
+        }
     }
 
     /**
@@ -205,10 +212,18 @@ public class Ghost implements Character {
         return color;
     }
 
+    /**
+     * Return the state of the ghost's animation
+     * @return o boolean value
+     */
     public boolean isAnimated() {
         return isAnimated;
     }
 
+    /**
+     * Modify the state of the ghost's animation
+     * @param isAnimated
+     */
     public void setAnimated(boolean isAnimated) {
         this.isAnimated = isAnimated;
     }

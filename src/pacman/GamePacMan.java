@@ -9,13 +9,11 @@ import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
 import engines.physic.ClassicPhysicEngine;
 import engines.physic.Collision;
-import engines.physic.PhysicEngine;
 import engines.sound.*;
 import gameplay.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import pacman.animations.PacManAnimation;
 import pacman.scene.LabyrinthGenerator;
 import pacman.scene.SceneMainMenu;
 import scene.SceneCase;
@@ -28,19 +26,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GamePacMan implements Game {
 
     private List<Entity> entities;
     private SceneGame sceneGame;
-    private LabyrinthGenerator labyrinthGenerator;
+    private final LabyrinthGenerator labyrinthGenerator;
     private KernelEngine kernelEngine;
-    private PhysicEngine physicEngine;
-    private SoundEngine soundEngine;
-    private ControlEngine controlEngine;
-    private GraphicEngine graphicEngine;
     private List<Thread> threadEntities = new ArrayList<>();
     private boolean stateThread = false;
     private int score = 0;
@@ -80,8 +73,7 @@ public class GamePacMan implements Game {
 
     public void startEngine(Stage stage) {
         kernelEngine = new ClassicKernelEngine(this);
-        physicEngine = new ClassicPhysicEngine();
-        kernelEngine.setPhysicEngine(physicEngine);
+        kernelEngine.setPhysicEngine(new ClassicPhysicEngine());
         startSoundEngine();
         startGraphicEngine(stage);
         startControlEngine();
@@ -102,15 +94,14 @@ public class GamePacMan implements Game {
                     soundManager.addSound(new ClassicSound(mediaPlayer, file.getName()));
                 }
             }
-            soundEngine = new ClassicSoundEngine(soundManager);
-            kernelEngine.setSoundEngine(soundEngine);
+            kernelEngine.setSoundEngine( new ClassicSoundEngine(soundManager));
         } else {
             System.out.println("error folder null");
         }
     }
 
     private void startGraphicEngine(Stage stage) {
-        graphicEngine = new ClassicGraphicEngine(stage, kernelEngine, new ClassicConvertSceneToGraphic());
+        GraphicEngine graphicEngine = new ClassicGraphicEngine(stage, kernelEngine, new ClassicConvertSceneToGraphic());
         graphicEngine.setFxWindow(1200, 800, "Pac-Man");
         graphicEngine.setCurrentScene(new SceneMainMenu(stage, graphicEngine));
         kernelEngine.setGraphicEngine(graphicEngine);
@@ -162,8 +153,7 @@ public class GamePacMan implements Game {
                 }
             }
 
-            controlEngine = new ClassicControlEngine(controlManager, kernelEngine);
-            kernelEngine.setControlEngine(controlEngine);
+            kernelEngine.setControlEngine(new ClassicControlEngine(controlManager, kernelEngine));
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

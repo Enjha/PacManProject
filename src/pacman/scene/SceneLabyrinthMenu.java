@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import pacman.Pacman;
 
 import java.io.File;
-import java.util.ArrayList;
 
 
 public class SceneLabyrinthMenu implements ScenePacMan {
@@ -60,7 +59,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         labelScore.setId("labelScore");
         labelVie.setId("labelVie");
 
-        for (int i = 0; i < pacman.getNumberOflife(); i++) {
+        for (int i = 0; i < pacman.getNumberOfLife(); i++) {
             ImageView coeur = new ImageView();
             setupScene.setImageView(coeur, 630 + (25 * i), 7, 30, 30, new Image(new File("ressources/textures/coeur.png").toURI().toString()), true);
             panel.getChildren().add(coeur);
