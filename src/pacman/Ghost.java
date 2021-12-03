@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import scene.SceneCase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The entity ghost
@@ -56,6 +57,8 @@ public class Ghost implements Character {
      * The animation's state of this ghost
      */
     private boolean isAnimated = false;
+
+    private Life life;
 
     /**
      * <b>Constructor of Ghost</b>
@@ -121,6 +124,16 @@ public class Ghost implements Character {
     public void setPosition(SceneCase position) {
         this.position = position;
     }
+
+    /**
+     * The ghost's X starting position
+     */
+    private int xStartPosition;
+
+    /**
+     * The ghost's Y starting position
+     */
+    private int yStartPosition;
 
     /**
      * Modify the team of this entity
@@ -226,5 +239,59 @@ public class Ghost implements Character {
      */
     public void setAnimated(boolean isAnimated) {
         this.isAnimated = isAnimated;
+    }
+
+    /**
+     * Return the life of a ghost
+     *
+     * @return a object type of Life
+     */
+    public Life getLife() {
+        return life;
+    }
+
+    /**
+     * Set the Number of a ghost Life point
+     */
+    public void setLifePoint(int nbLife) {
+        this.life.setNumberOfLife(nbLife);
+    }
+
+    /**
+     * Get the X starting position of a ghost in the labyrinth.
+     *
+     * @return a integer value
+     */
+    public int getxStartPosition() {
+        return xStartPosition;
+    }
+
+    /**
+     * Set the X starting position of a ghost in the labyrinth.
+     *
+     * @param xStartPosition
+     *      a new start position x
+     */
+    public void setxStartPosition(int xStartPosition) {
+        this.xStartPosition = xStartPosition;
+    }
+
+    /**
+     * Get the Y starting position of a ghost in the labyrinth.
+     *
+     * @return a integer value
+     */
+    public int getyStartPosition() {
+        return yStartPosition;
+    }
+
+    /**
+     * Set the Y starting position of a ghost in the labyrinth.
+     *
+     * @param yStartPosition
+     *      a new start position y
+     */
+    public void setyStartPosition(int yStartPosition) {
+        this.yStartPosition = yStartPosition;
     }
 }

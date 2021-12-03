@@ -30,7 +30,6 @@ public class SceneLabyrinthMenu implements ScenePacMan {
     private SetupScene setupScene = new SetupScene();
     private Pane panel;
     private GraphicEngine graphicEngine;
-    private Pacman pacman = new Pacman();
 
     public SceneLabyrinthMenu(Stage stage, GraphicEngine graphicEngine) {
         this.stage = stage;
@@ -53,17 +52,6 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         icon.setFitHeight(60);
         pauseButton.setGraphic(icon);
 
-        Label labelVie = new Label();
-        setupScene.setLabel(labelVie, "Vie(s) restante(s) : ", Pos.CENTER_LEFT, 500, -20, 80, 300, new Font(15), Paint.valueOf("black"), true);
-      //  labelScore.setId("labelScore");
-        labelVie.setId("labelVie");
-
-        for (int i = 0; i < pacman.getNumberOfLife(); i++) {
-            ImageView coeur = new ImageView();
-            setupScene.setImageView(coeur, 630 + (25 * i), 7, 30, 30, new Image(new File("ressources/textures/coeur.png").toURI().toString()), true);
-            panel.getChildren().add(coeur);
-        }
-
         pauseButton.setOnMouseClicked((event) -> {
             try {
                 setScenePause();
@@ -72,7 +60,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
             }
         });
 
-        panel.getChildren().addAll(pauseButton, labelVie);
+        panel.getChildren().addAll(pauseButton);
         root.getChildren().add(panel);
         root.setStyle("-fx-background-color: black;");
         graphicEngine.setControlEngineState(true);

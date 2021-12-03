@@ -3,6 +3,7 @@ package gameplay;
 import engines.graphic.ImageViewEntities;
 import engines.physic.Collision;
 import javafx.stage.Stage;
+import pacman.Life;
 import pacman.Score;
 import scene.SceneGame;
 
@@ -24,5 +25,6 @@ public interface Game {
     void treatmentCollisionGame(Movement movement);
     ImageViewEntities getImageViewEntity(Entity entity);
     Score getScore();
+    Life getLife();
     TeamManager getTeamManager();
 }

@@ -5,10 +5,7 @@ import static org.junit.Assert.assertNull;
 
 import gameplay.*;
 import org.junit.jupiter.api.Test;
-import pacman.Labyrinth2D;
-import pacman.LabyrinthCase;
-import pacman.NormalCaseContentManager;
-import pacman.Pacman;
+import pacman.*;
 import scene.SceneCase;
 import scene.SceneElement;
 import scene.SceneGame;
@@ -141,8 +138,8 @@ class Labyrinth2DTest {
         sceneCase1.addCaseContent(wallNorthSceneCase1);
         labyrinth.addSceneCase(sceneCase1,0,0);
         labyrinth.addSceneCase(sceneCase2,0,1);
-        Movement movementNorth = new MovementNorth(new Pacman());
-        Movement movementSouth = new MovementSouth(new Pacman());
+        Movement movementNorth = new MovementNorth(new Pacman(new ClassicLife()));
+        Movement movementSouth = new MovementSouth(new Pacman(new ClassicLife()));
 
         assertEquals(wallNorthSceneCase1,labyrinth.obstacleElement(0,0,movementNorth));
         assertNull(labyrinth.obstacleElement(0,0,movementSouth));
@@ -151,7 +148,7 @@ class Labyrinth2DTest {
 
     @Test
     void obstacleEntity(){
-        Entity entity1 = new Pacman();
+        Entity entity1 = new Pacman(new ClassicLife());
         sceneCase1.addCaseContent(entity1);
         labyrinth.addSceneCase(sceneCase1,0,0);
         labyrinth.addSceneCase(sceneCase2,0,1);

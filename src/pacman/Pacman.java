@@ -27,7 +27,7 @@ public class Pacman implements Character {
     /**
      * Number of PacMan life
      */
-    private int NumberOfLife = 3;
+    private Life life;
 
     /**
      * The direction of the entity's movement
@@ -84,6 +84,11 @@ public class Pacman implements Character {
     private int yStartPosition;
 
 
+    public Pacman(Life life) {
+        this.life = life;
+    }
+
+
     /**
      * Return the scene case who contain this entity
      *
@@ -103,19 +108,19 @@ public class Pacman implements Character {
     }
 
     /**
-     * Return the Number of PacMan Life
+     * Return the life of Pacman
      *
-     * @return integer numberOfLife
+     * @return a object type of Life
      */
-    public int getNumberOfLife() {
-        return NumberOfLife;
+    public Life getLife() {
+        return life;
     }
 
     /**
-     * Set the Number of PacMan Life
+     * Set the Number of PacMan Life point
      */
-    public void setNumberOfLife(int NumberOflife) {
-        this.NumberOfLife = NumberOflife;
+    public void setLifePoint(int nbLife) {
+        this.life.setNumberOfLife(nbLife);
     }
 
     /**
@@ -159,7 +164,6 @@ public class Pacman implements Character {
      *
      * @return list of Images
      */
-    @Override
     public ArrayList<Image> getTextures() {
         return new PacManView().getPacmanView(this);
     }
@@ -209,7 +213,8 @@ public class Pacman implements Character {
     /**
      * Set the X starting position of pacman in labyrtinh.
      *
-     * @param xStartPosition integer
+     * @param xStartPosition
+     *      a new start position x
      */
     public void setxStartPosition(int xStartPosition) {
         this.xStartPosition = xStartPosition;
@@ -227,7 +232,8 @@ public class Pacman implements Character {
     /**
      * Set the Y starting position of pacman in labyrtinh.
      *
-     * @param yStartPosition integer
+     * @param yStartPosition
+     *       a new start position y
      */
     public void setyStartPosition(int yStartPosition) {
         this.yStartPosition = yStartPosition;

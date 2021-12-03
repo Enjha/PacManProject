@@ -6,17 +6,14 @@ import static org.junit.Assert.assertNull;
 import org.junit.jupiter.api.Test;
 
 import gameplay.Entity;
-import pacman.Ghost;
-import pacman.GhostColor;
-import pacman.NormalCaseContentManager;
-import pacman.Pacman;
+import pacman.*;
 
 import java.util.List;
 
 class NormalCaseContentManagerTest {
 
     private final NormalCaseContentManager normalCaseContentManager = new NormalCaseContentManager();
-    private final Entity pacman = new Pacman();
+    private final Entity pacman = new Pacman(new ClassicLife());
     private final Entity ghostBlue = new Ghost("Blue", GhostColor.BLUE);
     private final Entity ghostPink = new Ghost("Pink", GhostColor.PINK);
 
