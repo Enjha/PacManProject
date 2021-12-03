@@ -2,6 +2,8 @@ package pacman;
 
 import engines.graphic.ImageViewEntities;
 import engines.physic.Collision;
+import engines.sound.Sound;
+import engines.sound.SoundManager;
 import gameplay.*;
 import pacman.animations.PacManAnimation;
 

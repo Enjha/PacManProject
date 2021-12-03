@@ -12,10 +12,7 @@ import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
 import engines.physic.ClassicPhysicEngine;
 import engines.physic.Collision;
-import engines.sound.ClassicSound;
-import engines.sound.ClassicSoundEngine;
-import engines.sound.ClassicSoundManager;
-import engines.sound.SoundManager;
+import engines.sound.*;
 import gameplay.Character;
 import gameplay.*;
 import javafx.scene.media.Media;
@@ -209,6 +206,8 @@ public class GamePacMan implements Game {
         if (collision.getSecondObjectCollision() instanceof NormalFruit) {
             score.addScore(10);
             treatmentCollisionMoveEntity(movement, collision);
+            kernelEngine.play1Sound("eat_fruit.wav");
+
         } else if (collision.getSecondObjectCollision() instanceof PacgumFruit) {
             score.addScore(50);
             treatmentCollisionMoveEntity(movement, collision);

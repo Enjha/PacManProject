@@ -95,10 +95,6 @@ public class LabyrinthBuild implements LabyrinthGenerator{
                         sceneCase.addCaseContent(new Wall(wallDirection));
                     }
                 }
-
-                if(x == 0 && y == 13){
-                    System.out.println(sceneCase.getCaseContent(Wall.class.toString()).size());
-                }
                 if(splitLine.length  > (4 + numberWall)){
                     x = Integer.parseInt(splitLine[3 + numberWall]);
                     y = Integer.parseInt(splitLine[4 + numberWall]);

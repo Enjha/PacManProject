@@ -135,6 +135,9 @@ public class ClassicKernelEngine implements KernelEngine {
     public void playSound(String soundName) {
         soundEngine.playSound(soundName, MediaPlayer.INDEFINITE);
     }
+    public void play1Sound(String soundName) {
+        soundEngine.playSound(soundName, 1);
+    }
 
     public List<Thread> getCurrentsThreads() {
         return game.getThreadEntities();
