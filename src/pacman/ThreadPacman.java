@@ -56,6 +56,9 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                                     pacManAnimation.movementAnimation(imageViewEntities);
                                     game.getImageViewEntity((Entity) collision.getSecondObjectCollision()).getImageView().setVisible(false);
                                 }
+                                if (collision.getSecondObjectCollision() instanceof Ghost){
+                                    pacManAnimation.deadAnimation(imageViewEntities);
+                                }
                             }
                             else {
                                 pacman.setDirection(movement.getDirection());

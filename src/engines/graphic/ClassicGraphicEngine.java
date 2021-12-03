@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import pacman.Life;
 import pacman.Score;
 import scene.SceneCase;
 import scene.SceneGame;
@@ -52,7 +53,9 @@ public class ClassicGraphicEngine implements GraphicEngine {
             setSceneGameTexture(kernelEngine.getSceneGame());
             setSceneGameEntity(kernelEngine.getSceneGame());
             Score score = kernelEngine.getScore();
+            Life life = kernelEngine.getLife();
             score.setSceneScore(scene.getPanel());
+            life.setSceneLife(scene.getPanel());
         }
     }
 

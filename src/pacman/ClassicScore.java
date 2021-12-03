@@ -3,13 +3,10 @@ package pacman;
 import apiUser.SetupScene;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-
-import java.awt.*;
 
 public class ClassicScore implements Score {
 
@@ -18,7 +15,8 @@ public class ClassicScore implements Score {
     private Pane pane;
 
     public ClassicScore() {
-        new SetupScene().setLabel(labelScore, "Score : 0", Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
+        new SetupScene().setLabel(labelScore, "Score : ", Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
+        labelScore.setId("labelScore");
     }
 
     public Label getLabel() {

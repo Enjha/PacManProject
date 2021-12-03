@@ -2,7 +2,6 @@ package engines.kernel;
 
 import engines.UI.Control;
 import engines.UI.ControlEngine;
-import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
 import engines.graphic.ImageViewEntities;
 import engines.physic.PhysicEngine;
@@ -10,6 +9,7 @@ import engines.sound.SoundEngine;
 import gameplay.Entity;
 import gameplay.Movement;
 import javafx.scene.Scene;
+import pacman.Life;
 import pacman.Score;
 import scene.SceneGame;
 
@@ -41,4 +41,5 @@ public interface KernelEngine {
     void playOneSound(String soundName);
     List<Thread> getCurrentsThreads();
     Score getScore();
+    Life getLife();
 }

@@ -12,7 +12,10 @@ import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
 import engines.physic.ClassicPhysicEngine;
 import engines.physic.Collision;
-import engines.sound.*;
+import engines.sound.ClassicSound;
+import engines.sound.ClassicSoundEngine;
+import engines.sound.ClassicSoundManager;
+import engines.sound.SoundManager;
 import gameplay.Character;
 import gameplay.*;
 import javafx.scene.media.Media;
@@ -40,18 +43,20 @@ public class GamePacMan implements Game {
     private List<Thread> threadEntities = new ArrayList<>();
     private boolean stateThread = false;
     private Score score;
+    private Life life;
     private TeamManager teamManager;
 
-    public GamePacMan(LabyrinthGenerator labyrinthGenerator,Score score,TeamManager teamManager) {
+    public GamePacMan(LabyrinthGenerator labyrinthGenerator, Score score, Life life, TeamManager teamManager) {
         this.labyrinthGenerator = labyrinthGenerator;
         this.score = score;
+        this.life = life;
         this.teamManager = teamManager;
-        teamManager.addTeam(new ClassicTeam("GHOST",false));
-        teamManager.addTeam(new ClassicTeam("PACMAN",false));
+        teamManager.addTeam(new ClassicTeam("GHOST", false));
+        teamManager.addTeam(new ClassicTeam("PACMAN", false));
     }
 
     public void createEntity() {
-        entities = labyrinthGenerator.generateEntity(sceneGame,this);
+        entities = labyrinthGenerator.generateEntity(sceneGame, this);
         for (Entity entity : entities) {
             if (entity instanceof Pacman) {
                 threadEntities.add(new ThreadPacman((Pacman) entity, this));
@@ -211,7 +216,7 @@ public class GamePacMan implements Game {
             kernelEngine.playOneSound("eat_fruit.wav");
         } else if (collision.getSecondObjectCollision() instanceof Ghost) {
             getThreadEntity(movement.getEntity()).setCollision(collision);
-            treatmentCollisionMoveEntity(movement,collision);
+            treatmentCollisionMoveEntity(movement, collision);
         }
     }
 
@@ -226,12 +231,14 @@ public class GamePacMan implements Game {
                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
                     newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
                 } else if (collision.getSecondObjectCollision() instanceof Ghost) {
-                    System.out.println("COLLISION WITH GHOOOSOST");
-                    kernelEngine.playOneSound("siren_1.wav");
+                   /* Pacman pacman = (Pacman) collision.getFirstObjectCollision();
+                    pacman.setDirection(Direction.Stop);
+                    pacman.setIsAlive(false);
+                    kernelEngine.playOneSound("siren_1.wav");*/
+                    System.out.println("TESTETSETSETTSE");
                 }
 
             } else {
-                System.out.println("collision null");
                 if (movement.getEntity().isCharacter()) {
                     ((Character) movement.getEntity()).setDirection(movement.getDirection());
                 }
@@ -284,11 +291,15 @@ public class GamePacMan implements Game {
         return kernelEngine.getImageViewEntities(entity);
     }
 
-    public Score getScore(){
+    public Score getScore() {
         return this.score;
     }
 
-    public TeamManager getTeamManager(){
+    public Life getLife() {
+        return this.life;
+    }
+
+    public TeamManager getTeamManager() {
         return teamManager;
     }
 }

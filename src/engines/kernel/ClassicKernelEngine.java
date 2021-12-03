@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
+import pacman.Life;
 import pacman.Score;
 import scene.SceneGame;
 
@@ -146,6 +147,10 @@ public class ClassicKernelEngine implements KernelEngine {
 
     public Score getScore() {
         return game.getScore();
+    }
+
+    public Life getLife() {
+        return game.getLife();
     }
 
 }

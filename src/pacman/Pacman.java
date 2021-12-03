@@ -27,7 +27,7 @@ public class Pacman implements Character {
     /**
      * Number of PacMan life
      */
-    private int NumberOfLife = 3;
+    private Life life;
 
     /**
      * The direction of the entity's movement
@@ -84,6 +84,11 @@ public class Pacman implements Character {
     private int yStartPosition;
 
 
+    public Pacman(Life life) {
+        this.life = life;
+    }
+
+
     /**
      * Return the scene case who contain this entity
      *
@@ -103,19 +108,19 @@ public class Pacman implements Character {
     }
 
     /**
-     * Return the Number of PacMan Life
+     * Return the Number caracteristic life of Pacman
      *
      * @return integer numberOfLife
      */
-    public int getNumberOfLife() {
-        return NumberOfLife;
+    public Life getLife() {
+        return life;
     }
 
     /**
      * Set the Number of PacMan Life
      */
-    public void setNumberOfLife(int NumberOflife) {
-        this.NumberOfLife = NumberOflife;
+    public void setLifePoint(int nbLife) {
+        this.life.setNumberOfLife(nbLife);
     }
 
     /**
