@@ -6,6 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import scene.SceneGame;
 
+import java.awt.*;
 import java.util.List;
 
 public interface ConvertSceneToGraphic {

@@ -5,9 +5,12 @@ import engines.UI.Control;
 import gameplay.Entity;
 import gameplay.ThreadEntity;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import pacman.scene.SceneLabyrinthMenu;
 import scene.SceneGame;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -43,8 +43,6 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                             pacman.setDirection(movement.getDirection());
                             pacman.setAnimated(true);
                             pacManAnimation.movementAnimation(imageViewEntities);
-                            pacman.setScore(pacman.getScore()+10);
-                            waitMovement();
                             game.getImageViewEntity((Entity) collision.getSecondObjectCollision()).getImageView().setVisible(false);
                         }
                         else{
@@ -54,7 +52,6 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                                     pacman.setDirection(movement.getDirection());
                                     pacman.setAnimated(true);
                                     pacManAnimation.movementAnimation(imageViewEntities);
-                                    waitMovement();
                                     game.getImageViewEntity((Entity) collision.getSecondObjectCollision()).getImageView().setVisible(false);
                                 }
                             }

@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import pacman.Score;
 import scene.SceneGame;
 
+import java.awt.*;
 import java.util.List;
 
 public interface Game {

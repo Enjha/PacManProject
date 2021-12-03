@@ -5,12 +5,16 @@ import apiUser.SceneAPIUser;
 import engines.UI.Control;
 import engines.kernel.KernelEngine;
 import gameplay.Entity;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import pacman.Score;
 import scene.SceneCase;
 import scene.SceneGame;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +25,7 @@ public class ClassicGraphicEngine implements GraphicEngine {
     private final KernelEngine kernelEngine;
     private ConvertSceneToGraphic convertSceneToGraphic;
     private SceneAPIUser previewScene;
+    List<javafx.scene.control.Label> labels = new ArrayList<>();
 
     public ClassicGraphicEngine(Stage stage, KernelEngine kernelEngine, ConvertSceneToGraphic convertSceneToGraphic) {
         this.stage = stage;
@@ -124,6 +129,14 @@ public class ClassicGraphicEngine implements GraphicEngine {
             }
         }
         return null;
+    }
+    public List<Label> getLabels(Pane pane){
+        for (Node lab : pane.getChildren()) {
+            if (lab instanceof javafx.scene.control.Label) {
+                labels.add((javafx.scene.control.Label) lab);
+            }
+        }
+        return labels;
     }
 
     public void playSound(String soundName) {

@@ -11,10 +11,13 @@ import gameplay.Entity;
 import gameplay.Game;
 import gameplay.Movement;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
 import pacman.Score;
 import scene.SceneGame;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,7 +116,6 @@ public class ClassicKernelEngine implements KernelEngine {
     public ImageViewEntities getImageViewEntities(Entity entity) {
         return graphicEngine.getImageViewEntities(entity);
     }
-
 
     public Entity getEntity(String entityName) {
         if(game.getEntities().size() != 0){
