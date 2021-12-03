@@ -55,7 +55,7 @@ public class SceneMainMenu implements ScenePacMan {
         buttonQuit.setOnMouseClicked((event)-> exit());
         buttonPlay.setOnMouseClicked((event)-> setScenePlay());
 
-        graphicEngine.playSound("game_start.wav");
+        graphicEngine.playSound("intermission.wav");
 
         pane.getChildren().addAll(buttonOption,buttonQuit,buttonPlay,picturePacMan);
         root.getChildren().add(pane);

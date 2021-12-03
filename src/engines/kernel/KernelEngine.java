@@ -39,6 +39,7 @@ public interface KernelEngine {
     ImageViewEntities getImageViewEntities(Entity entity);
     void playSound(String soundName);
     void playOneSound(String soundName);
+    void stopSound(String soundName);
     List<Thread> getCurrentsThreads();
     Score getScore();
     Life getLife();

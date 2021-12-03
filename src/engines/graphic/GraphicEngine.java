@@ -37,5 +37,6 @@ public interface GraphicEngine {
     void updateSceneGame(Entity entity);
     ImageViewEntities getImageViewEntities(Entity entity);
     void playSound(String soundName);
+    void stopSound(String soundName);
     List<Thread> getCurrentsThreads();
 }

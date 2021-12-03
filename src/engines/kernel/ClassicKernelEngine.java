@@ -140,6 +140,9 @@ public class ClassicKernelEngine implements KernelEngine {
         soundEngine.playSound(soundName, 1);
         soundEngine.stopSound(soundName);
     }
+    public void stopSound(String soundName){
+        soundEngine.stopSound(soundName);
+    }
 
     public List<Thread> getCurrentsThreads() {
         return game.getThreadEntities();

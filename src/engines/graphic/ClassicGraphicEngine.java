@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import pacman.Life;
 import pacman.Score;
@@ -146,6 +147,9 @@ public class ClassicGraphicEngine implements GraphicEngine {
         kernelEngine.playSound(soundName);
     }
 
+    public void stopSound(String soundName){
+        kernelEngine.stopSound(soundName);
+    }
     public List<Thread> getCurrentsThreads() {
         return kernelEngine.getCurrentsThreads();
     }
