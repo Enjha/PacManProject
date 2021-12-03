@@ -8,11 +8,9 @@ public interface Score {
 
     int getScore();
 
-    void setScore(int score);
+    void addScore(int score);
 
     Pane getSceneScore();
 
     void setSceneScore(Pane sceneScore);
-
-    void setVisible(boolean visibility);
 }

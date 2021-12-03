@@ -44,8 +44,9 @@ public class GamePacMan implements Game {
     private boolean stateThread = false;
     private Score score;
 
-    public GamePacMan(LabyrinthGenerator labyrinthGenerator) {
+    public GamePacMan(LabyrinthGenerator labyrinthGenerator,Score score) {
         this.labyrinthGenerator = labyrinthGenerator;
+        this.score = score;
     }
 
     public void createEntity() {
@@ -75,7 +76,6 @@ public class GamePacMan implements Game {
 
     public void generateSceneGame() {
         sceneGame = labyrinthGenerator.generateLabyrinth();
-        this.score =  new ClassicScore();
     }
 
     public void startEngine(Stage stage) {
@@ -203,8 +203,10 @@ public class GamePacMan implements Game {
 
     private void treatmentCollisionEntity(Movement movement, Collision collision) {
         if (collision.getSecondObjectCollision() instanceof NormalFruit) {
+            score.addScore(score.getScore() + 10);
             treatmentCollisionMoveEntity(movement, collision);
         } else if (collision.getSecondObjectCollision() instanceof PacgumFruit) {
+            //score.addScore(score.getScore() + 10);
             treatmentCollisionMoveEntity(movement, collision);
         } else if (collision.getSecondObjectCollision() instanceof Ghost) {
             getThreadEntity(movement.getEntity()).setCollision(collision);
@@ -221,7 +223,6 @@ public class GamePacMan implements Game {
             if (collision != null) {
                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
                     newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
-                    score.setScore(score.getScore() + 10);
                 } else if (collision.getSecondObjectCollision() instanceof Ghost) {
                     System.out.println("COLLISION WITH GHOOOSOST");
                 }

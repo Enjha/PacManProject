@@ -1,6 +1,7 @@
 package pacman;
 
 import apiUser.SetupScene;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -15,10 +16,9 @@ public class ClassicScore implements Score {
     private final Label labelScore = new Label();
     private int score = 0;
     private Pane pane;
-    private boolean visibility = false;
 
     public ClassicScore() {
-        new SetupScene().setLabel(labelScore, "Score : ", Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), visibility);
+        new SetupScene().setLabel(labelScore, "Score : ", Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
     }
 
     public Label getLabel() {
@@ -29,9 +29,13 @@ public class ClassicScore implements Score {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-        this.labelScore.setText("Score : " + score);
+    public void addScore(int value) {
+        score += value;
+        Platform.runLater(
+                () -> {
+                    labelScore.setText("Score : " + score);
+                });
+
     }
 
     public Pane getSceneScore() {
@@ -42,9 +46,4 @@ public class ClassicScore implements Score {
         this.pane = pane;
         pane.getChildren().add(labelScore);
     }
-
-    public void setVisible(boolean visibility) {
-        this.visibility = visibility;
-    }
-
 }

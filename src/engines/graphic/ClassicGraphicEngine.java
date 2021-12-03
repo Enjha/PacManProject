@@ -47,7 +47,6 @@ public class ClassicGraphicEngine implements GraphicEngine {
             setSceneGameTexture(kernelEngine.getSceneGame());
             setSceneGameEntity(kernelEngine.getSceneGame());
             Score score = kernelEngine.getScore();
-            score.setVisible(true);
             score.setSceneScore(scene.getPanel());
         }
     }

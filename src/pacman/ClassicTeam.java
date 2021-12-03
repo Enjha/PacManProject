@@ -15,7 +15,7 @@ public class ClassicTeam implements Team {
     /**
      * the state of if there is a collision between entities in this team
      */
-    private final boolean collision;
+    private boolean collision;
 
     /**
      * <b>Constructor of ClassicTeam</b>
@@ -43,5 +43,14 @@ public class ClassicTeam implements Team {
      */
     public  boolean getCollision(){
         return collision;
+    }
+
+    /**
+     * Modify the collision's state
+     * @param collision
+     *      a new collision's state
+     */
+    public void setCollision(boolean collision){
+        this.collision = collision;
     }
 }
