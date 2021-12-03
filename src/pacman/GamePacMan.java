@@ -69,6 +69,7 @@ public class GamePacMan implements Game {
                 threadEntity.setImageViewEntities(kernelEngine.getImageViewEntities(threadEntity.getEntity()));
                 thread.start();
             }
+            kernelEngine.playOneSound("game_start.wav");
             stateThread = true;
         }
     }
