@@ -52,10 +52,8 @@ public class GamePacMan implements Game {
 
     public void createEntity() {
         entities = labyrinthGenerator.generateEntity(sceneGame,this);
-
         for (Entity entity : entities) {
             if (entity instanceof Pacman) {
-
                 threadEntities.add(new ThreadPacman((Pacman) entity, this));
             }
             if (entity instanceof Ghost) {
@@ -229,6 +227,7 @@ public class GamePacMan implements Game {
                     newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
                 } else if (collision.getSecondObjectCollision() instanceof Ghost) {
                     System.out.println("COLLISION WITH GHOOOSOST");
+                    kernelEngine.playOneSound("siren_1.wav");
                 }
 
             } else {
