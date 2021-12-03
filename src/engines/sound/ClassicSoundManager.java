@@ -16,6 +16,7 @@ public class ClassicSoundManager implements SoundManager{
     public void addSound(Sound sound){
         if(!sounds.containsKey(sound.getName())){
             sounds.put(sound.getName(),sound);
+            assert(sounds.containsKey(sound.getName()));
         }
     }
 
@@ -27,6 +28,7 @@ public class ClassicSoundManager implements SoundManager{
     public void removeSound(Sound sound){
         if(sounds.containsKey(sound.getName())){
             sounds.remove(sound);
+            assert(!sounds.containsKey(sound.getName()));
         }
     }
 
@@ -40,6 +42,7 @@ public class ClassicSoundManager implements SoundManager{
     public void playSound(String name,int cycle){
         if(sounds.containsKey(name)){
             sounds.get(name).play(cycle);
+            assert(sounds.get(name).getSound().getStatus() == MediaPlayer.Status.PLAYING && sounds.get(name).getSound().getCycleCount() == cycle);
         }
     }
 
