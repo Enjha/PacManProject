@@ -155,6 +155,10 @@ class Labyrinth2DTest {
         sceneCase1.addCaseContent(entity1);
         labyrinth.addSceneCase(sceneCase1,0,0);
         labyrinth.addSceneCase(sceneCase2,0,1);
+
+        assertEquals(1,labyrinth.obstacleEntity(0,0).size());
+        assertEquals(entity1,labyrinth.obstacleEntity(0,0).get(0));
+        assertNull(labyrinth.obstacleEntity(0,1));
     }
 
 

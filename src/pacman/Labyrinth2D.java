@@ -159,7 +159,12 @@ public class Labyrinth2D implements SceneGame {
                 }
             }
         }
-        return entities;
+        if(entities.size() > 0) {
+            return entities;
+        }
+        else {
+            return null;
+        }
     }
 
     /**
