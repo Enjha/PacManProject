@@ -53,8 +53,6 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         icon.setFitHeight(60);
         pauseButton.setGraphic(icon);
 
-       // Label labelScore = new Label();
-       // setupScene.setLabel(labelScore, "Score : 0", Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
         Label labelVie = new Label();
         setupScene.setLabel(labelVie, "Vie(s) restante(s) : ", Pos.CENTER_LEFT, 500, -20, 80, 300, new Font(15), Paint.valueOf("black"), true);
       //  labelScore.setId("labelScore");

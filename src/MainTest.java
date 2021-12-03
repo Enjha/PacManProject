@@ -9,7 +9,7 @@ public class MainTest extends Application {
     public void start(Stage stage) {
 
         stage.setResizable(false);
-        Game game = new GamePacMan(new LabyrinthBuild(),new ClassicScore(),new ClassicTeamManager());
+        Game game = new GamePacMan(new LabyrinthBuild(),new ClassicScore(),297,new ClassicTeamManager());
         game.generateSceneGame();
         game.createEntity();
         game.startEngine(stage);

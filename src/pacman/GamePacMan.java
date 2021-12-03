@@ -18,8 +18,7 @@ import gameplay.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import pacman.scene.LabyrinthGenerator;
-import pacman.scene.SceneMainMenu;
+import pacman.scene.*;
 import scene.SceneCase;
 import scene.SceneElement;
 import scene.SceneGame;
@@ -41,11 +40,13 @@ public class GamePacMan implements Game {
     private boolean stateThread = false;
     private Score score;
     private TeamManager teamManager;
+    private int fruits;
 
-    public GamePacMan(LabyrinthGenerator labyrinthGenerator,Score score,TeamManager teamManager) {
+    public GamePacMan(LabyrinthGenerator labyrinthGenerator,Score score, int fruits, TeamManager teamManager) {
         this.labyrinthGenerator = labyrinthGenerator;
         this.score = score;
         this.teamManager = teamManager;
+        this.fruits = fruits;
         teamManager.addTeam(new ClassicTeam("GHOST",false));
         teamManager.addTeam(new ClassicTeam("PACMAN",false));
     }
@@ -206,10 +207,14 @@ public class GamePacMan implements Game {
             score.addScore(10);
             treatmentCollisionMoveEntity(movement, collision);
             kernelEngine.playOneSound("eat_fruit.wav");
+            if(fruits>290) fruits -=1;
+            else System.out.println("Gagné !");
         } else if (collision.getSecondObjectCollision() instanceof PacgumFruit) {
             score.addScore(50);
             treatmentCollisionMoveEntity(movement, collision);
             kernelEngine.playOneSound("eat_fruit.wav");
+            if(fruits>290) fruits -=1;
+            else System.out.println("Gagné !");
         } else if (collision.getSecondObjectCollision() instanceof Ghost) {
             getThreadEntity(movement.getEntity()).setCollision(collision);
             treatmentCollisionMoveEntity(movement,collision);
@@ -228,7 +233,7 @@ public class GamePacMan implements Game {
                     newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
                 } else if (collision.getSecondObjectCollision() instanceof Ghost) {
                     System.out.println("COLLISION WITH GHOOOSOST");
-                    kernelEngine.playOneSound("siren_1.wav");
+                    kernelEngine.playOneSound("death_1.wav");
                 }
 
             } else {
