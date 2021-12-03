@@ -214,6 +214,7 @@ public class GamePacMan implements Game {
             treatmentCollisionMoveEntity(movement, collision);
         } else if (collision.getSecondObjectCollision() instanceof Ghost) {
             getThreadEntity(movement.getEntity()).setCollision(collision);
+            treatmentCollisionMoveEntity(movement,collision);
         }
     }
 
@@ -232,6 +233,7 @@ public class GamePacMan implements Game {
                 }
 
             } else {
+                System.out.println("collision null");
                 if (movement.getEntity().isCharacter()) {
                     ((Character) movement.getEntity()).setDirection(movement.getDirection());
                 }
