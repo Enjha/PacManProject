@@ -10,6 +10,7 @@ import engines.sound.SoundEngine;
 import gameplay.Entity;
 import gameplay.Movement;
 import javafx.scene.Scene;
+import pacman.Score;
 import scene.SceneGame;
 
 import java.util.ArrayList;
@@ -38,5 +39,5 @@ public interface KernelEngine {
     ImageViewEntities getImageViewEntities(Entity entity);
     void playSound(String soundName);
     List<Thread> getCurrentsThreads();
-    int getScore();
+    Score getScore();
 }

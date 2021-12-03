@@ -1,6 +1,9 @@
 package pacman;
 
-import engines.UI.*;
+import engines.UI.ClassicControlEngine;
+import engines.UI.ClassicControlManager;
+import engines.UI.ControlManager;
+import engines.UI.KeyBoardControl;
 import engines.graphic.ClassicConvertSceneToGraphic;
 import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
@@ -9,7 +12,11 @@ import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
 import engines.physic.ClassicPhysicEngine;
 import engines.physic.Collision;
-import engines.sound.*;
+import engines.sound.ClassicSound;
+import engines.sound.ClassicSoundEngine;
+import engines.sound.ClassicSoundManager;
+import engines.sound.SoundManager;
+import gameplay.Character;
 import gameplay.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -19,7 +26,6 @@ import pacman.scene.SceneMainMenu;
 import scene.SceneCase;
 import scene.SceneElement;
 import scene.SceneGame;
-import gameplay.Character;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,7 +42,7 @@ public class GamePacMan implements Game {
     private KernelEngine kernelEngine;
     private List<Thread> threadEntities = new ArrayList<>();
     private boolean stateThread = false;
-    private int score = 0;
+    private Score score;
 
     public GamePacMan(LabyrinthGenerator labyrinthGenerator) {
         this.labyrinthGenerator = labyrinthGenerator;
@@ -69,6 +75,7 @@ public class GamePacMan implements Game {
 
     public void generateSceneGame() {
         sceneGame = labyrinthGenerator.generateLabyrinth();
+        this.score =  new ClassicScore();
     }
 
     public void startEngine(Stage stage) {
@@ -94,7 +101,7 @@ public class GamePacMan implements Game {
                     soundManager.addSound(new ClassicSound(mediaPlayer, file.getName()));
                 }
             }
-            kernelEngine.setSoundEngine( new ClassicSoundEngine(soundManager));
+            kernelEngine.setSoundEngine(new ClassicSoundEngine(soundManager));
         } else {
             System.out.println("error folder null");
         }
@@ -214,7 +221,7 @@ public class GamePacMan implements Game {
             if (collision != null) {
                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
                     newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
-                    setScore(score+10);
+                    score.setScore(score.getScore() + 10);
                 } else if (collision.getSecondObjectCollision() instanceof Ghost) {
                     System.out.println("COLLISION WITH GHOOOSOST");
                 }
@@ -272,11 +279,8 @@ public class GamePacMan implements Game {
         return kernelEngine.getImageViewEntities(entity);
     }
 
-    public int getScore() {
-        return score;
+    public Score getScore(){
+        return this.score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
 }

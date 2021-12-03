@@ -52,11 +52,11 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         icon.setFitHeight(60);
         pauseButton.setGraphic(icon);
 
-        Label labelScore = new Label();
-        setupScene.setLabel(labelScore, "Score : " + graphicEngine.getScore(), Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
+       // Label labelScore = new Label();
+       // setupScene.setLabel(labelScore, "Score : 0", Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
         Label labelVie = new Label();
         setupScene.setLabel(labelVie, "Vie(s) restante(s) : ", Pos.CENTER_LEFT, 500, -20, 80, 300, new Font(15), Paint.valueOf("black"), true);
-        labelScore.setId("labelScore");
+      //  labelScore.setId("labelScore");
         labelVie.setId("labelVie");
 
         for (int i = 0; i < pacman.getNumberOfLife(); i++) {
@@ -73,7 +73,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
             }
         });
 
-        panel.getChildren().addAll(pauseButton, labelScore, labelVie);
+        panel.getChildren().addAll(pauseButton, labelVie);
         root.getChildren().add(panel);
         root.setStyle("-fx-background-color: black;");
         graphicEngine.setControlEngineState(true);

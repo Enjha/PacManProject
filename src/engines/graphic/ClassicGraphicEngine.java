@@ -7,6 +7,7 @@ import engines.kernel.KernelEngine;
 import gameplay.Entity;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pacman.Score;
 import scene.SceneCase;
 import scene.SceneGame;
 
@@ -45,6 +46,9 @@ public class ClassicGraphicEngine implements GraphicEngine {
         if (window.getScene().isSceneGame()) {
             setSceneGameTexture(kernelEngine.getSceneGame());
             setSceneGameEntity(kernelEngine.getSceneGame());
+            Score score = kernelEngine.getScore();
+            score.setVisible(true);
+            score.setSceneScore(scene.getPanel());
         }
     }
 
@@ -124,10 +128,6 @@ public class ClassicGraphicEngine implements GraphicEngine {
 
     public List<Thread> getCurrentsThreads() {
         return kernelEngine.getCurrentsThreads();
-    }
-
-    public int getScore() {
-        return kernelEngine.getScore();
     }
 
 }
