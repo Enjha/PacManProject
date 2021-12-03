@@ -203,7 +203,7 @@ public class GamePacMan implements Game {
 
     private void treatmentCollisionEntity(Movement movement, Collision collision) {
         if (collision.getSecondObjectCollision() instanceof NormalFruit) {
-            score.addScore(score.getScore() + 10);
+            score.addScore(10);
             treatmentCollisionMoveEntity(movement, collision);
         } else if (collision.getSecondObjectCollision() instanceof PacgumFruit) {
             //score.addScore(score.getScore() + 10);
