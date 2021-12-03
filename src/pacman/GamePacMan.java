@@ -1,6 +1,9 @@
 package pacman;
 
-import engines.UI.*;
+import engines.UI.ClassicControlEngine;
+import engines.UI.ClassicControlManager;
+import engines.UI.ControlManager;
+import engines.UI.KeyBoardControl;
 import engines.graphic.ClassicConvertSceneToGraphic;
 import engines.graphic.ClassicGraphicEngine;
 import engines.graphic.GraphicEngine;
@@ -9,43 +12,41 @@ import engines.kernel.ClassicKernelEngine;
 import engines.kernel.KernelEngine;
 import engines.physic.ClassicPhysicEngine;
 import engines.physic.Collision;
-import engines.physic.PhysicEngine;
-import engines.sound.*;
+import engines.sound.ClassicSound;
+import engines.sound.ClassicSoundEngine;
+import engines.sound.ClassicSoundManager;
+import engines.sound.SoundManager;
+import gameplay.Character;
 import gameplay.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import pacman.animations.PacManAnimation;
 import pacman.scene.LabyrinthGenerator;
 import pacman.scene.SceneMainMenu;
 import scene.SceneCase;
 import scene.SceneElement;
 import scene.SceneGame;
-import gameplay.Character;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class GamePacMan implements Game {
 
     private List<Entity> entities;
     private SceneGame sceneGame;
-    private LabyrinthGenerator labyrinthGenerator;
+    private final LabyrinthGenerator labyrinthGenerator;
     private KernelEngine kernelEngine;
-    private PhysicEngine physicEngine;
-    private SoundEngine soundEngine;
-    private ControlEngine controlEngine;
-    private GraphicEngine graphicEngine;
     private List<Thread> threadEntities = new ArrayList<>();
     private boolean stateThread = false;
+    private Score score;
 
-    public GamePacMan(LabyrinthGenerator labyrinthGenerator) {
+    public GamePacMan(LabyrinthGenerator labyrinthGenerator,Score score) {
         this.labyrinthGenerator = labyrinthGenerator;
+        this.score = score;
     }
 
     public void createEntity() {
@@ -79,8 +80,7 @@ public class GamePacMan implements Game {
 
     public void startEngine(Stage stage) {
         kernelEngine = new ClassicKernelEngine(this);
-        physicEngine = new ClassicPhysicEngine();
-        kernelEngine.setPhysicEngine(physicEngine);
+        kernelEngine.setPhysicEngine(new ClassicPhysicEngine());
         startSoundEngine();
         startGraphicEngine(stage);
         startControlEngine();
@@ -101,15 +101,14 @@ public class GamePacMan implements Game {
                     soundManager.addSound(new ClassicSound(mediaPlayer, file.getName()));
                 }
             }
-            soundEngine = new ClassicSoundEngine(soundManager);
-            kernelEngine.setSoundEngine(soundEngine);
+            kernelEngine.setSoundEngine(new ClassicSoundEngine(soundManager));
         } else {
             System.out.println("error folder null");
         }
     }
 
     private void startGraphicEngine(Stage stage) {
-        graphicEngine = new ClassicGraphicEngine(stage, kernelEngine, new ClassicConvertSceneToGraphic());
+        GraphicEngine graphicEngine = new ClassicGraphicEngine(stage, kernelEngine, new ClassicConvertSceneToGraphic());
         graphicEngine.setFxWindow(1200, 800, "Pac-Man");
         graphicEngine.setCurrentScene(new SceneMainMenu(stage, graphicEngine));
         kernelEngine.setGraphicEngine(graphicEngine);
@@ -161,8 +160,7 @@ public class GamePacMan implements Game {
                 }
             }
 
-            controlEngine = new ClassicControlEngine(controlManager, kernelEngine);
-            kernelEngine.setControlEngine(controlEngine);
+            kernelEngine.setControlEngine(new ClassicControlEngine(controlManager, kernelEngine));
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -205,8 +203,10 @@ public class GamePacMan implements Game {
 
     private void treatmentCollisionEntity(Movement movement, Collision collision) {
         if (collision.getSecondObjectCollision() instanceof NormalFruit) {
+            score.addScore(10);
             treatmentCollisionMoveEntity(movement, collision);
         } else if (collision.getSecondObjectCollision() instanceof PacgumFruit) {
+            //score.addScore(score.getScore() + 10);
             treatmentCollisionMoveEntity(movement, collision);
         } else if (collision.getSecondObjectCollision() instanceof Ghost) {
             getThreadEntity(movement.getEntity()).setCollision(collision);
@@ -223,7 +223,7 @@ public class GamePacMan implements Game {
             if (collision != null) {
                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
                     newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
-                }else if(collision.getSecondObjectCollision() instanceof Ghost){
+                } else if (collision.getSecondObjectCollision() instanceof Ghost) {
                     System.out.println("COLLISION WITH GHOOOSOST");
                 }
 
@@ -279,4 +279,9 @@ public class GamePacMan implements Game {
     public ImageViewEntities getImageViewEntity(Entity entity) {
         return kernelEngine.getImageViewEntities(entity);
     }
+
+    public Score getScore(){
+        return this.score;
+    }
+
 }

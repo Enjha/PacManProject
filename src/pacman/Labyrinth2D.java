@@ -113,7 +113,7 @@ public class Labyrinth2D implements SceneGame {
         return null;
     }
 
-    public List<Entity> obstacleEntity(int x, int y, Movement movement){
+    public List<Entity> obstacleEntity(int x, int y){
         List<Entity> entities = null;
         if(x >= 0 && x < width && y >= 0 && y < height) {
             return entity(labyrinth[x][y]);
@@ -141,6 +141,12 @@ public class Labyrinth2D implements SceneGame {
       return null;
     }
 
+    /**
+     * Return all entity contain in a scene case
+     * @param sceneCase
+     *      a scene case of a scene
+     * @return a list of object type of Entity
+     */
     private List<Entity> entity(SceneCase sceneCase){
         List<List<Object>> list = sceneCase.getCaseAllContent();
         List<Entity> entities = new ArrayList<>();
@@ -153,7 +159,12 @@ public class Labyrinth2D implements SceneGame {
                 }
             }
         }
-        return entities;
+        if(entities.size() > 0) {
+            return entities;
+        }
+        else {
+            return null;
+        }
     }
 
     /**

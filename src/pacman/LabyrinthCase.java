@@ -70,6 +70,10 @@ public class LabyrinthCase implements SceneCase {
         return caseContentManager.getContent(typeOfElement);
     }
 
+    /**
+     * Return all content of the case
+     * @return a list of object's list
+     */
     public List<List<Object>> getCaseAllContent(){
         return caseContentManager.getAllContent();
     }
@@ -90,10 +94,19 @@ public class LabyrinthCase implements SceneCase {
         return y;
     }
 
+    /**
+     * Return the case link to this case
+     * @return a object type of SceneCase
+     */
     public SceneCase getSceneCaseLink(){
         return sceneCaseLink;
     }
 
+    /**
+     * Modifit the case link to this case
+     * @param sceneCase
+     *      a new scene case to link
+     */
     public void setSceneCaseLink(SceneCase sceneCase){
         sceneCaseLink = sceneCase;
     }

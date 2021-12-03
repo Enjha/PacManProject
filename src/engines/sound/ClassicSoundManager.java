@@ -7,8 +7,9 @@ public class ClassicSoundManager implements SoundManager{
     private HashMap<String,Sound> sounds = new HashMap<>();
 
     /**
-     * Permet d'ajouter un fichier audio à la hashmap de ceux que nous voulons jouer
+     * Add a new sound to the map if his name is not already register
      * @param sound
+     *      a new sound to add
      */
     public void addSound(Sound sound){
         if(!sounds.containsKey(sound.getName())){
@@ -17,8 +18,9 @@ public class ClassicSoundManager implements SoundManager{
     }
 
     /**
-     * Permet de retirer un son de la hashmap de ceux que nous voulons jouer
+     * Remove a sound if this sound is already register
      * @param sound
+     *      a sound to remove
      */
     public void removeSound(Sound sound){
         if(sounds.containsKey(sound.getName())){
@@ -27,9 +29,11 @@ public class ClassicSoundManager implements SoundManager{
     }
 
     /**
-     * Permet de jouer le fichier audio et de lui attribuer un cycle
+     * Play a sound during a cycle if its register
      * @param name
+     *      a sound's name
      * @param cycle
+     *      a cycle
      */
     public void playSound(String name,int cycle){
         if(sounds.containsKey(name)){
@@ -38,8 +42,9 @@ public class ClassicSoundManager implements SoundManager{
     }
 
     /**
-     * Arrêter l'écoute du son mis en argument
+     * Stop a sound if its register
      * @param name
+     *      a sound's name
      */
     public void stopSound(String name){
         if(sounds.containsKey(name)){
@@ -48,9 +53,11 @@ public class ClassicSoundManager implements SoundManager{
     }
 
     /**
-     * Permet de changer le volume du fichier audio joué mis en argument
+     * Modify a sound's volume with a new volume if its register
      * @param name
+     *      a sound's name
      * @param newVolume
+     *      a new volume
      */
     public void changeVolumeSound(String name, double newVolume){
         if(sounds.containsKey(name)){
@@ -59,8 +66,9 @@ public class ClassicSoundManager implements SoundManager{
     }
 
     /**
-     * Permet de modifier le volume de tous les fichiers audios en cours.
+     * Modify all sound's volume with a new volume
      * @param newVolume
+     *      a new volume
      */
     public void changeVolumeAll(double newVolume){
         for(Sound sound : sounds.values()){

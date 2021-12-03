@@ -12,6 +12,7 @@ import gameplay.Game;
 import gameplay.Movement;
 import javafx.scene.Scene;
 import javafx.scene.media.MediaPlayer;
+import pacman.Score;
 import scene.SceneGame;
 
 import java.util.ArrayList;
@@ -129,7 +130,7 @@ public class ClassicKernelEngine implements KernelEngine {
         graphicEngine.updateSceneGame(entity);
     }
 
-    public void playSound(String soundName){
+    public void playSound(String soundName) {
         soundEngine.playSound(soundName, MediaPlayer.INDEFINITE);
     }
 
@@ -137,5 +138,8 @@ public class ClassicKernelEngine implements KernelEngine {
         return game.getThreadEntities();
     }
 
+    public Score getScore() {
+        return game.getScore();
+    }
 
 }

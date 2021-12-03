@@ -5,6 +5,7 @@ public class MovementWest implements Movement {
     private final Entity entity;
 
     public MovementWest(Entity entity) {
+        assert entity != null;
         this.entity = entity;
     }
 
@@ -17,10 +18,9 @@ public class MovementWest implements Movement {
     }
 
     public int[] nextPosition() {
-        if (entity.getPosition().getX() == 0 && entity.getPosition().getY() == 13)
-            return new int[]{
-                    25, entity.getPosition().getY()
-            };
+        if(entity.getPosition().getSceneCaseLink() != null){
+            return new int[]{entity.getPosition().getSceneCaseLink().getX(),entity.getPosition().getSceneCaseLink().getY()};
+        }
         return new int[]{entity.getPosition().getX() - 1, entity.getPosition().getY()};
     }
 }

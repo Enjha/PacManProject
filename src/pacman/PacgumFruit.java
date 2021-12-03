@@ -14,10 +14,8 @@ public class PacgumFruit implements Item {
     private SceneCase position;
 
     /**
-     * The name of pacgum fruit
+     * The animation's state of a pacgum fruit
      */
-    private String entityName = "Pacgum";
-
     private boolean isAnimated = false;
 
     /**
@@ -66,13 +64,21 @@ public class PacgumFruit implements Item {
      * @return a string value
      */
     public String getEntityName(){
-        return entityName;
+        return "Pacgum";
     }
 
+    /**
+     * Return the state of the ghost's animation
+     * @return o boolean value
+     */
     public boolean isAnimated(){
         return isAnimated;
     }
 
+    /**
+     * Modify the state of the ghost's animation
+     * @param isAnimated
+     */
     public void setAnimated(boolean isAnimated){
         this.isAnimated = isAnimated;
     }

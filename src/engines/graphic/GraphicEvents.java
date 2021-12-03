@@ -6,7 +6,5 @@ public interface GraphicEvents {
 
     void notifyEvent(String event);
 
-    void notifyEntityUpdate(GraphicEntity entity);
-
     void subscribeEvents(EventListener listener);
 }

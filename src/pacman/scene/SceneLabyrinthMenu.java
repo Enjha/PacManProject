@@ -1,7 +1,7 @@
 package pacman.scene;
 
 import apiUser.SetupScene;
-import engines.graphic.GraphicEngine
+import engines.graphic.GraphicEngine;
 import gameplay.ThreadEntity;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -30,6 +30,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
     private SetupScene setupScene = new SetupScene();
     private Pane panel;
     private GraphicEngine graphicEngine;
+    private Pacman pacman = new Pacman();
 
     public SceneLabyrinthMenu(Stage stage, GraphicEngine graphicEngine) {
         this.stage = stage;
@@ -51,12 +52,19 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         icon.setFitHeight(60);
         pauseButton.setGraphic(icon);
 
-        Pacman pacman = (Pacman) graphicEngine.getEntity("Pac-Man");
-        Label labelScore = new Label();
-        setupScene.setLabel(labelScore, "Score : "+ Integer.toString(pacman.getScore()), Pos.CENTER_LEFT, 0, 200, 80, 100, new Font(15), Paint.valueOf("black"), true);
+       // Label labelScore = new Label();
+       // setupScene.setLabel(labelScore, "Score : 0", Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
         Label labelVie = new Label();
-        setupScene.setLabel(labelVie, "Vie restante : " + Integer.toString(pacman.getVies()), Pos.CENTER_LEFT, 0, 250, 80, 300, new Font(15), Paint.valueOf("black"), true);
-        Label labelVieRestante = new Label();
+        setupScene.setLabel(labelVie, "Vie(s) restante(s) : ", Pos.CENTER_LEFT, 500, -20, 80, 300, new Font(15), Paint.valueOf("black"), true);
+      //  labelScore.setId("labelScore");
+        labelVie.setId("labelVie");
+
+        for (int i = 0; i < pacman.getNumberOfLife(); i++) {
+            ImageView coeur = new ImageView();
+            setupScene.setImageView(coeur, 630 + (25 * i), 7, 30, 30, new Image(new File("ressources/textures/coeur.png").toURI().toString()), true);
+            panel.getChildren().add(coeur);
+        }
+
         pauseButton.setOnMouseClicked((event) -> {
             try {
                 setScenePause();
@@ -65,8 +73,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
             }
         });
 
-
-        panel.getChildren().addAll(pauseButton, labelScore, labelVie);
+        panel.getChildren().addAll(pauseButton, labelVie);
         root.getChildren().add(panel);
         root.setStyle("-fx-background-color: black;");
         graphicEngine.setControlEngineState(true);
@@ -83,9 +90,9 @@ public class SceneLabyrinthMenu implements ScenePacMan {
     }
 
     private synchronized void setScenePause() throws InterruptedException {
-        for (Thread t : graphicEngine.getCurrentsThreads()){
+        for (Thread t : graphicEngine.getCurrentsThreads()) {
             System.out.println(t.getName() + " : " + t.getState());
-            ((ThreadEntity)t).setPause(true);
+            ((ThreadEntity) t).setPause(true);
         }
         graphicEngine.setPreviewScene(this);
         graphicEngine.setCurrentScene(new ScenePauseMenu(stage, graphicEngine));

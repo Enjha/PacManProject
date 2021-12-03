@@ -61,5 +61,5 @@ public interface SceneGame {
      */
     SceneElement obstacleElement(int x, int y, Movement movement);
 
-    List<Entity> obstacleEntity(int x, int y, Movement movement);
+    List<Entity> obstacleEntity(int x, int y);
 }
