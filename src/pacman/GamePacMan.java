@@ -1,6 +1,5 @@
 package pacman;
 
-import apiUser.SetupScene;
 import engines.UI.ClassicControlEngine;
 import engines.UI.ClassicControlManager;
 import engines.UI.ControlManager;
@@ -19,17 +18,8 @@ import engines.sound.ClassicSoundManager;
 import engines.sound.SoundManager;
 import gameplay.Character;
 import gameplay.*;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import pacman.scene.*;
 import scene.SceneCase;
@@ -43,20 +33,77 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The game of Pac-Man
+ */
 public class GamePacMan implements Game {
 
+    /**
+     * The entities of the game Pac-Man
+     */
     private List<Entity> entities;
+
+    /**
+     * The information stock in the labyrinth
+     */
     private SceneGame sceneGame;
+
+    /**
+     * The labyrinth generator
+     */
     private final LabyrinthGenerator labyrinthGenerator;
+
+    /**
+     * The kernel engine used
+     */
     private KernelEngine kernelEngine;
+
+    /**
+     * The entities thread
+     */
     private List<Thread> threadEntities = new ArrayList<>();
+
+    /**
+     * The entities thread state, by default its false
+     */
     private boolean stateThread = false;
+
+    /**
+     * The score's information of the game Pac-Man
+     */
     private Score score;
+
+    /**
+     * The life's information of the game Pac-Man
+     */
     private Life life;
+
+    /**
+     * The number of fruit total of the game Pac-Man
+     */
     private int nbFruits;
+
+    /**
+     * The team manager used of the game Pac-man
+     */
     private TeamManager teamManager;
 
+    /**
+     * <b>Constructor of GamePacMan</b>
+     * @param labyrinthGenerator
+     *      a labyrinth generator
+     * @param score
+     *      a score's information
+     * @param life
+     *      a life's information
+     * @param nbFruit
+     *      a total number of fruit
+     * @param teamManager
+     *      a team manager
+     */
     public GamePacMan(LabyrinthGenerator labyrinthGenerator, Score score, Life life, int nbFruit, TeamManager teamManager) {
+        assert labyrinthGenerator != null && score != null && life != null && teamManager != null && nbFruit > 0 : "Error : a parameter is wrong";
+
         this.labyrinthGenerator = labyrinthGenerator;
         this.score = score;
         this.life = life;
@@ -66,8 +113,12 @@ public class GamePacMan implements Game {
         teamManager.addTeam(new ClassicTeam("PACMAN", false));
     }
 
+    /**
+     * Create the entity Pac-Man and the ghosts
+     */
     public void createEntity() {
         entities = labyrinthGenerator.generateEntity(sceneGame, this);
+        assert entities.size() > 0 : "error : entity not generate";
         for (Entity entity : entities) {
             if (entity instanceof Pacman) {
                 threadEntities.add(new ThreadPacman((Pacman) entity, this));
@@ -78,9 +129,13 @@ public class GamePacMan implements Game {
         }
     }
 
+    /**
+     * Start the entities thread and play the game start music
+     */
     public void startThreadEntity() {
         if (!stateThread) {
             for (Thread thread : threadEntities) {
+                assert thread.getState() == Thread.State.NEW : "Error : a thread is not new";
                 ThreadEntity threadEntity = (ThreadEntity) thread;
                 threadEntity.setImageViewEntities(kernelEngine.getImageViewEntities(threadEntity.getEntity()));
                 thread.start();
@@ -90,10 +145,19 @@ public class GamePacMan implements Game {
         }
     }
 
+    /**
+     * Generate the labyrinth
+     */
     public void generateSceneGame() {
         sceneGame = labyrinthGenerator.generateLabyrinth();
+        assert sceneGame != null : "Error : the scene game is null";
     }
 
+    /**
+     * Start the classic kernel engine, classic sound engine, classic graphic engine, classic control engine
+     * @param stage
+     *      the stage of the application
+     */
     public void startEngine(Stage stage) {
         kernelEngine = new ClassicKernelEngine(this);
         kernelEngine.setPhysicEngine(new ClassicPhysicEngine());
@@ -102,26 +166,31 @@ public class GamePacMan implements Game {
         startControlEngine();
     }
 
+    /**
+     * Start the classic sound engine and get all sound needed for the game Pac-Man
+     */
     private void startSoundEngine() {
         SoundManager soundManager = new ClassicSoundManager();
 
         File soundFolder = new File("ressources/sounds/PacMan");
         File[] files = soundFolder.listFiles();
 
-        if (files != null) {
-            for (File file : files) {
-                if (file.isFile()) {
-                    MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File(soundFolder.getPath() + "/" + file.getName()).toURI().toString()));
-                    mediaPlayer.setOnError(() -> System.out.println("media error" + mediaPlayer.getError().toString()));
-                    soundManager.addSound(new ClassicSound(mediaPlayer, file.getName()));
-                }
+        assert files != null : "error folder null";
+        for (File file : files) {
+            if (file.isFile()) {
+                MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File(soundFolder.getPath() + "/" + file.getName()).toURI().toString()));
+                mediaPlayer.setOnError(() -> System.out.println("media error" + mediaPlayer.getError().toString()));
+                soundManager.addSound(new ClassicSound(mediaPlayer, file.getName()));
             }
-            kernelEngine.setSoundEngine(new ClassicSoundEngine(soundManager));
-        } else {
-            System.out.println("error folder null");
         }
+        kernelEngine.setSoundEngine(new ClassicSoundEngine(soundManager));
     }
 
+    /**
+     * Start the classic graphic engine
+     * @param stage
+     *      the stage of the application
+     */
     private void startGraphicEngine(Stage stage) {
         GraphicEngine graphicEngine = new ClassicGraphicEngine(stage, kernelEngine, new ClassicConvertSceneToGraphic());
         graphicEngine.setFxWindow(1200, 800, "Pac-Man");
@@ -129,31 +198,29 @@ public class GamePacMan implements Game {
         kernelEngine.setGraphicEngine(graphicEngine);
     }
 
+    /**
+     * Start the classic control engine and get all control saved
+     */
     private void startControlEngine() {
         ControlManager controlManager = new ClassicControlManager();
 
         try {
-            String pathRessoucesControls = "ressources/controls/PacMan/commands.txt";
-            File commandFile = new File(pathRessoucesControls);
+            String pathResourcesControls = "ressources/controls/PacMan/commands.txt";
+            //read the commands file with the control saved
+            File commandFile = new File(pathResourcesControls);
 
             BufferedReader buffer = new BufferedReader(new FileReader(commandFile));
             String line;
             Entity entity = null;
+            //add all entity control saved
             while ((line = buffer.readLine()) != null) {
                 String[] lineSplit = line.split(" ");
                 if (lineSplit[0].equals("!!") && lineSplit[2].equals("!!")) {
                     entity = getEntity(lineSplit[1]);
-                    if (entity == null) {
-                        System.out.println("Error : entity null 0");
-                        System.exit(-1);
-                    }
-
-                } else {
-                    if (entity == null) {
-                        System.out.println("Error : entity null");
-                        System.exit(-1);
-                    }
-
+                    assert entity != null : "Error : entity nul";
+                }
+                else {
+                    assert entity != null : "Error : entity null";
                     Direction direction;
                     switch (lineSplit[0]) {
                         case "NORTH":
@@ -171,6 +238,7 @@ public class GamePacMan implements Game {
                         default:
                             direction = Direction.Stop;
                     }
+                    //add a control whit a entity and his control
                     controlManager.addControl(new KeyBoardControl(lineSplit[1], direction, entity));
                 }
             }
@@ -181,6 +249,12 @@ public class GamePacMan implements Game {
         }
     }
 
+    /**
+     * Return a entity with his name or null if no entity has this name
+     * @param entityName
+     *      a entity's name
+     * @return a object type of Entity
+     */
     private Entity getEntity(String entityName) {
         for (Entity entity : entities) {
             if (entity.getEntityName().equals(entityName)) {
@@ -190,34 +264,64 @@ public class GamePacMan implements Game {
         return null;
     }
 
+    /**
+     * Return all entities of the game Pac-Man
+     * @return a list of object type of Entity
+     */
     public List<Entity> getEntities() {
         return entities;
     }
 
+    /**
+     * Return the labyrinth of the game Pac-Man
+     * @return
+     */
     public SceneGame getSceneGame() {
         return sceneGame;
     }
 
+    /**
+     * Treat the collision of a entity who move
+     * @param movement
+     *      the entity's movement
+     * @param collision
+     *      the entity's collision
+     */
     public void treatmentCollision(Movement movement, Collision collision) {
-        if (collision != null) {
+        assert movement != null : "Error : the movement is null";
 
+        if (collision != null) {
+            //There is a collision with a wall
             if (collision.getSecondObjectCollision() instanceof SceneElement) {
                 getThreadEntity(movement.getEntity()).setCollision(collision);
                 if (movement.getEntity().isCharacter()) {
                     ((Character) movement.getEntity()).setDirection(Direction.Stop);
                 }
             } else {
+                //There is a collision with a entity
                 if (collision.getSecondObjectCollision() instanceof Entity) {
                     treatmentCollisionEntity(movement, collision);
                 }
             }
-        } else {
+        }
+        //There is no collision
+        else {
             treatmentCollisionMoveEntity(movement, null);
         }
     }
 
+    /**
+     * Threat the collision between two entities
+     * @param movement
+     *      a entity's movement
+     * @param collision
+     *      a entity's collision
+     */
     private void treatmentCollisionEntity(Movement movement, Collision collision) {
-        if (collision.getSecondObjectCollision() instanceof NormalFruit) {
+        assert movement != null && collision != null : "Error : a parameter is wrong";
+
+        //A collision between Pac-Man and a normal fruit
+        if (collision.getSecondObjectCollision() instanceof NormalFruit && collision.getFirstObjectCollision() instanceof Pacman) {
             score.addScore(10);
             treatmentCollisionMoveEntity(movement, collision);
             kernelEngine.playOneSound("eat_fruit.wav");
@@ -226,7 +330,9 @@ public class GamePacMan implements Game {
             else{
                 System.out.println("gagné !");
             }
-        } else if (collision.getSecondObjectCollision() instanceof PacgumFruit) {
+        }
+        //A collision between Pac-Man and a Pacgum fruit
+        else if (collision.getSecondObjectCollision() instanceof PacgumFruit && collision.getFirstObjectCollision() instanceof Pacman) {
             score.addScore(50);
             treatmentCollisionMoveEntity(movement, collision);
             kernelEngine.playOneSound("eat_fruit.wav");
@@ -234,44 +340,64 @@ public class GamePacMan implements Game {
             else{
                 System.out.println("gagné !");
             }
-        } else if (collision.getSecondObjectCollision() instanceof Ghost) {
+        }
+        //A collision between Pac-Man and a ghost
+        else if (collision.getSecondObjectCollision() instanceof Ghost && collision.getFirstObjectCollision() instanceof Pacman) {
             getThreadEntity(movement.getEntity()).setCollision(collision);
             treatmentCollisionMoveEntity(movement, collision);
         }
     }
 
+    /**
+     * Move a entity to the next case compared to the treatment of the collision
+     * @param movement
+     *      the entity's movement
+     * @param collision
+     *      the entity's collision
+     */
     private void treatmentCollisionMoveEntity(Movement movement, Collision collision) {
+        assert movement != null : "Error : the movement is null";
+
         getThreadEntity(movement.getEntity()).setCollision(collision);
         SceneCase newSceneCase = getNewSceneCase(movement.getDirection(), movement.getEntity());
 
-        if (newSceneCase != null) {
-            sceneGame.getCase(movement.getEntity().getPosition().getX(), movement.getEntity().getPosition().getY()).removeCaseContent(movement.getEntity());
-            newSceneCase.addCaseContent(movement.getEntity());
-            if (collision != null) {
-                if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
-                    newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
-                } else if (collision.getSecondObjectCollision() instanceof Ghost) {
+        assert newSceneCase != null : "error : new scene case null";
+
+        sceneGame.getCase(movement.getEntity().getPosition().getX(), movement.getEntity().getPosition().getY()).removeCaseContent(movement.getEntity());
+        newSceneCase.addCaseContent(movement.getEntity());
+        if (collision != null) {
+            if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
+                //The fruit is remove
+                newSceneCase.removeCaseContent(collision.getSecondObjectCollision());
+            } else if (collision.getSecondObjectCollision() instanceof Ghost) {
                    /* Pacman pacman = (Pacman) collision.getFirstObjectCollision();
                     pacman.setDirection(Direction.Stop);
                     pacman.setIsAlive(false);
                     kernelEngine.playOneSound("siren_1.wav");*/
-                    System.out.println("TESTETSETSETTSE");
-                }
-
-            } else {
-                if (movement.getEntity().isCharacter()) {
-                    ((Character) movement.getEntity()).setDirection(movement.getDirection());
-                }
+                System.out.println("TESTETSETSETTSE");
             }
-            movement.getEntity().setPosition(newSceneCase);
-            kernelEngine.updateSceneGame(movement.getEntity());
+
         } else {
-            System.err.println("error : new scene case null");
-            System.exit(-1);
+            if (movement.getEntity().isCharacter()) {
+                ((Character) movement.getEntity()).setDirection(movement.getDirection());
+            }
         }
+        //The entity's position is update
+        movement.getEntity().setPosition(newSceneCase);
+        //The labyrinth is update
+        kernelEngine.updateSceneGame(movement.getEntity());
     }
 
+    /**
+     * Return the next case of a entity who move in a direction
+     * @param direction
+     *      the movement's direction
+     * @param entity
+     *      the entity
+     * @return a object type of SceneCase
+     */
     private SceneCase getNewSceneCase(Direction direction, Entity entity) {
+        assert direction != null && entity != null : "Error : a parameter is wrong";
         switch (direction) {
             case North:
                 return sceneGame.getCase(entity.getPosition().getX(), new MovementNorth(entity).nextPosition()[1]);
@@ -286,15 +412,32 @@ public class GamePacMan implements Game {
         }
     }
 
+    /**
+     * Update the labyrinth after a movement
+     * @param movement
+     *      a entity's movement
+     */
     public void updateSceneGame(Movement movement) {
+        assert movement != null : "Error : the movement is null";
         kernelEngine.updateSceneGame(movement.getEntity());
     }
 
+    /**
+     * Return the entities thread
+     * @return a list of object type of Thread
+     */
     public List<Thread> getThreadEntities() {
         return threadEntities;
     }
 
+    /**
+     * Return the entity thread of a entity
+     * @param entity
+     *      a entity
+     * @return a object type of ThreadEntity
+     */
     public ThreadEntity getThreadEntity(Entity entity) {
+        assert entity != null : "Error : entity null";
         for (Thread thread : threadEntities) {
             if (((ThreadEntity) thread).getEntity() == entity) {
                 return (ThreadEntity) thread;
@@ -303,22 +446,47 @@ public class GamePacMan implements Game {
         return null;
     }
 
+    /**
+     * Call the collision's treatment of a movement of the kernel engine
+     * @param movement
+     *       a entity's movement
+     */
     public void treatmentCollisionGame(Movement movement) {
+        assert movement != null : "Error : movement null";
         kernelEngine.treatmentCollisionGame(movement);
     }
 
+    /**
+     * Return the image view entities of a entity
+     * @param entity
+     *      a entity
+     * @return a object type of ImageViewEntities
+     */
     public ImageViewEntities getImageViewEntity(Entity entity) {
+        assert entity != null : "Error : entity null";
         return kernelEngine.getImageViewEntities(entity);
     }
 
+    /**
+     * Return the score's information
+     * @return a object type of Score
+     */
     public Score getScore() {
-        return this.score;
+        return score;
     }
 
+    /**
+     * Return the life's information
+     * @return a object type of Life
+     */
     public Life getLife() {
-        return this.life;
+        return life;
     }
 
+    /**
+     * Return the team manager of this game
+     * @return a object type of TeamManager
+     */
     public TeamManager getTeamManager() {
         return teamManager;
     }
