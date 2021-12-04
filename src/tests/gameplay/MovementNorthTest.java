@@ -13,7 +13,7 @@ import scene.SceneCase;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MovementNorthTest {
-    private Entity entity = new Pacman(new ClassicLife());
+    private Entity entity = new Pacman(new ClassicLife(3));
     private Movement movement = new MovementNorth(entity);
     private SceneCase sceneCase2 = new LabyrinthCase(0,1,new NormalCaseContentManager());
     private SceneCase sceneCase3 = new LabyrinthCase(2,2,new NormalCaseContentManager());

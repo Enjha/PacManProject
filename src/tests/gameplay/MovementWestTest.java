@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MovementWestTest {
 
-    private Entity entity = new Pacman(new ClassicLife());
+    private Entity entity = new Pacman(new ClassicLife(3));
     private Movement movement = new MovementWest(entity);
     private SceneCase sceneCase2 = new LabyrinthCase(1,0,new NormalCaseContentManager());
     private SceneCase sceneCase3 = new LabyrinthCase(2,2,new NormalCaseContentManager());

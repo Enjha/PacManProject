@@ -14,14 +14,13 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.Objects;
 
 public class SceneMainMenu implements ScenePacMan {
 
     private BorderPane root = new BorderPane();
-    private final int widht = 1200;
+    private final int width = 1200;
     private final int height = 800;
-    private Scene scene = new Scene(root, widht, height);
+    private Scene scene = new Scene(root, width, height);
     private Stage stage;
     private SetupScene setupScene = new SetupScene();
     private GraphicEngine graphicEngine;
@@ -49,7 +48,9 @@ public class SceneMainMenu implements ScenePacMan {
         setupScene.setButton(buttonOption,"Options", Pos.CENTER,500,400,80,200,new Font(20),true);
 
         ImageView picturePacMan = new ImageView();
-        setupScene.setImageView(picturePacMan,450,100,80,300,new Image(new File("ressources/textures/menu_logo.png").toURI().toString()),true);
+        Image logoImage = new Image(new File("ressources/textures/menu_logo.png").toURI().toString());
+        assert !logoImage.isError() : "Error : width";
+        setupScene.setImageView(picturePacMan,450,100,80,300,logoImage,true);
 
         buttonOption.setOnMouseClicked((event)-> setSceneOption());
         buttonQuit.setOnMouseClicked((event)-> exit());

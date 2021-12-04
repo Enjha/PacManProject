@@ -25,9 +25,9 @@ class ClassicPhysicEngineTest {
     private final TeamManager teamManager = new ClassicTeamManager();
     private final Team team1 = new ClassicTeam("team1",true);
     private final Team team2 = new ClassicTeam("team2",false);
-    private Entity entity1 = new Pacman(new ClassicLife());
-    private Entity entity2 = new Pacman(new ClassicLife());
-    private Entity entity3 = new Pacman(new ClassicLife());
+    private Entity entity1 = new Pacman(new ClassicLife(3));
+    private Entity entity2 = new Pacman(new ClassicLife(3));
+    private Entity entity3 = new Pacman(new ClassicLife(3));
     private SceneElement wall1 = new Wall(Direction.West);
 
     @Test

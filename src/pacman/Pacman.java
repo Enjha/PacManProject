@@ -120,7 +120,7 @@ public class Pacman implements Character {
      * Set the Number of PacMan Life point
      */
     public void setLifePoint(int nbLife) {
-        this.life.setNumberOfLife(nbLife);
+        this.life.addLifePoint(nbLife);
     }
 
     /**

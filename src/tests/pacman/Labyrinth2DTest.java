@@ -138,8 +138,8 @@ class Labyrinth2DTest {
         sceneCase1.addCaseContent(wallNorthSceneCase1);
         labyrinth.addSceneCase(sceneCase1,0,0);
         labyrinth.addSceneCase(sceneCase2,0,1);
-        Movement movementNorth = new MovementNorth(new Pacman(new ClassicLife()));
-        Movement movementSouth = new MovementSouth(new Pacman(new ClassicLife()));
+        Movement movementNorth = new MovementNorth(new Pacman(new ClassicLife(3)));
+        Movement movementSouth = new MovementSouth(new Pacman(new ClassicLife(3)));
 
         assertEquals(wallNorthSceneCase1,labyrinth.obstacleElement(0,0,movementNorth));
         assertNull(labyrinth.obstacleElement(0,0,movementSouth));
@@ -148,7 +148,7 @@ class Labyrinth2DTest {
 
     @Test
     void obstacleEntity(){
-        Entity entity1 = new Pacman(new ClassicLife());
+        Entity entity1 = new Pacman(new ClassicLife(3));
         sceneCase1.addCaseContent(entity1);
         labyrinth.addSceneCase(sceneCase1,0,0);
         labyrinth.addSceneCase(sceneCase2,0,1);

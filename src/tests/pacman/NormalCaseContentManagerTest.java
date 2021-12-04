@@ -13,7 +13,7 @@ import java.util.List;
 class NormalCaseContentManagerTest {
 
     private final NormalCaseContentManager normalCaseContentManager = new NormalCaseContentManager();
-    private final Entity pacman = new Pacman(new ClassicLife());
+    private final Entity pacman = new Pacman(new ClassicLife(3));
     private final Entity ghostBlue = new Ghost("Blue", GhostColor.BLUE);
     private final Entity ghostPink = new Ghost("Pink", GhostColor.PINK);
 

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MovementEastTest {
 
-    private Entity entity = new Pacman(new ClassicLife());
+    private Entity entity = new Pacman(new ClassicLife(3));
     private Movement movement = new MovementEast(entity);
     private SceneCase sceneCase2 = new LabyrinthCase(0,0,new NormalCaseContentManager());
     private SceneCase sceneCase3 = new LabyrinthCase(2,2,new NormalCaseContentManager());

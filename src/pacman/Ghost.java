@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import scene.SceneCase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The entity ghost
@@ -254,7 +253,7 @@ public class Ghost implements Character {
      * Set the Number of a ghost Life point
      */
     public void setLifePoint(int nbLife) {
-        this.life.setNumberOfLife(nbLife);
+        this.life.addLifePoint(nbLife);
     }
 
     /**

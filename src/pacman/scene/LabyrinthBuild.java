@@ -125,7 +125,7 @@ public class LabyrinthBuild implements LabyrinthGenerator {
         switch (entityType) {
             case "PACMAN":
                 if (entityInformation.length == 3) {
-                    Entity pacman = new Pacman(new ClassicLife());
+                    Entity pacman = new Pacman(new ClassicLife(3));
                     setupEntityPosition(entityInformation[1], entityInformation[2], pacman, sceneGame);
                     ((Character) pacman).setTeam(game.getTeamManager().getTeam("PACMAN"));
                     return pacman;

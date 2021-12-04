@@ -5,7 +5,6 @@ import apiUser.SetupScene;
 import engines.UI.Control;
 import engines.graphic.GraphicEngine;
 import gameplay.Entity;
-import gameplay.ThreadEntity;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,9 +26,9 @@ import java.util.List;
 public class SceneOptionMenu implements ScenePacMan {
 
     private BorderPane root = new BorderPane();
-    private final int widht = 1200;
+    private final int width = 1200;
     private final int height = 800;
-    private Scene scene = new Scene(root, widht, height);
+    private Scene scene = new Scene(root, width, height);
     private Stage stage;
     private SetupScene setupScene = new SetupScene();
     private boolean stateSound = true;
