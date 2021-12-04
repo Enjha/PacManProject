@@ -25,7 +25,8 @@ public class CollisionEntities implements Collision{
      *      the second entity
      */
     public CollisionEntities(Entity firstEntity, Entity secondEntity){
-        assert(firstEntity != null && secondEntity != null);
+        assert firstEntity != null : "Error : first entity null";
+        assert secondEntity != null: "Error : second entity null";
         this.firstEntity = firstEntity;
         this.secondEntity = secondEntity;
     }

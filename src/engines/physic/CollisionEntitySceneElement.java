@@ -26,7 +26,8 @@ public class CollisionEntitySceneElement implements Collision{
      *      the scene element
      */
     public CollisionEntitySceneElement(Entity entity, SceneElement sceneElement){
-        assert(entity != null && sceneElement != null);
+        assert entity != null : "Error : first entity null";
+        assert sceneElement != null : "Error : second entity null";
         this.entity = entity;
         this.sceneElement = sceneElement;
     }

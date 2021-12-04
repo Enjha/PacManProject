@@ -25,8 +25,8 @@ public class ClassicSound implements Sound{
      *      s sound's name
      */
     public ClassicSound(MediaPlayer sound, String name){
-        assert (sound != null);
-        assert (name != null && !name.equals(""));
+        assert sound != null : "Error : sound null";
+        assert name != null : "Error : name null";
         this.sound = sound;
         this.name = name;
     }
@@ -53,10 +53,11 @@ public class ClassicSound implements Sound{
      *      a cycle
      */
     public void play(int cycle){
+        assert cycle > 0 : "Error : cycle <= 0";
         sound.setCycleCount(cycle);
-        assert (cycle == sound.getCycleCount());
+        assert cycle == sound.getCycleCount() : "Error : the cycle don't correspond";
         sound.play();
-        assert (sound.getStatus() == MediaPlayer.Status.PLAYING);
+        assert sound.getStatus() == MediaPlayer.Status.PLAYING : "Error : the sound is not played";
     }
 
     /**
@@ -64,7 +65,7 @@ public class ClassicSound implements Sound{
      */
     public void stop(){
         sound.stop();
-        assert(sound.getStatus() == MediaPlayer.Status.STOPPED);
+        assert sound.getStatus() == MediaPlayer.Status.STOPPED : "Error : the sound is not stopped";
     }
 
     /**
@@ -73,8 +74,9 @@ public class ClassicSound implements Sound{
      *      a new volume
      */
     public void setVolume(double volume){
+        assert volume >= 0 : "Error : volume < 0";
         sound.setVolume(volume);
-        assert(sound.getVolume() == volume);
+        assert sound.getVolume() == volume : "Error : the volume of the sound don't correspond";
     }
 
 }

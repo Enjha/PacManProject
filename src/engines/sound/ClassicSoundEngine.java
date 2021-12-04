@@ -21,7 +21,7 @@ public class ClassicSoundEngine implements SoundEngine {
      *      A sound manager
      */
     public ClassicSoundEngine(SoundManager soundManager){
-        assert(soundManager != null);
+        assert soundManager != null : "Error : sound manager null";
         this.soundManager = soundManager;
     }
 
@@ -33,8 +33,8 @@ public class ClassicSoundEngine implements SoundEngine {
      *      the sound's cycle
      */
     public void playSound(String name,int cycle){
-        assert(name != null);
-        assert(cycle >= 0);
+        assert name != null : "Error : name null";
+        assert cycle > 0 : "Error : cycle <= 0";
 
         soundManager.playSound(name, cycle);
         soundManager.changeVolumeSound(name, volume);
@@ -46,7 +46,7 @@ public class ClassicSoundEngine implements SoundEngine {
      *      a sound's name
      */
     public void stopSound(String name){
-        assert(name != null);
+        assert name != null : "Error : name null";
         soundManager.stopSound(name);
     }
 
@@ -58,7 +58,8 @@ public class ClassicSoundEngine implements SoundEngine {
      *      a new volume
      */
     public void changeVolume(String name, double newVolume){
-        assert(name != null);
+        assert name != null : "Error : name null";
+        assert newVolume >= 0 : "Error : new volume < 0";
         volume = newVolume;
         soundManager.changeVolumeSound(name,newVolume);
     }
@@ -69,7 +70,7 @@ public class ClassicSoundEngine implements SoundEngine {
      *      a new volume
      */
     public void changeVolumeAll(double newVolume){
-        assert(newVolume >= 0);
+        assert newVolume >= 0 : "Error : new volume < 0";
         volume = newVolume;
         soundManager.changeVolumeAll(newVolume);
     }

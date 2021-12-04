@@ -14,9 +14,10 @@ public class ClassicSoundManager implements SoundManager{
      *      a new sound to add
      */
     public void addSound(Sound sound){
+        assert sound != null : "Error : sound null";
         if(!sounds.containsKey(sound.getName())){
             sounds.put(sound.getName(),sound);
-            assert(sounds.containsKey(sound.getName()));
+            assert sounds.containsKey(sound.getName()) : "Error : sound not correctly add";
         }
     }
 
@@ -26,9 +27,10 @@ public class ClassicSoundManager implements SoundManager{
      *      a sound to remove
      */
     public void removeSound(Sound sound){
+        assert sound != null : "Error : sound null";
         if(sounds.containsKey(sound.getName())){
             sounds.remove(sound);
-            assert(!sounds.containsKey(sound.getName()));
+            assert !sounds.containsKey(sound.getName()) : "Error : sound not correctly remove";
         }
     }
 
@@ -40,9 +42,12 @@ public class ClassicSoundManager implements SoundManager{
      *      a cycle
      */
     public void playSound(String name,int cycle){
+        assert cycle > 0 : "Error : cycle <= 0";
+        assert name != null : "name null";
         if(sounds.containsKey(name)){
             sounds.get(name).play(cycle);
-            assert(sounds.get(name).getSound().getStatus() == MediaPlayer.Status.PLAYING && sounds.get(name).getSound().getCycleCount() == cycle);
+            assert sounds.get(name).getSound().getStatus() == MediaPlayer.Status.PLAYING : "Error : the sound is not played";
+            assert sounds.get(name).getSound().getCycleCount() == cycle : "Error : the cycle don't correspond";
         }
     }
 
@@ -52,9 +57,10 @@ public class ClassicSoundManager implements SoundManager{
      *      a sound's name
      */
     public void stopSound(String name){
+        assert name != null : "Error : name null";
         if(sounds.containsKey(name)){
             sounds.get(name).stop();
-            assert(sounds.get(name).getSound().getStatus() == MediaPlayer.Status.STOPPED);
+            assert sounds.get(name).getSound().getStatus() == MediaPlayer.Status.STOPPED : "Error :  the sound is not stopped";
         }
     }
 
@@ -66,9 +72,11 @@ public class ClassicSoundManager implements SoundManager{
      *      a new volume
      */
     public void changeVolumeSound(String name, double newVolume){
+        assert name != null : "Error : name null";
+        assert newVolume >= 0 : "Error : new volume < 0";
         if(sounds.containsKey(name)){
             sounds.get(name).setVolume(newVolume);
-            assert(sounds.get(name).getSound().getVolume() == newVolume);
+            assert sounds.get(name).getSound().getVolume() == newVolume : "Error : the volume of the sound don't correspond";
         }
     }
 
@@ -78,9 +86,10 @@ public class ClassicSoundManager implements SoundManager{
      *      a new volume
      */
     public void changeVolumeAll(double newVolume){
+        assert newVolume >= 0 : "Error : the new volume < 0";
         for(Sound sound : sounds.values()){
             sound.setVolume(newVolume);
-            assert(sound.getSound().getVolume() == newVolume);
+            assert sound.getSound().getVolume() == newVolume : "Error : the volume of the sound don't correspond";
         }
     }
 
