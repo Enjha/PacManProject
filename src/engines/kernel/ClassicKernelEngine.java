@@ -100,6 +100,7 @@ public class ClassicKernelEngine implements KernelEngine {
 
     public void treatmentCollisionGame(Movement movement) {
         if (physicEngine != null) {
+            System.out.println("Traitement de la collision");
             Collision collision = physicEngine.moveEntity(movement, game.getSceneGame());
             game.treatmentCollision(movement, collision);
         } else {
