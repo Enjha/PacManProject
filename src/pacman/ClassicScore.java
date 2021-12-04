@@ -64,7 +64,6 @@ public class ClassicScore implements Score {
                 () -> {
                     labelScore.setText("Score : " + score);
                 });
-
     }
 
     /**

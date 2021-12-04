@@ -38,7 +38,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
 
     public Scene getScene() {
         panel = new AnchorPane();
-        graphicEngine.stopSound("credit.wav");
+        graphicEngine.stopSound("intermission.wav");
         root.setId("background");
         File f = new File("ressources/styles/menu_style.css");
         scene.getStylesheets().clear();
