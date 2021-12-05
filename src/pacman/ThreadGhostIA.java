@@ -7,7 +7,6 @@ import gameplay.Entity;
 import gameplay.Game;
 import gameplay.Movement;
 import gameplay.ThreadEntity;
-import javafx.application.Platform;
 import pacman.animations.GhostAnimation;
 
 public class ThreadGhostIA extends Thread implements ThreadEntity {
@@ -54,6 +53,7 @@ public class ThreadGhostIA extends Thread implements ThreadEntity {
 
     public void setImageViewEntities(ImageViewEntities imageViewEntities) {
         this.imageViewEntities = imageViewEntities;
+        System.out.println(imageViewEntities.getEntity().getEntityName() + "/" + ghost.getEntityName());
     }
 
     public synchronized void setPause(boolean pause) {

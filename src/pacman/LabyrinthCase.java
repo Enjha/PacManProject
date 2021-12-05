@@ -47,7 +47,7 @@ public class LabyrinthCase implements SceneCase {
      * @param object
      *      a new object to add
      */
-    public void addCaseContent(Object object){
+    public synchronized void addCaseContent(Object object){
         caseContentManager.addContent(object.getClass().toString(),object);
     }
 
@@ -56,7 +56,7 @@ public class LabyrinthCase implements SceneCase {
      * @param object
      *      a object to remove
      */
-    public void removeCaseContent(Object object){
+    public synchronized void removeCaseContent(Object object){
         caseContentManager.removeContent(object.getClass().toString(),object);
     }
 
@@ -66,7 +66,7 @@ public class LabyrinthCase implements SceneCase {
      *      the type of the object to return
      * @return a list of object
      */
-    public List<Object> getCaseContent(String typeOfElement){
+    public synchronized List<Object> getCaseContent(String typeOfElement){
         return caseContentManager.getContent(typeOfElement);
     }
 
@@ -74,7 +74,7 @@ public class LabyrinthCase implements SceneCase {
      * Return all content of the case
      * @return a list of object's list
      */
-    public List<List<Object>> getCaseAllContent(){
+    public synchronized List<List<Object>> getCaseAllContent(){
         return caseContentManager.getAllContent();
     }
 

@@ -94,8 +94,6 @@ public class GamePacMan implements Game {
      */
     private TeamManager teamManager;
 
-    //etst
-
     /**
      * <b>Constructor of GamePacMan</b>
      *
@@ -300,7 +298,6 @@ public class GamePacMan implements Game {
     public synchronized void treatmentCollision(Movement movement, Collision collision) {
         assert movement != null : "Error : the movement is null";
 
-        System.out.println(movement.getEntity().getEntityName() + " : " + movement.getEntity().getPosition().getX() + "/" + movement.getEntity().getPosition().getY());
         if (collision != null) {
             //There is a collision with a wall
             if (collision.getSecondObjectCollision() instanceof SceneElement) {

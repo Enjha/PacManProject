@@ -140,7 +140,7 @@ public class LabyrinthBuild implements LabyrinthGenerator {
         switch (entityType) {
             case "PACMAN":
                 assert entityInformation.length == 3 : "Error : wrong format for the entities --> wrong number of information (3)";
-                Character pacman = new Pacman(new ClassicLife(3));
+                Character pacman = new Pacman(game.getLife());
                 setupEntityPosition(entityInformation[1], entityInformation[2], pacman, sceneGame);
                 pacman.setTeam(game.getTeamManager().getTeam("PACMAN"));
                 return pacman;
