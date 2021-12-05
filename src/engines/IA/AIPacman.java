@@ -1,6 +1,6 @@
 package engines.IA;
 
-import gameplay.Direction;
+import gameplay.*;
 import pacman.Ghost;
 import pacman.Pacman;
 import scene.SceneCase;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AIPacman implements IAEngine{
+public class AIPacman implements IAEngine {
 
     private final Ghost ghost;
     private final Pacman pacman;
@@ -22,7 +22,7 @@ public class AIPacman implements IAEngine{
     private boolean isFollowingPM;
     private boolean calledWhenFollowing = false;
 
-    public AIPacman(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase){
+    public AIPacman(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase) {
         this.ghost = ghost;
         this.pacman = pacman;
         this.sceneCase = sceneCase;
@@ -32,24 +32,45 @@ public class AIPacman implements IAEngine{
         move();
     }
 
-    private void move(){ //permet au fantôme de se deplacer
+    /**
+     * Méthode temporaire qui permet de génrer un mouvement aléatoire pour a un fantôme.
+     * @return random Movement
+     */
+    public Movement generateRandomMovement() {
+        Random random = new Random();
+        Direction[] directions = Direction.values();
+        Direction randomDirection = directions[random.nextInt(directions.length - 1)];
+        switch (randomDirection) {
+            case North:
+                return new MovementNorth(ghost);
+            case East:
+                return new MovementEast(ghost);
+            case South:
+                return new MovementSouth(ghost);
+            case West:
+                return new MovementWest(ghost);
+            default:
+                return null;
+        }
+    }
+
+    private void move() { //permet au fantôme de se deplacer
         ghost.setDirection(Direction.North);
         List<Object> walls = sceneCase[ghost.getPosition().getX()][ghost.getPosition().getY()].getCaseContent(Wall.class.toString());
-        while(ghost.isAlive()){
-            if(distBeetween() <= 5 && isAbleToFollow){ //ghost va passer dans l'état de déplacement "poursuite"
+        while (ghost.isAlive()) {
+            if (distBeetween() <= 5 && isAbleToFollow) { //ghost va passer dans l'état de déplacement "poursuite"
                 isAbleToFollow = false;
                 followPM(walls);
                 Thread threadFollow = new Thread(this);
                 calledByFollow = true;
                 threadFollow.start();
-            }
-            else{ //ghost va rester dans un état de déplacement "classique"
-                if (isWallOrCrossRoad(walls)){ //il y a un mur devant ou plusieurs possibilité de chemin alors
+            } else { //ghost va rester dans un état de déplacement "classique"
+                if (isWallOrCrossRoad(walls)) { //il y a un mur devant ou plusieurs possibilité de chemin alors
                     ArrayList<Direction> directions = initializeDirections();
                     directions = pickGoodCases(directions, walls);
                     pickDirection(directions);
                 }
-                if(isAbleToTurnAround){
+                if (isAbleToTurnAround) {
                     turnAround();
                     isAbleToTurnAround = false;
                     Thread threadTurnAround = new Thread(this);
@@ -60,10 +81,10 @@ public class AIPacman implements IAEngine{
         }
     }
 
-    private boolean isWallOrCrossRoad(List<Object> walls){
-        if(walls.isEmpty()) return true;
+    private boolean isWallOrCrossRoad(List<Object> walls) {
+        if (walls.isEmpty()) return true;
         int wallAround = 4;
-        for(Object o : walls){
+        for (Object o : walls) {
             Wall wall = (Wall) o;
             if (wall.getSceneElement() == ghost.getDirection())
                 return true;
@@ -72,38 +93,38 @@ public class AIPacman implements IAEngine{
         return wallAround < 2;
     }
 
-    private double distBeetween(){ //calculer la distance mathématique entre le fantôme et pacman
+    private double distBeetween() { //calculer la distance mathématique entre le fantôme et pacman
         SceneCase ghostPos = ghost.getPosition();
         SceneCase pacmanPos = pacman.getPosition();
         return Math.sqrt(Math.pow(ghostPos.getX() - pacmanPos.getX(), 2) + (Math.pow(ghostPos.getY() - pacmanPos.getY(), 2)));
     }
 
-    private void followPM(List<Object> walls){ //suivre PM en empruntant le chemin le plus court (par Dijkstra ou par indice de position)
+    private void followPM(List<Object> walls) { //suivre PM en empruntant le chemin le plus court (par Dijkstra ou par indice de position)
         isFollowingPM = true;
         Thread threadWhenImFollowingPM = new Thread(this);
         calledWhenFollowing = true;
         threadWhenImFollowingPM.start();
-        while(isFollowingPM){
-            if(isWallOrCrossRoad(walls)){
+        while (isFollowingPM) {
+            if (isWallOrCrossRoad(walls)) {
                 ghost.setDirection(findPM(walls));
             }
         }
     }
 
-    private Direction findPM(List<Object> walls){
+    private Direction findPM(List<Object> walls) {
         ArrayList<Direction> directions = initializeDirections();
-        for (Object o : walls){
+        for (Object o : walls) {
             Wall wall = (Wall) o;
-            if (wall.getSceneElement() == Direction.North){
+            if (wall.getSceneElement() == Direction.North) {
                 directions.remove(Direction.North);
             }
-            if (wall.getSceneElement() == Direction.East){
+            if (wall.getSceneElement() == Direction.East) {
                 directions.remove(Direction.East);
             }
-            if (wall.getSceneElement() == Direction.South){
+            if (wall.getSceneElement() == Direction.South) {
                 directions.remove(Direction.South);
             }
-            if (wall.getSceneElement() == Direction.West){
+            if (wall.getSceneElement() == Direction.West) {
                 directions.remove(Direction.West);
             }
         }
@@ -114,15 +135,15 @@ public class AIPacman implements IAEngine{
         return directions.get(0);
     }
 
-    private boolean pacmanOnRight(){
+    private boolean pacmanOnRight() {
         return ghost.getPosition().getX() < pacman.getPosition().getX();
     }
 
-    private boolean pacmanBelow(){
+    private boolean pacmanBelow() {
         return ghost.getPosition().getY() < pacman.getPosition().getY();
     }
 
-    private ArrayList<Direction> initializeDirections(){
+    private ArrayList<Direction> initializeDirections() {
         ArrayList<Direction> directions = new ArrayList<>();
         directions.add(Direction.North);
         directions.add(Direction.East);
@@ -131,21 +152,21 @@ public class AIPacman implements IAEngine{
         return directions;
     }
 
-    private ArrayList<Direction> pickGoodCases(ArrayList<Direction> directions, List<Object> walls){ //remove les positions ou le fantôme ne peux pas aller
+    private ArrayList<Direction> pickGoodCases(ArrayList<Direction> directions, List<Object> walls) { //remove les positions ou le fantôme ne peux pas aller
         directions.remove(ghost.getDirection());
-        for(Object o : walls){
+        for (Object o : walls) {
             Wall wall = (Wall) o;
             directions.remove(wall.getSceneElement());
         }
         return directions;
     }
 
-    private void pickDirection(ArrayList<Direction> directions){ //choisir une direction entre celles qui sont possibles
+    private void pickDirection(ArrayList<Direction> directions) { //choisir une direction entre celles qui sont possibles
         Random random = new Random();
         ghost.setDirection(directions.get(random.nextInt(directions.size()) - 1));
     }
 
-    private void turnAround(){ //le fantôme a une chance faire demi-tour
+    private void turnAround() { //le fantôme a une chance faire demi-tour
         Random random = new Random();
         int choice = random.nextInt(3);
         if (choice == 1) { //une chance sur trois de changer de direction
@@ -153,14 +174,14 @@ public class AIPacman implements IAEngine{
         }
     }
 
-    private Direction getOppositeDirection(Direction direction){
-        if(direction == Direction.North)
+    private Direction getOppositeDirection(Direction direction) {
+        if (direction == Direction.North)
             direction = Direction.South;
-        else if(direction == Direction.East)
+        else if (direction == Direction.East)
             direction = Direction.West;
-        else if(direction == Direction.South)
+        else if (direction == Direction.South)
             direction = Direction.North;
-        else if(direction == Direction.West)
+        else if (direction == Direction.West)
             direction = Direction.East;
         return direction;
     }
@@ -168,17 +189,17 @@ public class AIPacman implements IAEngine{
     @Override
     public void run() {
         try {
-            if(calledByFollow){
+            if (calledByFollow) {
                 calledByFollow = false;
                 Thread.sleep(10000); //il ne peut plus suivre PM pendant 10 secondes
                 isAbleToFollow = true;
             }
-            if(calledByTurnAround){
+            if (calledByTurnAround) {
                 calledByTurnAround = false;
                 Thread.sleep(7000); //il ne peut plus faire demi-tour pendant 7 secondes
                 isAbleToTurnAround = true;
             }
-            if(calledWhenFollowing){
+            if (calledWhenFollowing) {
                 calledWhenFollowing = false;
                 Thread.sleep(10000); //il poursuit PM pendant 10 secondes
                 isFollowingPM = false;

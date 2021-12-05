@@ -22,7 +22,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import pacman.animations.PacManAnimation;
-import pacman.scene.*;
+import pacman.scene.LabyrinthGenerator;
+import pacman.scene.SceneMainMenu;
 import scene.SceneCase;
 import scene.SceneElement;
 import scene.SceneGame;
@@ -91,6 +92,8 @@ public class GamePacMan implements Game {
      * The team manager used of the game Pac-man
      */
     private TeamManager teamManager;
+
+    //etst
 
     /**
      * <b>Constructor of GamePacMan</b>
@@ -341,7 +344,7 @@ public class GamePacMan implements Game {
             pacman.setDirection(Direction.Stop);
             getThreadEntity(pacman).setMovement(null);
             pacman.setIsAlive(false);
-            pacman.setLifePoint(pacman.getLife().getNumberOfLife() - 1);
+            pacman.getLife().removeLifePoint(1);
             new PacManAnimation().deadAnimation(kernelEngine.getImageViewEntities(pacman));
         }
     }
