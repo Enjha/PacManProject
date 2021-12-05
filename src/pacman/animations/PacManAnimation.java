@@ -19,48 +19,46 @@ public class PacManAnimation implements EntityAnimation {
                 if (entity.getEntity().getPosition().getSceneCaseLink() == null) {
                     new Timeline(
                             new KeyFrame(Duration.seconds(0), event -> image_pacman.setImage(pacman.getTextures().get(0))),
-                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setY(image_pacman.getY() - 4)),
+                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() - 4)),
+                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() - 4)),
+                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() - 4)),
+                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() - 4)),
                             new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setImage(pacman.getTextures().get(1))),
-                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setY(image_pacman.getY() - 4)),
-                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setY(image_pacman.getY() - 4)),
+                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() - 4)),
+                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() - 4)),
+                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() - 4)),
+                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() - 4)),
                             new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setImage(pacman.getTextures().get(0)))
                     ).play();
-                } else {
-
                 }
                 break;
             case East:
                 if (pacman.getPosition().getX() == 0 && pacman.getPosition().getY() == 13) {
                     new Timeline(
                             new KeyFrame(Duration.seconds(0), event -> image_pacman.setImage(pacman.getTextures().get(0))),
-                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setX(image_pacman.getX() + 4)),
+                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
                             new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setImage(pacman.getTextures().get(1))),
-                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setX(image_pacman.getX() - (25 * 32))),
-                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setX(image_pacman.getX() + 4)),
+                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - (25 * 32))),
+                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
                             new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setImage(pacman.getTextures().get(0)))
                     ).play();
                 } else {
                     new Timeline(
                             new KeyFrame(Duration.seconds(0), event -> image_pacman.setImage(pacman.getTextures().get(0))),
-                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setX(image_pacman.getX() + 4)),
+                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
                             new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setImage(pacman.getTextures().get(1))),
-                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setX(image_pacman.getX() + 4)),
-                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setX(image_pacman.getX() + 4)),
+                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
+                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + 4)),
                             new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setImage(pacman.getTextures().get(0)))
                     ).play();
                 }
@@ -68,15 +66,15 @@ public class PacManAnimation implements EntityAnimation {
             case South:
                 new Timeline(
                         new KeyFrame(Duration.seconds(0), event -> image_pacman.setImage(pacman.getTextures().get(0))),
-                        new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setY(image_pacman.getY() + 4)),
-                        new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setY(image_pacman.getY() + 4)),
-                        new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setY(image_pacman.getY() + 4)),
-                        new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setY(image_pacman.getY() + 4)),
+                        new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() + 4)),
+                        new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() + 4)),
+                        new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() + 4)),
+                        new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() + 4)),
                         new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setImage(pacman.getTextures().get(1))),
-                        new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setY(image_pacman.getY() + 4)),
-                        new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setY(image_pacman.getY() + 4)),
-                        new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setY(image_pacman.getY() + 4)),
-                        new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setY(image_pacman.getY() + 4)),
+                        new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() + 4)),
+                        new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() + 4)),
+                        new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() + 4)),
+                        new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setLayoutY(image_pacman.getLayoutY() + 4)),
                         new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setImage(pacman.getTextures().get(0)))
                 ).play();
                 break;
@@ -84,29 +82,29 @@ public class PacManAnimation implements EntityAnimation {
                 if (pacman.getPosition().getX() == 25 && pacman.getPosition().getY() == 13) {
                     new Timeline(
                             new KeyFrame(Duration.seconds(0), event -> image_pacman.setImage(pacman.getTextures().get(0))),
-                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setX(image_pacman.getX() - 4)),
+                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
                             new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setImage(pacman.getTextures().get(1))),
-                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setX(image_pacman.getX() + (25 * 32))),
-                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setX(image_pacman.getX() - 4)),
+                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() + (25 * 32))),
+                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
                             new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setImage(pacman.getTextures().get(0)))
                     ).play();
                 } else {
                     new Timeline(
                             new KeyFrame(Duration.seconds(0), event -> image_pacman.setImage(pacman.getTextures().get(0))),
-                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setX(image_pacman.getX() - 4)),
+                            new KeyFrame(Duration.seconds(0.025), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.05), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.075), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
                             new KeyFrame(Duration.seconds(0.1), event -> image_pacman.setImage(pacman.getTextures().get(1))),
-                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setX(image_pacman.getX() - 4)),
-                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setX(image_pacman.getX() - 4)),
+                            new KeyFrame(Duration.seconds(0.125), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.15), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.175), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
+                            new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setLayoutX(image_pacman.getLayoutX() - 4)),
                             new KeyFrame(Duration.seconds(0.2), event -> image_pacman.setImage(pacman.getTextures().get(0)))
                     ).play();
                 }

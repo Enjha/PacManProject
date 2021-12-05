@@ -36,11 +36,8 @@ public class ThreadGhostIA extends Thread implements ThreadEntity {
             if(collision == null){
                 ghostAnimation.movementAnimation(imageViewEntities);
             }
-
-
         }
     }
-
 
     public Entity getEntity() {
         return ghost;

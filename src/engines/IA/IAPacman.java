@@ -13,8 +13,8 @@ import java.util.Random;
 public class IAPacman implements IAEngine {
 
     private Ghost ghost;
-    private  Pacman pacman;
-    private  SceneCase[][] sceneCase;
+    private Pacman pacman;
+    private SceneCase[][] sceneCase;
     private boolean isAbleToFollow;
     private boolean calledByFollow = false;
     private boolean isAbleToTurnAround;
@@ -22,7 +22,9 @@ public class IAPacman implements IAEngine {
     private boolean isFollowingPM;
     private boolean calledWhenFollowing = false;
 
-    public IAPacman(){}
+    public IAPacman(SceneCase[][] sceneCase) {
+        this.sceneCase = sceneCase;
+    }
 
     public IAPacman(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase) {
         this.ghost = ghost;
@@ -35,33 +37,48 @@ public class IAPacman implements IAEngine {
     }
 
     /**
-     * Méthode temporaire qui permet de génrer un mouvement aléatoire pour a un fantôme.
+     * Méthode temporaire qui permet de générer un mouvement aléatoire pour a un fantôme.
+     *
      * @return random Movement
      */
     public synchronized Movement generateRandomMovement(Ghost ghost) {
-
-        try{
-            wait(5000);
-        }
-        catch (InterruptedException exception){
+        try {
+            wait(3000);
+        } catch (InterruptedException exception) {
             exception.printStackTrace();
         }
-
         Random random = new Random();
-        Direction[] directions = Direction.values();
-        Direction randomDirection = directions[random.nextInt(directions.length - 1)];
-        switch (randomDirection) {
+
+        Direction[] allDirections = Direction.values();
+        ArrayList<Direction> directions = new ArrayList<>();
+        directions.add(allDirections[0]);
+        directions.add(allDirections[1]);
+        directions.add(allDirections[2]);
+        directions.add(allDirections[3]);
+
+
+        if (sceneCase[ghost.getPosition().getX()][ghost.getPosition().getY()].getCaseContent(Wall.class.toString()) != null) {
+            for (Object o : sceneCase[ghost.getPosition().getX()][ghost.getPosition().getY()].getCaseContent(Wall.class.toString())) {
+                Wall w = (Wall) o;
+                directions.remove(w.getSceneElement());
+            }
+        }
+
+        switch (directions.get(random.nextInt(directions.size() - 1))) {
             case North:
+                ghost.setDirection(Direction.North);
                 return new MovementNorth(ghost);
             case East:
+                ghost.setDirection(Direction.East);
                 return new MovementEast(ghost);
             case South:
+                ghost.setDirection(Direction.South);
                 return new MovementSouth(ghost);
             case West:
+                ghost.setDirection(Direction.West);
                 return new MovementWest(ghost);
-            default:
-                return null;
         }
+        return null;
     }
 
     private void move() { //permet au fantôme de se deplacer
