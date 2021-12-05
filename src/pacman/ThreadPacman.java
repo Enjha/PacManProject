@@ -6,6 +6,7 @@ import engines.sound.Sound;
 import engines.sound.SoundManager;
 import gameplay.*;
 import pacman.animations.PacManAnimation;
+import scene.SceneElement;
 
 public class ThreadPacman extends Thread implements ThreadEntity {
 
@@ -30,6 +31,7 @@ public class ThreadPacman extends Thread implements ThreadEntity {
         while (!end) {
             if (pacman.getDirection() != Direction.Stop) {
                 if (futureMovement != null) {
+                    System.out.println("treatment 1");
                     game.treatmentCollisionGame(futureMovement);
                     if (collision == null) {
                         movement = futureMovement;
@@ -48,6 +50,7 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                             game.getImageViewEntity((Entity) collision.getSecondObjectCollision()).getImageView().setVisible(false);
                         }
                         else{
+                            System.out.println("treatment 2");
                             game.treatmentCollisionGame(movement);
                             if(collision != null) {
                                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
@@ -58,6 +61,10 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                                 }
                                 if (collision.getSecondObjectCollision() instanceof Ghost){
                                     pacManAnimation.deadAnimation(imageViewEntities);
+                                }
+                                if(collision.getSecondObjectCollision() instanceof SceneElement){
+                                    movement = null;
+                                    futureMovement = null;
                                 }
                             }
                             else {
@@ -71,6 +78,7 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                 }
                 else {
                     if (movement != null) {
+                        System.out.println("treatment 3");
                         game.treatmentCollisionGame(movement);
                         if (collision == null) {
                             pacman.setDirection(movement.getDirection());

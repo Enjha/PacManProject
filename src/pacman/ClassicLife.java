@@ -112,6 +112,7 @@ public class ClassicLife implements Life {
     private void updateLifePoint(){
         Platform.runLater(
                 () -> {
+                    System.out.println("life update : " + numberOfLife);
                     for (int i = 0; i < numberOfLife; i++) {
                         imageViews.get(i).setVisible(true);
                     }
