@@ -9,14 +9,11 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import pacman.Life;
 import pacman.Score;
-import scene.SceneCase;
 import scene.SceneGame;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,11 +38,11 @@ public class ClassicGraphicEngine implements GraphicEngine {
     }
 
     public void setSceneGameTexture(SceneGame sceneGame) {
-        convertSceneToGraphic.setLabyrinthTextureScene(sceneGame, window.getScene().getPanel());
+        convertSceneToGraphic.setLabyrinthTextureScene(sceneGame, window.getScene().getPane());
     }
 
     public void setSceneGameEntity(SceneGame sceneGame) {
-        convertSceneToGraphic.setEntityTextureScene(sceneGame, window.getScene().getPanel());
+        convertSceneToGraphic.setEntityTextureScene(sceneGame, window.getScene().getPane());
     }
 
     public void setCurrentScene(SceneAPIUser scene) {
@@ -55,8 +52,8 @@ public class ClassicGraphicEngine implements GraphicEngine {
             setSceneGameEntity(kernelEngine.getSceneGame());
             Score score = kernelEngine.getScore();
             Life life = kernelEngine.getLife();
-            score.setSceneScore(scene.getPanel());
-            life.setSceneLife(scene.getPanel());
+            score.setSceneScore(scene.getPane());
+            life.setSceneLife(scene.getPane());
         }
     }
 

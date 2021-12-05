@@ -71,7 +71,7 @@ public class ScenePlayMenu implements ScenePacMan {
 
     }
 
-    public Pane getPanel() {
+    public Pane getPane() {
         return pane;
     }
 

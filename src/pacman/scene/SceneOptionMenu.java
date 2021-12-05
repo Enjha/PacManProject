@@ -83,7 +83,7 @@ public class SceneOptionMenu implements ScenePacMan {
         for (int i = 0; i < controls.size(); i++) {
             buttonDirection = new Button();
             labelDirection = new Label();
-            setupScene.setButton(buttonDirection, controls.get(i).getKey(), Pos.CENTER, x, y + 40, 30, 100, new Font(20), true);
+            setupScene.setButton(buttonDirection, controls.get(i).getKeyName(), Pos.CENTER, x, y + 40, 30, 100, new Font(20), true);
             setupScene.setLabel(labelDirection, controls.get(i).getDirection().toString(), Pos.CENTER, x, y, 30, 100, new Font(20), Paint.valueOf("black"), true);
             Button finalButtonDirection = buttonDirection;
             buttonDirection.setOnMouseClicked((event) -> setControl(finalButtonDirection));
@@ -144,7 +144,7 @@ public class SceneOptionMenu implements ScenePacMan {
 
         for (int i = 0; i < controls.size(); i++) {
             listLabelControl.get(i).setText(controls.get(i).getDirection().toString());
-            listButtonControl.get(i).setText(controls.get(i).getKey());
+            listButtonControl.get(i).setText(controls.get(i).getKeyName());
         }
     }
 
@@ -164,7 +164,7 @@ public class SceneOptionMenu implements ScenePacMan {
         }
     }
 
-    public Pane getPanel() {
+    public Pane getPane() {
         return pane;
     }
 

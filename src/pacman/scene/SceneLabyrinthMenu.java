@@ -68,7 +68,7 @@ public class SceneLabyrinthMenu implements ScenePacMan {
         return scene;
     }
 
-    public Pane getPanel() {
+    public Pane getPane() {
         return panel;
     }
 
