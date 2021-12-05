@@ -39,9 +39,8 @@ public class IAPacman implements IAEngine {
      * @return random Movement
      */
     public synchronized Movement generateRandomMovement(Ghost ghost) {
-
         try{
-            wait(5000);
+            wait(500);
         }
         catch (InterruptedException exception){
             exception.printStackTrace();

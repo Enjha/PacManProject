@@ -88,9 +88,10 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
                     imageViewEntities.add(new ImageViewEntities(((Pacman)sceneCase.getCaseContent(Pacman.class.toString()).get(0)),imageView));
                     ((Pacman) sceneCase.getCaseContent(Pacman.class.toString()).get(0)).setxStartPosition(sceneCase.getX());
                     ((Pacman) sceneCase.getCaseContent(Pacman.class.toString()).get(0)).setyStartPosition(sceneCase.getY());
+
                 }
 
-                if (sceneCase.getCaseContent(Ghost.class.toString()) != null && sceneCase.getCaseContent(Ghost.class.toString()).size() > 0) {
+                else if (sceneCase.getCaseContent(Ghost.class.toString()) != null && sceneCase.getCaseContent(Ghost.class.toString()).size() > 0) {
                     for (Object o : sceneCase.getCaseContent(Ghost.class.toString())) {
                         Ghost ghost = (Ghost) o;
                         ArrayList<Image> ghost_textures = new GhostView().getGhostView(ghost);
@@ -101,14 +102,14 @@ public class ClassicConvertSceneToGraphic implements ConvertSceneToGraphic {
                     }
                 }
 
-                if (sceneCase.getCaseContent(NormalFruit.class.toString()) != null && sceneCase.getCaseContent(NormalFruit.class.toString()).size() > 0) {
+                else if (sceneCase.getCaseContent(NormalFruit.class.toString()) != null && sceneCase.getCaseContent(NormalFruit.class.toString()).size() > 0) {
                     Image fruit_texture = new ItemView().getItemView((Item) sceneCase.getCaseContent(NormalFruit.class.toString()).get(0));
                     setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, fruit_texture, true);
                     imageViewEntities.add(new ImageViewEntities(((NormalFruit)sceneCase.getCaseContent(NormalFruit.class.toString()).get(0)),imageView));
                     pane.getChildren().add(imageView);
                 }
 
-                if (sceneCase.getCaseContent(PacgumFruit.class.toString()) != null && sceneCase.getCaseContent(PacgumFruit.class.toString()).size() > 0) {
+                else if (sceneCase.getCaseContent(PacgumFruit.class.toString()) != null && sceneCase.getCaseContent(PacgumFruit.class.toString()).size() > 0) {
                     Image pac_gum_texture = new ItemView().getItemView((Item) sceneCase.getCaseContent(PacgumFruit.class.toString()).get(0));
                     setupScene.setImageView(imageView, x * CASE_SIZE + originEntitiesX, y * CASE_SIZE + originEntitiesY, ENTITY_TEXTURE_SIZE, ENTITY_TEXTURE_SIZE, pac_gum_texture, true);
                     imageViewEntities.add(new ImageViewEntities(((PacgumFruit)sceneCase.getCaseContent(PacgumFruit.class.toString()).get(0)),imageView));

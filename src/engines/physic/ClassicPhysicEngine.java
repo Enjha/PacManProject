@@ -20,7 +20,7 @@ public class ClassicPhysicEngine implements PhysicEngine {
      *      the scene game
      * @return a object type of Collision
      */
-    public Collision moveEntity(Movement movement, SceneGame sceneGame) {
+    public synchronized Collision moveEntity(Movement movement, SceneGame sceneGame) {
         assert movement != null : "Error : movement null";
         assert sceneGame != null : "Error : scene game null";
 
@@ -30,7 +30,7 @@ public class ClassicPhysicEngine implements PhysicEngine {
 
         if (sceneElement != null) {
             //A collision between a entity and a scene element
-            //System.out.println("COLLISION CONTRE MUR");
+            System.out.println("COLLISION CONTRE MUR : " + movement.getEntity().getEntityName());
             return new CollisionEntitySceneElement(movement.getEntity(), sceneElement);
         }
         else {
