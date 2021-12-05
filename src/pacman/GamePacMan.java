@@ -323,18 +323,29 @@ public class GamePacMan implements Game {
      */
     private void treatmentCollisionEntity(Movement movement, Collision collision) {
         assert movement != null && collision != null : "Error : a parameter is wrong";
-
         //A collision between Pac-Man and a normal fruit
         if (collision.getSecondObjectCollision() instanceof NormalFruit && collision.getFirstObjectCollision() instanceof Pacman) {
             score.addScore(10);
             treatmentCollisionMoveEntity(movement, collision);
+            if(nbFruits >1){
+                nbFruits-=1;
+            }else{
+                System.out.println("gagné");
+            }
+            kernelEngine.playFirstSound("eat_fruit.wav");
             kernelEngine.stopSound("eat_fruit.wav");
         }
         //A collision between Pac-Man and a Pacgum fruit
         else if (collision.getSecondObjectCollision() instanceof PacgumFruit && collision.getFirstObjectCollision() instanceof Pacman) {
             score.addScore(50);
-            treatmentCollisionMoveEntity(movement, collision);
+            if(nbFruits >1){
+                nbFruits-=1;
+            }else{
+                System.out.println("gagné");
+            }
+            kernelEngine.playFirstSound("eat_fruit.wav");
             kernelEngine.stopSound("eat_fruit.wav");
+            treatmentCollisionMoveEntity(movement, collision);
         }
         //A collision between Pac-Man and a ghost
         else if (collision.getSecondObjectCollision() instanceof Ghost && collision.getFirstObjectCollision() instanceof Pacman) {
