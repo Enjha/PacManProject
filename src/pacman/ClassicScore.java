@@ -32,7 +32,7 @@ public class ClassicScore implements Score {
      * <b>Constructor of ClassicScore</b>
      */
     public ClassicScore() {
-        new SetupScene().setLabel(labelScore, "Score : ", Pos.CENTER_LEFT, 300, -20, 80, 100, new Font(15), Paint.valueOf("black"), true);
+        new SetupScene().setLabel(labelScore, "Score : ", Pos.CENTER_LEFT, 300, 0, 40, 100, new Font(15), Paint.valueOf("black"), true);
         labelScore.setId("labelScore");
     }
 

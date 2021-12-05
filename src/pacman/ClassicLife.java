@@ -53,7 +53,7 @@ public class ClassicLife implements Life {
         this.numberMaxOfLife = numberMaxOfLife;
         numberOfLife = numberMaxOfLife;
         labelVie = new Label();
-        new SetupScene().setLabel(labelVie, "Vie(s) restante(s) : ", Pos.CENTER_LEFT, 500, -20, 80, 300, new Font(15), Paint.valueOf("black"), true);
+        new SetupScene().setLabel(labelVie, "Vie(s) restante(s) : ", Pos.CENTER_LEFT, 500, 0, 40, 300, new Font(15), Paint.valueOf("black"), true);
         labelVie.setId("labelVie");
         initLifePoint();
     }

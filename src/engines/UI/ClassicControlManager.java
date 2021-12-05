@@ -25,6 +25,7 @@ public class ClassicControlManager implements ControlManager{
         assert control != null : "Error : control null";
         if(!controls.containsKey(control.getKeyName())){
             controls.put(control.getKeyName(),control);
+            assert controls.containsKey(control.getKeyName());
         }
     }
 
@@ -36,6 +37,7 @@ public class ClassicControlManager implements ControlManager{
     public void removeControl(Control control){
         assert control != null : "Error : control null";
         controls.remove(control.getKeyName());
+        assert !controls.containsKey(control.getKeyName());
     }
 
     /**

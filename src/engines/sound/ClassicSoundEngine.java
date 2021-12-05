@@ -1,5 +1,7 @@
 package engines.sound;
 
+import javafx.scene.media.MediaPlayer;
+
 /**
  * A classic sound engine
  */
@@ -34,7 +36,7 @@ public class ClassicSoundEngine implements SoundEngine {
      */
     public void playSound(String name,int cycle){
         assert name != null : "Error : name null";
-        assert cycle > 0 : "Error : cycle <= 0";
+        assert cycle > 0 || cycle ==  MediaPlayer.INDEFINITE: "Error : cycle <= 0";
 
         soundManager.playSound(name, cycle);
         soundManager.changeVolumeSound(name, volume);

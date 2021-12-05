@@ -53,11 +53,9 @@ public class ClassicSound implements Sound{
      *      a cycle
      */
     public void play(int cycle){
-        assert cycle > 0 : "Error : cycle <= 0";
+        assert cycle > 0 || cycle == MediaPlayer.INDEFINITE : "Error : cycle <= 0";
         sound.setCycleCount(cycle);
-        assert cycle == sound.getCycleCount() : "Error : the cycle don't correspond";
         sound.play();
-        assert sound.getStatus() == MediaPlayer.Status.PLAYING : "Error : the sound is not played";
     }
 
     /**
@@ -65,7 +63,6 @@ public class ClassicSound implements Sound{
      */
     public void stop(){
         sound.stop();
-        assert sound.getStatus() == MediaPlayer.Status.STOPPED : "Error : the sound is not stopped";
     }
 
     /**

@@ -48,12 +48,10 @@ public class ClassicSoundManager implements SoundManager{
      *      a cycle
      */
     public void playSound(String name,int cycle){
-        assert cycle > 0 : "Error : cycle <= 0";
+        assert cycle > 0 || cycle == MediaPlayer.INDEFINITE : "Error : cycle <= 0";
         assert name != null : "name null";
         if(sounds.containsKey(name)){
             sounds.get(name).play(cycle);
-            assert sounds.get(name).getSound().getStatus() == MediaPlayer.Status.PLAYING : "Error : the sound is not played";
-            assert sounds.get(name).getSound().getCycleCount() == cycle : "Error : the cycle don't correspond";
         }
     }
 
@@ -66,7 +64,6 @@ public class ClassicSoundManager implements SoundManager{
         assert name != null : "Error : name null";
         if(sounds.containsKey(name)){
             sounds.get(name).stop();
-            assert sounds.get(name).getSound().getStatus() == MediaPlayer.Status.STOPPED : "Error :  the sound is not stopped";
         }
     }
 
