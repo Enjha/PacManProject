@@ -33,7 +33,7 @@ public class ScenePauseMenu implements ScenePacMan {
     }
 
     @Override
-    public Pane getPanel() {
+    public Pane getPane() {
         return null;
     }
 

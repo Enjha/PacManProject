@@ -64,12 +64,6 @@ public class SceneMainMenu implements ScenePacMan {
         return scene;
     }
 
-    @Override
-    public Pane getPanel() {
-        return null;
-    }
-
-
     private void setSceneOption(){
         graphicEngine.setPreviewScene(this);
         graphicEngine.setCurrentScene(new SceneOptionMenu(stage, graphicEngine));
