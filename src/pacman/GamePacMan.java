@@ -297,9 +297,10 @@ public class GamePacMan implements Game {
      * @param movement  the entity's movement
      * @param collision the entity's collision
      */
-    public void treatmentCollision(Movement movement, Collision collision) {
+    public synchronized void treatmentCollision(Movement movement, Collision collision) {
         assert movement != null : "Error : the movement is null";
 
+        System.out.println(movement.getEntity().getEntityName() + " : " + movement.getEntity().getPosition().getX() + "/" + movement.getEntity().getPosition().getY());
         if (collision != null) {
             //There is a collision with a wall
             if (collision.getSecondObjectCollision() instanceof SceneElement) {
