@@ -1,0 +1,35 @@
+#background{
+    -fx-background-color: linear-gradient(#130f40, black);
+}
+
+#pauseButton{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-radius: 30px;
+    -fx-border-color: transparent;
+}
+
+#pauseButton:hover {
+    -fx-cursor: hand;
+}
+
+.label{
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-radius: 30px;
+}
+
+.button:hover {
+    -fx-text-fill: #fff200;
+    -fx-border-color: #fff200;
+    -fx-cursor: hand;
+}
+
+#labelScore,#labelVie{
+    -fx-font-weight: bold;
+}
