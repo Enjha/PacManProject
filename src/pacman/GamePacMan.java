@@ -1,6 +1,5 @@
 package pacman;
 
-import apiUser.SetupScene;
 import engines.UI.ClassicControlEngine;
 import engines.UI.ClassicControlManager;
 import engines.UI.ControlManager;
@@ -19,17 +18,8 @@ import engines.sound.ClassicSoundManager;
 import engines.sound.SoundManager;
 import gameplay.Character;
 import gameplay.*;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import pacman.animations.PacManAnimation;
 import pacman.scene.*;
@@ -335,13 +325,13 @@ public class GamePacMan implements Game {
         if (collision.getSecondObjectCollision() instanceof NormalFruit && collision.getFirstObjectCollision() instanceof Pacman) {
             score.addScore(10);
             treatmentCollisionMoveEntity(movement, collision);
-            kernelEngine.playOneSound("eat_fruit.wav");
+            kernelEngine.stopSound("eat_fruit.wav");
         }
         //A collision between Pac-Man and a Pacgum fruit
         else if (collision.getSecondObjectCollision() instanceof PacgumFruit && collision.getFirstObjectCollision() instanceof Pacman) {
             score.addScore(50);
             treatmentCollisionMoveEntity(movement, collision);
-            kernelEngine.playOneSound("eat_fruit.wav");
+            kernelEngine.stopSound("eat_fruit.wav");
         }
         //A collision between Pac-Man and a ghost
         else if (collision.getSecondObjectCollision() instanceof Ghost && collision.getFirstObjectCollision() instanceof Pacman) {
