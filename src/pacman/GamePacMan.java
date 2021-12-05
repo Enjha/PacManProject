@@ -326,13 +326,13 @@ public class GamePacMan implements Game {
         //A collision between Pac-Man and a normal fruit
         if (collision.getSecondObjectCollision() instanceof NormalFruit && collision.getFirstObjectCollision() instanceof Pacman) {
             score.addScore(10);
+            kernelEngine.playFirstSound("eat_fruit.wav");
             treatmentCollisionMoveEntity(movement, collision);
             if(nbFruits >1){
                 nbFruits-=1;
             }else{
                 System.out.println("gagné");
             }
-            kernelEngine.playFirstSound("eat_fruit.wav");
             kernelEngine.stopSound("eat_fruit.wav");
         }
         //A collision between Pac-Man and a Pacgum fruit
@@ -344,8 +344,8 @@ public class GamePacMan implements Game {
                 System.out.println("gagné");
             }
             kernelEngine.playFirstSound("eat_fruit.wav");
-            kernelEngine.stopSound("eat_fruit.wav");
             treatmentCollisionMoveEntity(movement, collision);
+            kernelEngine.stopSound("eat_fruit.wav");
         }
         //A collision between Pac-Man and a ghost
         else if (collision.getSecondObjectCollision() instanceof Ghost && collision.getFirstObjectCollision() instanceof Pacman) {
