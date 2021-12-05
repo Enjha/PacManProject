@@ -4,9 +4,15 @@ import javafx.scene.media.MediaPlayer;
 
 import java.util.HashMap;
 
+/**
+ * A classic sound manager
+ */
 public class ClassicSoundManager implements SoundManager{
 
-    private HashMap<String,Sound> sounds = new HashMap<>();
+    /**
+     * The map with all sound register
+     */
+    private final HashMap<String,Sound> sounds = new HashMap<>();
 
     /**
      * Add a new sound to the map if his name is not already register
@@ -29,7 +35,7 @@ public class ClassicSoundManager implements SoundManager{
     public void removeSound(Sound sound){
         assert sound != null : "Error : sound null";
         if(sounds.containsKey(sound.getName())){
-            sounds.remove(sound);
+            sounds.remove(sound.getName());
             assert !sounds.containsKey(sound.getName()) : "Error : sound not correctly remove";
         }
     }
