@@ -1,6 +1,7 @@
 package pacman;
 
 import engines.graphic.ImageViewEntities;
+import engines.kernel.KernelEngine;
 import engines.physic.Collision;
 import engines.sound.Sound;
 import engines.sound.SoundManager;
@@ -31,7 +32,6 @@ public class ThreadPacman extends Thread implements ThreadEntity {
         while (!end) {
             if (pacman.getDirection() != Direction.Stop) {
                 if (futureMovement != null) {
-                    System.out.println("treatment 1");
                     game.treatmentCollisionGame(futureMovement);
                     if (collision == null) {
                         movement = futureMovement;
@@ -50,7 +50,6 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                             game.getImageViewEntity((Entity) collision.getSecondObjectCollision()).getImageView().setVisible(false);
                         }
                         else{
-                            System.out.println("treatment 2");
                             game.treatmentCollisionGame(movement);
                             if(collision != null) {
                                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
@@ -78,7 +77,6 @@ public class ThreadPacman extends Thread implements ThreadEntity {
                 }
                 else {
                     if (movement != null) {
-                        System.out.println("treatment 3");
                         game.treatmentCollisionGame(movement);
                         if (collision == null) {
                             pacman.setDirection(movement.getDirection());
@@ -160,4 +158,5 @@ public class ThreadPacman extends Thread implements ThreadEntity {
            System.out.println(this.getName() + "/" +this.getState());
        }
     }
+    public void setKernelEngine(KernelEngine kernelEngine){}
 }

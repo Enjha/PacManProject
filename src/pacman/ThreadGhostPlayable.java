@@ -1,11 +1,12 @@
 package pacman;
 
 import engines.graphic.ImageViewEntities;
+import engines.kernel.KernelEngine;
 import engines.physic.Collision;
 import gameplay.*;
 import pacman.animations.GhostAnimation;
 
-public class ThreadGhost extends Thread implements ThreadEntity {
+public class ThreadGhostPlayable extends Thread implements ThreadEntity {
 
     private Ghost ghost;
     private Movement movement;
@@ -18,7 +19,7 @@ public class ThreadGhost extends Thread implements ThreadEntity {
     private GhostAnimation ghostAnimation;
     private volatile boolean pause = false;
 
-    public ThreadGhost(Ghost ghost,Game game) {
+    public ThreadGhostPlayable(Ghost ghost, Game game) {
         this.ghost = ghost;
         this.game = game;
         this.ghostAnimation = new GhostAnimation();
@@ -156,4 +157,6 @@ public class ThreadGhost extends Thread implements ThreadEntity {
            System.out.println(this.getName() + "/" +this.getState());
        }
     }
+
+    public void setKernelEngine(KernelEngine kernelEngine){}
 }

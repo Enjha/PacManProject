@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AIPacman implements IAEngine {
+public class IAPacman implements IAEngine {
 
-    private final Ghost ghost;
-    private final Pacman pacman;
-    private final SceneCase[][] sceneCase;
+    private Ghost ghost;
+    private  Pacman pacman;
+    private  SceneCase[][] sceneCase;
     private boolean isAbleToFollow;
     private boolean calledByFollow = false;
     private boolean isAbleToTurnAround;
@@ -22,7 +22,9 @@ public class AIPacman implements IAEngine {
     private boolean isFollowingPM;
     private boolean calledWhenFollowing = false;
 
-    public AIPacman(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase) {
+    public IAPacman(){}
+
+    public IAPacman(Ghost ghost, Pacman pacman, SceneCase[][] sceneCase) {
         this.ghost = ghost;
         this.pacman = pacman;
         this.sceneCase = sceneCase;
@@ -36,7 +38,15 @@ public class AIPacman implements IAEngine {
      * Méthode temporaire qui permet de génrer un mouvement aléatoire pour a un fantôme.
      * @return random Movement
      */
-    public Movement generateRandomMovement() {
+    public synchronized Movement generateRandomMovement(Ghost ghost) {
+
+        try{
+            wait(500);
+        }
+        catch (InterruptedException exception){
+            exception.printStackTrace();
+        }
+
         Random random = new Random();
         Direction[] directions = Direction.values();
         Direction randomDirection = directions[random.nextInt(directions.length - 1)];

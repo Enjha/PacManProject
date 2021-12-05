@@ -30,7 +30,7 @@ public class ClassicPhysicEngine implements PhysicEngine {
 
         if (sceneElement != null) {
             //A collision between a entity and a scene element
-            System.out.println("COLLISION CONTRE MUR");
+            //System.out.println("COLLISION CONTRE MUR");
             return new CollisionEntitySceneElement(movement.getEntity(), sceneElement);
         }
         else {

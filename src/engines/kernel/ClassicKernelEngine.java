@@ -1,5 +1,6 @@
 package engines.kernel;
 
+import engines.IA.IAEngine;
 import engines.UI.Control;
 import engines.UI.ControlEngine;
 import engines.graphic.GraphicEngine;
@@ -12,6 +13,7 @@ import gameplay.Game;
 import gameplay.Movement;
 import javafx.scene.Scene;
 import javafx.scene.media.MediaPlayer;
+import pacman.Ghost;
 import pacman.Life;
 import pacman.Score;
 import scene.SceneGame;
@@ -42,6 +44,8 @@ public class ClassicKernelEngine implements KernelEngine {
      * The control engine connect to this kernel engine
      */
     private ControlEngine controlEngine;
+
+    private IAEngine iaEngine;
 
     /**
      * The current game
@@ -128,6 +132,10 @@ public class ClassicKernelEngine implements KernelEngine {
     public void setGraphicEngine(GraphicEngine graphicEngine) {
         assert graphicEngine != null : "Error : graphic engine null";
         this.graphicEngine = graphicEngine;
+    }
+
+    public void setIaEngine(IAEngine iaEngine){
+        this.iaEngine = iaEngine;
     }
 
     /**
@@ -231,9 +239,9 @@ public class ClassicKernelEngine implements KernelEngine {
         assert movement != null : "Error : movement null";
         assert game != null : "Error : game null";
 
-        System.out.println("Class ClassicKernelEngine --> treatmentCollisionGame : Traitement de la collision");
-        Collision collision = physicEngine.moveEntity(movement, game.getSceneGame());
-        game.treatmentCollision(movement, collision);
+        //System.out.println("Class ClassicKernelEngine --> treatmentCollisionGame : Traitement de la collision");
+            Collision collision = physicEngine.moveEntity(movement, game.getSceneGame());
+            game.treatmentCollision(movement, collision);
     }
 
     /**
@@ -350,5 +358,9 @@ public class ClassicKernelEngine implements KernelEngine {
     public Life getLife() {
         assert game != null : "Error : game null";
         return game.getLife();
+    }
+
+    public Movement getMovementIA(Entity entity){
+        return iaEngine.generateRandomMovement((Ghost) entity);
     }
 }

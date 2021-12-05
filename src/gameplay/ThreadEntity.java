@@ -1,6 +1,7 @@
 package gameplay;
 
 import engines.graphic.ImageViewEntities;
+import engines.kernel.KernelEngine;
 import engines.physic.Collision;
 
 public interface ThreadEntity {
@@ -10,4 +11,5 @@ public interface ThreadEntity {
     void setCollision(Collision collision);
     void setImageViewEntities(ImageViewEntities imageViewEntities);
     void setPause(boolean pause);
+    void setKernelEngine(KernelEngine kernelEngine);
 }

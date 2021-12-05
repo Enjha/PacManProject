@@ -1,5 +1,6 @@
 package engines.kernel;
 
+import engines.IA.IAEngine;
 import engines.UI.Control;
 import engines.UI.ControlEngine;
 import engines.graphic.GraphicEngine;
@@ -122,6 +123,8 @@ public interface KernelEngine {
      */
     void setControlEngineState(boolean state);
 
+    void setIaEngine(IAEngine iaEngine);
+
     /**
      * Modify the control engine scene with a new scene
      * @param scene
@@ -196,4 +199,6 @@ public interface KernelEngine {
      * @return a object type of Life
      */
     Life getLife();
+
+    Movement getMovementIA(Entity entity);
 }

@@ -129,7 +129,7 @@ public class Labyrinth2D implements SceneGame {
      *      a scene case
      * @return a object type of Wall
      */
-    private Wall wall(Direction direction, SceneCase sceneCase){
+    private synchronized Wall wall(Direction direction, SceneCase sceneCase){
         List<Object> list = sceneCase.getCaseContent(Wall.class.toString());
         if(list != null) {
             for (Object object : sceneCase.getCaseContent(Wall.class.toString())) {

@@ -1,5 +1,6 @@
 package pacman;
 
+import engines.IA.IAPacman;
 import engines.UI.ClassicControlEngine;
 import engines.UI.ClassicControlManager;
 import engines.UI.ControlManager;
@@ -130,7 +131,7 @@ public class GamePacMan implements Game {
                 threadEntities.add(new ThreadPacman((Pacman) entity, this));
             }
             if (entity instanceof Ghost) {
-                threadEntities.add(new ThreadGhost((Ghost) entity, this));
+                threadEntities.add(new ThreadGhostIA((Ghost) entity, this));
             }
         }
     }
@@ -144,6 +145,9 @@ public class GamePacMan implements Game {
                 assert thread.getState() == Thread.State.NEW : "Error : a thread is not new";
                 ThreadEntity threadEntity = (ThreadEntity) thread;
                 threadEntity.setImageViewEntities(kernelEngine.getImageViewEntities(threadEntity.getEntity()));
+                if(thread instanceof ThreadGhostIA){
+                    ((ThreadGhostIA)thread).setKernelEngine(kernelEngine);
+                }
                 thread.start();
             }
             kernelEngine.playFirstSound("game_start.wav");
@@ -167,6 +171,7 @@ public class GamePacMan implements Game {
     public void startEngine(Stage stage) {
         kernelEngine = new ClassicKernelEngine(this);
         kernelEngine.setPhysicEngine(new ClassicPhysicEngine());
+        kernelEngine.setIaEngine(new IAPacman());
         startSoundEngine();
         startGraphicEngine(stage);
         startControlEngine();
@@ -337,7 +342,7 @@ public class GamePacMan implements Game {
             kernelEngine.stopSound("eat_fruit.wav");
         }
         //A collision between Pac-Man and a ghost
-        else if (collision.getSecondObjectCollision() instanceof Ghost && collision.getFirstObjectCollision() instanceof Pacman) {
+        else if ((collision.getSecondObjectCollision() instanceof Ghost && collision.getFirstObjectCollision() instanceof Pacman) || (collision.getFirstObjectCollision() instanceof Ghost && collision.getSecondObjectCollision() instanceof Pacman)) {
             Pacman pacman = (Pacman) collision.getFirstObjectCollision();
             getThreadEntity(movement.getEntity()).setCollision(collision);
             treatmentCollisionMoveEntity(movement, collision);

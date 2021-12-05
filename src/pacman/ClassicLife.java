@@ -114,9 +114,11 @@ public class ClassicLife implements Life {
                 () -> {
                     System.out.println("life update : " + numberOfLife);
                     for (int i = 0; i < numberOfLife; i++) {
+                        System.out.println("i : " + i);
                         imageViews.get(i).setVisible(true);
                     }
                     for (int j = numberOfLife; j < imageViews.size(); j++) {
+                        System.out.println("j : " + j);
                         imageViews.get(j).setVisible(false);
                     }
                 });
