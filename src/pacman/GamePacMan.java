@@ -1,6 +1,5 @@
 package pacman;
 
-import apiUser.SetupScene;
 import engines.UI.ClassicControlEngine;
 import engines.UI.ClassicControlManager;
 import engines.UI.ControlManager;
@@ -19,20 +18,12 @@ import engines.sound.ClassicSoundManager;
 import engines.sound.SoundManager;
 import gameplay.Character;
 import gameplay.*;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import pacman.animations.PacManAnimation;
-import pacman.scene.*;
+import pacman.scene.LabyrinthGenerator;
+import pacman.scene.SceneMainMenu;
 import scene.SceneCase;
 import scene.SceneElement;
 import scene.SceneGame;
@@ -351,7 +342,7 @@ public class GamePacMan implements Game {
             pacman.setDirection(Direction.Stop);
             getThreadEntity(pacman).setMovement(null);
             pacman.setIsAlive(false);
-            pacman.setLifePoint(pacman.getLife().getNumberOfLife() - 1);
+            pacman.getLife().removeLifePoint(1);
             new PacManAnimation().deadAnimation(kernelEngine.getImageViewEntities(pacman));
         }
     }
