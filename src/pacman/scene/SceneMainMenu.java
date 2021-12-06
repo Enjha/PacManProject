@@ -23,7 +23,7 @@ public class SceneMainMenu implements ScenePacMan {
     /**
      * The root of this scene
      */
-    private BorderPane root = new BorderPane();
+    private final BorderPane root = new BorderPane();
 
     /**
      * The width of this scene

@@ -23,27 +23,91 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Scene of the option menu
+ */
 public class SceneOptionMenu implements ScenePacMan {
 
-    private BorderPane root = new BorderPane();
+    /**
+     * The root of this scene
+     */
+    private final BorderPane root = new BorderPane();
+
+    /**
+     * The width of this scene
+     */
     private final int width = 1200;
+
+    /**
+     * the height of this scene
+     */
     private final int height = 800;
-    private Scene scene = new Scene(root, width, height);
-    private Stage stage;
-    private SetupScene setupScene = new SetupScene();
+
+    /**
+     * The scene
+     */
+    private final Scene scene = new Scene(root, width, height);
+
+    /**
+     * The stage of this application
+     */
+    private final Stage stage;
+
+    /**
+     * The setup of the scene
+     */
+    private final SetupScene setupScene = new SetupScene();
     private boolean stateSound = true;
-    private GraphicEngine graphicEngine;
+
+    /**
+     * the graphic engine
+     */
+    private final GraphicEngine graphicEngine;
+
+    /**
+     * The index control entities, by default its 0
+     */
     private int indexControlEntities = 0;
-    private List<Button> listButtonControl = new ArrayList<>();
-    private List<Label> listLabelControl = new ArrayList<>();
+
+    /**
+     * The button for the control
+     */
+    private final List<Button> listButtonControl = new ArrayList<>();
+
+    /**
+     * The label for the control
+     */
+    private final List<Label> listLabelControl = new ArrayList<>();
+
+    /**
+     * The modify key control state, by default its false
+     */
     private boolean modifyKeyControl = false;
+
+    /**
+     * The pane of this scene
+     */
     private Pane pane;
 
+    /**
+     * <b>Constructor of SceneOptionMenu</b>
+     * @param stage
+     *      a stage
+     * @param graphicEngine
+     *      a graphic engine
+     */
     public SceneOptionMenu(Stage stage, GraphicEngine graphicEngine) {
+        assert stage != null : "Error : stage null";
+        assert graphicEngine != null : "Error : graphic engine null";
+
         this.graphicEngine = graphicEngine;
         this.stage = stage;
     }
 
+    /**
+     * Return the scene of the option menu
+     * @return a object type of Scene
+     */
     public Scene getScene() {
         pane = new AnchorPane();
         root.setId("background");
@@ -106,7 +170,7 @@ public class SceneOptionMenu implements ScenePacMan {
             labelVolumeLevel.setText("" + (int) (sliderSoundVolume.getValue() * 100));
         });
 
-        buttonSound.setOnMouseClicked((event) -> setStateSound(buttonSound, sliderSoundVolume, labelVolumeLevel));
+        buttonSound.setOnMouseClicked((event) -> setStateSound(buttonSound));
         buttonReturn.setOnMouseClicked((event) -> setSceneReturn());
 
         pane.getChildren().addAll(labelTitle, sliderSoundVolume, labelVolumeLevel, labelVolume, buttonSound, buttonReturn, buttonCharacter);
@@ -114,7 +178,12 @@ public class SceneOptionMenu implements ScenePacMan {
         return scene;
     }
 
-    private void setStateSound(Button soundButton, Slider sliderSoundVolume, Label labelVolumeLevel) {
+    /**
+     * mute or unmute all sound
+     * @param soundButton
+     *      a button
+     */
+    private void setStateSound(Button soundButton) {
         if (stateSound) {
             stateSound = false;
             soundButton.setText("Son : Désactivé");
@@ -131,6 +200,11 @@ public class SceneOptionMenu implements ScenePacMan {
         graphicEngine.setCurrentScene(graphicEngine.getPreviewScene());
     }
 
+    /**
+     * Change the entity control display
+     * @param button
+     *      the button connect to a entity
+     */
     private void changeEntityControl(Button button) {
         indexControlEntities = (indexControlEntities + 1) % graphicEngine.getEntities().size();
         Entity entity = graphicEngine.getEntities().get(indexControlEntities);
@@ -148,6 +222,11 @@ public class SceneOptionMenu implements ScenePacMan {
         }
     }
 
+    /**
+     * Modify a control
+     * @param button
+     *      the button connect to the control
+     */
     private void setControl(Button button) {
         modifyKeyControl = true;
         if (modifyKeyControl) {
@@ -164,10 +243,19 @@ public class SceneOptionMenu implements ScenePacMan {
         }
     }
 
+    /**
+     * Return the pane of this scene
+     * @return
+     */
     public Pane getPane() {
         return pane;
     }
 
+
+    /**
+     * Return that scene is not a scene game
+     * @return a boolean value equal to false
+     */
     public boolean isSceneGame() {
         return false;
     }
