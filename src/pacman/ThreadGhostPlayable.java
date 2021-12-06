@@ -119,25 +119,19 @@ public class ThreadGhostPlayable extends Thread implements ThreadEntity {
         }
     }
 
-    private synchronized void waitMovement(){
-        try{
-            if(!pause) {
-                wait(time);
-            }
-            else {
-                while(pause) {
-                    wait();
-                }
-            }
-        } catch (InterruptedException exception) {
-            exception.printStackTrace();
-        }
-    }
-
+    /**
+     * Return the entity of this thread
+     * @return a object type of Entity
+     */
     public Entity getEntity() {
         return ghost;
     }
 
+    /**
+     * Modigy the movement of this entity or save a second move
+     * @param movement
+     *      a new movement
+     */
     public synchronized void setMovement(Movement movement) {
         if (this.movement != null) {
             futureMovement = movement;
@@ -149,14 +143,29 @@ public class ThreadGhostPlayable extends Thread implements ThreadEntity {
         }
     }
 
+    /**
+     * Modify the collision
+     * @param collision
+     *      a new collision
+     */
     public void setCollision(Collision collision) {
         this.collision = collision;
     }
 
+    /**
+     * Modify the image view entities of this entity
+     * @param imageViewEntities
+     *      a new image view entities
+     */
     public void setImageViewEntities(ImageViewEntities imageViewEntities) {
         this.imageViewEntities = imageViewEntities;
     }
 
+    /**
+     * Modify the pause's state
+     * @param pause
+     *      a new state's pause
+     */
     public synchronized void setPause(boolean pause) {
        this.pause = pause;
        if(!pause){
@@ -166,5 +175,10 @@ public class ThreadGhostPlayable extends Thread implements ThreadEntity {
        }
     }
 
+    /**
+     * we don't need to use the kernel engine
+     * @param kernelEngine
+     *      a new kernel engine
+     */
     public void setKernelEngine(KernelEngine kernelEngine){}
 }

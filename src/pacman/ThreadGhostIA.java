@@ -31,6 +31,10 @@ public class ThreadGhostIA extends Thread implements ThreadEntity {
      * The entity collision after a movement, by default its null
      */
     private Collision collision = null;
+
+    /**
+     * The entity image view entities
+     */
     private ImageViewEntities imageViewEntities;
 
     /**
