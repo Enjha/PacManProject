@@ -111,4 +111,6 @@ public interface Game {
      * @return a object type of TeamManager
      */
     TeamManager getTeamManager();
+
+    void createThreadEntity();
 }

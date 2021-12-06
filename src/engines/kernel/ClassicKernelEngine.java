@@ -370,4 +370,12 @@ public class ClassicKernelEngine implements KernelEngine {
         assert entity != null : "Error : entity null";
         return iaEngine.generateRandomMovement(entity);
     }
+
+    public void createThreadEntities(){
+        game.createThreadEntity();
+    }
+
+    public boolean getSolo(){
+        return graphicEngine.getSolo();
+    }
 }

@@ -64,11 +64,13 @@ public class ScenePlayMenu implements ScenePacMan {
     }
 
     private void setSceneSoloMenu(Stage stage) {
+        graphicEngine.setSolo(true);
         graphicEngine.setCurrentScene(new SceneLabyrinthMenu(stage, graphicEngine));
     }
 
     private void setSceneMultiMenu(Stage stage) {
-
+        graphicEngine.setSolo(false);
+        graphicEngine.setCurrentScene(new SceneLabyrinthMenu(stage, graphicEngine));
     }
 
     public Pane getPane() {

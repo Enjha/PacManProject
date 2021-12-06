@@ -51,7 +51,12 @@ public class ClassicGraphicEngine implements GraphicEngine {
     /**
      * A list of label of the pane
      */
-    List<Label> labels = new ArrayList<>();
+    private List<Label> labels = new ArrayList<>();
+
+    /**
+     * The game mode solo, by default its true
+     */
+    private boolean solo = true;
 
     /**
      * <b>Constructor of ClassicGraphicEngine</b>
@@ -121,6 +126,7 @@ public class ClassicGraphicEngine implements GraphicEngine {
         assert kernelEngine.getSceneGame() != null : "Error : kernel engine --> scene game null";
         window.setScene(scene);
         if (window.getScene().isSceneGame()) {
+            kernelEngine.createThreadEntities();
             setSceneGameTexture(kernelEngine.getSceneGame());
             setSceneGameEntity(kernelEngine.getSceneGame());
             Score score = kernelEngine.getScore();
@@ -268,7 +274,6 @@ public class ClassicGraphicEngine implements GraphicEngine {
         assert entity != null : "Error : entity null";
         ImageViewEntities imageViewEntities = getImageViewEntities(entity);
         assert imageViewEntities != null : "Error : image view entities null";
-        convertSceneToGraphic.setEntityPosition(entity, imageViewEntities.getImageView());System.err.println("error : entity not found");
     }
 
     /**
@@ -329,5 +334,17 @@ public class ClassicGraphicEngine implements GraphicEngine {
      */
     public List<Thread> getCurrentsThreads() {
         return kernelEngine.getCurrentsThreads();
+    }
+
+    public void setSolo(boolean solo){
+        this.solo = solo;
+    }
+
+    /**
+     * Return the game mode solo state
+     * @return o boolean value
+     */
+    public boolean getSolo(){
+        return solo;
     }
 }

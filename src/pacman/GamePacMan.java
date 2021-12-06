@@ -123,13 +123,21 @@ public class GamePacMan implements Game {
      */
     public void createEntity() {
         entities = labyrinthGenerator.generateEntity(sceneGame, this);
-        assert entities.size() > 0 : "error : entity not generate";
+    }
+
+    public void createThreadEntity(){
+        threadEntities = new ArrayList<>();
         for (Entity entity : entities) {
             if (entity instanceof Pacman) {
                 threadEntities.add(new ThreadPacman((Pacman) entity, this));
             }
             if (entity instanceof Ghost) {
-                threadEntities.add(new ThreadGhostIA((Ghost) entity, this));
+                if(!kernelEngine.getSolo()) {
+                    threadEntities.add(new ThreadGhostIA((Ghost) entity, this));
+                }
+                else {
+                    threadEntities.add(new ThreadGhostPlayable((Ghost) entity,this));
+                }
             }
         }
     }

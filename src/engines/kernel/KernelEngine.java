@@ -201,4 +201,8 @@ public interface KernelEngine {
     Life getLife();
 
     Movement getMovementIA(Entity entity);
+
+    void createThreadEntities();
+
+    boolean getSolo();
 }

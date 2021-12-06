@@ -39,4 +39,6 @@ public interface GraphicEngine {
     void playSound(String soundName);
     void stopSound(String soundName);
     List<Thread> getCurrentsThreads();
+    void setSolo(boolean solo);
+    boolean getSolo();
 }
