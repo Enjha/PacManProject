@@ -3,6 +3,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import pacman.*;
 import pacman.scene.LabyrinthBuild;
+import pacman.ClassicTeamManager;
 
 public class Main extends Application {
 

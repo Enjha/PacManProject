@@ -3,11 +3,9 @@ package pacman;
 import engines.graphic.ImageViewEntities;
 import engines.kernel.KernelEngine;
 import engines.physic.Collision;
-import gameplay.Entity;
-import gameplay.Game;
-import gameplay.Movement;
-import gameplay.ThreadEntity;
+import gameplay.*;
 import pacman.animations.GhostAnimation;
+import scene.SceneElement;
 
 /**
  * A thread of a ghost control by a IA
@@ -86,6 +84,12 @@ public class ThreadGhostIA extends Thread implements ThreadEntity {
             if(collision == null){
                 ghostAnimation.movementAnimation(imageViewEntities);
             }
+            else {
+                if(collision.getSecondObjectCollision() instanceof SceneElement){
+                    movement = null;
+                    ghost.setDirection(Direction.Stop);
+                }
+            }
         }
     }
 
@@ -114,7 +118,6 @@ public class ThreadGhostIA extends Thread implements ThreadEntity {
      *      a new collision
      */
     public void setCollision(Collision collision) {
-        assert collision != null : "Error : collision null";
         this.collision = collision;
     }
 

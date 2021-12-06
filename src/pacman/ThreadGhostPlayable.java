@@ -5,6 +5,8 @@ import engines.kernel.KernelEngine;
 import engines.physic.Collision;
 import gameplay.*;
 import pacman.animations.GhostAnimation;
+import pacman.Ghost;
+import scene.SceneElement;
 
 public class ThreadGhostPlayable extends Thread implements ThreadEntity {
 
@@ -34,6 +36,7 @@ public class ThreadGhostPlayable extends Thread implements ThreadEntity {
                         movement = futureMovement;
                         futureMovement = null;
                         ghost.setDirection(movement.getDirection());
+                        ghost.setAnimated(true);
                         ghostAnimation.movementAnimation(imageViewEntities);
                     }
                     else{
@@ -41,20 +44,25 @@ public class ThreadGhostPlayable extends Thread implements ThreadEntity {
                             movement = futureMovement;
                             futureMovement = null;
                             ghost.setDirection(movement.getDirection());
+                            ghost.setAnimated(true);
                             ghostAnimation.movementAnimation(imageViewEntities);
-                            waitMovement();
                         }
                         else{
                             game.treatmentCollisionGame(movement);
                             if(collision != null) {
                                 if (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit) {
                                     ghost.setDirection(movement.getDirection());
+                                    ghost.setAnimated(true);
                                     ghostAnimation.movementAnimation(imageViewEntities);
-                                    waitMovement();
+                                }
+                                if(collision.getSecondObjectCollision() instanceof SceneElement){
+                                    movement = null;
+                                    futureMovement = null;
                                 }
                             }
                             else {
                                 ghost.setDirection(movement.getDirection());
+                                ghost.setAnimated(true);
                                 ghostAnimation.movementAnimation(imageViewEntities);
                             }
                         }
@@ -66,14 +74,14 @@ public class ThreadGhostPlayable extends Thread implements ThreadEntity {
                         game.treatmentCollisionGame(movement);
                         if (collision == null) {
                             ghost.setDirection(movement.getDirection());
+                            ghost.setAnimated(true);
                             ghostAnimation.movementAnimation(imageViewEntities);
-                            waitMovement();
                         }
                         else{
                             if(collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit){
                                 ghost.setDirection(movement.getDirection());
+                                ghost.setAnimated(true);
                                 ghostAnimation.movementAnimation(imageViewEntities);
-                                waitMovement();
                             }
                         }
                     }

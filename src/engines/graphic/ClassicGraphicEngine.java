@@ -94,7 +94,7 @@ public class ClassicGraphicEngine implements GraphicEngine {
     }
 
     /**
-     * Setup the scene game texture
+     * Setup the scene game texture with the labyrinth texture
      * @param sceneGame
      *      a scene game
      */
@@ -336,13 +336,18 @@ public class ClassicGraphicEngine implements GraphicEngine {
         return kernelEngine.getCurrentsThreads();
     }
 
+    /**
+     * Modify if the game mode is solo
+     * @param solo
+     *      the state
+     */
     public void setSolo(boolean solo){
         this.solo = solo;
     }
 
     /**
      * Return the game mode solo state
-     * @return o boolean value
+     * @return a boolean value
      */
     public boolean getSolo(){
         return solo;

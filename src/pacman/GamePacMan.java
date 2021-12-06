@@ -132,7 +132,7 @@ public class GamePacMan implements Game {
                 threadEntities.add(new ThreadPacman((Pacman) entity, this));
             }
             if (entity instanceof Ghost) {
-                if(!kernelEngine.getSolo()) {
+                if(kernelEngine.getSolo()) {
                     threadEntities.add(new ThreadGhostIA((Ghost) entity, this));
                 }
                 else {
@@ -308,6 +308,7 @@ public class GamePacMan implements Game {
 
         if (collision != null) {
             //There is a collision with a wall
+            System.out.println("wall : " + movement.getEntity().getEntityName());
             if (collision.getSecondObjectCollision() instanceof SceneElement) {
                 getThreadEntity(movement.getEntity()).setCollision(collision);
                 if (movement.getEntity().isCharacter()) {
@@ -375,6 +376,11 @@ public class GamePacMan implements Game {
             new PacManAnimation().deadAnimation(kernelEngine.getImageViewEntities(pacman));
             kernelEngine.stopSound("death_1.wav");
         }
+        else if(collision.getFirstObjectCollision() instanceof Ghost && (collision.getSecondObjectCollision() instanceof NormalFruit || collision.getSecondObjectCollision() instanceof PacgumFruit)){
+            System.out.println("collision fruit : " + movement.getEntity().getEntityName());
+            getThreadEntity(movement.getEntity()).setCollision(null);
+            treatmentCollisionMoveEntity(movement,null);
+        }
     }
 
     /**
@@ -386,10 +392,14 @@ public class GamePacMan implements Game {
     private void treatmentCollisionMoveEntity(Movement movement, Collision collision) {
         assert movement != null : "Error : the movement is null";
 
+        System.out.println(movement.getEntity().getEntityName() + " : " + movement.getDirection());
         getThreadEntity(movement.getEntity()).setCollision(collision);
         SceneCase newSceneCase = getNewSceneCase(movement.getDirection(), movement.getEntity());
 
         assert newSceneCase != null : "error : new scene case null";
+
+        System.out.println("case : " + newSceneCase.getX() + "/" + newSceneCase.getY());
+
 
         sceneGame.getCase(movement.getEntity().getPosition().getX(), movement.getEntity().getPosition().getY()).removeCaseContent(movement.getEntity());
         newSceneCase.addCaseContent(movement.getEntity());
@@ -419,6 +429,7 @@ public class GamePacMan implements Game {
      */
     private SceneCase getNewSceneCase(Direction direction, Entity entity) {
         assert direction != null && entity != null : "Error : a parameter is wrong";
+        System.out.println(entity + " : " + entity.getPosition().getX() + "/" + entity.getPosition().getY());
         switch (direction) {
             case North:
                 return sceneGame.getCase(entity.getPosition().getX(), new MovementNorth(entity).nextPosition()[1]);
