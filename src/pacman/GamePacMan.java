@@ -143,8 +143,8 @@ public class GamePacMan implements Game {
                 assert thread.getState() == Thread.State.NEW : "Error : a thread is not new";
                 ThreadEntity threadEntity = (ThreadEntity) thread;
                 threadEntity.setImageViewEntities(kernelEngine.getImageViewEntities(threadEntity.getEntity()));
-                if(thread instanceof ThreadGhostIA){
-                    ((ThreadGhostIA)thread).setKernelEngine(kernelEngine);
+                if (thread instanceof ThreadGhostIA) {
+                    ((ThreadGhostIA) thread).setKernelEngine(kernelEngine);
                 }
                 thread.start();
             }
@@ -169,7 +169,7 @@ public class GamePacMan implements Game {
     public void startEngine(Stage stage) {
         kernelEngine = new ClassicKernelEngine(this);
         kernelEngine.setPhysicEngine(new ClassicPhysicEngine());
-        kernelEngine.setIaEngine(new IAPacman());
+        kernelEngine.setIaEngine(new IAPacman(this.getSceneGame().getCases()));
         startSoundEngine();
         startGraphicEngine(stage);
         startControlEngine();
@@ -331,9 +331,9 @@ public class GamePacMan implements Game {
             score.addScore(10);
             kernelEngine.playFirstSound("eat_fruit.wav");
             treatmentCollisionMoveEntity(movement, collision);
-            if(nbFruits >1){
-                nbFruits-=1;
-            }else{
+            if (nbFruits > 1) {
+                nbFruits -= 1;
+            } else {
                 System.out.println("gagné");
             }
             kernelEngine.stopSound("eat_fruit.wav");
@@ -341,9 +341,9 @@ public class GamePacMan implements Game {
         //A collision between Pac-Man and a Pacgum fruit
         else if (collision.getSecondObjectCollision() instanceof PacgumFruit && collision.getFirstObjectCollision() instanceof Pacman) {
             score.addScore(50);
-            if(nbFruits >1){
-                nbFruits-=1;
-            }else{
+            if (nbFruits > 1) {
+                nbFruits -= 1;
+            } else {
                 System.out.println("gagné");
             }
             kernelEngine.playFirstSound("eat_fruit.wav");
@@ -352,14 +352,20 @@ public class GamePacMan implements Game {
         }
         //A collision between Pac-Man and a ghost
         else if ((collision.getSecondObjectCollision() instanceof Ghost && collision.getFirstObjectCollision() instanceof Pacman) || (collision.getFirstObjectCollision() instanceof Ghost && collision.getSecondObjectCollision() instanceof Pacman)) {
-            Pacman pacman = (Pacman) collision.getFirstObjectCollision();
+            Pacman pacman;
+            if (collision.getFirstObjectCollision() instanceof Pacman)
+                pacman = (Pacman) collision.getFirstObjectCollision();
+            else
+                pacman = (Pacman) collision.getSecondObjectCollision();
             getThreadEntity(movement.getEntity()).setCollision(collision);
+            kernelEngine.playFirstSound("death_1.wav");
             treatmentCollisionMoveEntity(movement, collision);
             pacman.setDirection(Direction.Stop);
             getThreadEntity(pacman).setMovement(null);
             pacman.setIsAlive(false);
             pacman.getLife().removeLifePoint(1);
             new PacManAnimation().deadAnimation(kernelEngine.getImageViewEntities(pacman));
+            kernelEngine.stopSound("death_1.wav");
         }
     }
 

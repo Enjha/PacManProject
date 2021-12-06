@@ -38,7 +38,6 @@ public class ThreadGhostIA extends Thread implements ThreadEntity {
         }
     }
 
-
     public Entity getEntity() {
         return ghost;
     }
