@@ -371,10 +371,17 @@ public class ClassicKernelEngine implements KernelEngine {
         return iaEngine.generateRandomMovement(entity);
     }
 
+    /**
+     * Create all thread entities
+     */
     public void createThreadEntities(){
         game.createThreadEntity();
     }
 
+    /**
+     * return the game mode solo state
+     * @return a boolean value
+     */
     public boolean getSolo(){
         return graphicEngine.getSolo();
     }

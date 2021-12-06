@@ -200,9 +200,22 @@ public interface KernelEngine {
      */
     Life getLife();
 
+    /**
+     * Return the movement for a entity control by a IA
+     * @param entity
+     *      a entity
+     * @return a object type of Movement
+     */
     Movement getMovementIA(Entity entity);
 
+    /**
+     * Create all thread entities
+     */
     void createThreadEntities();
 
+    /**
+     * return the game mode solo state
+     * @return a boolean value
+     */
     boolean getSolo();
 }

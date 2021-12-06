@@ -15,22 +15,70 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+/**
+ * Scene main menu
+ */
 public class SceneMainMenu implements ScenePacMan {
 
+    /**
+     * The root of this scene
+     */
     private BorderPane root = new BorderPane();
+
+    /**
+     * The width of this scene
+     */
     private final int width = 1200;
+
+    /**
+     * the height of this scene
+     */
     private final int height = 800;
-    private Scene scene = new Scene(root, width, height);
-    private Stage stage;
-    private SetupScene setupScene = new SetupScene();
-    private GraphicEngine graphicEngine;
+
+    /**
+     * The scene
+     */
+    private final Scene scene = new Scene(root, width, height);
+
+    /**
+     * The stage of this application
+     */
+    private final Stage stage;
+
+    /**
+     * The setup of the scene
+     */
+    private final SetupScene setupScene = new SetupScene();
+
+    /**
+     * the graphic engine
+     */
+    private final GraphicEngine graphicEngine;
+
+    /**
+     * The pane of this scene
+     */
     private Pane pane;
 
+    /**
+     * <b>Constructor of SceneMainMenu</b>
+     * @param stage
+     *      a stage
+     * @param graphicEngine
+     *      a graphicEngine
+     */
     public SceneMainMenu(Stage stage, GraphicEngine graphicEngine){
+        assert stage != null : "Error : stage nul";
+        assert graphicEngine != null : "Error : graphic engine null";
+
         this.stage = stage;
         this.graphicEngine = graphicEngine;
     }
 
+    /**
+     * Return the scene of the main menu
+     * @return a object type of Scene
+     */
     public Scene getScene(){
         pane = new AnchorPane();
         root.setId("background");
@@ -64,23 +112,40 @@ public class SceneMainMenu implements ScenePacMan {
         return scene;
     }
 
+    /**
+     * Set the scene to the scene option
+     */
     private void setSceneOption(){
         graphicEngine.setPreviewScene(this);
         graphicEngine.setCurrentScene(new SceneOptionMenu(stage, graphicEngine));
     }
 
+    /**
+     * Exit the game
+     */
     private void exit(){
         System.exit(0);
     }
 
+    /**
+     * Set the scene to the scene play
+     */
     private void setScenePlay(){
         graphicEngine.setCurrentScene(new ScenePlayMenu(stage, graphicEngine));
     }
 
+    /**
+     * Return the pane of this scene
+     * @return
+     */
     public Pane getPane(){
         return pane;
     }
 
+    /**
+     * Return that scene is not a scene game
+     * @return a boolean value equal to false
+     */
     public boolean isSceneGame(){
         return false;
     }
