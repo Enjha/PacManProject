@@ -34,11 +34,22 @@ public class FxWindow {
      */
     private final Stage stage;
 
+    /**
+     * <b>Constructor of FxWindow</b>
+     * @param width
+     *      a window's width
+     * @param height
+     *      a window's height
+     * @param sceneName
+     *      a scene game
+     * @param stage
+     *      a stage
+     */
     public FxWindow(int width, int height,String sceneName,Stage stage){
         assert width > 0 : "Error : width <= 0";
         assert height > 0 : "Error : height <= 0";
         assert sceneName != null : "Error : scene name null";
-        assert stage != null : "Error : stagenull";
+        assert stage != null : "Error : stage null";
 
         this.width = width;
         this.height = height;
@@ -46,6 +57,9 @@ public class FxWindow {
         this.stage = stage;
     }
 
+    /**
+     * Open and show the window
+     */
     public void openWindow(){
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, width, height);
@@ -54,6 +68,11 @@ public class FxWindow {
         stage.show();
     }
 
+    /**
+     * Modify the current scene API user
+     * @param sceneAPIUser
+     *      a new scene API user
+     */
     public void setScene(SceneAPIUser sceneAPIUser){
         assert sceneAPIUser != null : "Error scene API user null";
 
@@ -63,6 +82,10 @@ public class FxWindow {
         stage.show();
     }
 
+    /**
+     * Return the current scene API user
+     * @return a object type of SceneAPIUser
+     */
     public SceneAPIUser getScene(){
         return sceneAPIUser;
     }

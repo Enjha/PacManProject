@@ -7,16 +7,27 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import pacman.Ghost;
 
+/**
+ * The ghost animation
+ */
 public class GhostAnimation implements EntityAnimation {
 
-    @Override
-    public void movementAnimation(ImageViewEntities entity) {
-        Ghost ghost = (Ghost) entity.getEntity();
-        ImageView image_ghost = entity.getImageView();
+    /**
+     * The animation of a movement
+     * @param imageViewEntities
+     *      a entity
+     */
+    public void movementAnimation(ImageViewEntities imageViewEntities) {
+        assert imageViewEntities != null : "Error : image view entities null";
+        Ghost ghost = (Ghost) imageViewEntities.getEntity();
+        ImageView image_ghost = imageViewEntities.getImageView();
+        assert image_ghost != null : "Error : image ghost null";
 
+        //The ghost is alive
         if (ghost.isAlive()) {
             switch (ghost.getDirection()) {
                 case North:
+                    //The ghost is alive
                     if (ghost.isAlive()) {
                         new Timeline(
                                 new KeyFrame(Duration.seconds(0), event -> image_ghost.setImage(ghost.getTextures().get(0))),
@@ -31,6 +42,7 @@ public class GhostAnimation implements EntityAnimation {
                                 new KeyFrame(Duration.seconds(0.18), event -> image_ghost.setLayoutY(image_ghost.getLayoutY() - 4)),
                                 new KeyFrame(Duration.seconds(0.18), event -> image_ghost.setImage(ghost.getTextures().get(0)))
                         ).play();
+                        //The ghost is afraid
                     } else if (ghost.isAfraid()) {
                         new Timeline(
                                 new KeyFrame(Duration.seconds(0), event -> image_ghost.setImage(ghost.getTextures().get(0))),
@@ -61,6 +73,7 @@ public class GhostAnimation implements EntityAnimation {
                     }
                     break;
                 case East:
+                    //The ghost is alive
                     if (ghost.isAlive()) {
                         new Timeline(
                                 new KeyFrame(Duration.seconds(0), event -> image_ghost.setImage(ghost.getTextures().get(0))),
@@ -75,6 +88,7 @@ public class GhostAnimation implements EntityAnimation {
                                 new KeyFrame(Duration.seconds(0.18), event -> image_ghost.setLayoutX(image_ghost.getLayoutX() + 4)),
                                 new KeyFrame(Duration.seconds(0.18), event -> image_ghost.setImage(ghost.getTextures().get(0)))
                         ).play();
+                        //The ghost is afraid
                     } else if (ghost.isAfraid()) {
                         new Timeline(
                                 new KeyFrame(Duration.seconds(0), event -> image_ghost.setImage(ghost.getTextures().get(0))),
@@ -105,6 +119,7 @@ public class GhostAnimation implements EntityAnimation {
                     }
                     break;
                 case South:
+                    //The ghost is alive
                     if (ghost.isAlive()) {
                         new Timeline(
                                 new KeyFrame(Duration.seconds(0), event -> image_ghost.setImage(ghost.getTextures().get(0))),
@@ -119,6 +134,7 @@ public class GhostAnimation implements EntityAnimation {
                                 new KeyFrame(Duration.seconds(0.18), event -> image_ghost.setLayoutY(image_ghost.getLayoutY() + 4)),
                                 new KeyFrame(Duration.seconds(0.18), event -> image_ghost.setImage(ghost.getTextures().get(0)))
                         ).play();
+                        //The ghost is afraid
                     } else if (ghost.isAfraid()) {
                         new Timeline(
                                 new KeyFrame(Duration.seconds(0), event -> image_ghost.setImage(ghost.getTextures().get(0))),
@@ -149,6 +165,7 @@ public class GhostAnimation implements EntityAnimation {
                     }
                     break;
                 case West:
+                    //The ghost is alive
                     if (ghost.isAlive()) {
                         new Timeline(
                                 new KeyFrame(Duration.seconds(0), event -> image_ghost.setImage(ghost.getTextures().get(0))),
@@ -163,6 +180,7 @@ public class GhostAnimation implements EntityAnimation {
                                 new KeyFrame(Duration.seconds(0.18), event -> image_ghost.setLayoutX(image_ghost.getLayoutX() - 4)),
                                 new KeyFrame(Duration.seconds(0.18), event -> image_ghost.setImage(ghost.getTextures().get(0)))
                         ).play();
+                        //The ghost is afraid
                     } else if (ghost.isAfraid()) {
                         new Timeline(
                                 new KeyFrame(Duration.seconds(0), event -> image_ghost.setImage(ghost.getTextures().get(0))),

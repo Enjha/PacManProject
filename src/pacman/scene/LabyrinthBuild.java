@@ -138,6 +138,7 @@ public class LabyrinthBuild implements LabyrinthGenerator {
 
         String entityType = entityInformation[0];
         switch (entityType) {
+            //Create a Pac-Man
             case "PACMAN":
                 assert entityInformation.length == 3 : "Error : wrong format for the entities --> wrong number of information (3)";
                 Character pacman = new Pacman(game.getLife());
@@ -145,6 +146,7 @@ public class LabyrinthBuild implements LabyrinthGenerator {
                 pacman.setTeam(game.getTeamManager().getTeam("PACMAN"));
                 return pacman;
 
+                //Create a ghost
             case "GHOST":
                 assert entityInformation.length == 5 : "Error : wrong format for the entities --> wrong number of information (5)";
                 GhostColor ghostColor = getGhostColor(entityInformation[2]);
@@ -154,12 +156,14 @@ public class LabyrinthBuild implements LabyrinthGenerator {
                 ghost.setTeam(game.getTeamManager().getTeam("GHOST"));
                 return ghost;
 
+            //Create a Pacgum
             case "PACGUM":
                 assert entityInformation.length == 3 : "Error : wrong format for the entities --> wrong number of information (3)";
                 Entity pacgum = new PacgumFruit();
                 setupEntityPosition(entityInformation[1], entityInformation[2], pacgum, sceneGame);
                 return pacgum;
 
+            //Create a normal fruit
             case "FRUIT":
                 assert entityInformation.length == 3 : "Error : wrong format for the entities --> wrong number of information (3)";
                 Entity fruit = new NormalFruit();
@@ -209,19 +213,11 @@ public class LabyrinthBuild implements LabyrinthGenerator {
         try {
             int x = Integer.parseInt(positionX);
             int y = Integer.parseInt(positionY);
-            if (sceneGame != null) {
-                SceneCase sceneCase = sceneGame.getCase(x, y);
-                if (sceneCase != null) {
-                    entity.setPosition(sceneCase);
-                    sceneCase.addCaseContent(entity);
-                } else {
-                    System.err.println("error : case null");
-                    System.exit(-1);
-                }
-            } else {
-                System.err.println("error : scene game null");
-                System.exit(-1);
-            }
+            assert sceneGame != null : "Error : scene game null";
+            SceneCase sceneCase = sceneGame.getCase(x, y);
+            assert sceneCase != null : "Error : scene case null";
+            entity.setPosition(sceneCase);
+            sceneCase.addCaseContent(entity);
 
         } catch (Exception exception) {
             exception.printStackTrace();

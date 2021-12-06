@@ -360,7 +360,14 @@ public class ClassicKernelEngine implements KernelEngine {
         return game.getLife();
     }
 
+    /**
+     * Return the movement for a entity control by a IA
+     * @param entity
+     *      a entity
+     * @return a object type of Movement
+     */
     public Movement getMovementIA(Entity entity){
-        return iaEngine.generateRandomMovement((Ghost) entity);
+        assert entity != null : "Error : entity null";
+        return iaEngine.generateRandomMovement(entity);
     }
 }

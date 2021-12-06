@@ -1,6 +1,7 @@
 package engines.IA;
 
 import gameplay.*;
+import gameplay.Character;
 import pacman.Ghost;
 import pacman.Pacman;
 import scene.SceneCase;
@@ -9,6 +10,7 @@ import scene.Wall;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 
 public class IAPacman implements IAEngine {
 
@@ -41,7 +43,7 @@ public class IAPacman implements IAEngine {
      *
      * @return random Movement
      */
-    public synchronized Movement generateRandomMovement(Ghost ghost) {
+    public synchronized Movement generateRandomMovement(Entity entity) {
         try {
             wait(3000);
         } catch (InterruptedException exception) {
@@ -57,26 +59,28 @@ public class IAPacman implements IAEngine {
         directions.add(allDirections[3]);
 
 
-        if (sceneCase[ghost.getPosition().getX()][ghost.getPosition().getY()].getCaseContent(Wall.class.toString()) != null) {
-            for (Object o : sceneCase[ghost.getPosition().getX()][ghost.getPosition().getY()].getCaseContent(Wall.class.toString())) {
+        if (sceneCase[entity.getPosition().getX()][entity.getPosition().getY()].getCaseContent(Wall.class.toString()) != null) {
+            for (Object o : sceneCase[entity.getPosition().getX()][entity.getPosition().getY()].getCaseContent(Wall.class.toString())) {
                 Wall w = (Wall) o;
                 directions.remove(w.getSceneElement());
             }
         }
 
+        assert entity.isCharacter() : "Error : entity not a character";
+
         switch (directions.get(random.nextInt(directions.size() - 1))) {
             case North:
-                ghost.setDirection(Direction.North);
-                return new MovementNorth(ghost);
+                ((Character)entity).setDirection(Direction.North);
+                return new MovementNorth(entity);
             case East:
-                ghost.setDirection(Direction.East);
-                return new MovementEast(ghost);
+                ((Character)entity).setDirection(Direction.East);
+                return new MovementEast(entity);
             case South:
-                ghost.setDirection(Direction.South);
-                return new MovementSouth(ghost);
+                ((Character)entity).setDirection(Direction.South);
+                return new MovementSouth(entity);
             case West:
-                ghost.setDirection(Direction.West);
-                return new MovementWest(ghost);
+                ((Character)entity).setDirection(Direction.West);
+                return new MovementWest(entity);
         }
         return null;
     }

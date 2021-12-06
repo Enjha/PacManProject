@@ -110,11 +110,9 @@ public class ClassicLife implements Life {
      * Upgrade the display who show the current life point
      */
     private void updateLifePoint(){
-        Platform.runLater(
+        /*Platform.runLater(
                 () -> {
-
-
-                });
+                });*/
         System.out.println("life update : " + numberOfLife);
         for (int i = 0; i < numberOfLife; i++) {
             System.out.println("i : " + i);
