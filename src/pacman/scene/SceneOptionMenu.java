@@ -245,7 +245,7 @@ public class SceneOptionMenu implements ScenePacMan {
 
     /**
      * Return the pane of this scene
-     * @return
+     * @return a object type of Pane
      */
     public Pane getPane() {
         return pane;

@@ -208,8 +208,11 @@ public class Ghost implements Character {
         return isAfraid;
     }
 
+
     /**
      * Set the entity's state of fear.
+     * @param isAfraid
+     *      a afraid state
      */
     public void setIsAfraid(boolean isAfraid) {
         this.isAfraid = isAfraid;
@@ -235,6 +238,7 @@ public class Ghost implements Character {
     /**
      * Modify the state of the ghost's animation
      * @param isAnimated
+     *         a animation state
      */
     public void setAnimated(boolean isAnimated) {
         this.isAnimated = isAnimated;

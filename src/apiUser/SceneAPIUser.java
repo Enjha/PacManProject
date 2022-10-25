@@ -16,7 +16,7 @@ public interface SceneAPIUser {
 
     /**
      * Return the pane
-     * @return
+     * @return a object type of Pane
      */
     Pane getPane();
 

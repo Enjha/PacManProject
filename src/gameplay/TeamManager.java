@@ -21,11 +21,12 @@ public interface TeamManager {
      */
     boolean removeTeam(Team team);
 
+
     /**
      * Return the team with this name if its exist
      * @param teamName
-     *      a team's name
-     * @returna object type of Team
+     * a team's name
+     * @return a object type Of Team
      */
     Team getTeam(String teamName);
 }

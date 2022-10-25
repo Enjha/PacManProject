@@ -78,6 +78,7 @@ public class NormalFruit implements Item {
     /**
      * Modify the state of the ghost's animation
      * @param isAnimated
+     *      a animation state
      */
     public void setAnimated(boolean isAnimated){
         this.isAnimated = isAnimated;

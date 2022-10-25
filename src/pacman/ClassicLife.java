@@ -159,7 +159,7 @@ public class ClassicLife implements Life {
     }
 
     /**
-     * Modify the number max of life point with a new value > 0
+     * Modify the number max of life point with a new value superior to 0
      * @param numberMaxOfLife
      *      a new number of life point
      */

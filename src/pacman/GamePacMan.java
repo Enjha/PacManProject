@@ -102,6 +102,7 @@ public class GamePacMan implements Game {
      * @param life               a life's information
      * @param nbFruit            a total number of fruit
      * @param teamManager        a team manager
+     * @param gameOver           a game over
      */
     public GamePacMan(LabyrinthGenerator labyrinthGenerator, Score score, GameOver gameOver, Life life, int nbFruit, TeamManager teamManager) {
         assert labyrinthGenerator != null && score != null && life != null && teamManager != null && nbFruit > 0 : "Error : a parameter is wrong";
@@ -291,7 +292,7 @@ public class GamePacMan implements Game {
     /**
      * Return the labyrinth of the game Pac-Man
      *
-     * @return
+     * @return a object type of SceneGame
      */
     public SceneGame getSceneGame() {
         return sceneGame;
